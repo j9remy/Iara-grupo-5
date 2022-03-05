@@ -55,6 +55,10 @@ body {
   justify-content: space-between;
 }
 
+.prelative {
+  position: relative;
+}
+
 a,
 a:hover {
   text-decoration: none;
@@ -153,6 +157,92 @@ img {
 }
 
 .main-banner {
-    padding: 80px 0;
+  padding: 100px 0;
 }
 
+.como-funciona .text {
+  width: 100%;
+  max-width: 480px;
+  font-size: 23px;
+  color: #fff;
+}
+
+.como-funciona .title {
+  width: 100%;
+  max-width: 435px;
+  font-size: 62px;
+  color: #fff;
+}
+
+.como-funciona {
+  background-color: #de0235;
+  padding: 150px 0;
+}
+
+.deco {
+  position: absolute;
+}
+
+.estrela {
+  bottom: 160px;
+  left: -115px;
+  transform: rotate(15deg);
+  height: 100px;
+}
+.concha {
+  right: -25px;
+  top: 164px;
+  transform: rotate(19deg);
+  height: 100px;
+}
+.elipse {
+  position: absolute;
+  z-index: 1;
+  bottom: 423px;
+}
+
+.sobre-nos {
+  padding: 150px 0;
+}
+
+.sobre-nos .text {
+  width: 100%;
+  max-width: 435px;
+  font-size: 22px;
+}
+
+.sobre-nos .title {
+  width: 100%;
+  max-width: 435px;
+  font-size: 62px;
+}
+
+.tracinho {
+  left: 236px;
+  width: 129px;
+  top: 62px;
+}
+
+.sereia {
+  height: 250px;
+  left: -130px;
+  top: -58px;
+  /* z-index: -1; */
+}
+.contato{
+  background-color: #AB0229;
+  padding: 150px 0;
+}
+
+.contato .title{
+  width: 100%;
+  max-width: 435px;
+  font-size: 62px;
+  color: #FFF;
+}
+
+.seta {
+  height: 109px;
+  top: 88px;
+  right: 346px;
+}
