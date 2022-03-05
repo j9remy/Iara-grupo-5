@@ -1,0 +1,158 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&family=Ubuntu:wght@400;500;700&display=swap");
+
+/*
+base: #FDFBFB;
+primária: #DE0235;
+vermelho claro: #E3466B;
+vermelho escuro: #AB0229;
+vermelho escurão: #5E1D2C;
+marrom: #1E0D14;
+*/
+
+html {
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -ms-overflow-style: scrollbar;
+  -webkit-tap-highlight-color: transparent;
+}
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background-color: #fdfbfb;
+  font-family: "Ubuntu", sans-serif;
+}
+
+.txt-condensed {
+  font-family: "Ubuntu Condensed", sans-serif;
+}
+
+*,
+::after,
+::before {
+  box-sizing: inherit;
+}
+
+.container {
+  width: 100%;
+  max-width: 1170px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+.dflex {
+  display: flex;
+}
+
+.acenter {
+  align-items: center;
+}
+
+.jbetween {
+  justify-content: space-between;
+}
+
+a,
+a:hover {
+  text-decoration: none;
+}
+
+a {
+  transition: all 0.4s;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+.logo {
+  width: 160px;
+}
+
+.menu {
+  padding: 15px 0;
+}
+
+.menu .links a {
+  font-weight: bold;
+  font-size: 21px;
+  line-height: 24px;
+  color: #ab0229;
+  display: block;
+}
+
+.menu .links a:hover {
+  transform: scale(1.07);
+}
+
+.menu .links li:not(:last-child) {
+  margin-right: 35px;
+}
+
+.menu .links .button.white {
+  background: #fdfbfb;
+  background-size: 800% 400%;
+  color: #ab0229;
+  box-shadow: 0px 4px 4px #e3466b;
+}
+.menu .links .button {
+  background: linear-gradient(-45deg, #5e1d2c, #de0235, #ab0229, #e3466b);
+  background-size: 800% 400%;
+  padding: 12px 20px;
+  display: inline-block;
+  border-radius: 10px;
+  color: #fff;
+  transition: all 0.5s ease-in-out;
+  font-size: 17px;
+  box-shadow: 0px 4px 4px #e3466b;
+}
+
+.menu .links .button:hover {
+  transform: scale(1.05);
+  animation: gradient 5s infinite cubic-bezier(0.62, 0.28, 0.23, 0.99) both;
+}
+
+.menu .links .button:active {
+  animation: gradient 3s infinite;
+  transform: scale(0.8);
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.main-banner .text {
+  width: 100%;
+  max-width: 524px;
+  font-size: 58px;
+}
+.red {
+  color: #de0235;
+}
+
+.main-banner {
+    padding: 80px 0;
+}
+
