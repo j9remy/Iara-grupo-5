@@ -157,7 +157,7 @@ img {
 }
 
 .main-banner {
-  padding: 100px 0;
+  padding: 120px 0;
 }
 
 .como-funciona .text {
@@ -176,7 +176,7 @@ img {
 
 .como-funciona {
   background-color: #de0235;
-  padding: 150px 0;
+  padding: 180px 0;
 }
 
 .deco {
@@ -190,7 +190,7 @@ img {
   height: 100px;
 }
 .concha {
-  right: -60px;
+  right: -35px;
   top: 164px;
   transform: rotate(19deg);
   height: 100px;
@@ -202,7 +202,7 @@ img {
 }
 
 .sobre-nos {
-  padding: 150px 0;
+  padding: 180px 0;
 }
 
 .sobre-nos .text {
@@ -232,7 +232,7 @@ img {
 }
 .contato{
   background-color: #AB0229;
-  padding: 150px 0;
+  padding: 180px 0;
 }
 
 .contato .title{
