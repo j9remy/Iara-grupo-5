@@ -169,7 +169,7 @@ img {
 
 .como-funciona .title {
   width: 100%;
-  max-width: 435px;
+  max-width: 415px;
   font-size: 62px;
   color: #fff;
 }
@@ -185,12 +185,12 @@ img {
 
 .estrela {
   bottom: 160px;
-  left: -115px;
+  left: -85px;
   transform: rotate(15deg);
   height: 100px;
 }
 .concha {
-  right: -25px;
+  right: -60px;
   top: 164px;
   transform: rotate(19deg);
   height: 100px;
@@ -207,8 +207,9 @@ img {
 
 .sobre-nos .text {
   width: 100%;
-  max-width: 435px;
+  max-width: 415px;
   font-size: 22px;
+  margin-left: 20px
 }
 
 .sobre-nos .title {
@@ -218,14 +219,14 @@ img {
 }
 
 .tracinho {
-  left: 236px;
+  left: 257px;
   width: 129px;
   top: 62px;
 }
 
 .sereia {
   height: 250px;
-  left: -130px;
+  left: -110px;
   top: -58px;
   /* z-index: -1; */
 }
