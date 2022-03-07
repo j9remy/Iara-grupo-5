@@ -112,7 +112,7 @@ img {
   box-shadow: 0px 4px 4px #e3466b;
 }
 .menu .links .button {
-  background: linear-gradient(-45deg, #5e1d2c, #de0235, #ab0229, #e3466b);
+  background: linear-gradient(-45deg, #5e1d2c, #ab0229, #e3466b, #de0235);
   background-size: 800% 400%;
   padding: 12px 20px;
   display: inline-block;
