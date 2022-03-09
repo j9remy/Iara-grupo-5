@@ -83,6 +83,7 @@ img {
 
 .logo {
   width: 160px;
+  transition: all .4s;
 }
 
 .menu {
@@ -269,3 +270,8 @@ img {
   transform: rotate(180deg);
   top: -40px;
 }  
+
+.logo:hover{
+  transform: scale(1.06);
+  transition: all .4s;
+}
