@@ -184,14 +184,14 @@ img {
 }
 
 .estrela {
-  bottom: 180px;
+  bottom: 200px;
   left: -85px;
   transform: rotate(15deg);
   height: 100px;
 }
 .concha {
   right: -35px;
-  top: 220px;
+  top: 203px;
   transform: rotate(19deg);
   height: 100px;
 }
