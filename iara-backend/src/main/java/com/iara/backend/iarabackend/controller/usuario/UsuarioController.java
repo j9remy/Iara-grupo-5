@@ -59,11 +59,7 @@ public class UsuarioController {
         return "Usuario "+ usuario +" não encontrado";
     }
 
-    //Eu criei um endPoint que retorna um usuario dado um indice especifico
-    @GetMapping("/{index}")
-    public Usuario getUsuarios(@PathVariable int index) {
-        return usuarios.get(index);
-    }
-    
+
+
 }
 
