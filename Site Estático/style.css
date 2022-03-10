@@ -250,26 +250,12 @@ img {
 }
 
 
-.como-funciona svg {
+svg {
   width: 100%;
   position: absolute;
   transform: rotate(180deg);
   top: -40px;
 }
-
-.sobre-nos svg {
-  width: 100%;
-  position: absolute;
-  transform: rotate(180deg);
-  top: -40px;
-} 
-
-.contato svg {
-  width: 100%;
-  position: absolute;
-  transform: rotate(180deg);
-  top: -40px;
-}  
 
 .logo:hover{
   transform: scale(1.06);
