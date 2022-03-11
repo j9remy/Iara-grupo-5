@@ -7,11 +7,11 @@ public class Endereco {
     private String numero;
     private String bairro;
     private String cidade;
-    private char uf;
+    private String uf;
     private String complemento;
 
 //    Constructor
-    public Endereco(String cep, String rua, String numero, String bairro, String cidade, char uf, String complemento) {
+    public Endereco(String cep, String rua, String numero, String bairro, String cidade, String uf, String complemento) {
         this.cep = cep;
         this.rua = rua;
         this.numero = numero;
@@ -52,10 +52,10 @@ public class Endereco {
     public void setCidade(String cidade) {
         this.cidade = cidade;
     }
-    public char getUf() {
+    public String getUf() {
         return uf;
     }
-    public void setUf(char uf) {
+    public void setUf(String uf) {
         this.uf = uf;
     }
     public String getComplemento() {
@@ -65,5 +65,18 @@ public class Endereco {
         this.complemento = complemento;
     }
 
+//    toString
 
+    @Override
+    public String toString() {
+        return "Endereco{" +
+                "cep='" + cep + '\'' +
+                ", rua='" + rua + '\'' +
+                ", numero='" + numero + '\'' +
+                ", bairro='" + bairro + '\'' +
+                ", cidade='" + cidade + '\'' +
+                ", uf='" + uf + '\'' +
+                ", complemento='" + complemento + '\'' +
+                '}';
+    }
 }
