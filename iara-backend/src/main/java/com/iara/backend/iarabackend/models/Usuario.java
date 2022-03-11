@@ -35,106 +35,56 @@ public abstract class Usuario {
     public String getNome() {
         return nome;
     }
-
-
-
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-
-
     public String getSobreNome() {
         return sobrenome;
     }
-
-
-
     public void setSobrenome(String sobreNome) {
         this.sobrenome = sobreNome;
     }
-
-
-
     public String getCpf() {
         return cpf;
     }
-
-
-
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-
-
-
     public LocalDate getDataNasc() {
         return dataNasc;
     }
-
-
-
     public void setDataNasc(LocalDate dataNasc) {
         this.dataNasc = dataNasc;
     }
-
-
-
     public String getEmail() {
         return email;
     }
-
-
-
     public void setEmail(String email) {
         this.email = email;
     }
-
-
-
     public String getSenha() {
         return senha;
     }
-
-
-
-
-
-
     public char getSexo() {
         return sexo;
     }
-
-
-
     public void setSexo(char sexo) {
         this.sexo = sexo;
     }
-
-
-
     public String getTelefone() {
         return telefone;
     }
-
-
-
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-
-
-
     public Endereco getEndereco() {
         return endereco;
     }
-
-
-
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
 
+    
     public abstract boolean autenticar(String email, String senha);
 
 }
