@@ -228,7 +228,7 @@ img {
 }
 .contato{
   background-color: #AB0229;
-  padding: 120px 0;
+  padding: 120px 0 80px 0;
 }
 
 .contato .title{
@@ -236,12 +236,13 @@ img {
   max-width: 435px;
   font-size: 62px;
   color: #FFF;
+  margin-bottom: 80px;
 }
 
 .seta {
   height: 109px;
   top: 200px;
-  right: 400px;
+  right: 380px;
   transform: rotate(357deg);
 }
 
@@ -338,6 +339,15 @@ i.fa-solid.fa-envelope-open-text {
   font-size: 47px;
   max-width: 371px;
   margin-top: 22px;
+}
+
+.footer {
+  background-color: #ab0229;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
+  font-weight: bold;
+  color: #32010d;;
 }
 
 
