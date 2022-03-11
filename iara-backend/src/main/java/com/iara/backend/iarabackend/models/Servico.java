@@ -1,5 +1,7 @@
 package com.iara.backend.iarabackend.models;
 
+import java.util.List;
+
 public class Servico {
     private Double valor;
     private String descricao;
@@ -16,35 +18,27 @@ public class Servico {
     public Double getValor() {
         return valor;
     }
-
     public void setValor(Double valor) {
         this.valor = valor;
     }
-
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+    public String getTipo() {
+        return tipo;
+    }
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    public Boolean getAtivo() {
+        return ativo;
+    }
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
     public String getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public Boolean getAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(Boolean ativo) {
-        this.ativo = ativo;
-    }
-
-    
     
 }

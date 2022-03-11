@@ -1,12 +1,14 @@
 package com.iara.backend.iarabackend.models;
 
+import java.time.LocalDate;
+
 public abstract class Usuario {
     private String nome;
     private String sobrenome;
     private String cpf;
-    private String dataNasc;
+    private LocalDate dataNasc;
     private String email;
-    private String senha;
+    protected String senha;
     private char sexo;
     private String telefone;
     private Endereco endereco;
@@ -14,7 +16,7 @@ public abstract class Usuario {
 
 
 
-    public Usuario(String nome, String sobreNome, String cpf, String dataNasc, String email, String senha, char sexo,
+    public Usuario(String nome, String sobreNome, String cpf, LocalDate dataNasc, String email, String senha, char sexo,
             String telefone, Endereco endereco) {
         this.nome = nome;
         this.sobrenome = sobreNome;
@@ -66,13 +68,13 @@ public abstract class Usuario {
 
 
 
-    public String getDataNasc() {
+    public LocalDate getDataNasc() {
         return dataNasc;
     }
 
 
 
-    public void setDataNasc(String dataNasc) {
+    public void setDataNasc(LocalDate dataNasc) {
         this.dataNasc = dataNasc;
     }
 
@@ -96,9 +98,6 @@ public abstract class Usuario {
 
 
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
 
 
 
@@ -136,8 +135,6 @@ public abstract class Usuario {
         this.endereco = endereco;
     }
 
-    public abstract void autenticar();
-   
+    public abstract boolean autenticar(String email, String senha);
 
-    
 }
