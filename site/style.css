@@ -87,7 +87,7 @@ img {
 }
 
 .menu {
-  padding: 15px 0;
+  padding: 5px 0;
 }
 
 .menu .links a {
@@ -186,7 +186,7 @@ img {
 
 .estrela {
   bottom: 200px;
-  left: -85px;
+  left: -65px;
   transform: rotate(15deg);
   height: 100px;
 }
@@ -195,11 +195,6 @@ img {
   top: 203px;
   transform: rotate(19deg);
   height: 100px;
-}
-.elipse {
-  position: absolute;
-  z-index: 1;
-  bottom: 487px;
 }
 
 .sobre-nos {
@@ -233,7 +228,7 @@ img {
 }
 .contato{
   background-color: #AB0229;
-  padding: 180px 0;
+  padding: 120px 0;
 }
 
 .contato .title{
@@ -245,8 +240,9 @@ img {
 
 .seta {
   height: 109px;
-  top: 88px;
-  right: 346px;
+  top: 200px;
+  right: 400px;
+  transform: rotate(357deg);
 }
 
 
@@ -261,3 +257,87 @@ svg {
   transform: scale(1.06);
   transition: all .4s;
 }
+
+.contato .conteudo{
+  width: 100%;
+  max-width: 524px;
+  font-size: 58px;
+  display: flex;
+    align-content: center;
+    flex-direction: column;
+}
+
+.button.fale-conosco {
+  background-color: #FFF;
+  font-size: 27px;
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 12px 60px;
+  color: #000;
+  display: block;
+  width: fit-content;
+  box-shadow: 0px 4px 4px #de0235;
+  margin-bottom: 18px;
+  /*
+  display: inline-block;
+  */
+}
+
+.button.fale-conosco:hover{
+  transform: scale(1.02);
+  box-shadow: 0px 4px 14px 5px #de0235;
+}
+
+i.fa-solid.fa-envelope-open-text {
+    margin-right: 10px;
+}
+
+.input.mensagem{
+  resize: none;
+  border: 7px solid transparent;
+  font-family: 'Ubuntu';
+  border-radius: 10px;
+  font-size: 17px;
+  margin-bottom: -18px;
+}
+
+.input.email{
+  border: 7px solid transparent;
+  font-family: 'Ubuntu';
+  border-radius: 10px;
+  font-size: 16px;
+  width: 225px;
+  height: 45px;
+}
+
+.button.enviar-mensagem{
+  background-color: #FFF;
+  font-size: 17px;
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 13px 24px;
+  color: #000;
+  box-shadow: 0px 4px 4px #de0235;
+  border: 1px solid transparent;
+  margin-left: 17px;
+  transition: all .4s;
+}
+
+.button.enviar-mensagem:hover{
+  transform: scale(1.05);
+  box-shadow: 0px 4px 14px 5px #de0235;
+  transition: all .4s;
+  cursor: pointer;
+}
+
+.icones {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #FFF;
+  font-size: 47px;
+  max-width: 371px;
+  margin-top: 22px;
+}
+
+
