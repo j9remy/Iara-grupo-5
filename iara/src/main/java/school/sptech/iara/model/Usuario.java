@@ -107,8 +107,26 @@ public abstract class Usuario implements Avaliavel{
             if (!autenticado){
                 return;
             }else{
-                autenticado = true;
+                autenticado = false;
             }
         }
+    }
+
+    //toString
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "nome='" + nome + '\'' +
+                ", sobrenome='" + sobrenome + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", dataNasc=" + dataNasc +
+                ", email='" + email + '\'' +
+                ", senha='" + senha + '\'' +
+                ", sexo=" + sexo +
+                ", telefone='" + telefone + '\'' +
+                ", autenticado=" + autenticado +
+                ", endereco=" + endereco +
+                '}';
     }
 }

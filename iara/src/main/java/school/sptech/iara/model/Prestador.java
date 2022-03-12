@@ -3,13 +3,13 @@ package school.sptech.iara.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Prestador extends Usuario{
 //    Attributes
     private String resumo;
     private List<Habilidade> habilidades;
     private List<Servico> servicos;
-    private List<Integer> avaliacoes;
 
 //    Constructor
     public Prestador(String nome, String sobrenome,
@@ -19,26 +19,40 @@ public class Prestador extends Usuario{
                      Endereco endereco, String resumo) {
         super(nome, sobrenome, cpf, dataNasc, email, senha, sexo, telefone, endereco);
         this.resumo = resumo;
+        habilidades = new ArrayList<>();
+        servicos = new ArrayList<>();
     }
 
 //    Getter and Setter
-    public String getDescricao() {
+    public String getResumo() {
         return resumo;
     }
-    public void setDescricao(String resumo) {
+    public void setResumo(String resumo) {
         this.resumo = resumo;
     }
+    public List<Habilidade> getHabilidades() {
+        return habilidades;
+    }
+    public List<Servico> getServicos() {
+        return servicos;
+    }
 
-//    Methods
+    //    Methods
     @Override
     // Soma o resultado de todos getAvaliacao() da classe Servico e divide pelo total de ServicosAtribuidos
     public double getAvaliacao(){
         Double somaAvaliacoes = 0d;
         Integer qtdAvaliacoes = 0;
-        for (Servico ser: servicos) {
-            somaAvaliacoes += ser.getAvaliacao();
-            qtdAvaliacoes += ser.getQtdServicosAtribuidos();
+
+        for (Servico serv: getServicos()) {
+            for (ServicoAtribuido servAttr : serv.getServicoAtribuidos()){
+                if (Objects.nonNull(servAttr.getAvaliacao())){
+                    somaAvaliacoes += serv.getAvaliacao();
+                }
+            }
+            qtdAvaliacoes += serv.getQtdServicosAvaliados();
         }
+
         return somaAvaliacoes/qtdAvaliacoes;
     }
 
@@ -63,7 +77,7 @@ public class Prestador extends Usuario{
     }
 
     //retorna todos serviços ativos
-    public List<Servico> listarServicosAtivos(){
+    public List<Servico> getServicosAtivos(){
         List<Servico> servicosAtivos = new ArrayList<>();
         for (Servico serv: servicos) {
             if (serv.isAtivo()){
@@ -71,5 +85,25 @@ public class Prestador extends Usuario{
             }
         }
         return servicosAtivos;
+    }
+
+//    toString
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "nome='" + getNome() + '\'' +
+                ", sobrenome='" + getSobrenome() + '\'' +
+                ", cpf='" + getCpf() + '\'' +
+                ", dataNasc=" + getDataNasc() +
+                ", email='" + getEmail() + '\'' +
+                ", sexo=" + getSexo() +
+                ", telefone='" + getTelefone() + '\'' +
+                ", autenticado=" + isAutenticado() +
+                ", endereco=" + getEndereco() +
+                ", resumo=" + getResumo() +
+                ", habilidades=" + habilidades +
+                ", serviços=" + servicos +
+                ", mediaAvaliacao=" + getAvaliacao() +
+                '}';
     }
 }

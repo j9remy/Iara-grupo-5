@@ -11,7 +11,7 @@ public class Habilidade {
         this.descricao = descricao;
     }
 
-    //    Getter and Setter
+//    Getter and Setter
     public String getHabilidade() {
         return habilidade;
     }
@@ -23,5 +23,14 @@ public class Habilidade {
     }
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+//    toString
+    @Override
+    public String toString() {
+        return "Habilidade{" +
+                "habilidade='" + habilidade + '\'' +
+                ", descricao='" + descricao + '\'' +
+                '}';
     }
 }

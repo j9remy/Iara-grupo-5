@@ -1,6 +1,7 @@
 package school.sptech.iara.model;
 
 import java.time.LocalTime;
+import java.util.Objects;
 
 public class ServicoAtribuido implements Avaliavel{
 //    Attributes
@@ -8,7 +9,7 @@ public class ServicoAtribuido implements Avaliavel{
     private LocalTime horaInicio;
     private LocalTime horaFim;
     private boolean finalizado;
-    private double avaliacao;
+    private Double avaliacao;
 
 //    Constructor
     public ServicoAtribuido(Cliente cliente) {
@@ -16,7 +17,7 @@ public class ServicoAtribuido implements Avaliavel{
         this.horaInicio = LocalTime.now();
         horaFim = horaInicio;
         finalizado = false;
-        avaliacao = 0d;
+        avaliacao = null;
     }
 
 //    Getter and Setter
@@ -44,16 +45,21 @@ public class ServicoAtribuido implements Avaliavel{
     public void setHoraFim(LocalTime horaFim) {
         this.horaFim = horaFim;
     }
-    public void setAvaliacao(double avaliacao) {
-        this.avaliacao = avaliacao;
-    }
-
-    //    Methods
+//    Methods
+    // Simplesmente retorna o valor do atributo avaliacao
     @Override
     public double getAvaliacao() {
         return avaliacao;
     }
 
+    // Adiciona avaliação caso ainda não esteja avaliado
+    public void addAvaliacao(double avaliacao) {
+        if(Objects.isNull(this.avaliacao) && avaliacao >= 0 && avaliacao <= 5 && finalizado){
+            this.avaliacao = avaliacao;
+        }
+    }
+
+    // Caso serviço não esteja finalizado, finaliza-o alterando 'finalizado' para true
     public void finalizarServico(){
         if (!isFinalizado()){
             setFinalizado(true);
@@ -61,5 +67,15 @@ public class ServicoAtribuido implements Avaliavel{
         }
     }
 
-
+//    toString
+    @Override
+    public String toString() {
+        return "ServicoAtribuido{" +
+                "cliente=" + cliente +
+                ", horaInicio=" + horaInicio +
+                ", horaFim=" + horaFim +
+                ", finalizado=" + finalizado +
+                ", avaliacao=" + avaliacao +
+                '}';
+    }
 }

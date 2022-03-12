@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Servico {
 //    Attributes
@@ -50,6 +51,9 @@ public class Servico {
     public void setAtivo() {
         setAtivo(!isAtivo());
     }
+    public List<ServicoAtribuido> getServicoAtribuidos() {
+        return servicoAtribuidos;
+    }
 
 //    Methods
     //Retorna a quantidade de serviços atribuidos a este serviço
@@ -57,13 +61,31 @@ public class Servico {
         return servicoAtribuidos.size();
     }
 
+    // Retorna a quantidade de serviços avaliados
+    public int getQtdServicosAvaliados(){
+        int soma = 0;
+        for (ServicoAtribuido serv: servicoAtribuidos) {
+            if (Objects.nonNull(serv.getAvaliacao())){
+                soma++;
+            }
+        }
+        return soma;
+    }
+
     //Retorna média das avaliações dos servicos atribuidos a este
     public double getAvaliacao(){
         Double somaAvaliacoes = 0d;
         for (ServicoAtribuido serv: servicoAtribuidos) {
-            somaAvaliacoes += serv.getAvaliacao();
+            Double avaliacao = serv.getAvaliacao();
+            if(!avaliacao.isNaN()){
+                somaAvaliacoes += serv.getAvaliacao();
+            }
         }
-        return somaAvaliacoes/servicoAtribuidos.size();
+        if(!somaAvaliacoes.isNaN()){
+            return somaAvaliacoes/servicoAtribuidos.size();
+        }else{
+            return 0d;
+        }
     }
 
     //retorna a lista de todos os servicos atribuidos serviço
@@ -99,6 +121,16 @@ public class Servico {
         setTipo(tipo);
     }
 
-
+//    toString
+    @Override
+    public String toString() {
+        return "Servico{" +
+                "valor=" + valor +
+                ", descricao='" + descricao + '\'' +
+                ", tipo='" + tipo + '\'' +
+                ", ativo=" + ativo +
+                ", servicoAtribuidos=" + servicoAtribuidos +
+                '}';
+    }
 }
 
