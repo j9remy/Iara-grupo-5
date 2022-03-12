@@ -354,4 +354,24 @@ i.fa-solid.fa-envelope-open-text {
   color: #FFF;
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: ##fdfbfb
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #de0235;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #AB0229;
+}
+
 
