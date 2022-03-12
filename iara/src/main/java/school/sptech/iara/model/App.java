@@ -5,8 +5,10 @@ import java.time.LocalDate;
 public class App {
     public static void main(String[] args) {
         //Endereço
-        Endereco endereco1 = new Endereco("cep","rua","num","bairro","cidade", "SP","Complemento");
-        Endereco endereco2 = new Endereco("cep2","rua2","num2","bairro2","cidade2", "SP2","Complemento2");
+        Endereco endereco1 = new Endereco("cep","rua","num",
+                "bairro","cidade", "SP","Complemento");
+        Endereco endereco2 = new Endereco("cep2","rua2","num2",
+                "bairro2","cidade2", "SP2","Complemento2");
 
         //Cliente
         Cliente cl = new Cliente("Lucas","Teixeira",

@@ -90,25 +90,30 @@ public abstract class Usuario implements Avaliavel{
     }
 
 //    Methods
-    public void autenticar(String email, String senha){
+
+    public boolean usuarioExiste(String email, String senha){
         if (email.equalsIgnoreCase(getEmail()) &&
-            senha.equals(this.senha)){
-            if (autenticado){
-                return;
-            }else{
-                autenticado = true;
-            }
+                senha.equals(this.senha)){
+            return true;
+        }
+        return false;
+    }
+
+    public String autenticar(String email, String senha){
+        if(usuarioExiste(email,senha)){
+            autenticado = true;
+            return "Usuario logado com sucesso";
+        }else {
+            return "Usuario não encontrado";
         }
     }
 
-    public void logOff(String email, String senha){
-        if (email.equalsIgnoreCase(getEmail()) &&
-                senha.equals(this.senha)){
-            if (!autenticado){
-                return;
-            }else{
-                autenticado = false;
-            }
+    public String logOff(String email, String senha){
+        if(usuarioExiste(email,senha)){
+            autenticado = false;
+            return "LogOff finalizado com sucesso";
+        }else {
+            return "Usuario não encontrado";
         }
     }
 
