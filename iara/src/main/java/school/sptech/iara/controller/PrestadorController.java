@@ -2,6 +2,7 @@ package school.sptech.iara.controller;
 
 import org.springframework.web.bind.annotation.*;
 import school.sptech.iara.model.Cliente;
+import school.sptech.iara.model.Habilidade;
 import school.sptech.iara.model.Prestador;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.Objects;
 public class PrestadorController {
 
     private List<Prestador> prestadores = new ArrayList<>();
+    private List<Habilidade> habilidades = new ArrayList<>();
 
     // retorna todos registros de usuários
     @GetMapping
@@ -66,6 +68,20 @@ public class PrestadorController {
             }
         }
         return "Usuário não encontrado";
+    }
+
+    @PostMapping("/{index}/habilidade")
+    public void postAddHabilidade(@RequestBody Habilidade habilidade,
+                                  @PathVariable int index){
+        boolean encontrado = false;
+        for (Habilidade hab: habilidades) {
+            if (hab.equals(habilidade)){
+                encontrado = true;
+            }
+        }
+        if (!encontrado){
+            prestadores.get(index).addHabilidade(habilidade);
+        }
     }
 
     //    desautenticar usuário
