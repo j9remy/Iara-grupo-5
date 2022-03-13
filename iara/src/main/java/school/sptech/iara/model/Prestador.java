@@ -13,7 +13,7 @@ public class Prestador extends Usuario{
 
 //    Constructor
     public Prestador(String nome, String sobrenome,
-                     String cpf, LocalDate dataNasc,
+                     String cpf, String dataNasc,
                      String email, String senha,
                      char sexo, String telefone,
                      Endereco endereco, String resumo) {

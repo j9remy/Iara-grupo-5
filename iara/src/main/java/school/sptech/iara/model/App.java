@@ -12,7 +12,7 @@ public class App {
 
         //Cliente
         Cliente cl = new Cliente("Lucas","Teixeira",
-                "123123", LocalDate.of(2003,9,07),
+                "123123", "2003-09-07",
                 "lucas@email.com","senha",'M', "telefone",endereco1);
 
         cl.addAvaliacao(5);
@@ -58,7 +58,7 @@ public class App {
 
         //Prestador
         Prestador pr = new Prestador("Rogerio", "Silva",
-                "3213123",LocalDate.of(1970,2,14),
+                "3213123","1970-2-4",
                 "rogerio@email.com","senha2", 'M', "0000000", endereco2,
                 "Esse é um resumo");
         pr.addHabilidade(hab1);

@@ -7,7 +7,7 @@ public abstract class Usuario implements Avaliavel{
     private String nome;
     private String sobrenome;
     private String cpf;
-    private LocalDate dataNasc;
+    private String dataNasc;
     private String email;
     private String senha;
     private char sexo;
@@ -17,7 +17,7 @@ public abstract class Usuario implements Avaliavel{
 
 //    Constructor
     public Usuario(String nome, String sobrenome,
-                   String cpf, LocalDate dataNasc,
+                   String cpf, String dataNasc,
                    String email, String senha,
                    char sexo, String telefone,
                    Endereco endereco) {
@@ -52,10 +52,10 @@ public abstract class Usuario implements Avaliavel{
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-    public LocalDate getDataNasc() {
+    public String getDataNasc() {
         return dataNasc;
     }
-    public void setDataNasc(LocalDate dataNasc) {
+    public void setDataNasc(String dataNasc) {
         this.dataNasc = dataNasc;
     }
     public String getEmail() {

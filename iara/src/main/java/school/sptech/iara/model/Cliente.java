@@ -10,7 +10,7 @@ public class Cliente extends Usuario {
 
 //    Constructor
     public Cliente(String nome, String sobrenome,
-                   String cpf, LocalDate dataNasc,
+                   String cpf, String dataNasc,
                    String email, String senha,
                    char sexo, String telefone,
                    Endereco endereco) {
