@@ -104,13 +104,25 @@ public class Servico {
     }
 
     // Deleta o registro de ServicoAtribuido da lista somente se ele não estiver finalizado ainda
-    public void cancelarServico(@NotNull ServicoAtribuido servico){
+    public void cancelarServicoAtribuido(@NotNull ServicoAtribuido servico){
         if (!servico.isFinalizado()){
             for (ServicoAtribuido serv: servicoAtribuidos) {
                 if (servico.equals(serv)){
                     servicoAtribuidos.remove(serv);
                 }
             }
+        }
+    }
+
+    public void desativarServico(){
+        boolean existeServicosAtribuidosNaoFinalizados = false;
+        for (ServicoAtribuido servAttr: servicoAtribuidos) {
+            if (!servAttr.isFinalizado()){
+                existeServicosAtribuidosNaoFinalizados = true;
+            }
+        }
+        if (!existeServicosAtribuidosNaoFinalizados){
+            setAtivo(false);
         }
     }
 

@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import school.sptech.iara.model.Cliente;
 import school.sptech.iara.model.Habilidade;
 import school.sptech.iara.model.Prestador;
+import school.sptech.iara.model.Servico;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ public class PrestadorController {
 
     private List<Prestador> prestadores = new ArrayList<>();
     private List<Habilidade> habilidades = new ArrayList<>();
+    private List<Servico> servicos = new ArrayList<>();
 
     // retorna todos registros de usuários
     @GetMapping
@@ -70,17 +72,45 @@ public class PrestadorController {
         return "Usuário não encontrado";
     }
 
+    // adiciona habilidade
     @PostMapping("/{index}/habilidade")
     public void postAddHabilidade(@RequestBody Habilidade habilidade,
                                   @PathVariable int index){
         boolean encontrado = false;
         for (Habilidade hab: habilidades) {
-            if (hab.equals(habilidade)){
+            if (hab.toString().equals(habilidade.toString())){
                 encontrado = true;
             }
         }
         if (!encontrado){
-            prestadores.get(index).addHabilidade(habilidade);
+            try{
+                if (!Objects.isNull(prestadores.get(index))){
+                    prestadores.get(index).addHabilidade(habilidade);
+                }
+            }catch (Exception e){
+                System.out.println(e);
+            }
+        }
+    }
+
+    //adiciona serviço
+    @PostMapping("/{index}/servico")
+    public void postAddServico(@RequestBody Servico servico,
+                                  @PathVariable int index){
+        boolean encontrado = false;
+        for (Servico ser: servicos) {
+            if (ser.toString().equals(servico.toString())){
+                encontrado = true;
+            }
+        }
+        if (!encontrado){
+            try{
+                if (!Objects.isNull(prestadores.get(index))){
+                    prestadores.get(index).addServico(servico);
+                }
+            }catch (Exception e){
+                System.out.println(e);
+            }
         }
     }
 
