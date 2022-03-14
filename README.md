@@ -1,1 +1,1 @@
-# 2CCOA---Grupo-5
+![alt text](./site/img/logo.png)
