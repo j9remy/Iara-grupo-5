@@ -85,6 +85,7 @@
             <img class="deco tracinho" src="img/tracinhos.png">
             <img onclick="togglebalao()" class="deco sereia" src="img/sereia.png">
             <span id="balao" class="balao">Você sabia que Iara significa Mãe-d'água?</span>
+            <div id="balao2" class="traco"></div>
             <div class="title">
                 <b>SOBRE NÓS</b>
             </div>
@@ -146,11 +147,17 @@
 </html>
 <script>
     var balao = document.getElementById('balao');
+    var balao2 = document.getElementById('balao2');
     function togglebalao() {
         if(balao.classList.contains('show')) {
             balao.classList.remove('show');
         } else {
             balao.classList.add('show');
+        }
+        if(balao2.classList.contains('show')) {
+            balao2.classList.remove('show');
+        } else {
+            balao2.classList.add('show');
         }
     }
 </script>
