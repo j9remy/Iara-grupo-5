@@ -383,3 +383,24 @@ i.fa-solid.fa-envelope-open-text {
 }
 
 
+.balao{
+  transition: all 1s;
+  font-size: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 5px;
+  left: 35px;
+  font-weight: bold;
+}
+
+.balao.show{
+  font-size: 17px;
+  width: 130px;
+  height: 65px;
+  top: -57px;
+  left: 58px;
+  text-shadow: 2px 2px 3px #de0235ad;
+}
+
+
