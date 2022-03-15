@@ -379,28 +379,45 @@ i.fa-solid.fa-envelope-open-text {
 
 .input.email:focus, .input.mensagem:focus{
       outline: none !important;
-      box-shadow: 0px 4px 14px 5px #de0235
+      box-shadow: 0px 4px 14px 5px #de0235;
 }
 
 
 .balao{
-  transition: all 1s;
-  font-size: 0;
-  width: 0;
-  height: 0;
+  transition: all .9s;
+  width: 130px;
+  height: 65px;
   position: absolute;
-  top: 5px;
-  left: 35px;
+  top: -57px;
+  left: 80px;
   font-weight: bold;
+  color: white;
+  font-size: 16.5px;
+  letter-spacing: 0.6px;
 }
 
 .balao.show{
-  font-size: 17px;
   width: 130px;
   height: 65px;
   top: -57px;
-  left: 58px;
-  text-shadow: 2px 2px 3px #de0235ad;
+  left: 80px;
+  letter-spacing: 0.6px;
+  color: black;
+  font-size: 17px;
 }
 
+.traco{
+  position: absolute;
+  top: 5px;
+  left: 39px;
+  height: 4px;
+  width: 0px;
+  background-color: #de0235;
+  transition: all .9s;
+}
+
+.traco.show{
+  height: 4px;
+  width: 149px;
+}
 
