@@ -83,7 +83,8 @@
             </svg>
         <div class="container dflex acenter jbetween prelative">
             <img class="deco tracinho" src="img/tracinhos.png">
-            <img class="deco sereia" src="img/sereia.png">
+            <img onclick="togglebalao()" class="deco sereia" src="img/sereia.png">
+            <span id="balao" class="balao">Você sabia que Iara significa Mãe-d'água?</span>
             <div class="title">
                 <b>SOBRE NÓS</b>
             </div>
@@ -143,3 +144,13 @@
     
 </body>
 </html>
+<script>
+    var balao = document.getElementById('balao');
+    function togglebalao() {
+        if(balao.classList.contains('show')) {
+            balao.classList.remove('show');
+        } else {
+            balao.classList.add('show');
+        }
+    }
+</script>
