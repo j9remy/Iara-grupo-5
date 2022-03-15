@@ -52,7 +52,7 @@ public class ClienteController {
     }
 
     //Adicionar avaliação a lista de avaliações
-    @PostMapping("/avaliacao/{indexUser}/{avaliacao}")
+    @PutMapping("/avaliacao/{indexUser}/{avaliacao}")
     public String postAddAvaliacao(@PathVariable int indexUser, @PathVariable int avaliacao){
         try{
             if (avaliacao < 0 || avaliacao >5){

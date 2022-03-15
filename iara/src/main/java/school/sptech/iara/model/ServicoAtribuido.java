@@ -17,7 +17,7 @@ public class ServicoAtribuido implements Avaliavel{
         this.horaInicio = LocalTime.now();
         horaFim = horaInicio;
         finalizado = false;
-        avaliacao = null;
+        avaliacao = -1d;
     }
 
 //    Getter and Setter

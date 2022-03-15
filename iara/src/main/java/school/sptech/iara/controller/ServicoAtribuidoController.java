@@ -2,6 +2,7 @@ package school.sptech.iara.controller;
 
 import org.springframework.web.bind.annotation.*;
 import school.sptech.iara.model.Cliente;
+import school.sptech.iara.model.Servico;
 import school.sptech.iara.model.ServicoAtribuido;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class ServicoAtribuidoController {
     public List<ServicoAtribuido> getListaServicos(){
         return servicoAtribuidos;
     }
+
     @GetMapping("/{index}")
     public ServicoAtribuido getServicoPorIndex(@PathVariable int index){
         try{
@@ -32,11 +34,8 @@ public class ServicoAtribuidoController {
     }
 
     @PostMapping
-    public Cliente postCadastrarServico(@RequestBody Cliente cliente){
-        return cliente;
-
-//        servicoAtribuidos.add(new ServicoAtribuido(cliente));
-//        return new ServicoAtribuido(cliente).toString();
+    public void postCadastrarServico(@RequestBody Cliente cliente){
+        servicoAtribuidos.add(new ServicoAtribuido(cliente));
     }
 
 }

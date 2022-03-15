@@ -14,7 +14,6 @@ import java.util.Objects;
 public class ServicoController {
 
     private List<Servico> servicos = new ArrayList<>();
-    private List<ServicoAtribuido> servicoAtribuidos = new ArrayList<>();
 
     @GetMapping
     public List<Servico> getServicos(){
@@ -52,15 +51,13 @@ public class ServicoController {
     }
 
     //add serviço atribuido
-//    a
-//    a
-//    a
-//    a
-//    a
-//    a
-//    a
+    @PostMapping("/servico-atribuido/{index}")
+    public void addServicoAtribuido(@RequestBody ServicoAtribuido servicoAtribuido,
+                                    @PathVariable int index){
+        servicos.get(index).addServicoAtribuido(servicoAtribuido);
+    }
 
-    @PutMapping("/{index}/alterna-ativo")
+    @PutMapping("/alterna-ativo/{index}")
     public void desativarServico(@PathVariable int index){
         try{
             if (!Objects.isNull(servicos.get(index))){

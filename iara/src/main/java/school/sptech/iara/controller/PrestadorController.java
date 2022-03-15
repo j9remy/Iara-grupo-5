@@ -73,7 +73,7 @@ public class PrestadorController {
     }
 
     // adiciona habilidade
-    @PostMapping("/{index}/habilidade")
+    @PostMapping("/habilidade/{index}")
     public void postAddHabilidade(@RequestBody Habilidade habilidade,
                                   @PathVariable int index){
         boolean encontrado = false;
@@ -94,7 +94,7 @@ public class PrestadorController {
     }
 
     //adiciona serviço
-    @PostMapping("/{index}/servico")
+    @PostMapping("/servico/{index}")
     public void postAddServico(@RequestBody Servico servico,
                                   @PathVariable int index){
         boolean encontrado = false;
