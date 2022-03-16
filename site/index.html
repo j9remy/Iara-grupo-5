@@ -62,7 +62,7 @@
             <img class="deco concha" src="img/concha1.png">
             <img class="deco estrela" src="img/concha2.png">
             <div class="text">
-                COM A <b>IARA</b>, VOCÊ VAI ENCONTRAR OS MELHORES PROFISSIONAIS DE PROCEDIMENTOS ESTÉTICOS PRÓXIMOS A VOCÊ.
+                COM A <b>IARA</b> VOCÊ, VAI ENCONTRAR OS MELHORES PROFISSIONAIS DE PROCEDIMENTOS ESTÉTICOS PRÓXIMOS A VOCÊ.
                 COM A POSSIBILIDADE DE <b>ESCOLHA</b> DE ATENDIMENTO, VOCÊ PODE IR ATÉ O PROFISSIONAL OU ELE VIR ATÉ VOCÊ.
             </div>
 
@@ -83,7 +83,7 @@
             </svg>
         <div class="container dflex acenter jbetween prelative">
             <img class="deco tracinho" src="img/tracinhos.png">
-            <img onclick="togglebalao()" class="deco sereia" src="img/sereia.png">
+            <img onmouseover="togglebalao()" onmouseout="togglebalao()" class="deco sereia" src="img/sereia.png">
             <span id="balao" class="balao">Você sabia que Iara significa Mãe-d'água?</span>
             <div id="balao2" class="traco"></div>
             <div class="title">
@@ -153,8 +153,7 @@
             balao.classList.remove('show');
         } else {
             balao.classList.add('show');
-        }
-        if(balao2.classList.contains('show')) {
+        }if(balao2.classList.contains('show')) {
             balao2.classList.remove('show');
         } else {
             balao2.classList.add('show');
