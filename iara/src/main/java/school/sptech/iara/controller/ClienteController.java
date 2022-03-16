@@ -52,7 +52,7 @@ public class ClienteController {
     //Adicionar avaliação a lista de avaliações
     @PutMapping("/avaliacao/{indexUser}/{avaliacao}")
     public ResponseEntity postAddAvaliacao(@PathVariable int indexUser, @PathVariable int avaliacao){
-
+        try{
             if (avaliacao < 0 || avaliacao >5){
                 return ResponseEntity.status(400).build();
             }
@@ -63,6 +63,10 @@ public class ClienteController {
             }else {
                 return ResponseEntity.status(404).build();
             }
+        }catch (Exception e){
+            return ResponseEntity.status(404).build();
+        }
+
 
     }
 

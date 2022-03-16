@@ -1,5 +1,6 @@
 package school.sptech.iara.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import school.sptech.iara.model.Cliente;
 import school.sptech.iara.model.Habilidade;
@@ -20,61 +21,58 @@ public class PrestadorController {
 
     // retorna todos registros de usuários
     @GetMapping
-    public List<Prestador> getListaPrestadores(){
-        return prestadores;
+    public ResponseEntity getListaPrestadores(){
+        if (!prestadores.isEmpty()){
+            return ResponseEntity.status(200).body(prestadores);
+        }
+        return ResponseEntity.status(204).build();
     }
 
     // retorna usuário pelo index
     @GetMapping("/{index}")
-    public Prestador getPrestadorPorIndex(@PathVariable int index){
+    public ResponseEntity getPrestadorPorIndex(@PathVariable int index){
         try{
             if (!Objects.isNull(prestadores.get(index))){
-                return prestadores.get(index);
+                return ResponseEntity.status(200).body(prestadores.get(index));
             }
         }catch (Exception e){
             System.out.println(e);
-            return null;
+            return ResponseEntity.status(404).build();
         }
-        return null;
+        return ResponseEntity.status(204).build();
     }
 
-    //cadastro de clientes, com possibilidade de cadastrar vários de uma só vez
+    //cadastro de prestador
     @PostMapping
-    public void postCadastrarPrestadores(@RequestBody Prestador prestador[]){
-        for (int i = 0; i < prestador.length; i++) {
-            boolean encontrado = false;
-            for (Prestador pr: prestadores) {
-                if (pr.getEmail().equalsIgnoreCase(prestador[i].getEmail())||
-                        pr.getCpf().equalsIgnoreCase(prestador[i].getCpf())||
-                        pr.getTelefone().equalsIgnoreCase(prestador[i].getTelefone())){
-                    encontrado = true;
-                }
-            }
-            if (!encontrado){
-                prestadores.add(prestador[i]);
+    public ResponseEntity postCadastrarPrestadores(@RequestBody Prestador prestador){
+        for (Prestador pr: this.prestadores) {
+            if (pr.getEmail().equalsIgnoreCase(prestador.getEmail()) ||
+                    pr.getCpf().equalsIgnoreCase(prestador.getCpf()) ||
+                    pr.getTelefone().equalsIgnoreCase(prestador.getTelefone())){
+                return ResponseEntity.status(409).build();
             }
         }
+        prestadores.add(prestador);
+        return ResponseEntity.status(201).build();
     }
 
     //Autenticar usuário
     @PostMapping("/autenticacao/{email}/{senha}")
-    public String postAutenticarUsuario(@PathVariable String email, @PathVariable String senha){
+    public ResponseEntity postAutenticarUsuario(@PathVariable String email, @PathVariable String senha){
         for (Prestador prestador: prestadores) {
             if (prestador.usuarioExiste(email,senha)){
                 if (!prestador.isAutenticado()){
                     prestador.autenticar(email,senha);
-                    return "Usuário autenticado com sucesso";
-                }else {
-                    return "Usuário ja está autenticado";
+                    return ResponseEntity.status(200).build();
                 }
             }
         }
-        return "Usuário não encontrado";
+        return ResponseEntity.status(404).build();
     }
 
     // adiciona habilidade
     @PostMapping("/habilidade/{index}")
-    public void postAddHabilidade(@RequestBody Habilidade habilidade,
+    public ResponseEntity postAddHabilidade(@RequestBody Habilidade habilidade,
                                   @PathVariable int index){
         boolean encontrado = false;
         for (Habilidade hab: habilidades) {
@@ -86,20 +84,27 @@ public class PrestadorController {
             try{
                 if (!Objects.isNull(prestadores.get(index))){
                     prestadores.get(index).addHabilidade(habilidade);
+                    return ResponseEntity.status(201).build();
                 }
             }catch (Exception e){
-                System.out.println(e);
+                return ResponseEntity.status(404).build();
             }
         }
+        return ResponseEntity.status(404).build();
     }
 
     //adiciona serviço
     @PostMapping("/servico/{index}")
-    public void postAddServico(@RequestBody Servico servico,
+    public ResponseEntity postAddServico(@RequestBody Servico servico,
                                   @PathVariable int index){
+        if (prestadores.get(index).getServicos().isEmpty()){
+            prestadores.get(index).addServico(servico);
+            return ResponseEntity.status(201).build();
+        }
+
         boolean encontrado = false;
-        for (Servico ser: servicos) {
-            if (ser.toString().equals(servico.toString())){
+        for (Servico ser: prestadores.get(index).getServicos()) {
+            if (ser.equals(servico)){
                 encontrado = true;
             }
         }
@@ -107,27 +112,28 @@ public class PrestadorController {
             try{
                 if (!Objects.isNull(prestadores.get(index))){
                     prestadores.get(index).addServico(servico);
+                    return ResponseEntity.status(201).build();
                 }
             }catch (Exception e){
                 System.out.println(e);
+                return ResponseEntity.status(404).build();
             }
         }
+        return ResponseEntity.status(404).build();
     }
 
     //    desautenticar usuário
     @DeleteMapping("/autenticacao/{email}/{senha}")
-    public String deleteDesautenticarUsuario(@PathVariable String email, @PathVariable String senha){
+    public ResponseEntity deleteDesautenticarUsuario(@PathVariable String email, @PathVariable String senha){
         for (Prestador prestador: prestadores) {
             if (prestador.usuarioExiste(email,senha)){
                 if (prestador.isAutenticado()){
                     prestador.logOff(email,senha);
-                    return "Usuário desautenticado com sucesso";
-                }else {
-                    return "Usuário não está autenticado";
+                    return ResponseEntity.status(200).build();
                 }
             }
         }
-        return "Usuário não encontrado";
+        return ResponseEntity.status(404).build();
     }
 
 
