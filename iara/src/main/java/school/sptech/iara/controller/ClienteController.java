@@ -1,5 +1,6 @@
 package school.sptech.iara.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import school.sptech.iara.model.Cliente;
 
@@ -15,89 +16,81 @@ public class ClienteController {
 
     // retorna todos registros de usuários
     @GetMapping
-    public List<Cliente> getListaClientes(){
-        return clientes;
+    public ResponseEntity getListaClientes(){
+        if(clientes.isEmpty())
+            return ResponseEntity.status(204).build();
+        return ResponseEntity.status(200).body(clientes);
     }
 
     // retorna usuário pelo index
     @GetMapping("/{index}")
-    public Cliente getClientePorIndex(@PathVariable int index){
+    public ResponseEntity getClientePorIndex(@PathVariable int index){
         try{
             if (!Objects.isNull(clientes.get(index))){
-                return clientes.get(index);
+                return ResponseEntity.status(200).body(clientes.get(index));
             }
         }catch (Exception e){
-            System.out.println(e);
-            return null;
+            return ResponseEntity.status(404).build();
         }
-        return null;
+        return ResponseEntity.status(204).build();
     }
 
     //cadastro de clientes, com possibilidade de cadastrar vários de uma só vez
     @PostMapping
-    public void postCadastrarClientes(@RequestBody Cliente cliente[]){
-        for (int i = 0; i < cliente.length; i++) {
-            boolean encontrado = false;
-            for (Cliente cl: clientes) {
-                if (cl.getEmail().equalsIgnoreCase(cliente[i].getEmail())||
-                    cl.getCpf().equalsIgnoreCase(cliente[i].getCpf())||
-                    cl.getTelefone().equalsIgnoreCase(cliente[i].getTelefone())){
-                    encontrado = true;
-                }
-            }
-            if (!encontrado){
-                clientes.add(cliente[i]);
+    public ResponseEntity postCadastrarClientes(@RequestBody Cliente cliente){
+        for (Cliente cl: this.clientes) {
+            if (cl.getEmail().equalsIgnoreCase(cliente.getEmail()) ||
+                cl.getCpf().equalsIgnoreCase(cliente.getCpf()) ||
+                cl.getTelefone().equalsIgnoreCase(cliente.getTelefone())){
+                return ResponseEntity.status(409).build();
             }
         }
+        clientes.add(cliente);
+        return ResponseEntity.status(201).build();
     }
 
     //Adicionar avaliação a lista de avaliações
     @PutMapping("/avaliacao/{indexUser}/{avaliacao}")
-    public String postAddAvaliacao(@PathVariable int indexUser, @PathVariable int avaliacao){
-        try{
+    public ResponseEntity postAddAvaliacao(@PathVariable int indexUser, @PathVariable int avaliacao){
+
             if (avaliacao < 0 || avaliacao >5){
-                return "A avaliação deve ser um número entre 0 e 5";
+                return ResponseEntity.status(400).build();
             }
+
             if (!Objects.isNull(clientes.get(indexUser))){
                 clientes.get(indexUser).addAvaliacao(avaliacao);
-                return "Avaliação de " + avaliacao + " atribuida para " + clientes.get(indexUser).getNome();
+                return ResponseEntity.status(201).build();
+            }else {
+                return ResponseEntity.status(404).build();
             }
-        }catch (Exception e){
-            System.out.println(e);
-            return e.toString();
-        }
-        return null;
+
     }
 
     //Autenticar usuário
     @PostMapping("/autenticacao/{email}/{senha}")
-    public String postAutenticarUsuario(@PathVariable String email, @PathVariable String senha){
+    public ResponseEntity postAutenticarUsuario(@PathVariable String email, @PathVariable String senha){
         for (Cliente cliente: clientes) {
             if (cliente.usuarioExiste(email,senha)){
                 if (!cliente.isAutenticado()){
                     cliente.autenticar(email,senha);
-                    return "Usuário autenticado com sucesso";
-                }else {
-                    return "Usuário ja está autenticado";
+                    return ResponseEntity.status(200).build();
                 }
             }
         }
-        return "Usuário não encontrado";
+        return ResponseEntity.status(404).build();
     }
 
 //    desautenticar usuário
     @DeleteMapping("/autenticacao/{email}/{senha}")
-    public String deleteDesautenticarUsuario(@PathVariable String email, @PathVariable String senha){
+    public ResponseEntity deleteDesautenticarUsuario(@PathVariable String email, @PathVariable String senha){
         for (Cliente cliente: clientes) {
             if (cliente.usuarioExiste(email,senha)){
                 if (cliente.isAutenticado()){
                     cliente.logOff(email,senha);
-                    return "Usuário desautenticado com sucesso";
-                }else {
-                    return "Usuário não está autenticado";
+                    return ResponseEntity.status(200).build();
                 }
             }
         }
-        return "Usuário não encontrado";
+        return ResponseEntity.status(404).build();
     }
 }
