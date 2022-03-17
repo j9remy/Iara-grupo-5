@@ -178,7 +178,7 @@ img {
 
 .como-funciona {
   background-color: #de0235;
-  padding: 180px 0;
+  padding: 200px 0;
 }
 
 .deco {
@@ -211,19 +211,20 @@ img {
 
 .sobre-nos .title {
   width: 100%;
-  max-width: 435px;
+  max-width: 355px;
   font-size: 62px;
+  margin-left: 50px;
 }
 
 .tracinho {
-   left: 236px;
-   width: 132px;
-   top: 72px;
+  left: 286px;
+  width: 132px;
+  top: 72px;
 }
 
 .sereia {
   height: 250px;
-  left: -77px;
+  left: -28px;
   top: -45px;
   /* z-index: -1; */
 }
@@ -349,8 +350,7 @@ i.fa-solid.fa-envelope-open-text {
   display: flex;
   justify-content: center;
   padding-bottom: 10px;
-  font-weight: bold;
-  color: #32010d;;
+  color: #fdfbfb;
 }
 
 .icones a{
@@ -389,7 +389,7 @@ i.fa-solid.fa-envelope-open-text {
   height: 65px;
   position: absolute;
   top: -57px;
-  left: 80px;
+  left: 133px;
   font-weight: bold;
   color: #fdfbfb;
   font-size: 16.5px;
@@ -400,7 +400,7 @@ i.fa-solid.fa-envelope-open-text {
   width: 130px;
   height: 65px;
   top: -57px;
-  left: 80px;
+  left: 133px;
   letter-spacing: 0.6px;
   color: black;
   font-size: 17px;
@@ -409,7 +409,7 @@ i.fa-solid.fa-envelope-open-text {
 .traco{
   position: absolute;
   top: 5px;
-  left: 39px;
+  left: 91px;
   height: 4px;
   width: 0px;
   background-color: #de0235;
