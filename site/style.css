@@ -88,6 +88,12 @@ img {
 
 .menu {
   padding: 5px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9;
+  background: #fdfbfb;
 }
 
 .menu .links a {
@@ -159,7 +165,11 @@ img {
 }
 
 .main-banner {
-  padding: 120px 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 130px;
 }
 
 .como-funciona .text {
