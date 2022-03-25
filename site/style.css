@@ -23,6 +23,9 @@ body {
   margin: 0;
   overflow-x: hidden;
   background-color: #fdfbfb;
+}
+
+body, input, button, textarea {
   font-family: "Ubuntu", sans-serif;
 }
 
@@ -273,7 +276,7 @@ svg {
 
 .contato .conteudo{
   width: 100%;
-  max-width: 524px;
+  max-width: 369px;
   font-size: 58px;
   display: flex;
     align-content: center;
@@ -307,22 +310,19 @@ i.fa-solid.fa-envelope-open-text {
 
 .input.mensagem{
   resize: none;
-  border: 7px solid transparent;
-  font-family: 'Ubuntu';
+  border: 2px solid transparent;
   border-radius: 10px;
   font-size: 17px;
-  margin-bottom: -18px;
   transition: all .4s;
+  width: 100%;
+  padding: 17px;
 }
 
-.input.email{
-  border: 7px solid transparent;
-  font-family: 'Ubuntu';
-  border-radius: 10px;
-  font-size: 16px;
-  width: 225px;
-  height: 45px;
-  transition: all .4s;
+#form-contato {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .button.enviar-mensagem{
@@ -330,12 +330,14 @@ i.fa-solid.fa-envelope-open-text {
   font-size: 17px;
   font-weight: bold;
   border-radius: 10px;
-  padding: 13px 23px;
+  padding: 0 23px;
   color: #000;
   box-shadow: 0px 4px 4px #de0235;
   border: 1px solid transparent;
   margin-left: 17px;
   transition: all .4s;
+  margin: 25px 0 0;
+  height: 45px;
 }
 
 .button.enviar-mensagem:hover{
@@ -387,7 +389,7 @@ i.fa-solid.fa-envelope-open-text {
   background: #AB0229;
 }
 
-.input.email:focus, .input.mensagem:focus{
+.input.email:focus, .input.email.focus, .input.mensagem:focus{
       outline: none !important;
       box-shadow: 0px 4px 14px 5px #de0235;
 }
@@ -431,3 +433,63 @@ i.fa-solid.fa-envelope-open-text {
   width: 149px;
 }
 
+
+
+.user-input-wrp {
+	position: relative;
+	width: calc(100% - 130px);
+}
+.user-input-wrp.total {
+	width: 100%;
+}
+.user-input-wrp .inputText{
+	outline: none;
+	border:none;
+	border-radius: 9px;
+	/* border-bottom: 1px solid #777; */
+	/* box-shadow: none !important; */
+	/* font-size: 17px; */
+	/* font-weight: bold; */
+  padding: 0 12px;
+  width: 100%;
+  color: #fff;
+  border: 2px solid transparent;
+  transition: all .4s;
+}
+.user-input-wrp input.inputText {
+	height: 45px;
+}
+.user-input-wrp .floating-label {
+	position: absolute;
+	pointer-events: none;
+	top: 38px;
+	left: 12px;
+	transition: 0.2s ease all;
+	font-size: 17px;
+	/* font-weight: bold; */
+}
+.user-input-wrp .inputText:focus ~ .floating-label, .user-input-wrp .inputText.focus ~ .floating-label,
+.user-input-wrp .inputText:not(:focus):valid ~ .floating-label, .user-input-wrp .inputText:not(.focus):valid ~ .floating-label {
+	top: 19px;
+	left: 8px;
+	font-size: 13px;
+	opacity: 1;
+	font-weight: bold;
+	color: #1e0d14;
+}
+
+
+
+
+.user-input-wrp .inputText:focus, .user-input-wrp .inputText.focus, .input.mensagem:focus {
+  border: 2px solid #fff;
+  background-color: #ab0229;
+	box-shadow: 0px 4px 14px 5px #de0235;
+}
+
+.user-input-wrp .inputText:focus ~ .floating-label, .user-input-wrp .inputText.focus ~ .floating-label,
+.user-input-wrp .inputText:not(:focus):valid ~ .floating-label, .user-input-wrp .inputText:not(.focus):valid ~ .floating-label {
+  top: 20px;
+  color: #fff;
+  background: #af0229;
+}
