@@ -336,7 +336,7 @@ i.fa-solid.fa-envelope-open-text {
   border: 1px solid transparent;
   margin-left: 17px;
   transition: all .4s;
-  margin: 25px 0 0;
+  margin: 0;
   height: 45px;
 }
 
@@ -438,6 +438,7 @@ i.fa-solid.fa-envelope-open-text {
 .user-input-wrp {
 	position: relative;
 	width: calc(100% - 130px);
+  display: flex;
 }
 .user-input-wrp.total {
 	width: 100%;
@@ -462,7 +463,7 @@ i.fa-solid.fa-envelope-open-text {
 .user-input-wrp .floating-label {
 	position: absolute;
 	pointer-events: none;
-	top: 38px;
+	top: 12px;
 	left: 12px;
 	transition: 0.2s ease all;
 	font-size: 17px;
@@ -478,9 +479,6 @@ i.fa-solid.fa-envelope-open-text {
 	color: #1e0d14;
 }
 
-
-
-
 .user-input-wrp .inputText:focus, .user-input-wrp .inputText.focus, .input.mensagem:focus {
   border: 2px solid #fff;
   background-color: #ab0229;
@@ -489,7 +487,11 @@ i.fa-solid.fa-envelope-open-text {
 
 .user-input-wrp .inputText:focus ~ .floating-label, .user-input-wrp .inputText.focus ~ .floating-label,
 .user-input-wrp .inputText:not(:focus):valid ~ .floating-label, .user-input-wrp .inputText:not(.focus):valid ~ .floating-label {
-  top: 20px;
+  top: -7px;
   color: #fff;
   background: #af0229;
+}
+
+#form-contato > div:first-child {
+  margin-bottom: 20px;
 }
