@@ -97,6 +97,7 @@ img {
   width: 100%;
   z-index: 9;
   background: #fdfbfb;
+  box-shadow: 0 0 7px 0px white;
 }
 
 .menu .links a {
