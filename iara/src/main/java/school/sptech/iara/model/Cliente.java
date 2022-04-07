@@ -1,9 +1,11 @@
 package school.sptech.iara.model;
 
+import javax.persistence.Entity;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Cliente extends Usuario {
 //    Attributes
     private List<Integer> avaliacoes;

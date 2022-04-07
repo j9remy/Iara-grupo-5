@@ -1,9 +1,18 @@
 package school.sptech.iara.model;
 
-import java.time.LocalDate;
+import org.jetbrains.annotations.NotNull;
 
+import javax.persistence.*;
+
+@MappedSuperclass
 public abstract class Usuario implements Avaliavel{
 //    Attributes
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @NotNull
+    
     private String nome;
     private String sobrenome;
     private String cpf;

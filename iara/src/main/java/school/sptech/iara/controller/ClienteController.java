@@ -1,8 +1,10 @@
 package school.sptech.iara.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import school.sptech.iara.model.Cliente;
+import school.sptech.iara.repository.ClienteRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,9 @@ import java.util.Objects;
 @RestController
 @RequestMapping("/cliente")
 public class ClienteController {
+
+    @Autowired
+    private ClienteRepository repository;
 
     private List<Cliente> clientes = new ArrayList<>();
 
@@ -45,7 +50,7 @@ public class ClienteController {
                 return ResponseEntity.status(409).build();
             }
         }
-        clientes.add(cliente);
+        repository.save(cliente);
         return ResponseEntity.status(201).build();
     }
 
