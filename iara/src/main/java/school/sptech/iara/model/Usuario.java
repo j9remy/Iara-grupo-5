@@ -12,7 +12,7 @@ public abstract class Usuario implements Avaliavel{
     private Integer id;
 
     @NotNull
-    
+
     private String nome;
     private String sobrenome;
     private String cpf;
