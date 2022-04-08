@@ -15,8 +15,8 @@ public class App {
                 "123123", "2003-09-07",
                 "lucas@email.com","senha",'M', "telefone",endereco1);
 
-        cl.addAvaliacao(5);
-        cl.addAvaliacao(4);
+//        cl.addAvaliacao(5);
+//        cl.addAvaliacao(4);
         System.out.println(cl.getAvaliacao()); // Esperado 4.5
 
         //Servico pt1

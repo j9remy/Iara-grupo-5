@@ -1,8 +1,13 @@
 package school.sptech.iara.model;
 
+import org.hibernate.validator.constraints.br.CPF;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @MappedSuperclass
 public abstract class Usuario implements Avaliavel{
@@ -12,16 +17,38 @@ public abstract class Usuario implements Avaliavel{
     private Integer id;
 
     @NotNull
-
+    @Size(min = 2, max = 30)
     private String nome;
+
+    @NotNull
+    @Size(min = 2, max = 30)
     private String sobrenome;
+
+    @NotNull
+    @CPF
     private String cpf;
+
+    @NotNull
+    @Past
     private String dataNasc;
+
+    @NotNull
+    @Email
     private String email;
+
+    @NotNull
+    @Size(min = 5, max = 20)
     private String senha;
+
+    @NotNull
     private char sexo;
+
+    @NotNull
+    @Pattern(regexp = "(\\(?\\d{2}\\)?\\s)?(\\d{4,5}\\-\\d{4})" , message = "Informe um telefone válido com ou sem DDD")
     private String telefone;
     private boolean autenticado;
+
+    @OneToMany
     private Endereco endereco;
 
 //    Constructor
@@ -127,7 +154,6 @@ public abstract class Usuario implements Avaliavel{
     }
 
     //toString
-
     @Override
     public String toString() {
         return "Usuario{" +

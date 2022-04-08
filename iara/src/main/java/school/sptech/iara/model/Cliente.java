@@ -17,7 +17,7 @@ public class Cliente extends Usuario {
                    char sexo, String telefone,
                    Endereco endereco) {
         super(nome, sobrenome, cpf, dataNasc, email, senha, sexo, telefone, endereco);
-        avaliacoes = new ArrayList<>();
+        //avaliacoes = new ArrayList<>();
     }
 
 //    Methods
@@ -27,7 +27,6 @@ public class Cliente extends Usuario {
             avaliacoes.add(num);
         }
     }
-
     @Override
     // Retourna a média de todas avaliações na lista
     public double getAvaliacao(){

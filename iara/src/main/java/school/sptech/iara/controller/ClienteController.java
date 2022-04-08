@@ -63,7 +63,7 @@ public class ClienteController {
             }
 
             if (!Objects.isNull(clientes.get(indexUser))){
-                clientes.get(indexUser).addAvaliacao(avaliacao);
+//                clientes.get(indexUser).addAvaliacao(avaliacao);
                 return ResponseEntity.status(201).build();
             }else {
                 return ResponseEntity.status(404).build();

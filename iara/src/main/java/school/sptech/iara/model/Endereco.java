@@ -1,13 +1,40 @@
 package school.sptech.iara.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+@Entity
 public class Endereco {
 //    Attributes
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @NotNull
+    @Size(min = 8, max = 9)
     private String cep;
+
+    @NotNull
     private String rua;
+
+    @NotNull
     private String numero;
+
+    @NotNull
     private String bairro;
+
+    @NotNull
     private String cidade;
+
+    @NotNull
+    @Size(min = 2, max = 2)
     private String uf;
+
+    @NotNull
     private String complemento;
 
 //    Constructor

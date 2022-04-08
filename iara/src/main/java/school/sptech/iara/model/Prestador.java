@@ -99,7 +99,7 @@ public class Prestador extends Usuario{
                 ", sexo=" + getSexo() +
                 ", telefone='" + getTelefone() + '\'' +
                 ", autenticado=" + isAutenticado() +
-                ", endereco=" + getEndereco() +
+//                ", endereco=" + getEndereco() +
                 ", resumo=" + getResumo() +
                 ", habilidades=" + habilidades +
                 ", serviços=" + servicos +
