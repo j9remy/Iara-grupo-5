@@ -1,10 +1,18 @@
 package school.sptech.iara.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalTime;
 import java.util.Objects;
 
+
 public class ServicoAtribuido implements Avaliavel{
 //    Attributes
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private Cliente cliente;
     private LocalTime horaInicio;
     private LocalTime horaFim;

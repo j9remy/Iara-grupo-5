@@ -8,6 +8,10 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @MappedSuperclass
 public abstract class Usuario implements Avaliavel{
@@ -30,7 +34,7 @@ public abstract class Usuario implements Avaliavel{
 
     @NotNull
     @Past
-    private String dataNasc;
+    private Timestamp dataNasc;
 
     @NotNull
     @Email
@@ -46,14 +50,13 @@ public abstract class Usuario implements Avaliavel{
     @NotNull
     @Pattern(regexp = "(\\(?\\d{2}\\)?\\s)?(\\d{4,5}\\-\\d{4})" , message = "Informe um telefone válido com ou sem DDD")
     private String telefone;
+
     private boolean autenticado;
 
-    @OneToMany
-    private Endereco endereco;
 
 //    Constructor
     public Usuario(String nome, String sobrenome,
-                   String cpf, String dataNasc,
+                   String cpf, Timestamp dataNasc,
                    String email, String senha,
                    char sexo, String telefone,
                    Endereco endereco) {
@@ -66,7 +69,6 @@ public abstract class Usuario implements Avaliavel{
         this.sexo = sexo;
         this.telefone = telefone;
         this.autenticado = false;
-        this.endereco = endereco;
     }
 
 //    Getter and Setter
@@ -88,10 +90,10 @@ public abstract class Usuario implements Avaliavel{
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-    public String getDataNasc() {
+    public Timestamp getDataNasc() {
         return dataNasc;
     }
-    public void setDataNasc(String dataNasc) {
+    public void setDataNasc(Timestamp dataNasc) {
         this.dataNasc = dataNasc;
     }
     public String getEmail() {
@@ -118,12 +120,7 @@ public abstract class Usuario implements Avaliavel{
     public boolean isAutenticado() {
         return autenticado;
     }
-    public Endereco getEndereco() {
-        return endereco;
-    }
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
+
 
 //    Methods
 
@@ -166,7 +163,6 @@ public abstract class Usuario implements Avaliavel{
                 ", sexo=" + sexo +
                 ", telefone='" + telefone + '\'' +
                 ", autenticado=" + autenticado +
-                ", endereco=" + endereco +
                 '}';
     }
 }

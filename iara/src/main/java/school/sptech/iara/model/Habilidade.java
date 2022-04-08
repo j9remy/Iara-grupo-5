@@ -1,7 +1,16 @@
 package school.sptech.iara.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Habilidade {
 //    Attribute
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String habilidade;
     private String descricao;
 

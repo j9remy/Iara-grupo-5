@@ -2,16 +2,21 @@ package school.sptech.iara.model;
 
 import org.jetbrains.annotations.NotNull;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Servico {
 //    Attributes
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private double valor;
     private String descricao;
     private String tipo;
     private boolean ativo;
+
     private List<ServicoAtribuido> servicoAtribuidos;
 
 //    Constructor

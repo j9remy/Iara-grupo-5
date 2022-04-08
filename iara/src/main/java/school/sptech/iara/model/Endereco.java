@@ -1,21 +1,24 @@
 package school.sptech.iara.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@Table(name = "endereco")
 public class Endereco {
 //    Attributes
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private int id;
 
+    @Id
     @NotNull
-    @Size(min = 8, max = 9)
+    @Pattern(regexp = "[\\s]*[0-9]*[1-9]+",message="msg")
     private String cep;
 
     @NotNull
@@ -37,6 +40,9 @@ public class Endereco {
     @NotNull
     private String complemento;
 
+    @OneToMany
+    private List<Cliente> usuarios;
+
 //    Constructor
     public Endereco(String cep, String rua, String numero, String bairro, String cidade, String uf, String complemento) {
         this.cep = cep;
@@ -46,6 +52,7 @@ public class Endereco {
         this.cidade = cidade;
         this.uf = uf;
         this.complemento = complemento;
+        usuarios = new ArrayList<>();
     }
 
     //    Getter and Setter

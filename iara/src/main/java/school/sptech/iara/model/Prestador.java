@@ -1,5 +1,6 @@
 package school.sptech.iara.model;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,12 +9,13 @@ import java.util.Objects;
 public class Prestador extends Usuario{
 //    Attributes
     private String resumo;
+    private Boolean atendeDomicilio;
     private List<Habilidade> habilidades;
     private List<Servico> servicos;
 
 //    Constructor
     public Prestador(String nome, String sobrenome,
-                     String cpf, String dataNasc,
+                     String cpf, Timestamp dataNasc,
                      String email, String senha,
                      char sexo, String telefone,
                      Endereco endereco, String resumo) {
