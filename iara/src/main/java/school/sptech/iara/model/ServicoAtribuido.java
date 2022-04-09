@@ -1,27 +1,31 @@
 package school.sptech.iara.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalTime;
 import java.util.Objects;
 
-
+@Entity
 public class ServicoAtribuido implements Avaliavel{
 //    Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @ManyToOne
     private Cliente cliente;
+
     private LocalTime horaInicio;
     private LocalTime horaFim;
+    private String observacoes;
+    private String status;
     private boolean finalizado;
     private Double avaliacao;
 
+    @OneToOne
+    private Chat chat;
+
 //    Constructor
-    public ServicoAtribuido(Cliente cliente) {
-        this.cliente = cliente;
+    public ServicoAtribuido() {
         this.horaInicio = LocalTime.now();
         horaFim = horaInicio;
         finalizado = false;
@@ -29,12 +33,6 @@ public class ServicoAtribuido implements Avaliavel{
     }
 
 //    Getter and Setter
-    public Cliente getCliente() {
-        return cliente;
-    }
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
     public LocalTime getHoraInicio() {
         return horaInicio;
     }
@@ -79,7 +77,6 @@ public class ServicoAtribuido implements Avaliavel{
     @Override
     public String toString() {
         return "ServicoAtribuido{" +
-                "cliente=" + cliente +
                 ", horaInicio=" + horaInicio +
                 ", horaFim=" + horaFim +
                 ", finalizado=" + finalizado +

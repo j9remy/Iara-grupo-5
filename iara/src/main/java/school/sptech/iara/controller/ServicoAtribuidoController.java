@@ -35,7 +35,7 @@ public class ServicoAtribuidoController {
 
     @PostMapping
     public void postCadastrarServico(@RequestBody Cliente cliente){
-        servicoAtribuidos.add(new ServicoAtribuido(cliente));
+//        servicoAtribuidos.add(new ServicoAtribuido(cliente));
     }
 
 }

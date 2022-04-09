@@ -14,7 +14,6 @@ public class Cliente extends Usuario {
     @OneToMany
     private List<AvaliacaoCliente> avaliacoes;
 
-
 //    Constructor
     public Cliente(String nome, String sobrenome,
                    String cpf, Timestamp dataNasc,

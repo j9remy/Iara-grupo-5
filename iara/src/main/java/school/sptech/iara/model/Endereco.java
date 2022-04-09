@@ -19,6 +19,7 @@ public class Endereco {
     @Id
     @NotNull
     @Pattern(regexp = "[\\s]*[0-9]*[1-9]+",message="msg")
+    @Size(min = 8, max = 8)
     private String cep;
 
     @NotNull

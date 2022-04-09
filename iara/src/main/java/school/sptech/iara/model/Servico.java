@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
 public class Servico {
 //    Attributes
     @Id
@@ -17,6 +18,7 @@ public class Servico {
     private String tipo;
     private boolean ativo;
 
+    @OneToMany
     private List<ServicoAtribuido> servicoAtribuidos;
 
 //    Constructor
