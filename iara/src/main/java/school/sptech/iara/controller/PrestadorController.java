@@ -2,10 +2,11 @@ package school.sptech.iara.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import school.sptech.iara.model.Cliente;
 import school.sptech.iara.model.Habilidade;
 import school.sptech.iara.model.Prestador;
 import school.sptech.iara.model.Servico;
+import school.sptech.iara.repository.PrestadorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,8 @@ import java.util.Objects;
 @RequestMapping("/prestador")
 public class PrestadorController {
 
+    @Autowired
+    private PrestadorRepository prestadorRepository;
     private List<Prestador> prestadores = new ArrayList<>();
     private List<Habilidade> habilidades = new ArrayList<>();
     private List<Servico> servicos = new ArrayList<>();
