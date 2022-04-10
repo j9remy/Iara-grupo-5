@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
@@ -18,6 +19,7 @@ public class Mensagem {
 
     @NotNull
     @NotBlank
+    @Size(max = 500)
     private String mensagem;
 
     private LocalDateTime dataHora;

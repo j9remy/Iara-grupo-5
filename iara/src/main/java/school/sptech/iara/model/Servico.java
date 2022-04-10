@@ -21,6 +21,9 @@ public class Servico {
     @OneToMany
     private List<ServicoAtribuido> servicoAtribuidos;
 
+    @ManyToOne
+    private Prestador prestador;
+
 //    Constructor
     public Servico(double valor, String descricao, String tipo) {
         this.valor = valor;

@@ -100,17 +100,17 @@ public class PrestadorController {
     @PostMapping("/servico/{index}")
     public ResponseEntity postAddServico(@RequestBody Servico servico,
                                   @PathVariable int index){
-        if (prestadores.get(index).getServicos().isEmpty()){
-            prestadores.get(index).addServico(servico);
-            return ResponseEntity.status(201).build();
-        }
+//        if (prestadores.get(index).getServicos().isEmpty()){
+//            prestadores.get(index).addServico(servico);
+//            return ResponseEntity.status(201).build();
+//        }
 
         boolean encontrado = false;
-        for (Servico ser: prestadores.get(index).getServicos()) {
-            if (ser.equals(servico)){
-                encontrado = true;
-            }
-        }
+//        for (Servico ser: prestadores.get(index).getServicos()) {
+//            if (ser.equals(servico)){
+//                encontrado = true;
+//            }
+//        }
         if (!encontrado){
             try{
                 if (!Objects.isNull(prestadores.get(index))){

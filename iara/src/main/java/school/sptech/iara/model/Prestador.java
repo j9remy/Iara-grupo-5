@@ -1,16 +1,29 @@
 package school.sptech.iara.model;
 
+import org.jetbrains.annotations.NotNull;
+
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
 public class Prestador extends Usuario{
 //    Attributes
     private String resumo;
+
+    @NotNull
     private Boolean atendeDomicilio;
+
+    @OneToMany
     private List<Habilidade> habilidades;
+
+    @OneToMany
     private List<Servico> servicos;
 
 //    Constructor
@@ -18,26 +31,46 @@ public class Prestador extends Usuario{
                      String cpf, Timestamp dataNasc,
                      String email, String senha,
                      char sexo, String telefone,
-                     Endereco endereco, String resumo) {
+                     Endereco endereco, String resumo,
+                     Boolean atendeDomicilio) {
         super(nome, sobrenome, cpf, dataNasc, email, senha, sexo, telefone, endereco);
         this.resumo = resumo;
+        this.atendeDomicilio = atendeDomicilio;
         habilidades = new ArrayList<>();
         servicos = new ArrayList<>();
     }
 
-//    Getter and Setter
+    public Prestador(String nome, String sobrenome,
+                     String cpf, Timestamp dataNasc,
+                     String email, String senha, char sexo,
+                     String telefone, Endereco endereco,
+                     Boolean atendeDomicilio) {
+        super(nome, sobrenome, cpf, dataNasc, email, senha, sexo, telefone, endereco);
+        this.atendeDomicilio = atendeDomicilio;
+        habilidades = new ArrayList<>();
+//        servicos = new ArrayList<>();
+    }
+
+    //    Getter and Setter
     public String getResumo() {
         return resumo;
     }
     public void setResumo(String resumo) {
         this.resumo = resumo;
     }
+    public Boolean getAtendeDomicilio() {
+        return atendeDomicilio;
+    }
+    public void setAtendeDomicilio(Boolean atendeDomicilio) {
+        this.atendeDomicilio = atendeDomicilio;
+    }
+
     public List<Habilidade> getHabilidades() {
         return habilidades;
     }
-    public List<Servico> getServicos() {
-        return servicos;
-    }
+//    public List<Servico> getServicos() {
+//        return servicos;
+//    }
 
     //    Methods
     @Override
@@ -46,14 +79,14 @@ public class Prestador extends Usuario{
         Double somaAvaliacoes = 0d;
         Integer qtdAvaliacoes = 0;
 
-        for (Servico serv: getServicos()) {
-            for (ServicoAtribuido servAttr : serv.getServicoAtribuidos()){
-                if (Objects.nonNull(servAttr.getAvaliacao())){
-                    somaAvaliacoes += serv.getAvaliacao();
-                }
-            }
-            qtdAvaliacoes += serv.getQtdServicosAvaliados();
-        }
+//        for (Servico serv: getServicos()) {
+//            for (ServicoAtribuido servAttr : serv.getServicoAtribuidos()){
+//                if (Objects.nonNull(servAttr.getAvaliacao())){
+//                    somaAvaliacoes += serv.getAvaliacao();
+//                }
+//            }
+//            qtdAvaliacoes += serv.getQtdServicosAvaliados();
+//        }
 
         return somaAvaliacoes/qtdAvaliacoes;
     }
@@ -70,22 +103,22 @@ public class Prestador extends Usuario{
 
     //Se servico não existir na lista, adiciona
     public void addServico(Servico servico){
-        for (Servico ser : servicos) {
-            if (ser.equals(servico)){
-                return;
-            }
-        }
-        servicos.add(servico);
+//        for (Servico ser : servicos) {
+//            if (ser.equals(servico)){
+//                return;
+//            }
+//        }
+//        servicos.add(servico);
     }
 
     //retorna todos serviços ativos
     public List<Servico> getServicosAtivos(){
         List<Servico> servicosAtivos = new ArrayList<>();
-        for (Servico serv: servicos) {
-            if (serv.isAtivo()){
-                servicosAtivos.add(serv);
-            }
-        }
+//        for (Servico serv: servicos) {
+//            if (serv.isAtivo()){
+//                servicosAtivos.add(serv);
+//            }
+//        }
         return servicosAtivos;
     }
 
@@ -104,7 +137,7 @@ public class Prestador extends Usuario{
 //                ", endereco=" + getEndereco() +
                 ", resumo=" + getResumo() +
                 ", habilidades=" + habilidades +
-                ", serviços=" + servicos +
+//                ", serviços=" + servicos +
                 ", mediaAvaliacao=" + getAvaliacao() +
                 '}';
     }

@@ -9,9 +9,6 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @MappedSuperclass
 public abstract class Usuario implements Avaliavel{
@@ -45,6 +42,7 @@ public abstract class Usuario implements Avaliavel{
     private String senha;
 
     @NotNull
+    @Size(min = 1, max = 1)
     private char sexo;
 
     @NotNull

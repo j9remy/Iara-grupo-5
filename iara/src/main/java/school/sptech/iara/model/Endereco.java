@@ -23,22 +23,26 @@ public class Endereco {
     private String cep;
 
     @NotNull
+    @Size(min = 2, max = 60)
     private String rua;
 
     @NotNull
+    @Size(min = 1, max = 10)
     private String numero;
 
     @NotNull
+    @Size(min = 2, max = 60)
     private String bairro;
 
     @NotNull
+    @Size(min = 2, max = 45)
     private String cidade;
 
     @NotNull
     @Size(min = 2, max = 2)
     private String uf;
 
-    @NotNull
+    @Size(min = 1, max = 60)
     private String complemento;
 
     @OneToMany
