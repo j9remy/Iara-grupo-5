@@ -25,9 +25,9 @@ public class PrestadorController {
     // retorna todos registros de prestadores
     @GetMapping
     public ResponseEntity getListaPrestadores(){
+        prestadores.addAll(prestadorRepository.findAll());
         if (!prestadores.isEmpty()){
-
-            return ResponseEntity.status(200).body(prestadorRepository.findAll());
+            return ResponseEntity.status(200).body(prestadores);
         }
         return ResponseEntity.status(204).build();
     }
