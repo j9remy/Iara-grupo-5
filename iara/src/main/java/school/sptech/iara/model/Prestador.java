@@ -72,6 +72,7 @@ public class Prestador extends Usuario{
 //        return servicos;
 //    }
 
+
     //    Methods
     @Override
     // Soma o resultado de todos getAvaliacao() da classe Servico e divide pelo total de ServicosAtribuidos
