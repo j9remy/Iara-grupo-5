@@ -14,29 +14,16 @@ public class Lista <T>{
 
     // Métodos
 
-    public void adiciona(T elemento) {
-        if (estaCheio())
+    public void add(T elemento) {
+        if (isFull())
             System.out.println("Lista está cheia!");
         else {
             vetor[nroElem] = elemento;
             nroElem++;
         }
     }
-
-    public void adiciona(T[] elementos) {
-        for (int i = 0; i < elementos.length; i++)
-            adiciona(elementos[i]);
-    }
-
-    public boolean indiceExiste(int indice) {
-        if (indice >= 0 && indice <= nroElem)
-            return true;
-
-        return false;
-    }
-
-    public void adiciona(T elemento, int indice) {
-        if (!estaCheio() && indiceExiste(indice)) {
+    public void add(T elemento, int indice) {
+        if (!isFull() && exists(indice)) {
             for (int i = nroElem - 1; i >= indice; i--)
                 vetor[i + 1] = vetor[i];
 
@@ -44,9 +31,27 @@ public class Lista <T>{
             nroElem++;
         }
     }
+    public void add(T[] elementos) {
+        for (int i = 0; i < elementos.length; i++)
+            add(elementos[i]);
+    }
+
+    public int getElement(T elementoBuscado) {
+        for (int i = 0; i < nroElem; i++) {
+            if (contains(elementoBuscado))
+                return i;
+        }
+        return -1;
+    }
+    public T getElement(int indice) {
+        if (indice < 0 || indice >= nroElem)
+            return null;
+        else
+            return vetor[indice];
+    }
 
     public void exibe() {
-        if (estaVazio())
+        if (isEmpty())
             System.out.println("\nLista vazia!");
         else {
             System.out.println("\nElementos da lista:");
@@ -56,38 +61,20 @@ public class Lista <T>{
         }
     }
 
-    public int busca(T elementoBuscado) {
-        for (int i = 0; i < nroElem; i++) {
-            if (contem(elementoBuscado))
-                return i;
-        }
-        return -1;
-    }
-
-    public boolean contem(T elemento) {
-        for (int i = 0; i < nroElem; i++) {
-            if (vetor[i].equals(elemento)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void atualizaPorElemento(T elementoDaLista, T elementoNovo) {
-        if (contem(elementoDaLista))
-            vetor[busca(elementoDaLista)] = elementoNovo;
+    public void update(T elementoDaLista, T elementoNovo) {
+        if (contains(elementoDaLista))
+            vetor[getElement(elementoDaLista)] = elementoNovo;
         else
             System.out.println("Elemento não existe na lista");
     }
-
-    public void atualizaPorIndice(int indice, T elemento) {
-        if (Objects.nonNull(busca(indice)))
+    public void update(int indice, T elemento) {
+        if (Objects.nonNull(getElement(indice)))
             vetor[indice] = elemento;
         else
             System.out.println("Índice não existe na lista");
     }
 
-    public boolean removePeloIndice (int indice) {
+    public boolean remove(int indice) {
         if (indice < 0 || indice >= nroElem) {
             System.out.println("\nÍndice inválido!");
             return false;
@@ -98,38 +85,35 @@ public class Lista <T>{
         nroElem--;
         return true;
     }
-
-    public boolean removeElemento(T elementoARemover) {
-        return removePeloIndice(busca(elementoARemover));
+    public boolean remove(T elementoARemover) {
+        return remove(getElement(elementoARemover));
     }
 
-    public int getTamanho() {
+    public boolean exists(int indice) {
+        if (indice >= 0 && indice <= nroElem)
+            return true;
+
+        return false;
+    }
+    public boolean contains(T elemento) {
+        for (int i = 0; i < nroElem; i++) {
+            if (vetor[i].equals(elemento)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public int size() {
         return nroElem;
     }
-
-    public T busca(int indice) {
-        if (indice < 0 || indice >= nroElem)
-            return null;
-        else
-            return vetor[indice];
-    }
-
-    public void Limpa() {
+    public void clear() {
         nroElem = 0;
     }
-
-    public boolean estaVazio() {
-        if (nroElem == 0)
-            return true;
-
-        return false;
+    public boolean isEmpty() {
+        return nroElem == 0;
     }
-
-    public boolean estaCheio() {
-        if (getTamanho() >= vetor.length)
-            return true;
-
-        return false;
+    public boolean isFull() {
+        return size() >= vetor.length;
     }
 
 

@@ -49,8 +49,8 @@ public class PrestadorController {
     //cadastro de prestador
     @PostMapping
     public ResponseEntity postCadastrarPrestadores(@RequestBody Prestador prestador){
-        if (!prestadorRepository.existsById(prestador.getId()))
-            return ResponseEntity.status(201).body(prestadorRepository.save(prestador));
+//        if (!prestadorRepository.existsById(prestador.getId()))
+//            return ResponseEntity.status(201).body(prestadorRepository.save(prestador));
 
         return ResponseEntity.status(400).build();
     }

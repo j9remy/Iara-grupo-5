@@ -42,7 +42,6 @@ public abstract class Usuario implements Avaliavel{
     private String senha;
 
     @NotNull
-    @Size(min = 1, max = 1)
     private char sexo;
 
     @NotNull
@@ -56,8 +55,7 @@ public abstract class Usuario implements Avaliavel{
     public Usuario(String nome, String sobrenome,
                    String cpf, Timestamp dataNasc,
                    String email, String senha,
-                   char sexo, String telefone,
-                   Endereco endereco) {
+                   char sexo, String telefone) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.cpf = cpf;
@@ -67,6 +65,10 @@ public abstract class Usuario implements Avaliavel{
         this.sexo = sexo;
         this.telefone = telefone;
         this.autenticado = false;
+    }
+
+    public Usuario() {
+
     }
 
 //    Getter and Setter

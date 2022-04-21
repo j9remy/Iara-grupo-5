@@ -31,9 +31,9 @@ public class Prestador extends Usuario{
                      String cpf, Timestamp dataNasc,
                      String email, String senha,
                      char sexo, String telefone,
-                     Endereco endereco, String resumo,
+                     String resumo,
                      Boolean atendeDomicilio) {
-        super(nome, sobrenome, cpf, dataNasc, email, senha, sexo, telefone, endereco);
+        super(nome, sobrenome, cpf, dataNasc, email, senha, sexo, telefone);
         this.resumo = resumo;
         this.atendeDomicilio = atendeDomicilio;
         habilidades = new ArrayList<>();
@@ -43,9 +43,9 @@ public class Prestador extends Usuario{
     public Prestador(String nome, String sobrenome,
                      String cpf, Timestamp dataNasc,
                      String email, String senha, char sexo,
-                     String telefone, Endereco endereco,
+                     String telefone,
                      Boolean atendeDomicilio) {
-        super(nome, sobrenome, cpf, dataNasc, email, senha, sexo, telefone, endereco);
+        super(nome, sobrenome, cpf, dataNasc, email, senha, sexo, telefone);
         this.atendeDomicilio = atendeDomicilio;
         habilidades = new ArrayList<>();
 //        servicos = new ArrayList<>();
@@ -76,7 +76,7 @@ public class Prestador extends Usuario{
     //    Methods
     @Override
     // Soma o resultado de todos getAvaliacao() da classe Servico e divide pelo total de ServicosAtribuidos
-    public double getAvaliacao(){
+    public double calcAvaliacao(){
         Double somaAvaliacoes = 0d;
         Integer qtdAvaliacoes = 0;
 
@@ -139,7 +139,7 @@ public class Prestador extends Usuario{
                 ", resumo=" + getResumo() +
                 ", habilidades=" + habilidades +
 //                ", serviços=" + servicos +
-                ", mediaAvaliacao=" + getAvaliacao() +
+                ", mediaAvaliacao=" + calcAvaliacao() +
                 '}';
     }
 }

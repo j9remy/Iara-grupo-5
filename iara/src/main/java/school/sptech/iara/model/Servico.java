@@ -75,7 +75,7 @@ public class Servico {
     public int getQtdServicosAvaliados(){
         int soma = 0;
         for (ServicoAtribuido serv: servicoAtribuidos) {
-            if (Objects.nonNull(serv.getAvaliacao())){
+            if (Objects.nonNull(serv.calcAvaliacao())){
                 soma++;
             }
         }
@@ -86,9 +86,9 @@ public class Servico {
     public double getAvaliacao(){
         Double somaAvaliacoes = 0d;
         for (ServicoAtribuido serv: servicoAtribuidos) {
-            Double avaliacao = serv.getAvaliacao();
+            Double avaliacao = serv.calcAvaliacao();
             if(!avaliacao.isNaN()){
-                somaAvaliacoes += serv.getAvaliacao();
+                somaAvaliacoes += serv.calcAvaliacao();
             }
         }
         if(!somaAvaliacoes.isNaN()){

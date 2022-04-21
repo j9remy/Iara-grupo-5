@@ -8,18 +8,18 @@ public class App {
         Lista<Integer> lista = new Lista<>(10);
 
         Integer[] aaa = {9,8,7,6};
-        System.out.println(lista.getTamanho());
-        System.out.println(lista.estaCheio());
-        System.out.println(lista.estaVazio());
-        lista.adiciona(1);
-        lista.adiciona(2);
-        lista.adiciona(3);
-        lista.adiciona(4);
+        System.out.println(lista.size());
+        System.out.println(lista.isFull());
+        System.out.println(lista.isEmpty());
+        lista.add(1);
+        lista.add(2);
+        lista.add(3);
+        lista.add(4);
 
 
 //        lista.adiciona(aaa);
 
-       lista.adiciona(99,0);
+       lista.add(99,0);
 
         lista.exibe();
 

@@ -54,7 +54,7 @@ public class ServicoAtribuido implements Avaliavel{
 //    Methods
     // Simplesmente retorna o valor do atributo avaliacao
     @Override
-    public double getAvaliacao() {
+    public double calcAvaliacao() {
         return avaliacao;
     }
 

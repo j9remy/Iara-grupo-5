@@ -11,7 +11,6 @@ public class AvaliacaoCliente {
 
     private Integer avaliacao;
 
-
     public AvaliacaoCliente(Integer avaliacao) {
         this.avaliacao = avaliacao;
     }
