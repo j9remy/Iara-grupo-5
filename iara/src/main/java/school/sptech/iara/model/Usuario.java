@@ -22,7 +22,7 @@ public abstract class Usuario implements Avaliavel{
     private String nome;
 
     @NotNull
-    @Size(min = 2, max = 30)
+    @Size(min = 2, max = 50)
     private String sobrenome;
 
     @NotNull
@@ -42,7 +42,7 @@ public abstract class Usuario implements Avaliavel{
     private String senha;
 
     @NotNull
-    private char sexo;
+    private char genero;
 
     @NotNull
     @Pattern(regexp = "(\\(?\\d{2}\\)?\\s)?(\\d{4,5}\\-\\d{4})" , message = "Informe um telefone válido com ou sem DDD")
@@ -55,14 +55,14 @@ public abstract class Usuario implements Avaliavel{
     public Usuario(String nome, String sobrenome,
                    String cpf, Timestamp dataNasc,
                    String email, String senha,
-                   char sexo, String telefone) {
+                   char genero, String telefone) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.cpf = cpf;
         this.dataNasc = dataNasc;
         this.email = email;
         this.senha = senha;
-        this.sexo = sexo;
+        this.genero = genero;
         this.telefone = telefone;
         this.autenticado = false;
     }
@@ -115,10 +115,10 @@ public abstract class Usuario implements Avaliavel{
         this.senha = senha;
     }
     public char getSexo() {
-        return sexo;
+        return genero;
     }
     public void setSexo(char sexo) {
-        this.sexo = sexo;
+        this.genero = sexo;
     }
     public String getTelefone() {
         return telefone;
@@ -169,7 +169,7 @@ public abstract class Usuario implements Avaliavel{
                 ", dataNasc=" + dataNasc +
                 ", email='" + email + '\'' +
                 ", senha='" + senha + '\'' +
-                ", sexo=" + sexo +
+                ", sexo=" + genero +
                 ", telefone='" + telefone + '\'' +
                 ", autenticado=" + autenticado +
                 '}';

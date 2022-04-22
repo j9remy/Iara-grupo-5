@@ -69,8 +69,7 @@ public class ClienteController {
             UsuarioAvaliacaoResponse respAval = new UsuarioAvaliacaoResponse(cliente, cliente.calcAvaliacao());
             return ResponseEntity.status(200).body(respAval);
         }
-        return ResponseEntity.status(404).build();
-    }
+        return ResponseEntity.status(404).build();    }
 
     //Adicionar avaliação a lista de avaliações
     @PostMapping("/avaliacao")
