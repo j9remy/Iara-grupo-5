@@ -85,6 +85,7 @@ public class Lista <T>{
         nroElem--;
         return true;
     }
+
     public boolean remove(T elementoARemover) {
         return remove(getElement(elementoARemover));
     }
@@ -95,6 +96,7 @@ public class Lista <T>{
 
         return false;
     }
+
     public boolean contains(T elemento) {
         for (int i = 0; i < nroElem; i++) {
             if (vetor[i].equals(elemento)) {
@@ -103,6 +105,9 @@ public class Lista <T>{
         }
         return false;
     }
+
+
+
     public int size() {
         return nroElem;
     }

@@ -10,6 +10,7 @@ import school.sptech.iara.repository.ClienteRepository;
 import school.sptech.iara.request.ClienteIdAvaliacaoRequest;
 import school.sptech.iara.request.UsuarioEmailSenhaRequest;
 import school.sptech.iara.response.UsuarioAvaliacaoResponse;
+import school.sptech.iara.util.Lista;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -120,4 +121,27 @@ public class ClienteController {
         }
         return ResponseEntity.status(404).build();
     }
+
+    @GetMapping("/relatorio-cliente")
+    public ResponseEntity getRelatorio() {
+        String relatorio = "";
+
+        List<Cliente> lista = repository.findAll();
+
+        for (Cliente cliente : lista) {
+            relatorio += cliente.getId()
+                    + "," + cliente.getNome() + " " + cliente.getSobrenome() +
+                    "," + cliente.getCpf() + "," + cliente.getDataNasc() +
+                    "," + cliente.getEmail() + "," + cliente.getSexo() +
+                    "," + cliente.getTelefone() + "\r\n";
+        }
+
+        return ResponseEntity
+                .status(200)
+                .header("content-type", "text/csv")
+                .header("content-disposition",
+                        "filename=\"Relatorio_Cliente.csv\"")
+                .body(relatorio);
+    }
+
 }

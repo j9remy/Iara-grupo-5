@@ -2,6 +2,7 @@ package school.sptech.iara.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import school.sptech.iara.model.Cliente;
 import school.sptech.iara.model.Habilidade;
 import school.sptech.iara.model.Prestador;
 import school.sptech.iara.model.Servico;
@@ -136,5 +137,27 @@ public class PrestadorController {
         return ResponseEntity.status(404).build();
     }
 
+
+//    @GetMapping("/relatorio-prestador")
+//    public ResponseEntity getRelatorio() {
+//        String relatorio = "";
+//
+//        List<Prestador> lista = repository.findAll();
+//
+//        for (Prestador prestador : lista) {
+//            relatorio += prestador.getId()
+//                    + "," + prestador.getNome() + " " + prestador.getSobrenome() +
+//                    "," + prestador.getCpf() + "," + prestador.getDataNasc() +
+//                    "," + prestador.getEmail() + "," + prestador.getSexo() +
+//                    "," + prestador.getTelefone() + "\r\n";
+//        }
+//
+//        return ResponseEntity
+//                .status(200)
+//                .header("content-type", "text/csv")
+//                .header("content-disposition",
+//                        "filename=\"Relatorio_Prestador.csv\"")
+//                .body(relatorio);
+//    }
 
 }
