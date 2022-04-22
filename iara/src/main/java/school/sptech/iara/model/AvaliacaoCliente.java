@@ -1,6 +1,7 @@
 package school.sptech.iara.model;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 public class AvaliacaoCliente {
@@ -9,10 +10,17 @@ public class AvaliacaoCliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private Integer avaliacao;
+    @ManyToOne
+    private Cliente cliente;
 
-    public AvaliacaoCliente(Integer avaliacao) {
+    private Integer avaliacao;
+    private LocalDateTime dataHora;
+
+    public AvaliacaoCliente(){}
+    public AvaliacaoCliente(Integer avaliacao, Cliente cliente) {
         this.avaliacao = avaliacao;
+        dataHora = LocalDateTime.now();
+        this.cliente = cliente;
     }
 
     public Integer getAvaliacao() {

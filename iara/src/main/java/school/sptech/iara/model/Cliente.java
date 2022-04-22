@@ -2,6 +2,7 @@ package school.sptech.iara.model;
 
 import school.sptech.iara.util.Lista;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -12,7 +13,7 @@ import java.util.List;
 @Entity
 public class Cliente extends Usuario {
 //    Attributes
-    @OneToMany
+    @OneToMany(cascade= CascadeType.PERSIST)
     private List<AvaliacaoCliente> avaliacoes;
 //    Constructor
     public Cliente(){
@@ -27,12 +28,11 @@ public class Cliente extends Usuario {
     }
 
     //    Methods
-    // Adiciona na lista de avaliações um número entre 0 e 5
-    public void addAvaliacao(Integer num) {
-        if (num >= 0 && num <= 5){
-            avaliacoes.add(new AvaliacaoCliente(num));
-        }
+    // Adiciona na lista de avaliações
+    public void addAvaliacao(AvaliacaoCliente avaliacao) {
+        avaliacoes.add(avaliacao);
     }
+
     @Override
     // Retourna a média de todas avaliações na lista
     public double calcAvaliacao(){

@@ -3,9 +3,13 @@ package school.sptech.iara.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import school.sptech.iara.model.AvaliacaoCliente;
 import school.sptech.iara.model.Cliente;
+import school.sptech.iara.repository.AvaliacaoRepository;
 import school.sptech.iara.repository.ClienteRepository;
+import school.sptech.iara.request.ClienteIdAvaliacaoRequest;
 import school.sptech.iara.request.UsuarioEmailSenhaRequest;
+import school.sptech.iara.response.UsuarioAvaliacaoResponse;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -17,6 +21,9 @@ public class ClienteController {
 
     @Autowired
     private ClienteRepository repository;
+
+    @Autowired
+    private AvaliacaoRepository avaliacaoRepository;
 
     // retorna todos registros de usuários
     @GetMapping
@@ -52,32 +59,40 @@ public class ClienteController {
             return ResponseEntity.status(201).build();
         }
         return ResponseEntity.status(400).build();
+    }
 
+    @GetMapping("/avaliacao/{id}")
+    public ResponseEntity getAvaliacao(@PathVariable Integer id){
+        Optional<Cliente> clienteOptional = repository.findById(id);
+        if (clienteOptional.isPresent()){
+            Cliente cliente = clienteOptional.get();
+            UsuarioAvaliacaoResponse respAval = new UsuarioAvaliacaoResponse(cliente, cliente.calcAvaliacao());
+            return ResponseEntity.status(200).body(respAval);
+        }
+        return ResponseEntity.status(404).build();
     }
 
     //Adicionar avaliação a lista de avaliações
-    @PutMapping("/avaliacao/{idUser}/{avaliacao}")
-    public ResponseEntity postAddAvaliacao(@PathVariable int idUser, @PathVariable int avaliacao){
-        try{
-            if (avaliacao < 0 || avaliacao >5){
-                return ResponseEntity.status(400).build();
-            }
-
-            Optional<Cliente> clienteOptional = repository.findById(idUser);
-            if (clienteOptional.isPresent()){
-                Cliente cliente = clienteOptional.get();
-                cliente.addAvaliacao(avaliacao);
-                repository.save(cliente);
-                return ResponseEntity.status(201).build();
-            }else {
-                return ResponseEntity.status(204).build();
-            }
-        }catch (Exception e){
-            return ResponseEntity.status(404).build();
+    @PostMapping("/avaliacao")
+    public ResponseEntity postAddAvaliacao(@RequestBody ClienteIdAvaliacaoRequest req){
+        if (req.getAvaliacao() < 0 || req.getAvaliacao() >5){
+            return ResponseEntity.status(400).build();
         }
 
-
+        Optional<Cliente> clienteOptional = repository.findById(req.getId());
+        if (clienteOptional.isPresent()){
+            Cliente cliente = clienteOptional.get();
+            AvaliacaoCliente avaliacaoCliente = new AvaliacaoCliente(req.getAvaliacao(),cliente);
+            avaliacaoRepository.save(avaliacaoCliente);
+            cliente.addAvaliacao(avaliacaoCliente);
+            repository.save(cliente);
+            return ResponseEntity.status(201).build();
+        }else {
+            return ResponseEntity.status(204).build();
+        }
     }
+
+
 
     //Autenticar usuário
     @PostMapping("/autenticacao")
