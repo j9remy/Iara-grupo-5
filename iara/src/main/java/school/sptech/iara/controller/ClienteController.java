@@ -39,13 +39,11 @@ public class ClienteController {
     // retorna usuário pelo index
     @GetMapping("/{index}")
     public ResponseEntity getClientePorIndex(@PathVariable int index){
-
         Optional<Cliente> clienteOptional = repository.findById(index);
         if (clienteOptional.isPresent()) {
             Cliente cliente = clienteOptional.get();
             return ResponseEntity.status(200).body(repository.findById(index));
         }
-
         return ResponseEntity.status(204).build();
     }
 
@@ -70,7 +68,8 @@ public class ClienteController {
             UsuarioAvaliacaoResponse respAval = new UsuarioAvaliacaoResponse(cliente, cliente.calcAvaliacao());
             return ResponseEntity.status(200).body(respAval);
         }
-        return ResponseEntity.status(404).build();    }
+        return ResponseEntity.status(404).build();
+    }
 
     //Adicionar avaliação a lista de avaliações
     @PostMapping("/avaliacao")
@@ -78,7 +77,6 @@ public class ClienteController {
         if (req.getAvaliacao() < 0 || req.getAvaliacao() >5){
             return ResponseEntity.status(400).build();
         }
-
         Optional<Cliente> clienteOptional = repository.findById(req.getId());
         if (clienteOptional.isPresent()){
             Cliente cliente = clienteOptional.get();

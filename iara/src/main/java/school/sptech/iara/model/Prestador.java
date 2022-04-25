@@ -2,10 +2,7 @@ package school.sptech.iara.model;
 
 import org.jetbrains.annotations.NotNull;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -27,13 +24,16 @@ public class Prestador extends Usuario{
     private List<Servico> servicos;
 
 //    Constructor
+    public Prestador(){
+        super();
+    }
     public Prestador(String nome, String sobrenome,
                      String cpf, Timestamp dataNasc,
                      String email, String senha,
-                     char sexo, String telefone,
+                     char genero, String telefone,
                      String resumo,
                      Boolean atendeDomicilio) {
-        super(nome, sobrenome, cpf, dataNasc, email, senha, sexo, telefone);
+        super(nome, sobrenome, cpf, dataNasc, email, senha, genero, telefone);
         this.resumo = resumo;
         this.atendeDomicilio = atendeDomicilio;
         habilidades = new ArrayList<>();
@@ -42,10 +42,10 @@ public class Prestador extends Usuario{
 
     public Prestador(String nome, String sobrenome,
                      String cpf, Timestamp dataNasc,
-                     String email, String senha, char sexo,
+                     String email, String senha, char genero,
                      String telefone,
                      Boolean atendeDomicilio) {
-        super(nome, sobrenome, cpf, dataNasc, email, senha, sexo, telefone);
+        super(nome, sobrenome, cpf, dataNasc, email, senha, genero, telefone);
         this.atendeDomicilio = atendeDomicilio;
         habilidades = new ArrayList<>();
 //        servicos = new ArrayList<>();
@@ -92,34 +92,44 @@ public class Prestador extends Usuario{
         return somaAvaliacoes/qtdAvaliacoes;
     }
 
-    //Se habilidade não existir na lista, adiciona
+//  Adiciona nova habilidade
     public void addHabilidade(Habilidade habilidade){
-        for (Habilidade hab : habilidades) {
-            if (hab.equals(habilidade)){
-                return;
+        habilidades.add(habilidade);
+    }
+
+    public Boolean habilidadeExiste(Habilidade habilidade){
+        for (int i = 0; i < habilidades.size(); i++) {
+            if (habilidades.get(i).getHabilidade().equals(habilidade.getHabilidade()) &&
+                    habilidades.get(i).getDescricao().equals(habilidade.getDescricao())){
+                return true;
             }
         }
-        habilidades.add(habilidade);
+        return false;
     }
 
     //Se servico não existir na lista, adiciona
     public void addServico(Servico servico){
-//        for (Servico ser : servicos) {
-//            if (ser.equals(servico)){
-//                return;
-//            }
-//        }
-//        servicos.add(servico);
+        servicos.add(servico);
+    }
+
+    public Boolean servicoExiste(Servico servico){
+        for (Servico ser : servicos) {
+            if (ser.getDescricao().equals(servico.getDescricao()) &&
+                    ser.getTipo().equals(servico.getTipo())){
+                return true;
+            }
+        }
+        return false;
     }
 
     //retorna todos serviços ativos
     public List<Servico> getServicosAtivos(){
         List<Servico> servicosAtivos = new ArrayList<>();
-//        for (Servico serv: servicos) {
-//            if (serv.isAtivo()){
-//                servicosAtivos.add(serv);
-//            }
-//        }
+        for (Servico serv: servicos) {
+            if (serv.isAtivo()){
+                servicosAtivos.add(serv);
+            }
+        }
         return servicosAtivos;
     }
 

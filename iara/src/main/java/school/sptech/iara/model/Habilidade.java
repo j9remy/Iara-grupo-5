@@ -23,6 +23,7 @@ public class Habilidade {
     private String descricao;
 
 //    Constructor
+    public Habilidade(){}
     public Habilidade(String habilidade, String descricao) {
         this.habilidade = habilidade;
         this.descricao = descricao;

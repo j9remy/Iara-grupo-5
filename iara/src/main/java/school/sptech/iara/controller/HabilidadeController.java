@@ -1,51 +1,51 @@
 package school.sptech.iara.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import school.sptech.iara.model.Habilidade;
-import school.sptech.iara.model.Prestador;
+import school.sptech.iara.repository.HabilidadeRepository;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/habilidade")
 public class HabilidadeController {
 
-    private List<Habilidade> habilidades = new ArrayList<>();
+//    private List<Habilidade> habilidades = new ArrayList<>();
+
+    @Autowired
+    private HabilidadeRepository repository;
 
     @GetMapping
-    public List<Habilidade> getHabilidades(){
-        return habilidades;
+    public ResponseEntity getHabilidades(){
+        List<Habilidade> habilidades = repository.findAll();
+        if (!habilidades.isEmpty()){
+            return ResponseEntity.status(200).body(habilidades);
+        }
+        return ResponseEntity.status(204).build();
     }
 
     // retorna habilidade pelo index
-    @GetMapping("/{index}")
-    public Habilidade getHabilidadePorIndex(@PathVariable int index){
-        try{
-            if (!Objects.isNull(habilidades.get(index))){
-                return habilidades.get(index);
-            }
-        }catch (Exception e){
-            System.out.println(e);
-            return null;
+    @GetMapping("/{id}")
+    public ResponseEntity getHabilidadePorIndex(@PathVariable int id){
+        Optional<Habilidade> habilidadeOptional = repository.findById(id);
+        if (habilidadeOptional.isPresent()){
+            Habilidade habilidade = habilidadeOptional.get();
+            return ResponseEntity.status(200).body(habilidade);
         }
-        return null;
+        return ResponseEntity.status(404).build();
     }
 
     @PostMapping
-    public void postAddHabilidade(@RequestBody Habilidade habilidade[]){
-        for (int i = 0; i < habilidade.length;i++){
-            boolean encontrado = false;
-            for (Habilidade hab: habilidades) {
-                if (hab.toString().equals(habilidade[i].toString())){
-                    encontrado = true;
-                }
-            }
-            if (!encontrado){
-                habilidades.add(habilidade[i]);
-            }
+    public ResponseEntity postAddHabilidade(@RequestBody Habilidade habilidade){
+        if (!repository.existsByDescricao(habilidade.getDescricao()) &&
+                !repository.existsByHabilidade(habilidade.getHabilidade())){
+            repository.save(habilidade);
+            return ResponseEntity.status(201).build();
         }
+        return ResponseEntity.status(400).build();
     }
 
 

@@ -21,10 +21,11 @@ public class Servico {
     @OneToMany
     private List<ServicoAtribuido> servicoAtribuidos;
 
-    @ManyToOne
-    private Prestador prestador;
+//    @ManyToOne
+//    private Prestador prestador;
 
 //    Constructor
+    public Servico(){}
     public Servico(double valor, String descricao, String tipo) {
         this.valor = valor;
         this.descricao = descricao;

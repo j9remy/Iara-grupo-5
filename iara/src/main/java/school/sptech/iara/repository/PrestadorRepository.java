@@ -1,10 +1,20 @@
 package school.sptech.iara.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import school.sptech.iara.model.Cliente;
 import school.sptech.iara.model.Prestador;
+
+import java.util.List;
+import java.util.Optional;
 
 public interface PrestadorRepository extends JpaRepository<Prestador, Integer> {
     boolean existsByEmailAndSenha(String email, String senha);
 
     Prestador getByEmailAndSenha(String email, String senha);
+
+    @Query("SELECT c FROM Prestador c WHERE email = ?1 OR cpf = ?2 OR telefone = ?3")
+    List<Prestador> validarCadastro(String email, String cpf, String telefone);
+
+    Optional<Prestador> findByEmailAndSenha(String email, String senha);
 }
