@@ -8,6 +8,7 @@ import school.sptech.iara.model.Cliente;
 import school.sptech.iara.repository.AvaliacaoRepository;
 import school.sptech.iara.repository.ClienteRepository;
 import school.sptech.iara.request.ClienteIdAvaliacaoRequest;
+import school.sptech.iara.request.ClienteUpdateRequest;
 import school.sptech.iara.request.UsuarioEmailSenhaRequest;
 import school.sptech.iara.response.UsuarioAvaliacaoResponse;
 import school.sptech.iara.util.Lista;
@@ -28,7 +29,7 @@ public class ClienteController {
 
     // retorna todos registros de usuários
     @GetMapping
-    public ResponseEntity pegarItens(){
+    public ResponseEntity getCliente(){
         List<Cliente> clientes = repository.findAll();
         if (!clientes.isEmpty()){
             return ResponseEntity.status(200).body(clientes);
@@ -37,19 +38,19 @@ public class ClienteController {
     }
 
     // retorna usuário pelo index
-    @GetMapping("/{index}")
-    public ResponseEntity getClientePorIndex(@PathVariable int index){
-        Optional<Cliente> clienteOptional = repository.findById(index);
+    @GetMapping("/{id}")
+    public ResponseEntity getClientePorId(@PathVariable int id){
+        Optional<Cliente> clienteOptional = repository.findById(id);
         if (clienteOptional.isPresent()) {
             Cliente cliente = clienteOptional.get();
-            return ResponseEntity.status(200).body(repository.findById(index));
+            return ResponseEntity.status(200).body(repository.findById(id));
         }
         return ResponseEntity.status(204).build();
     }
 
     //cadastro de clientes, com possibilidade de cadastrar vários de uma só vez
     @PostMapping
-    public ResponseEntity postCadastrarClientes(@RequestBody Cliente cliente){
+    public ResponseEntity postCadastroClientes(@RequestBody Cliente cliente){
         List<Cliente> clienteOptional = repository.validarCadastro(
                 cliente.getEmail(), cliente.getCpf(), cliente.getTelefone()
         );
@@ -73,7 +74,7 @@ public class ClienteController {
 
     //Adicionar avaliação a lista de avaliações
     @PostMapping("/avaliacao")
-    public ResponseEntity postAddAvaliacao(@RequestBody ClienteIdAvaliacaoRequest req){
+    public ResponseEntity postCadastroAvaliacao(@RequestBody ClienteIdAvaliacaoRequest req){
         if (req.getAvaliacao() < 0 || req.getAvaliacao() >5){
             return ResponseEntity.status(400).build();
         }
@@ -109,7 +110,7 @@ public class ClienteController {
 
 //    desautenticar usuário
     @DeleteMapping("/autenticacao")
-    public ResponseEntity deleteDesautenticarUsuario(@RequestBody @Valid UsuarioEmailSenhaRequest req){
+    public ResponseEntity deleteLogOffUsuario(@RequestBody @Valid UsuarioEmailSenhaRequest req){
         Optional<Cliente> clienteOptional = repository.findByEmailAndSenha(req.getEmail(), req.getSenha());
         if (clienteOptional.isPresent()){
             Cliente cliente = clienteOptional.get();
@@ -120,7 +121,31 @@ public class ClienteController {
         return ResponseEntity.status(404).build();
     }
 
-    @GetMapping("/relatorio-cliente")
+    @PutMapping
+    public ResponseEntity putCliente(@RequestBody @Valid ClienteUpdateRequest req){
+        Optional<Cliente> clienteOptional = repository.findById(req.getId());
+        if (clienteOptional.isPresent()){
+            Cliente cliente = clienteOptional.get();
+            cliente.setNome(req.getNome());
+            cliente.setSobrenome(req.getSobrenome());
+            cliente.setDataNasc(req.getDataNasc());
+            cliente.setSenha(req.getSenha());
+            cliente.setSexo(req.getGenero());
+            Boolean telefoneExiste = repository.existsByTelefone(req.getTelefone());
+            if(!req.getTelefone().equals(cliente.getTelefone())){
+                if (!telefoneExiste){
+                    cliente.setTelefone(req.getTelefone());
+                    repository.save(cliente);
+                    return ResponseEntity.status(201).build();
+                }
+            }
+            repository.save(cliente);
+            return ResponseEntity.status(206).build();
+        }
+        return ResponseEntity.status(400).build();
+    }
+
+    @GetMapping("/relatorio")
     public ResponseEntity getRelatorio() {
         String relatorio = "";
 
@@ -128,18 +153,18 @@ public class ClienteController {
 
         for (Cliente cliente : lista) {
             relatorio += cliente.getId()
-                    + "," + cliente.getNome() + " " + cliente.getSobrenome() +
-                    "," + cliente.getCpf() + "," + cliente.getDataNasc() +
-                    "," + cliente.getEmail() + "," + cliente.getSexo() +
-                    "," + cliente.getTelefone() + "\r\n";
+                + "," + cliente.getNome() + " " + cliente.getSobrenome() +
+                "," + cliente.getCpf() + "," + cliente.getDataNasc() +
+                "," + cliente.getEmail() + "," + cliente.getSexo() +
+                "," + cliente.getTelefone() + "\r\n";
         }
 
         return ResponseEntity
-                .status(200)
-                .header("content-type", "text/csv")
-                .header("content-disposition",
-                        "filename=\"Relatorio_Cliente.csv\"")
-                .body(relatorio);
+            .status(200)
+            .header("content-type", "text/csv")
+            .header("content-disposition",
+                    "filename=\"Relatorio_Cliente.csv\"")
+            .body(relatorio);
     }
 
 }

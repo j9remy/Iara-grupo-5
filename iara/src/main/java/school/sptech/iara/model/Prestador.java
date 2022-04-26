@@ -68,10 +68,6 @@ public class Prestador extends Usuario{
     public List<Habilidade> getHabilidades() {
         return habilidades;
     }
-//    public List<Servico> getServicos() {
-//        return servicos;
-//    }
-
 
     //    Methods
     @Override
@@ -137,19 +133,19 @@ public class Prestador extends Usuario{
     @Override
     public String toString() {
         return "Cliente{" +
-                "nome='" + getNome() + '\'' +
-                ", sobrenome='" + getSobrenome() + '\'' +
-                ", cpf='" + getCpf() + '\'' +
-                ", dataNasc=" + getDataNasc() +
-                ", email='" + getEmail() + '\'' +
-                ", sexo=" + getSexo() +
-                ", telefone='" + getTelefone() + '\'' +
-                ", autenticado=" + isAutenticado() +
+            "nome='" + getNome() + '\'' +
+            ", sobrenome='" + getSobrenome() + '\'' +
+            ", cpf='" + getCpf() + '\'' +
+            ", dataNasc=" + getDataNasc() +
+            ", email='" + getEmail() + '\'' +
+            ", sexo=" + getSexo() +
+            ", telefone='" + getTelefone() + '\'' +
+            ", autenticado=" + isAutenticado() +
 //                ", endereco=" + getEndereco() +
-                ", resumo=" + getResumo() +
-                ", habilidades=" + habilidades +
+            ", resumo=" + getResumo() +
+            ", habilidades=" + habilidades +
 //                ", serviços=" + servicos +
-                ", mediaAvaliacao=" + calcAvaliacao() +
-                '}';
+            ", mediaAvaliacao=" + calcAvaliacao() +
+            '}';
     }
 }

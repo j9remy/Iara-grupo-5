@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import school.sptech.iara.repository.ServicoRepository;
 import school.sptech.iara.request.PrestadorHabilidadeRequest;
 import school.sptech.iara.request.PrestadorServicoRequest;
+import school.sptech.iara.request.PrestadorUpdateRequest;
 import school.sptech.iara.request.UsuarioEmailSenhaRequest;
 
 import javax.validation.Valid;
@@ -42,7 +43,7 @@ public class PrestadorController {
 
     // retorna usuário pelo index
     @GetMapping("/{id}")
-    public ResponseEntity getPrestadorPorIndex(@PathVariable Integer id){
+    public ResponseEntity getPrestadorPorId(@PathVariable Integer id){
         Optional<Prestador> prestadorOptional = repository.findById(id);
         if (prestadorOptional.isPresent()){
             Prestador prestador = prestadorOptional.get();
@@ -53,7 +54,7 @@ public class PrestadorController {
 
     //cadastro de prestador
     @PostMapping
-    public ResponseEntity postCadastrarPrestadores(@RequestBody Prestador prestador){
+    public ResponseEntity postCadastrarPrestador(@RequestBody Prestador prestador){
         List<Prestador> prestadoresInvalidos = repository.validarCadastro(
                 prestador.getEmail(), prestador.getCpf(), prestador.getTelefone()
         );
@@ -67,7 +68,7 @@ public class PrestadorController {
 
     //Autenticar usuário
     @PostMapping("/autenticacao")
-    public ResponseEntity postAutenticarUsuario(@RequestBody @Valid UsuarioEmailSenhaRequest req){
+    public ResponseEntity postAutenticarPrestador(@RequestBody @Valid UsuarioEmailSenhaRequest req){
 
         Optional<Prestador> prestadorOptional = repository.findByEmailAndSenha(req.getEmail(), req.getSenha());
         if (prestadorOptional.isPresent()){
@@ -81,7 +82,7 @@ public class PrestadorController {
 
     //    desautenticar usuário
     @DeleteMapping("/autenticacao")
-    public ResponseEntity deleteDesautenticarUsuario(@RequestBody @Valid UsuarioEmailSenhaRequest req){
+    public ResponseEntity deleteLogoffPrestador(@RequestBody @Valid UsuarioEmailSenhaRequest req){
         Optional<Prestador> prestadorOptional = repository.findByEmailAndSenha(req.getEmail(), req.getSenha());
         if (prestadorOptional.isPresent()){
             Prestador prestador = prestadorOptional.get();
@@ -94,7 +95,7 @@ public class PrestadorController {
 
     // adiciona habilidade
     @PostMapping("/habilidade")
-    public ResponseEntity postAddHabilidade(@RequestBody PrestadorHabilidadeRequest req){
+    public ResponseEntity postAddHabilidade(@RequestBody @Valid PrestadorHabilidadeRequest req){
         Optional<Prestador> prestadorOptional = repository.findById(req.getUserId());
         if (prestadorOptional.isPresent()){
             Prestador prestador = prestadorOptional.get();
@@ -111,7 +112,7 @@ public class PrestadorController {
 
 //    adiciona serviço
     @PostMapping("/servico") // revisar fluxo
-    public ResponseEntity postAddServico(@RequestBody PrestadorServicoRequest req){
+    public ResponseEntity postAddServico(@RequestBody @Valid PrestadorServicoRequest req){
         Optional<Prestador> prestadorOptional = repository.findById(req.getIdPrestador());
         if (prestadorOptional.isPresent()){
             Prestador prestador = prestadorOptional.get();
@@ -129,29 +130,57 @@ public class PrestadorController {
         return ResponseEntity.status(404).build();
     }
 
+    @PutMapping
+    public ResponseEntity putPrestador(@RequestBody @Valid PrestadorUpdateRequest req){
+        Optional<Prestador> prestadorOptional = repository.findById(req.getId());
+        if(prestadorOptional.isPresent()){
+            Prestador prestador = prestadorOptional.get();
+            prestador.setNome(req.getNome());
+            prestador.setSobrenome(req.getSobrenome());
+            prestador.setDataNasc(req.getDataNasc());
+            prestador.setSenha(req.getSenha());
+            prestador.setSexo(req.getGenero());
+            prestador.setAtendeDomicilio(req.getAtendeDomicilio());
+            if(!req.getResumo().isEmpty()){
+                prestador.setResumo(req.getResumo());
+            }
+            Boolean telefoneExiste = repository.existsByTelefone(req.getTelefone());
+            if(!req.getTelefone().equals(prestador.getTelefone())){
+                if (!telefoneExiste){
+                    prestador.setTelefone(req.getTelefone());
+                    repository.save(prestador);
+                    return ResponseEntity.status(201).build();
+                }
+            }
+            repository.save(prestador);
+            return ResponseEntity.status(206).build();
+        }
+        return ResponseEntity.status(404).build();
+    }
 
 
-
-//    @GetMapping("/relatorio-prestador")
-//    public ResponseEntity getRelatorio() {
-//        String relatorio = "";
-//
-//        List<Prestador> lista = repository.findAll();
-//
-//        for (Prestador prestador : lista) {
-//            relatorio += prestador.getId()
-//                    + "," + prestador.getNome() + " " + prestador.getSobrenome() +
-//                    "," + prestador.getCpf() + "," + prestador.getDataNasc() +
-//                    "," + prestador.getEmail() + "," + prestador.getSexo() +
-//                    "," + prestador.getTelefone() + "\r\n";
-//        }
-//
-//        return ResponseEntity
-//                .status(200)
-//                .header("content-type", "text/csv")
-//                .header("content-disposition",
-//                        "filename=\"Relatorio_Prestador.csv\"")
-//                .body(relatorio);
-//    }
+    @GetMapping("/relatorio")
+    public ResponseEntity getRelatorio() {
+        String relatorio = "";
+        List<Prestador> lista = repository.findAll();
+        for (Prestador prestador : lista) {
+            relatorio += prestador.getId()
+                    + ";" + prestador.getNome() + " " + prestador.getSobrenome() +
+                    ";" + prestador.getCpf() +
+                    "," + prestador.getDataNasc() +
+                    ";" + prestador.getEmail() +
+                    ";" + prestador.getSexo() +
+                    ";" + prestador.getTelefone() +
+                    ";" + prestador.getResumo() +
+                    ";" + prestador.getAtendeDomicilio() +
+                    "\r\n";
+        }
+        return ResponseEntity
+                .status(200)
+                .header("content-type", "text/csv")
+                .header("content-disposition",
+                        "filename=\"Relatorio_Prestador.csv\"")
+                .body(relatorio);
+    }
 
 }

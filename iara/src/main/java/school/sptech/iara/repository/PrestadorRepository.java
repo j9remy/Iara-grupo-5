@@ -17,4 +17,6 @@ public interface PrestadorRepository extends JpaRepository<Prestador, Integer> {
     List<Prestador> validarCadastro(String email, String cpf, String telefone);
 
     Optional<Prestador> findByEmailAndSenha(String email, String senha);
+
+    Boolean existsByTelefone(String telefone);
 }

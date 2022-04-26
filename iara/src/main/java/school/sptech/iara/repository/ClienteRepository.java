@@ -14,4 +14,6 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
     @Query("SELECT c FROM Cliente c WHERE email = ?1 OR cpf = ?2 OR telefone = ?3")
     List<Cliente> validarCadastro(String email, String cpf, String telefone);
+
+    Boolean existsByTelefone(String telefone);
 }

@@ -26,22 +26,19 @@ public class Cliente extends Usuario {
         avaliacoes = new ArrayList<>();
     }
 
-    //    Methods
-    // Adiciona na lista de avaliações
+//    Methods
+//    Adiciona na lista de avaliações
     public void addAvaliacao(AvaliacaoCliente avaliacao) {
         avaliacoes.add(avaliacao);
     }
 
     @Override
-    // Retourna a média de todas avaliações na lista
+//   Retourna a média de todas avaliações na lista
     public double calcAvaliacao(){
         Double somaAvaliacoes = 0d;
         for (AvaliacaoCliente avaliacao : avaliacoes) {
             somaAvaliacoes += avaliacao.getAvaliacao();
         }
-//        for (int i = 0; i > avaliacoes.size(); i++){
-//            somaAvaliacoes += avaliacoes.get(i).getAvaliacao();
-//        }
         return somaAvaliacoes/avaliacoes.size();
     }
 
