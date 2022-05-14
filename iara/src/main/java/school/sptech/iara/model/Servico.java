@@ -17,6 +17,7 @@ public class Servico {
     private String descricao;
     private String tipo;
     private boolean ativo;
+    private Double duracaoEstimada;
 
     @OneToMany
     private List<ServicoAtribuido> servicoAtribuidos;
@@ -26,11 +27,12 @@ public class Servico {
 
 //    Constructor
     public Servico(){}
-    public Servico(double valor, String descricao, String tipo) {
+    public Servico(double valor, String descricao, String tipo, Double duracaoEstimada) {
         this.valor = valor;
         this.descricao = descricao;
         this.tipo = tipo;
         ativo = true;
+        this.duracaoEstimada = duracaoEstimada;
         servicoAtribuidos = new ArrayList<>();
     }
 
@@ -65,8 +67,14 @@ public class Servico {
     public List<ServicoAtribuido> getServicoAtribuidos() {
         return servicoAtribuidos;
     }
+    public Double getDuracaoEstimada() {
+        return duracaoEstimada;
+    }
+    public void setDuracaoEstimada(Double duracaoEstimada) {
+        this.duracaoEstimada = duracaoEstimada;
+    }
 
-//    Methods
+    //    Methods
     //Retorna a quantidade de serviços atribuidos a este serviço
     public int getQtdServicosAtribuidos(){
         return servicoAtribuidos.size();
@@ -153,6 +161,7 @@ public class Servico {
                 ", tipo='" + tipo + '\'' +
                 ", ativo=" + ativo +
                 ", servicoAtribuidos=" + servicoAtribuidos +
+                ", duracaoEstimada=" + duracaoEstimada +
                 '}';
     }
 }

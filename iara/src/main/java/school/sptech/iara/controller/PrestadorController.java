@@ -91,24 +91,6 @@ public class PrestadorController {
         return ResponseEntity.status(404).build();
     }
 
-    // adiciona habilidade
-    @PostMapping("/habilidade")
-    public ResponseEntity postAddHabilidade(@RequestBody @Valid PrestadorHabilidadeRequest req){
-        Optional<Prestador> prestadorOptional = repository.findById(req.getUserId());
-        if (prestadorOptional.isPresent()){
-            Prestador prestador = prestadorOptional.get();
-            if (!prestador.habilidadeExiste(req.getHabilidade())){
-                habilidadeRepository.save(req.getHabilidade());
-                prestador.addHabilidade(req.getHabilidade());
-                repository.save(prestador);
-                return ResponseEntity.status(201).build();
-            }
-            return ResponseEntity.status(400).build();
-        }
-        return ResponseEntity.status(404).build();
-    }
-
-
     @PutMapping
     public ResponseEntity putPrestador(@RequestBody @Valid PrestadorUpdateRequest req){
         Optional<Prestador> prestadorOptional = repository.findById(req.getId());

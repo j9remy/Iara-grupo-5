@@ -19,7 +19,6 @@ public class ServicoController {
 
     @Autowired
     private ServicoRepository servicoRepository;
-
     @Autowired
     private PrestadorRepository repository;
 
@@ -47,7 +46,8 @@ public class ServicoController {
             if (!prestador.servicoExiste(req.getServico())){
                 Servico servico = new Servico(req.getServico().getValor(),
                         req.getServico().getDescricao(),
-                        req.getServico().getTipo());
+                        req.getServico().getTipo(),
+                        req.getServico().getDuracaoEstimada());
                 prestador.addServico(servico);
                 servicoRepository.save(servico);
                 repository.save(prestador);
@@ -61,13 +61,54 @@ public class ServicoController {
     @PutMapping("/{id}")
     public ResponseEntity putAtualizaServico(@RequestBody @Valid ServicoRequest servicoRequest,
                                              @PathVariable int id) {
-
         Optional<Servico> servicoEncontrado = servicoRepository.findById(id);
         if (servicoEncontrado.isPresent()) {
             Servico servico = servicoEncontrado.get();
             servico.setTipo(servicoRequest.getTipo());
             servico.setDescricao(servicoRequest.getDescricao());
             servico.setValor(servicoRequest.getValor());
+            servicoRepository.save(servico);
+            return ResponseEntity.status(200).build();
+        }
+        return ResponseEntity.status(404).build();
+    }
+
+    @PostMapping("/ativo/{id}")
+    public ResponseEntity postAtivoTrue(
+            @PathVariable Integer id){
+        Optional<Servico> servicoOptional = servicoRepository.findById(id);
+        if (servicoOptional.isPresent()){
+            Servico servico = servicoOptional.get();
+            servico.setAtivo(true);
+            servicoRepository.save(servico);
+            return ResponseEntity.status(200).build();
+        }
+        return ResponseEntity.status(404).build();
+    }
+
+    @DeleteMapping("/ativo/{id}")
+    public ResponseEntity deleteAtivoTrue(
+            @PathVariable Integer id){
+        Optional<Servico> servicoOptional = servicoRepository.findById(id);
+        if (servicoOptional.isPresent()){
+            Servico servico = servicoOptional.get();
+            servico.setAtivo(false);
+            servicoRepository.save(servico);
+            return ResponseEntity.status(200).build();
+        }
+        return ResponseEntity.status(404).build();
+    }
+
+    @PatchMapping("/duracao/{id}/{duracao}") //
+    public ResponseEntity patchDuracao(@PathVariable Integer id,
+                                       @PathVariable Double duracao){
+        Optional<Servico> servicoOptional = servicoRepository.findById(id);
+        if (servicoOptional.isPresent()){
+            Servico servico = servicoOptional.get();
+            if (servico.getDuracaoEstimada().equals(duracao)){
+                return ResponseEntity.status(400).build();
+            }
+            servico.setDuracaoEstimada(duracao);
             servicoRepository.save(servico);
             return ResponseEntity.status(200).build();
         }
