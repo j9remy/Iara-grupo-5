@@ -14,9 +14,7 @@ import school.sptech.iara.request.PrestadorUpdateRequest;
 import school.sptech.iara.request.UsuarioEmailSenhaRequest;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -110,25 +108,6 @@ public class PrestadorController {
         return ResponseEntity.status(404).build();
     }
 
-//    adiciona serviço
-    @PostMapping("/servico") // revisar fluxo
-    public ResponseEntity postAddServico(@RequestBody @Valid PrestadorServicoRequest req){
-        Optional<Prestador> prestadorOptional = repository.findById(req.getIdPrestador());
-        if (prestadorOptional.isPresent()){
-            Prestador prestador = prestadorOptional.get();
-            if (!prestador.servicoExiste(req.getServico())){
-                Servico servico = new Servico(req.getServico().getValor(),
-                        req.getServico().getDescricao(),
-                        req.getServico().getTipo());
-                prestador.addServico(servico);
-                servicoRepository.save(servico);
-                repository.save(prestador);
-                return ResponseEntity.status(201).build();
-            }
-            return ResponseEntity.status(400).build();
-        }
-        return ResponseEntity.status(404).build();
-    }
 
     @PutMapping
     public ResponseEntity putPrestador(@RequestBody @Valid PrestadorUpdateRequest req){
@@ -179,7 +158,7 @@ public class PrestadorController {
                 .status(200)
                 .header("content-type", "text/csv")
                 .header("content-disposition",
-                        "filename=\"Relatorio_Prestador.csv\"")
+                        "filename=\"relatorio_prestador.csv\"")
                 .body(relatorio);
     }
 

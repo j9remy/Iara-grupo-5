@@ -45,7 +45,7 @@ public class ClienteController {
             Cliente cliente = clienteOptional.get();
             return ResponseEntity.status(200).body(repository.findById(id));
         }
-        return ResponseEntity.status(204).build();
+        return ResponseEntity.status(404).build();
     }
 
     //cadastro de clientes, com possibilidade de cadastrar vários de uma só vez
@@ -152,18 +152,20 @@ public class ClienteController {
         List<Cliente> lista = repository.findAll();
 
         for (Cliente cliente : lista) {
-            relatorio += cliente.getId()
-                + "," + cliente.getNome() + " " + cliente.getSobrenome() +
-                "," + cliente.getCpf() + "," + cliente.getDataNasc() +
-                "," + cliente.getEmail() + "," + cliente.getSexo() +
-                "," + cliente.getTelefone() + "\r\n";
+            relatorio += cliente.getId() +
+                ";" + cliente.getNome() + " " + cliente.getSobrenome() +
+                ";" + cliente.getCpf() +
+                ";" + cliente.getDataNasc() +
+                ";" + cliente.getEmail() +
+                ";" + cliente.getSexo() +
+                ";" + cliente.getTelefone() + "\r\n";
         }
 
         return ResponseEntity
             .status(200)
             .header("content-type", "text/csv")
             .header("content-disposition",
-                    "filename=\"Relatorio_Cliente.csv\"")
+                    "filename=\"relatorio_cliente.csv\"")
             .body(relatorio);
     }
 

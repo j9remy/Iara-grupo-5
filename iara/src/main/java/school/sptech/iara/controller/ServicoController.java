@@ -3,15 +3,14 @@ package school.sptech.iara.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import school.sptech.iara.model.Habilidade;
 import school.sptech.iara.model.Prestador;
 import school.sptech.iara.model.Servico;
-import school.sptech.iara.model.ServicoAtribuido;
+import school.sptech.iara.repository.PrestadorRepository;
 import school.sptech.iara.repository.ServicoRepository;
+import school.sptech.iara.request.PrestadorServicoRequest;
+import school.sptech.iara.request.ServicoRequest;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -19,44 +18,60 @@ import java.util.Optional;
 public class ServicoController {
 
     @Autowired
-    private ServicoRepository repository;
+    private ServicoRepository servicoRepository;
+
+    @Autowired
+    private PrestadorRepository repository;
 
     @GetMapping
-    public ResponseEntity getServicos(){
-        List<Servico> servicos = repository.findAll();
-        if (!servicos.isEmpty()){
-            return ResponseEntity.status(200).body(servicos);
-        }
-        return ResponseEntity.status(204).build();
+    public ResponseEntity getListaServicos(){
+        if (servicoRepository.findAll().isEmpty())
+            return ResponseEntity.status(204).build();
+
+        return ResponseEntity.status(200).body(servicoRepository.findAll());
     }
 
-    // retorna serviço pelo index
-    @GetMapping("/{id}")
-    public ResponseEntity getServicoPorIndex(@PathVariable int id){
-        Optional<Servico> servicoOptional = repository.findById(id);
-        if (servicoOptional.isPresent()){
-            Servico servico = servicoOptional.get();
-            return ResponseEntity.status(200).body(servico);
+    @GetMapping("/{index}")
+    public ResponseEntity getServicoPorIndex(@PathVariable int index){
+        if (servicoRepository.existsById(index))
+            return ResponseEntity.status(200).body(servicoRepository.findById(index));
+        return ResponseEntity.status(404).build();
+    }
+
+    //    adiciona serviço
+    @PostMapping
+    public ResponseEntity postAddServico(@RequestBody @Valid PrestadorServicoRequest req){
+        Optional<Prestador> prestadorOptional = repository.findById(req.getIdPrestador());
+        if (prestadorOptional.isPresent()){
+            Prestador prestador = prestadorOptional.get();
+            if (!prestador.servicoExiste(req.getServico())){
+                Servico servico = new Servico(req.getServico().getValor(),
+                        req.getServico().getDescricao(),
+                        req.getServico().getTipo());
+                prestador.addServico(servico);
+                servicoRepository.save(servico);
+                repository.save(prestador);
+                return ResponseEntity.status(201).build();
+            }
+            return ResponseEntity.status(400).build();
         }
         return ResponseEntity.status(404).build();
     }
 
-    //add serviço atribuido
-//    @PostMapping("/servico-atribuido/{index}")
-//    public void addServicoAtribuido(@RequestBody ServicoAtribuido servicoAtribuido,
-//                                    @PathVariable int index){
-//        servicos.get(index).addServicoAtribuido(servicoAtribuido);
-//    }
+    @PutMapping("/{id}")
+    public ResponseEntity putAtualizaServico(@RequestBody @Valid ServicoRequest servicoRequest,
+                                             @PathVariable int id) {
 
-//    @PutMapping("/alterna-ativo/{index}")
-//    public void desativarServico(@PathVariable int index){
-//        try{
-//            if (!Objects.isNull(servicos.get(index))){
-//                servicos.get(index).setAtivo();
-//            }
-//        }catch (Exception e){
-//            System.out.println(e);
-//        }
-//    }
+        Optional<Servico> servicoEncontrado = servicoRepository.findById(id);
+        if (servicoEncontrado.isPresent()) {
+            Servico servico = servicoEncontrado.get();
+            servico.setTipo(servicoRequest.getTipo());
+            servico.setDescricao(servicoRequest.getDescricao());
+            servico.setValor(servicoRequest.getValor());
+            servicoRepository.save(servico);
+            return ResponseEntity.status(200).build();
+        }
+        return ResponseEntity.status(404).build();
+    }
 
 }

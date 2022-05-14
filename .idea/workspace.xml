@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c8f52d0b-c99f-4e35-be4b-9fec096d052d" name="Changes" comment="" />
+    <list default="true" id="c8f52d0b-c99f-4e35-be4b-9fec096d052d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/docs/Diagramas/diagramaDeClasseAtualizadoSprint2.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Diagramas/diagramaDeClasseAtualizadoSprint2.drawio" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iara/src/main/java/school/sptech/iara/controller/ClienteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/iara/src/main/java/school/sptech/iara/controller/ClienteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iara/src/main/java/school/sptech/iara/controller/PrestadorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/iara/src/main/java/school/sptech/iara/controller/PrestadorController.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
