@@ -1,0 +1,164 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&family=Ubuntu:wght@400;500;700&display=swap");
+
+/*
+base: #FDFBFB;
+primária: #DE0235;
+vermelho claro: #E3466B;
+vermelho escuro: #AB0229;
+vermelho escurão: #5E1D2C;
+marrom: #1E0D14;
+*/
+
+html {
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -ms-overflow-style: scrollbar;
+  -webkit-tap-highlight-color: transparent;
+}
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background-color: #fdfbfb;
+}
+
+body, input, button, textarea {
+  font-family: "Ubuntu", sans-serif;
+}
+
+.txt-condensed {
+  font-family: "Ubuntu Condensed", sans-serif;
+}
+
+*,
+::after,
+::before {
+  box-sizing: inherit;
+}
+
+.container {
+  width: 100%;
+  max-width: 1170px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+.dflex {
+  display: flex;
+}
+
+.acenter {
+  align-items: center;
+}
+
+.jcenter{
+    justify-content: center;
+}
+
+.jbetween {
+  justify-content: space-between;
+}
+
+.prelative {
+  position: relative;
+}
+
+a,
+a:hover {
+  text-decoration: none;
+}
+
+a {
+  transition: all 0.4s;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+.page-signin {
+    min-height: 100vh;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0px 3px 10px 0px #de0235;
+    padding: 40px;
+}
+
+.bg-dark-red, .bg-hover-dark-red:hover {
+    background-color: #AB0229;
+}
+
+.bg-white {
+    background-color: #fdfbfb;
+}
+
+.txt-white, .txt-hover-white:hover {
+    color: #fff;
+}
+
+.txt-black {
+    color: #000;
+}
+
+.txt-center{
+    text-align: center;
+}
+
+.button {
+    display: block;
+    border-radius: 10px;
+    padding: 20px 25px;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    margin: 25px 0;
+    box-shadow: 0px 4px 4px 0px #de0235;
+}
+
+.button:hover {
+    box-shadow: 0px 0px 15px 0px #fff;
+}
+
+.logo {
+    width: 300px;
+    margin: 0 auto;
+}
+
+.buttons {
+    margin: 50px 0;
+}
+
+.transform {
+    transition: all .4s;
+    display: block;
+}
+
+.transform:hover {
+    transform: scale(1.1);
+}
+
+.login a {
+    margin-left: 7px;
+}
+
+.login {
+    font-size: 18px;
+}
+
+
+
+
