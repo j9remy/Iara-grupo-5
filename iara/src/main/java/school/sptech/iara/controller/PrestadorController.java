@@ -2,16 +2,16 @@ package school.sptech.iara.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import school.sptech.iara.model.Cliente;
+import school.sptech.iara.model.Endereco;
 import school.sptech.iara.model.Prestador;
 import school.sptech.iara.model.Servico;
+import school.sptech.iara.repository.EnderecoRepository;
 import school.sptech.iara.repository.HabilidadeRepository;
 import school.sptech.iara.repository.PrestadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import school.sptech.iara.repository.ServicoRepository;
-import school.sptech.iara.request.PrestadorHabilidadeRequest;
-import school.sptech.iara.request.PrestadorServicoRequest;
-import school.sptech.iara.request.PrestadorUpdateRequest;
-import school.sptech.iara.request.UsuarioEmailSenhaRequest;
+import school.sptech.iara.request.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -27,6 +27,8 @@ public class PrestadorController {
     private HabilidadeRepository habilidadeRepository;
     @Autowired
     private ServicoRepository servicoRepository;
+    @Autowired
+    private EnderecoRepository enderecoRepository;
 
 
     // retorna todos registros de prestadores
@@ -119,6 +121,22 @@ public class PrestadorController {
         return ResponseEntity.status(404).build();
     }
 
+    @PostMapping("/endereco/{idPrestador}")
+    public ResponseEntity postEnderecoCliente(@PathVariable Integer idPrestador,
+                                              @RequestBody EnderecoRequest enderecoRequest){
+        List<Endereco> enderecos = enderecoRepository.enderecoValido(enderecoRequest.getCep(),
+                enderecoRequest.getComplemento(),
+                enderecoRequest.getNumero());
+        Optional<Prestador> prestadorOptional = repository.findById(idPrestador);
+        if (!enderecos.isEmpty() && prestadorOptional.isPresent()){
+            Endereco endereco = enderecos.get(0);
+            Prestador prestador = prestadorOptional.get();
+            prestador.addEndereco(endereco);
+            repository.save(prestador);
+            return ResponseEntity.status(200).build();
+        }
+        return ResponseEntity.status(400).build();
+    }
 
     @GetMapping("/relatorio")
     public ResponseEntity getRelatorio() {

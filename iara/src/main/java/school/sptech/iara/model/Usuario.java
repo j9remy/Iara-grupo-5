@@ -9,6 +9,8 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @MappedSuperclass
 public abstract class Usuario implements Avaliavel{
@@ -50,6 +52,9 @@ public abstract class Usuario implements Avaliavel{
 
     private boolean autenticado;
 
+    @OneToMany
+    private List<Endereco> enderecos;
+
 
 //    Constructor
     public Usuario(String nome, String sobrenome,
@@ -65,6 +70,7 @@ public abstract class Usuario implements Avaliavel{
         this.genero = genero;
         this.telefone = telefone;
         this.autenticado = false;
+        enderecos = new ArrayList<>();
     }
 
     public Usuario() {
@@ -76,11 +82,9 @@ public abstract class Usuario implements Avaliavel{
     public Integer getId() {
         return id;
     }
-
     public void setId(Integer id) {
         this.id = id;
     }
-
     public String getNome() {
         return nome;
     }
@@ -157,6 +161,10 @@ public abstract class Usuario implements Avaliavel{
         }else {
             return "Usuario não encontrado";
         }
+    }
+
+    public void addEndereco(Endereco endereco){
+        enderecos.add(endereco);
     }
 
     //toString

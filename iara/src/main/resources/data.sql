@@ -18,3 +18,8 @@ INSERT INTO Prestador (Autenticado, Nome, Sobrenome, Cpf, Data_nasc, Email, Senh
     (true, 'Kelvin','Ramos','10419961011','2001-03-13','kelvin@gmail.com.br','12345','M','(68) 96942-6542', 'Massagista premiado mundialmente, técnicas tailandesas e experiência na área', true),
     (false, 'Bruno','Aluísio','65638818073','1994-04-17','alubruno@bing.com','12345','M','(87) 98169-4246', 'Cabeleireiro feminino, experiência com cortes curtos e cachos', true),
     (false, 'Antonio','Ferreira','32339010039','1995-01-27','antoniofer@safra.com.br','12345','F','(88) 98734-1451', 'Designer de unhas com vasta experiência no mercado procurando clientes', true);
+
+-- Endereco
+INSERT INTO Endereco (Cep, Rua, Numero, Bairro, Cidade, Uf, Complemento) VALUES
+    ('09411190', 'Rua São Francisco', '200', 'Roncon', 'Ribeirão Pires', 'SP', 'Fundos');
+

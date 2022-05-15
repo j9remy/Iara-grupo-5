@@ -5,14 +5,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import school.sptech.iara.model.AvaliacaoCliente;
 import school.sptech.iara.model.Cliente;
+import school.sptech.iara.model.Endereco;
 import school.sptech.iara.repository.AvaliacaoRepository;
 import school.sptech.iara.repository.ClienteRepository;
+import school.sptech.iara.repository.EnderecoRepository;
 import school.sptech.iara.request.ClienteIdAvaliacaoRequest;
 import school.sptech.iara.request.ClienteUpdateRequest;
+import school.sptech.iara.request.EnderecoRequest;
 import school.sptech.iara.request.UsuarioEmailSenhaRequest;
 import school.sptech.iara.response.UsuarioAvaliacaoResponse;
 import school.sptech.iara.util.Lista;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -23,9 +27,11 @@ public class ClienteController {
 
     @Autowired
     private ClienteRepository repository;
-
     @Autowired
     private AvaliacaoRepository avaliacaoRepository;
+    @Autowired
+    private EnderecoRepository enderecoRepository;
+
 
     // retorna todos registros de usuários
     @GetMapping
@@ -141,6 +147,23 @@ public class ClienteController {
             }
             repository.save(cliente);
             return ResponseEntity.status(206).build();
+        }
+        return ResponseEntity.status(400).build();
+    }
+
+    @PostMapping("/endereco/{idCliente}")
+    public ResponseEntity postEnderecoCliente(@PathVariable Integer idCliente,
+                                              @RequestBody EnderecoRequest enderecoRequest){
+        List<Endereco> enderecos = enderecoRepository.enderecoValido(enderecoRequest.getCep(),
+                enderecoRequest.getComplemento(),
+                enderecoRequest.getNumero());
+        Optional<Cliente> clienteOptional = repository.findById(idCliente);
+        if (!enderecos.isEmpty() && clienteOptional.isPresent()){
+            Endereco endereco = enderecos.get(0);
+            Cliente cliente = clienteOptional.get();
+            cliente.addEndereco(endereco);
+            repository.save(cliente);
+            return ResponseEntity.status(200).build();
         }
         return ResponseEntity.status(400).build();
     }

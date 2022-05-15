@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "endereco")
+//@Table(name = "endereco")
 public class Endereco {
 //    Attributes
 //    @Id
@@ -17,13 +17,16 @@ public class Endereco {
 //    private int id;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     @NotNull
-    @Pattern(regexp = "[\\s]*[0-9]*[1-9]+",message="msg")
-    @Size(min = 8, max = 8)
+//    @Pattern(regexp = "[\\s]*[0-9]*[0-9]+",message="msg")
+//    @Size(min = 8, max = 9)
     private String cep;
 
     @NotNull
-    @Size(min = 2, max = 60)
+    @Size(min = 2, max = 100)
     private String rua;
 
     @NotNull
@@ -45,10 +48,11 @@ public class Endereco {
     @Size(min = 1, max = 60)
     private String complemento;
 
-    @OneToMany
-    private List<Cliente> usuarios;
+//    @OneToMany
+//    private List<Cliente> usuarios;
 
 //    Constructor
+    public Endereco(){}
     public Endereco(String cep, String rua, String numero, String bairro, String cidade, String uf, String complemento) {
         this.cep = cep;
         this.rua = rua;
@@ -57,10 +61,16 @@ public class Endereco {
         this.cidade = cidade;
         this.uf = uf;
         this.complemento = complemento;
-        usuarios = new ArrayList<>();
+//        usuarios = new ArrayList<>();
     }
 
     //    Getter and Setter
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
     public String getCep() {
         return cep;
     }
@@ -109,7 +119,8 @@ public class Endereco {
     @Override
     public String toString() {
         return "Endereco{" +
-                "cep='" + cep + '\'' +
+                "id='" + id + '\'' +
+                ", cep='" + cep + '\'' +
                 ", rua='" + rua + '\'' +
                 ", numero='" + numero + '\'' +
                 ", bairro='" + bairro + '\'' +
