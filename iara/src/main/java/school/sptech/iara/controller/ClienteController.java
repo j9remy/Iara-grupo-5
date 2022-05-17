@@ -32,7 +32,6 @@ public class ClienteController {
     @Autowired
     private EnderecoRepository enderecoRepository;
 
-
     // retorna todos registros de usuários
     @GetMapping
     public ResponseEntity getCliente(){
@@ -96,8 +95,6 @@ public class ClienteController {
             return ResponseEntity.status(204).build();
         }
     }
-
-
 
     //Autenticar usuário
     @PostMapping("/autenticacao")
@@ -166,6 +163,25 @@ public class ClienteController {
             return ResponseEntity.status(200).build();
         }
         return ResponseEntity.status(400).build();
+    }
+
+    @GetMapping(value = "/foto/{idCliente}", produces = "image/jpeg")
+    public ResponseEntity<byte[]> getFoto(@PathVariable Integer idCliente) {
+        byte[] foto = repository.getFoto(idCliente);
+        if (foto == null) {
+            return ResponseEntity.status(404).build();
+        }
+        return ResponseEntity.status(200).body(foto);
+    }
+    
+    @PatchMapping(value = "/foto/{idCliente}", consumes = "image/jpeg")
+    public ResponseEntity patchFoto(@PathVariable Integer idCliente,
+                                    @RequestBody byte[] novaFoto) {
+        if (!repository.existsById(idCliente)) {
+            return ResponseEntity.status(404).build();
+        }
+        repository.atualizarFoto(idCliente, novaFoto);
+        return ResponseEntity.status(200).build();
     }
 
     @GetMapping("/relatorio")
