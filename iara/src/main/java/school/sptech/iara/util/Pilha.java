@@ -2,28 +2,18 @@ package school.sptech.iara.util;
 
 public class Pilha {
 
-    // Atributos
     private int[] pilha;
     private int topo;
 
-    // Construtor
+    // Constructor
     public Pilha(int capacidade) {
         pilha = new int[capacidade];
         topo = -1;
     }
 
-    // Métodos
-
+    // Methods
     public Boolean isEmpty() {
         return topo == -1;
-
-// A instrução acima equivale a esse bloco de instruções
-//        if (topo == -1) {
-//            return true;
-//        }
-//        else {
-//            return false;
-//        }
     }
 
     public Boolean isFull() {
@@ -35,9 +25,6 @@ public class Pilha {
             System.out.println("Pilha cheia!");
         }
         else {
-//            topo++;
-//            pilha[topo] = info;
-            // as 2 instruções acima equivalem a esta abaixo:
             pilha[++topo] = info;
         }
     }
@@ -46,10 +33,6 @@ public class Pilha {
         if (isEmpty()) {
             return -1;
         }
-//        int retorno = pilha[topo];
-//        topo--;
-//        return retorno;
-
         return pilha[topo--];
     }
 
