@@ -2,10 +2,8 @@ package school.sptech.iara.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import school.sptech.iara.model.Cliente;
 import school.sptech.iara.model.Endereco;
 import school.sptech.iara.model.Prestador;
-import school.sptech.iara.model.Servico;
 import school.sptech.iara.repository.EnderecoRepository;
 import school.sptech.iara.repository.HabilidadeRepository;
 import school.sptech.iara.repository.PrestadorRepository;
@@ -123,7 +121,7 @@ public class PrestadorController {
 
     @PostMapping("/endereco/{idPrestador}")
     public ResponseEntity postEnderecoCliente(@PathVariable Integer idPrestador,
-                                              @RequestBody EnderecoRequest enderecoRequest){
+                                              @RequestBody EnderecoSimplesRequest enderecoRequest){
         List<Endereco> enderecos = enderecoRepository.enderecoValido(enderecoRequest.getCep(),
                 enderecoRequest.getComplemento(),
                 enderecoRequest.getNumero());
@@ -136,6 +134,25 @@ public class PrestadorController {
             return ResponseEntity.status(200).build();
         }
         return ResponseEntity.status(400).build();
+    }
+
+    @GetMapping(value = "/foto/{idPrestador}", produces = "image/jpeg")
+    public ResponseEntity<byte[]> getFoto(@PathVariable Integer idPrestador) {
+        byte[] foto = repository.getFoto(idPrestador);
+        if (foto == null) {
+            return ResponseEntity.status(404).build();
+        }
+        return ResponseEntity.status(200).body(foto);
+    }
+
+    @PatchMapping(value = "/foto/{idPrestador}", consumes = "image/jpeg")
+    public ResponseEntity patchFoto(@PathVariable Integer idPrestador,
+                                    @RequestBody byte[] novaFoto) {
+        if (!repository.existsById(idPrestador)) {
+            return ResponseEntity.status(404).build();
+        }
+        repository.atualizarFoto(idPrestador, novaFoto);
+        return ResponseEntity.status(200).build();
     }
 
     @GetMapping("/relatorio")

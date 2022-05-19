@@ -72,7 +72,6 @@ public abstract class Usuario implements Avaliavel{
         this.autenticado = false;
         enderecos = new ArrayList<>();
     }
-
     public Usuario() {
 
     }

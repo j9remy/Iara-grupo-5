@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import school.sptech.iara.model.Endereco;
 import school.sptech.iara.repository.EnderecoRepository;
 import school.sptech.iara.request.EnderecoRequest;
+import school.sptech.iara.request.EnderecoSimplesRequest;
 import school.sptech.iara.rest.viacep.ViacepClient;
 import school.sptech.iara.rest.viacep.ViacepResponse;
 
@@ -41,7 +42,7 @@ public class EnderecoController {
 
 
     @PostMapping
-    public ResponseEntity postEndereco(@RequestBody EnderecoRequest enderecoRequest){
+    public ResponseEntity postEnderecoReq(@RequestBody EnderecoSimplesRequest enderecoRequest){
         List<Endereco> enderecos = enderecoRepository.enderecoValido(enderecoRequest.getCep(),
                 enderecoRequest.getComplemento(),
                 enderecoRequest.getNumero());

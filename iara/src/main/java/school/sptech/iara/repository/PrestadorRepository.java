@@ -1,10 +1,12 @@
 package school.sptech.iara.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import school.sptech.iara.model.Cliente;
 import school.sptech.iara.model.Prestador;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,5 +20,14 @@ public interface PrestadorRepository extends JpaRepository<Prestador, Integer> {
 
     Optional<Prestador> findByEmailAndSenha(String email, String senha);
 
+    @Query("UPDATE Prestador a SET a.foto = ?2 WHERE a.id = ?1")
+    @Modifying
+    @Transactional
+    void atualizarFoto(Integer idPrestador, byte[] novaFoto);
+
+    @Query("SELECT a.foto FROM Prestador c WHERE a.id = ?1")
+    byte[] getFoto(Integer idPrestador);
+
     Boolean existsByTelefone(String telefone);
+
 }

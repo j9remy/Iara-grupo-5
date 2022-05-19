@@ -12,17 +12,13 @@ import java.util.List;
 //@Table(name = "endereco")
 public class Endereco {
 //    Attributes
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private int id;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotNull
-//    @Pattern(regexp = "[\\s]*[0-9]*[0-9]+",message="msg")
-//    @Size(min = 8, max = 9)
+    @Pattern(regexp = "[\\s]*[0-9]*[0-9]+",message="msg")
+    @Size(min = 8, max = 9)
     private String cep;
 
     @NotNull

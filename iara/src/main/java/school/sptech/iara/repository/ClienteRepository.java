@@ -1,10 +1,12 @@
 package school.sptech.iara.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import school.sptech.iara.model.Cliente;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +16,13 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
     @Query("SELECT c FROM Cliente c WHERE email = ?1 OR cpf = ?2 OR telefone = ?3")
     List<Cliente> validarCadastro(String email, String cpf, String telefone);
+    @Query("UPDATE Cliente a SET c.foto = ?2 WHERE a.id = ?1")
+    @Modifying
+    @Transactional
+    void atualizarFoto(Integer idCliente, byte[] novaFoto);
+
+    @Query("SELECT a.foto FROM Cliente a WHERE a.id = ?1")
+    byte[] getFoto(Integer idCliente);
 
     Boolean existsByTelefone(String telefone);
 }

@@ -11,12 +11,10 @@ import school.sptech.iara.repository.ClienteRepository;
 import school.sptech.iara.repository.EnderecoRepository;
 import school.sptech.iara.request.ClienteIdAvaliacaoRequest;
 import school.sptech.iara.request.ClienteUpdateRequest;
-import school.sptech.iara.request.EnderecoRequest;
+import school.sptech.iara.request.EnderecoSimplesRequest;
 import school.sptech.iara.request.UsuarioEmailSenhaRequest;
 import school.sptech.iara.response.UsuarioAvaliacaoResponse;
-import school.sptech.iara.util.Lista;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -153,7 +151,7 @@ public class ClienteController {
 
     @PostMapping("/endereco/{idCliente}")
     public ResponseEntity postEnderecoCliente(@PathVariable Integer idCliente,
-                                              @RequestBody EnderecoRequest enderecoRequest){
+                                              @RequestBody EnderecoSimplesRequest enderecoRequest){
         List<Endereco> enderecos = enderecoRepository.enderecoValido(enderecoRequest.getCep(),
                 enderecoRequest.getComplemento(),
                 enderecoRequest.getNumero());
@@ -166,6 +164,25 @@ public class ClienteController {
             return ResponseEntity.status(200).build();
         }
         return ResponseEntity.status(400).build();
+    }
+
+    @GetMapping(value = "/foto/{idCliente}", produces = "image/jpeg")
+    public ResponseEntity<byte[]> getFoto(@PathVariable Integer idCliente) {
+        byte[] foto = repository.getFoto(idCliente);
+        if (foto == null) {
+            return ResponseEntity.status(404).build();
+        }
+        return ResponseEntity.status(200).body(foto);
+    }
+
+    @PatchMapping(value = "/foto/{idCliente}", consumes = "image/jpeg")
+    public ResponseEntity patchFoto(@PathVariable Integer idCliente,
+                                    @RequestBody byte[] novaFoto) {
+        if (!repository.existsById(idCliente)) {
+            return ResponseEntity.status(404).build();
+        }
+        repository.atualizarFoto(idCliente, novaFoto);
+        return ResponseEntity.status(200).build();
     }
 
     @GetMapping("/relatorio")

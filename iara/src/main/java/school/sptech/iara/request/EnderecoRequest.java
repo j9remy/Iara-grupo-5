@@ -1,26 +1,47 @@
 package school.sptech.iara.request;
 
-public class EnderecoRequest {
-    private String cep;
-    private String numero;
-    private String complemento;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-    public String getCep() {
-        return cep;
+public class EnderecoRequest extends EnderecoSimplesRequest{
+    @NotNull
+    @Size(min = 2, max = 100)
+    private String rua;
+
+    @NotNull
+    @Size(min = 2, max = 60)
+    private String bairro;
+
+    @NotNull
+    @Size(min = 2, max = 45)
+    private String cidade;
+
+    @NotNull
+    @Size(min = 2, max = 2)
+    private String uf;
+
+    public String getRua() {
+        return rua;
     }
-    public void setCep(String cep) {
-        this.cep = cep;
+    public String getBairro() {
+        return bairro;
     }
-    public String getNumero() {
-        return numero;
+    public String getCidade() {
+        return cidade;
     }
-    public void setNumero(String numero) {
-        this.numero = numero;
+    public String getUf() {
+        return uf;
     }
-    public String getComplemento() {
-        return complemento;
+    public void setRua(String rua) {
+        this.rua = rua;
     }
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+    public void setUf(String uf) {
+        this.uf = uf;
     }
 }

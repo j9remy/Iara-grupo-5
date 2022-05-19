@@ -3,6 +3,7 @@ package school.sptech.iara.model;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -13,14 +14,19 @@ public class Servico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotNull
+    @Min(10)
     private double valor;
+    @NotNull
     private String descricao;
+    @NotNull
     private String tipo;
     private boolean ativo;
+    @NotNull
     private Double duracaoEstimada;
 
-    @OneToMany
-    private List<ServicoAtribuido> servicoAtribuidos;
+//    @OneToMany
+//    private List<ServicoAtribuido> servicoAtribuidos;
 
 //    @ManyToOne
 //    private Prestador prestador;
@@ -33,7 +39,7 @@ public class Servico {
         this.tipo = tipo;
         ativo = true;
         this.duracaoEstimada = duracaoEstimada;
-        servicoAtribuidos = new ArrayList<>();
+//        servicoAtribuidos = new ArrayList<>();
     }
 
 //    Getter and Setter
@@ -64,9 +70,9 @@ public class Servico {
     public void setAtivo() {
         setAtivo(!isAtivo());
     }
-    public List<ServicoAtribuido> getServicoAtribuidos() {
-        return servicoAtribuidos;
-    }
+//    public List<ServicoAtribuido> getServicoAtribuidos() {
+//        return servicoAtribuidos;
+//    }
     public Double getDuracaoEstimada() {
         return duracaoEstimada;
     }
@@ -76,70 +82,71 @@ public class Servico {
 
     //    Methods
     //Retorna a quantidade de serviços atribuidos a este serviço
-    public int getQtdServicosAtribuidos(){
-        return servicoAtribuidos.size();
-    }
+//    public int getQtdServicosAtribuidos(){
+//        return servicoAtribuidos.size();
+//    }
 
     // Retorna a quantidade de serviços avaliados
     public int getQtdServicosAvaliados(){
         int soma = 0;
-        for (ServicoAtribuido serv: servicoAtribuidos) {
-            if (Objects.nonNull(serv.calcAvaliacao())){
-                soma++;
-            }
-        }
+//        for (ServicoAtribuido serv: servicoAtribuidos) {
+//            if (Objects.nonNull(serv.calcAvaliacao())){
+//                soma++;
+//            }
+//        }
         return soma;
     }
 
     //Retorna média das avaliações dos servicos atribuidos a este
     public double getAvaliacao(){
         Double somaAvaliacoes = 0d;
-        for (ServicoAtribuido serv: servicoAtribuidos) {
-            Double avaliacao = serv.calcAvaliacao();
-            if(!avaliacao.isNaN()){
-                somaAvaliacoes += serv.calcAvaliacao();
-            }
-        }
-        if(!somaAvaliacoes.isNaN()){
-            return somaAvaliacoes/servicoAtribuidos.size();
-        }else{
-            return 0d;
-        }
+//        for (ServicoAtribuido serv: servicoAtribuidos) {
+//            Double avaliacao = serv.calcAvaliacao();
+//            if(!avaliacao.isNaN()){
+//                somaAvaliacoes += serv.calcAvaliacao();
+//            }
+//        }
+//        if(!somaAvaliacoes.isNaN()){
+//            return somaAvaliacoes/servicoAtribuidos.size();
+//        }else{
+//            return 0d;
+//        }
+        return 0d;
     }
 
     //retorna a lista de todos os servicos atribuidos serviço
-    public List<ServicoAtribuido> listarServicosAtribuidos(){
-        return servicoAtribuidos;
-    }
+//    public List<ServicoAtribuido> listarServicosAtribuidos(){
+//        return servicoAtribuidos;
+//    }
 
     //Se servicoAtribuido não existir na lista, adiciona
     public void addServicoAtribuido(ServicoAtribuido servicoAtribuido){
-        for (ServicoAtribuido serv: servicoAtribuidos) {
-            if (serv.equals(servicoAtribuido)){
-                return;
-            }
-        }
-        servicoAtribuidos.add(servicoAtribuido);
+//        for (ServicoAtribuido serv: servicoAtribuidos) {
+//            if (serv.equals(servicoAtribuido)){
+//                return;
+//            }
+//        }
+//        servicoAtribuidos.add(servicoAtribuido);
     }
 
     // Deleta o registro de ServicoAtribuido da lista somente se ele não estiver finalizado ainda
     public void cancelarServicoAtribuido(@NotNull ServicoAtribuido servico){
         if (!servico.isFinalizado()){
-            for (ServicoAtribuido serv: servicoAtribuidos) {
-                if (servico.equals(serv)){
-                    servicoAtribuidos.remove(serv);
-                }
-            }
+//            for (ServicoAtribuido serv: servicoAtribuidos) {
+//                if (servico.equals(serv)){
+//                    servicoAtribuidos.remove(serv);
+//                }
+//            }
         }
     }
 
     public void desativarServico(){
         boolean existeServicosAtribuidosNaoFinalizados = false;
-        for (ServicoAtribuido servAttr: servicoAtribuidos) {
-            if (!servAttr.isFinalizado()){
-                existeServicosAtribuidosNaoFinalizados = true;
-            }
-        }
+//        for (ServicoAtribuido servAttr: servicoAtribuidos) {
+//            if (!servAttr.isFinalizado()){
+//                existeServicosAtribuidosNaoFinalizados = true;
+//            }
+//        }
         if (!existeServicosAtribuidosNaoFinalizados){
             setAtivo(false);
         }
@@ -160,7 +167,7 @@ public class Servico {
                 ", descricao='" + descricao + '\'' +
                 ", tipo='" + tipo + '\'' +
                 ", ativo=" + ativo +
-                ", servicoAtribuidos=" + servicoAtribuidos +
+//                ", servicoAtribuidos=" + servicoAtribuidos +
                 ", duracaoEstimada=" + duracaoEstimada +
                 '}';
     }
