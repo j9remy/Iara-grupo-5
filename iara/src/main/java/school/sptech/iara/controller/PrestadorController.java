@@ -136,10 +136,8 @@ public class PrestadorController {
         return ResponseEntity.status(400).build();
     }
 
-<<<<<<< HEAD
-=======
-    /*
->>>>>>> ce7c585185564217ce45c753a9c48782a2157a6a
+
+
     @GetMapping(value = "/foto/{idPrestador}", produces = "image/jpeg")
     public ResponseEntity<byte[]> getFoto(@PathVariable Integer idPrestador) {
         byte[] foto = repository.getFoto(idPrestador);
@@ -158,10 +156,6 @@ public class PrestadorController {
         repository.atualizarFoto(idPrestador, novaFoto);
         return ResponseEntity.status(200).build();
     }
-<<<<<<< HEAD
-=======
-     */
->>>>>>> ce7c585185564217ce45c753a9c48782a2157a6a
 
     @GetMapping("/relatorio")
     public ResponseEntity getRelatorio() {

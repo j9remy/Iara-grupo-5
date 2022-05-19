@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import school.sptech.iara.model.Cliente;
 import school.sptech.iara.model.Prestador;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,15 +17,7 @@ public interface PrestadorRepository extends JpaRepository<Prestador, Integer> {
 
     @Query("SELECT c FROM Prestador c WHERE email = ?1 OR cpf = ?2 OR telefone = ?3")
     List<Prestador> validarCadastro(String email, String cpf, String telefone);
-/*
-    @Query("UPDATE Prestador a SET a.foto = ?2 WHERE a.idPrestador = ?1")
-    @Modifying
-    @Transactional
-    void atualizarFoto(Integer idPrestador, byte[] novaFoto);
 
-    @Query("SELECT a.foto FROM Prestador c WHERE a.idPrestador = ?1")
-    byte[] getFoto(Integer idPrestador);
- */
     Optional<Prestador> findByEmailAndSenha(String email, String senha);
 
     @Query("UPDATE Prestador a SET a.foto = ?2 WHERE a.id = ?1")
@@ -34,7 +25,7 @@ public interface PrestadorRepository extends JpaRepository<Prestador, Integer> {
     @Transactional
     void atualizarFoto(Integer idPrestador, byte[] novaFoto);
 
-    @Query("SELECT a.foto FROM Prestador c WHERE a.id = ?1")
+    @Query("SELECT a.foto FROM Prestador a WHERE a.id = ?1")
     byte[] getFoto(Integer idPrestador);
 
     Boolean existsByTelefone(String telefone);

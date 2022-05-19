@@ -19,6 +19,9 @@ public abstract class Usuario implements Avaliavel{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Size(max = 50_000_000)
+    private byte[] foto;
+
     @NotNull
     @Size(min = 2, max = 30)
     private String nome;
@@ -132,9 +135,13 @@ public abstract class Usuario implements Avaliavel{
     public boolean isAutenticado() {
         return autenticado;
     }
-
-
-//    Methods
+    public byte[] getFoto() {
+        return foto;
+    }
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
+    //    Methods
 
     public boolean usuarioExiste(String email, String senha){
         if (email.equalsIgnoreCase(getEmail()) &&

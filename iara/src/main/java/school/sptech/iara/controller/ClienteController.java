@@ -164,28 +164,7 @@ public class ClienteController {
         }
         return ResponseEntity.status(400).build();
     }
-/*
-    @GetMapping(value = "/foto/{idCliente}", produces = "image/jpeg")
-    public ResponseEntity<byte[]> getFoto(@PathVariable Integer idCliente) {
-        byte[] foto = repository.getFoto(idCliente);
-        if (foto == null) {
-            return ResponseEntity.status(404).build();
-        }
-        return ResponseEntity.status(200).body(foto);
-    }
 
-    @PatchMapping(value = "/foto/{id}", consumes = "image/jpeg")
-    public ResponseEntity patchFoto(@PathVariable Usuario idCliente,
-                                    @RequestBody byte[] novaFoto) {
-        if (!repository.existsById(idCliente.getId())) {
-            return ResponseEntity.status(404).build();
-        }
-        repository.atualizarFoto(idCliente.getId(), novaFoto);
-        return ResponseEntity.status(200).build();
-    }
-/*
-
-<<<<<<< HEAD
     @GetMapping(value = "/foto/{idCliente}", produces = "image/jpeg")
     public ResponseEntity<byte[]> getFoto(@PathVariable Integer idCliente) {
         byte[] foto = repository.getFoto(idCliente);
@@ -205,9 +184,6 @@ public class ClienteController {
         return ResponseEntity.status(200).build();
     }
 
-=======
- */
->>>>>>> ce7c585185564217ce45c753a9c48782a2157a6a
     @GetMapping("/relatorio")
     public ResponseEntity getRelatorio() {
         String relatorio = "";
