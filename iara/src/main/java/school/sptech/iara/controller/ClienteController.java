@@ -1,11 +1,13 @@
 package school.sptech.iara.controller;
 
+import org.h2.engine.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import school.sptech.iara.model.AvaliacaoCliente;
 import school.sptech.iara.model.Cliente;
 import school.sptech.iara.model.Endereco;
+import school.sptech.iara.model.Usuario;
 import school.sptech.iara.repository.AvaliacaoRepository;
 import school.sptech.iara.repository.ClienteRepository;
 import school.sptech.iara.repository.EnderecoRepository;
@@ -29,7 +31,6 @@ public class ClienteController {
     private AvaliacaoRepository avaliacaoRepository;
     @Autowired
     private EnderecoRepository enderecoRepository;
-
 
     // retorna todos registros de usuários
     @GetMapping
@@ -94,8 +95,6 @@ public class ClienteController {
             return ResponseEntity.status(204).build();
         }
     }
-
-
 
     //Autenticar usuário
     @PostMapping("/autenticacao")
@@ -165,7 +164,28 @@ public class ClienteController {
         }
         return ResponseEntity.status(400).build();
     }
+/*
+    @GetMapping(value = "/foto/{idCliente}", produces = "image/jpeg")
+    public ResponseEntity<byte[]> getFoto(@PathVariable Integer idCliente) {
+        byte[] foto = repository.getFoto(idCliente);
+        if (foto == null) {
+            return ResponseEntity.status(404).build();
+        }
+        return ResponseEntity.status(200).body(foto);
+    }
 
+    @PatchMapping(value = "/foto/{id}", consumes = "image/jpeg")
+    public ResponseEntity patchFoto(@PathVariable Usuario idCliente,
+                                    @RequestBody byte[] novaFoto) {
+        if (!repository.existsById(idCliente.getId())) {
+            return ResponseEntity.status(404).build();
+        }
+        repository.atualizarFoto(idCliente.getId(), novaFoto);
+        return ResponseEntity.status(200).build();
+    }
+/*
+
+<<<<<<< HEAD
     @GetMapping(value = "/foto/{idCliente}", produces = "image/jpeg")
     public ResponseEntity<byte[]> getFoto(@PathVariable Integer idCliente) {
         byte[] foto = repository.getFoto(idCliente);
@@ -185,6 +205,9 @@ public class ClienteController {
         return ResponseEntity.status(200).build();
     }
 
+=======
+ */
+>>>>>>> ce7c585185564217ce45c753a9c48782a2157a6a
     @GetMapping("/relatorio")
     public ResponseEntity getRelatorio() {
         String relatorio = "";
