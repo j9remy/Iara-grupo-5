@@ -444,21 +444,17 @@ i.fa-solid.fa-envelope-open-text {
 .user-input-wrp.total {
 	width: 100%;
 }
-.user-input-wrp .inputText{
+.user-input-wrp .input{
 	outline: none;
 	border:none;
 	border-radius: 9px;
-	/* border-bottom: 1px solid #777; */
-	/* box-shadow: none !important; */
-	/* font-size: 17px; */
-	/* font-weight: bold; */
   padding: 4px 12px;
   width: 100%;
   color: #fff;
   border: 2px solid transparent;
   transition: all .4s;
 }
-.user-input-wrp input.inputText {
+.user-input-wrp input.input {
 	height: 45px;
 }
 .user-input-wrp .floating-label {
@@ -468,10 +464,9 @@ i.fa-solid.fa-envelope-open-text {
 	left: 12px;
 	transition: 0.2s ease all;
 	font-size: 17px;
-	/* font-weight: bold; */
 }
-.user-input-wrp .inputText:focus ~ .floating-label, .user-input-wrp .inputText.focus ~ .floating-label,
-.user-input-wrp .inputText:not(:focus):valid ~ .floating-label, .user-input-wrp .inputText:not(.focus):valid ~ .floating-label {
+.user-input-wrp .input:focus ~ .floating-label, .user-input-wrp .input.focus ~ .floating-label,
+.user-input-wrp .input:not(:focus):valid ~ .floating-label, .user-input-wrp .input:not(.focus):valid ~ .floating-label {
 	top: 19px;
 	left: 8px;
 	font-size: 13px;
@@ -480,14 +475,14 @@ i.fa-solid.fa-envelope-open-text {
 	color: #1e0d14;
 }
 
-.user-input-wrp .inputText:focus, .user-input-wrp .inputText.focus, .input.mensagem:focus {
+.user-input-wrp .input:focus, .user-input-wrp .input.focus, .input.mensagem:focus {
   border: 2px solid #fff;
   background-color: #ab0229;
 	box-shadow: 0px 4px 14px 5px #de0235;
 }
 
-.user-input-wrp .inputText:focus ~ .floating-label, .user-input-wrp .inputText.focus ~ .floating-label,
-.user-input-wrp .inputText:not(:focus):valid ~ .floating-label, .user-input-wrp .inputText:not(.focus):valid ~ .floating-label {
+.user-input-wrp .input:focus ~ .floating-label, .user-input-wrp .input.focus ~ .floating-label,
+.user-input-wrp .input:not(:focus):valid ~ .floating-label, .user-input-wrp .input:not(.focus):valid ~ .floating-label {
   top: -7px;
   color: #fff;
   background: #af0229;
