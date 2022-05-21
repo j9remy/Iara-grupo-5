@@ -28,6 +28,9 @@ public class ServicoAtribuido implements Avaliavel{
     @OneToOne
     private Chat chat;
 
+    @ManyToOne
+    private ServicoAtribuido servicoAtribuido;
+
 //    Constructor
     public ServicoAtribuido(Servico servico, LocalDateTime horaInicio) {
         this.dataHoraInicio = horaInicio;
