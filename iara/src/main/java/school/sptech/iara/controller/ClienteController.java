@@ -1,23 +1,26 @@
 package school.sptech.iara.controller;
 
-import org.h2.engine.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import school.sptech.iara.model.AvaliacaoCliente;
 import school.sptech.iara.model.Cliente;
 import school.sptech.iara.model.Endereco;
-import school.sptech.iara.model.Usuario;
 import school.sptech.iara.repository.AvaliacaoRepository;
 import school.sptech.iara.repository.ClienteRepository;
 import school.sptech.iara.repository.EnderecoRepository;
-import school.sptech.iara.request.ClienteIdAvaliacaoRequest;
-import school.sptech.iara.request.ClienteUpdateRequest;
-import school.sptech.iara.request.EnderecoSimplesRequest;
-import school.sptech.iara.request.UsuarioEmailSenhaRequest;
+import school.sptech.iara.request.*;
 import school.sptech.iara.response.UsuarioAvaliacaoResponse;
+import school.sptech.iara.util.GravaArquivo;
 
 import javax.validation.Valid;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -182,6 +185,140 @@ public class ClienteController {
         }
         repository.atualizarFoto(idCliente, novaFoto);
         return ResponseEntity.status(200).build();
+    }
+
+    @GetMapping("/registro/{nomeArq}")
+    public ResponseEntity postRegistro(@PathVariable String nomeArq) {
+        List<Cliente> lista = repository.findAll();
+        GravaArquivo gravaArq = new GravaArquivo();
+        int contaRegCorpo = 0;
+
+        // Monta o registro de header
+        String header = "CLIENTE";
+        header += LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+        header += "01";
+
+        // Grava o registro de header
+        gravaArq.gravaRegistro(header, nomeArq);
+
+        String corpo;
+        for (Cliente c : lista) {
+            corpo = "02";
+            corpo += String.format("%-5.5s", c.getNome());
+            corpo += String.format("%-5.5s", c.getSobrenome());
+            corpo += String.format("%-5.5s", c.getCpf());
+            corpo += String.format("%-5.5s", c.getDataNasc());
+            corpo += String.format("%-5.5s", c.getSexo());
+            corpo += String.format("%-5.5s", c.getEmail());
+            corpo += String.format("%-5.5s", c.getTelefone());
+            contaRegCorpo++;
+            gravaArq.gravaRegistro(corpo, nomeArq);
+        }
+
+        // Monta e grava o registro de trailer
+        String trailer = "01";
+        trailer += String.format("%010d", contaRegCorpo);
+        gravaArq.gravaRegistro(trailer, nomeArq);
+
+        return ResponseEntity.status(201).build();
+    }
+
+    @PostMapping("/registro/{nomeArq}")
+    public ResponseEntity getRegistro(String nomeArq) {
+        BufferedReader entrada = null;
+        String registro, tipoRegistro;
+        String nome, sobrenome, cpf, email, senha, telefone;
+        Timestamp dataNasc;
+        Character sexo;
+        int contaRegCorpoLido = 0;
+        int qtdRegCorpoGravado;
+
+        List<Cliente> listaLida = new ArrayList<>();
+
+        // try-catch para abrir o arquivo
+        try {
+            entrada = new BufferedReader(new FileReader(nomeArq));
+        } catch (IOException erro) {
+            System.out.println("Erro ao abrir o arquivo: " + erro);
+            return ResponseEntity.status(400).build();
+        }
+
+        try {
+            // Leitura do primeiro registro do arquivo
+            registro = entrada.readLine();
+
+            while (registro != null) { // enquanto não chegou ao final do arquivo
+                // obtém os 2 primeiros caracteres do registro
+                // 01234567
+                // 00NOTA20221
+                tipoRegistro = registro.substring(0,2);
+                if (tipoRegistro.equals("00")) {
+                    System.out.println("É um registro de header");
+                    System.out.println("Tipo de arquivo: " + registro.substring(2,6));
+                    System.out.println("Ano e semestre: " + registro.substring(6,11));
+                    System.out.println("Data e hora da gravação: " + registro.substring(11,30));
+                    System.out.println("Versão do documento: " + registro.substring(30,32));
+                }
+                else if (tipoRegistro.equals("01")) {
+                    System.out.println("É um registro de trailer");
+                    qtdRegCorpoGravado = Integer.parseInt(registro.substring(2,12));
+                    if (contaRegCorpoLido == qtdRegCorpoGravado) {
+                        System.out.println("Quantidade de registros lidos é compatível " +
+                                "com a quantidade de registros gravados");
+                    }
+                    else {
+                        System.out.println("Quantidade de registros lidos não é compatível " +
+                                "com a quantidade de registros gravados");
+                    }
+                }
+                else if (tipoRegistro.equals("00002")) {
+                    System.out.println("É um registro de corpo");
+                    nome = registro.substring(6,35).trim();
+                    sobrenome = registro.substring(36,85).trim();
+                    cpf = registro.substring(86,96).trim();
+                    dataNasc = Timestamp.valueOf(registro.substring(97,115).trim());
+                    sexo = registro.charAt(116);
+                    email = registro.substring(117,166).trim();
+                    senha = registro.substring(167,177).trim();
+                    telefone = registro.substring(178,191).trim();
+                    contaRegCorpoLido++;
+
+                    Cliente c = new Cliente(nome,
+                            sobrenome,
+                            cpf,
+                            dataNasc,
+                            email,
+                            senha,
+                            sexo,
+                            telefone);
+
+                    // No projeto de PI, poderia fazer:
+                    // repository.save(a);
+
+                    // No nosso caso, vamos adicionar o objeto a na listaLida:
+                    repository.save(c);
+                }
+                else {
+                    System.out.println("Tipo de registro inválido!");
+                }
+
+                // Lê o próximo registro
+                registro = entrada.readLine();
+            }
+
+            entrada.close();
+        }
+        catch (IOException erro) {
+            System.out.println("Erro ao ler o arquivo: " + erro);
+            return ResponseEntity.status(400).build();
+        }
+
+        // Vamos exibir a listaLida
+        System.out.println("\nConteúdo da lista lida:");
+        for (Cliente c : listaLida) {
+            System.out.println(c);
+        }
+        return ResponseEntity.status(201).build();
     }
 
     @GetMapping("/relatorio")

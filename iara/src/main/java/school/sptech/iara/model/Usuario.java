@@ -188,4 +188,5 @@ public abstract class Usuario implements Avaliavel{
                 ", autenticado=" + autenticado +
                 '}';
     }
+
 }

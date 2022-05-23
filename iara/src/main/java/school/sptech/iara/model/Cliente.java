@@ -1,7 +1,5 @@
 package school.sptech.iara.model;
 
-import school.sptech.iara.util.Lista;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -18,6 +16,7 @@ public class Cliente extends Usuario {
     public Cliente(){
         super();
     }
+
     public Cliente(String nome, String sobrenome,
                    String cpf, Timestamp dataNasc,
                    String email, String senha,
@@ -42,6 +41,4 @@ public class Cliente extends Usuario {
         return somaAvaliacoes/avaliacoes.size();
     }
 
-//    toString
-
-}
+    }
