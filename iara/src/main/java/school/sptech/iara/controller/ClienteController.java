@@ -204,13 +204,13 @@ public class ClienteController {
         String corpo;
         for (Cliente c : lista) {
             corpo = "02";
-            corpo += String.format("%-5.5s", c.getNome());
-            corpo += String.format("%-5.5s", c.getSobrenome());
-            corpo += String.format("%-5.5s", c.getCpf());
-            corpo += String.format("%-5.5s", c.getDataNasc());
-            corpo += String.format("%-5.5s", c.getSexo());
-            corpo += String.format("%-5.5s", c.getEmail());
-            corpo += String.format("%-5.5s", c.getTelefone());
+            corpo += String.format("%-30.30s", c.getNome());
+            corpo += String.format("%-50.50s", c.getSobrenome());
+            corpo += String.format("%-11.11s", c.getCpf());
+            corpo += String.format("%-19.19s", c.getDataNasc());
+            corpo += String.format("%-1.1s", c.getSexo());
+            corpo += String.format("%-50.50s", c.getEmail());
+            corpo += String.format("%-15.15s", c.getTelefone());
             contaRegCorpo++;
             gravaArq.gravaRegistro(corpo, nomeArq);
         }

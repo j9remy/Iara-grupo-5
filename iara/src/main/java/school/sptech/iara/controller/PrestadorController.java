@@ -182,14 +182,14 @@ public class PrestadorController {
         String corpo;
         for (Prestador p : lista) {
             corpo = "02";
-            corpo += String.format("%-5.5s", p.getNome());
-            corpo += String.format("%-5.5s", p.getSobrenome());
-            corpo += String.format("%-5.5s", p.getCpf());
-            corpo += String.format("%-5.5s", p.getDataNasc());
-            corpo += String.format("%-5.5s", p.getSexo());
-            corpo += String.format("%-5.5s", p.getEmail());
-            corpo += String.format("%-5.5s", p.getTelefone());
-            corpo += String.format("%-5.5s", p.getResumo());
+            corpo += String.format("%-30.30s", p.getNome());
+            corpo += String.format("%-50.50s", p.getSobrenome());
+            corpo += String.format("%-11.11s", p.getCpf());
+            corpo += String.format("%-19.19s", p.getDataNasc());
+            corpo += String.format("%-1.1s", p.getSexo());
+            corpo += String.format("%-50.50s", p.getEmail());
+            corpo += String.format("%-15.15s", p.getTelefone());
+            corpo += String.format("%140.140s", p.getResumo());
             corpo += String.format("%-5.5s", p.getAtendeDomicilio());
             contaRegCorpo++;
             gravaArq.gravaRegistro(corpo, nomeArq);
@@ -234,7 +234,6 @@ public class PrestadorController {
                 // 00NOTA20221
                 tipoRegistro = registro.substring(0,2);
                 if (tipoRegistro.equals("00")) {
-                    System.out.println("É um registro de header");
                     System.out.println("Tipo de arquivo: " + registro.substring(2,6));
                     System.out.println("Ano e semestre: " + registro.substring(6,11));
                     System.out.println("Data e hora da gravação: " + registro.substring(11,30));
@@ -253,7 +252,6 @@ public class PrestadorController {
                     }
                 }
                 else if (tipoRegistro.equals("00002")) {
-                    System.out.println("É um registro de corpo");
                     nome = registro.substring(6,35).trim();
                     sobrenome = registro.substring(36,85).trim();
                     cpf = registro.substring(86,96).trim();
