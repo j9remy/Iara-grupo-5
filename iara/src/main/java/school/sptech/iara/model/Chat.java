@@ -1,7 +1,6 @@
 package school.sptech.iara.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Chat {
@@ -14,6 +13,9 @@ public class Chat {
     private ServicoAtribuido servicoAtribuido;
 
     private Boolean finalizado;
+
+    public Chat() {
+    }
 
     //Constructor
     public Chat(ServicoAtribuido servicoAtribuido) {

@@ -28,6 +28,9 @@ public class Mensagem {
     @ManyToOne
     private Chat chat;
 
+    public Mensagem() {
+    }
+
     //constructor
     public Mensagem(Integer remetente, Integer destinatario, @NotNull String mensagem, Chat chat) {
         this.idRemetente = remetente;
