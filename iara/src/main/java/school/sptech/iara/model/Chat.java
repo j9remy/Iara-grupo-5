@@ -22,7 +22,7 @@ public class Chat {
         this.servicoAtribuido = servicoAtribuido;
         finalizado = false;
     }
-    public Chat(){}
+
 
     // Getter and Setter
     public Boolean getFinalizado() {
