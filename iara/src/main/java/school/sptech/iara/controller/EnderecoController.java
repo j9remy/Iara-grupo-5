@@ -23,7 +23,7 @@ public class EnderecoController {
     private ViacepClient viacepClient;
 
     @GetMapping
-    public ResponseEntity getEnderecos(){
+    public ResponseEntity<List<Endereco>> getEnderecos(){
         List<Endereco> enderecos = enderecoRepository.findAll();
         if (enderecos.isEmpty())
             return ResponseEntity.status(204).build();
@@ -31,18 +31,16 @@ public class EnderecoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity getEndereco(@PathVariable Integer id){
+    public ResponseEntity<Endereco> getEndereco(@PathVariable Integer id){
         Optional<Endereco> enderecoOptional = enderecoRepository.findById(id);
-        if (enderecoOptional.isPresent()){
+        if (enderecoOptional.isPresent())
             return ResponseEntity.status(200).body(enderecoOptional.get());
-
-        }
         return ResponseEntity.status(404).build();
     }
 
 
     @PostMapping
-    public ResponseEntity postEnderecoReq(@RequestBody EnderecoSimplesRequest enderecoRequest){
+    public ResponseEntity<Void> postEnderecoReq(@RequestBody EnderecoSimplesRequest enderecoRequest){
         List<Endereco> enderecos = enderecoRepository.enderecoValido(enderecoRequest.getCep(),
                 enderecoRequest.getComplemento(),
                 enderecoRequest.getNumero());

@@ -18,7 +18,9 @@ public class Chat {
     //Constructor
     public Chat(ServicoAtribuido servicoAtribuido) {
         this.servicoAtribuido = servicoAtribuido;
+        finalizado = false;
     }
+    public Chat(){}
 
     // Getter and Setter
     public Boolean getFinalizado() {

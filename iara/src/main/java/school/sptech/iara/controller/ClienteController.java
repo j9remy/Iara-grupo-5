@@ -37,7 +37,7 @@ public class ClienteController {
 
     // retorna todos registros de usuários
     @GetMapping
-    public ResponseEntity getCliente(){
+    public ResponseEntity<List<Cliente>> getCliente(){
         List<Cliente> clientes = repository.findAll();
         if (!clientes.isEmpty()){
             return ResponseEntity.status(200).body(clientes);
@@ -47,18 +47,18 @@ public class ClienteController {
 
     // retorna usuário pelo index
     @GetMapping("/{id}")
-    public ResponseEntity getClientePorId(@PathVariable int id){
+    public ResponseEntity<Cliente> getClientePorId(@PathVariable int id){
         Optional<Cliente> clienteOptional = repository.findById(id);
         if (clienteOptional.isPresent()) {
             Cliente cliente = clienteOptional.get();
-            return ResponseEntity.status(200).body(repository.findById(id));
+            return ResponseEntity.status(200).body(cliente);
         }
         return ResponseEntity.status(404).build();
     }
 
     //cadastro de clientes, com possibilidade de cadastrar vários de uma só vez
     @PostMapping
-    public ResponseEntity postCadastroClientes(@RequestBody Cliente cliente){
+    public ResponseEntity<Void> postCadastroClientes(@RequestBody Cliente cliente){
         List<Cliente> clienteOptional = repository.validarCadastro(
                 cliente.getEmail(), cliente.getCpf(), cliente.getTelefone()
         );
@@ -70,7 +70,7 @@ public class ClienteController {
     }
 
     @GetMapping("/avaliacao/{id}")
-    public ResponseEntity getAvaliacao(@PathVariable Integer id){
+    public ResponseEntity<UsuarioAvaliacaoResponse> getAvaliacao(@PathVariable Integer id){
         Optional<Cliente> clienteOptional = repository.findById(id);
         if (clienteOptional.isPresent()){
             Cliente cliente = clienteOptional.get();
@@ -82,7 +82,7 @@ public class ClienteController {
 
     //Adicionar avaliação a lista de avaliações
     @PostMapping("/avaliacao")
-    public ResponseEntity postCadastroAvaliacao(@RequestBody ClienteIdAvaliacaoRequest req){
+    public ResponseEntity<Void> postCadastroAvaliacao(@RequestBody ClienteIdAvaliacaoRequest req){
         if (req.getAvaliacao() < 0 || req.getAvaliacao() >5){
             return ResponseEntity.status(400).build();
         }
@@ -101,7 +101,7 @@ public class ClienteController {
 
     //Autenticar usuário
     @PostMapping("/autenticacao")
-    public ResponseEntity postAutenticarUsuario(@RequestBody @Valid UsuarioEmailSenhaRequest req){
+    public ResponseEntity<Void> postAutenticarUsuario(@RequestBody @Valid UsuarioEmailSenhaRequest req){
 
         Optional<Cliente> clienteOptional = repository.findByEmailAndSenha(req.getEmail(), req.getSenha());
 
@@ -116,7 +116,7 @@ public class ClienteController {
 
 //    desautenticar usuário
     @DeleteMapping("/autenticacao")
-    public ResponseEntity deleteLogOffUsuario(@RequestBody @Valid UsuarioEmailSenhaRequest req){
+    public ResponseEntity<Void> deleteLogOffUsuario(@RequestBody @Valid UsuarioEmailSenhaRequest req){
         Optional<Cliente> clienteOptional = repository.findByEmailAndSenha(req.getEmail(), req.getSenha());
         if (clienteOptional.isPresent()){
             Cliente cliente = clienteOptional.get();
@@ -128,7 +128,7 @@ public class ClienteController {
     }
 
     @PutMapping
-    public ResponseEntity putCliente(@RequestBody @Valid ClienteUpdateRequest req){
+    public ResponseEntity<Void> putCliente(@RequestBody @Valid ClienteUpdateRequest req){
         Optional<Cliente> clienteOptional = repository.findById(req.getId());
         if (clienteOptional.isPresent()){
             Cliente cliente = clienteOptional.get();
@@ -152,7 +152,7 @@ public class ClienteController {
     }
 
     @PostMapping("/endereco/{idCliente}")
-    public ResponseEntity postEnderecoCliente(@PathVariable Integer idCliente,
+    public ResponseEntity<Void> postEnderecoCliente(@PathVariable Integer idCliente,
                                               @RequestBody EnderecoSimplesRequest enderecoRequest){
         List<Endereco> enderecos = enderecoRepository.enderecoValido(enderecoRequest.getCep(),
                 enderecoRequest.getComplemento(),
@@ -178,7 +178,7 @@ public class ClienteController {
     }
 
     @PatchMapping(value = "/foto/{idCliente}", consumes = "image/jpeg")
-    public ResponseEntity patchFoto(@PathVariable Integer idCliente,
+    public ResponseEntity<Void> patchFoto(@PathVariable Integer idCliente,
                                     @RequestBody byte[] novaFoto) {
         if (!repository.existsById(idCliente)) {
             return ResponseEntity.status(404).build();
@@ -188,7 +188,7 @@ public class ClienteController {
     }
 
     @GetMapping("/registro/{nomeArq}")
-    public ResponseEntity postRegistro(@PathVariable String nomeArq) {
+    public ResponseEntity<Void> postRegistro(@PathVariable String nomeArq) {
         List<Cliente> lista = repository.findAll();
         GravaArquivo gravaArq = new GravaArquivo();
         int contaRegCorpo = 0;
@@ -224,12 +224,12 @@ public class ClienteController {
     }
 
     @PostMapping("/registro/{nomeArq}")
-    public ResponseEntity getRegistro(String nomeArq) {
+    public ResponseEntity<Void> getRegistro(String nomeArq) {
         BufferedReader entrada = null;
         String registro, tipoRegistro;
         String nome, sobrenome, cpf, email, senha, telefone;
         Timestamp dataNasc;
-        Character sexo;
+        char sexo;
         int contaRegCorpoLido = 0;
         int qtdRegCorpoGravado;
 
@@ -252,54 +252,55 @@ public class ClienteController {
                 // 01234567
                 // 00NOTA20221
                 tipoRegistro = registro.substring(0,2);
-                if (tipoRegistro.equals("00")) {
-                    System.out.println("É um registro de header");
-                    System.out.println("Tipo de arquivo: " + registro.substring(2,6));
-                    System.out.println("Ano e semestre: " + registro.substring(6,11));
-                    System.out.println("Data e hora da gravação: " + registro.substring(11,30));
-                    System.out.println("Versão do documento: " + registro.substring(30,32));
-                }
-                else if (tipoRegistro.equals("01")) {
-                    System.out.println("É um registro de trailer");
-                    qtdRegCorpoGravado = Integer.parseInt(registro.substring(2,12));
-                    if (contaRegCorpoLido == qtdRegCorpoGravado) {
-                        System.out.println("Quantidade de registros lidos é compatível " +
-                                "com a quantidade de registros gravados");
-                    }
-                    else {
-                        System.out.println("Quantidade de registros lidos não é compatível " +
-                                "com a quantidade de registros gravados");
-                    }
-                }
-                else if (tipoRegistro.equals("00002")) {
-                    System.out.println("É um registro de corpo");
-                    nome = registro.substring(6,35).trim();
-                    sobrenome = registro.substring(36,85).trim();
-                    cpf = registro.substring(86,96).trim();
-                    dataNasc = Timestamp.valueOf(registro.substring(97,115).trim());
-                    sexo = registro.charAt(116);
-                    email = registro.substring(117,166).trim();
-                    senha = registro.substring(167,177).trim();
-                    telefone = registro.substring(178,191).trim();
-                    contaRegCorpoLido++;
+                switch (tipoRegistro) {
+                    case "00":
+                        System.out.println("É um registro de header");
+                        System.out.println("Tipo de arquivo: " + registro.substring(2, 6));
+                        System.out.println("Ano e semestre: " + registro.substring(6, 11));
+                        System.out.println("Data e hora da gravação: " + registro.substring(11, 30));
+                        System.out.println("Versão do documento: " + registro.substring(30, 32));
+                        break;
+                    case "01":
+                        System.out.println("É um registro de trailer");
+                        qtdRegCorpoGravado = Integer.parseInt(registro.substring(2, 12));
+                        if (contaRegCorpoLido == qtdRegCorpoGravado) {
+                            System.out.println("Quantidade de registros lidos é compatível " +
+                                    "com a quantidade de registros gravados");
+                        } else {
+                            System.out.println("Quantidade de registros lidos não é compatível " +
+                                    "com a quantidade de registros gravados");
+                        }
+                        break;
+                    case "00002":
+                        System.out.println("É um registro de corpo");
+                        nome = registro.substring(6, 35).trim();
+                        sobrenome = registro.substring(36, 85).trim();
+                        cpf = registro.substring(86, 96).trim();
+                        dataNasc = Timestamp.valueOf(registro.substring(97, 115).trim());
+                        sexo = registro.charAt(116);
+                        email = registro.substring(117, 166).trim();
+                        senha = registro.substring(167, 177).trim();
+                        telefone = registro.substring(178, 191).trim();
+                        contaRegCorpoLido++;
 
-                    Cliente c = new Cliente(nome,
-                            sobrenome,
-                            cpf,
-                            dataNasc,
-                            email,
-                            senha,
-                            sexo,
-                            telefone);
+                        Cliente c = new Cliente(nome,
+                                sobrenome,
+                                cpf,
+                                dataNasc,
+                                email,
+                                senha,
+                                sexo,
+                                telefone);
 
-                    // No projeto de PI, poderia fazer:
-                    // repository.save(a);
+                        // No projeto de PI, poderia fazer:
+                        // repository.save(a);
 
-                    // No nosso caso, vamos adicionar o objeto a na listaLida:
-                    repository.save(c);
-                }
-                else {
-                    System.out.println("Tipo de registro inválido!");
+                        // No nosso caso, vamos adicionar o objeto a na listaLida:
+                        repository.save(c);
+                        break;
+                    default:
+                        System.out.println("Tipo de registro inválido!");
+                        break;
                 }
 
                 // Lê o próximo registro
@@ -322,7 +323,7 @@ public class ClienteController {
     }
 
     @GetMapping("/relatorio")
-    public ResponseEntity getRelatorio() {
+    public ResponseEntity<String> getRelatorio() {
         String relatorio = "";
 
         List<Cliente> lista = repository.findAll();

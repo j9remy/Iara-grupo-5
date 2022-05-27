@@ -11,6 +11,7 @@ import school.sptech.iara.request.PrestadorServicoRequest;
 import school.sptech.iara.request.ServicoRequest;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -23,23 +24,23 @@ public class ServicoController {
     private PrestadorRepository repository;
 
     @GetMapping
-    public ResponseEntity getListaServicos(){
+    public ResponseEntity<List<Servico>> getListaServicos(){
         if (servicoRepository.findAll().isEmpty())
             return ResponseEntity.status(204).build();
-
         return ResponseEntity.status(200).body(servicoRepository.findAll());
     }
 
     @GetMapping("/{index}")
-    public ResponseEntity getServicoPorIndex(@PathVariable int index){
-        if (servicoRepository.existsById(index))
-            return ResponseEntity.status(200).body(servicoRepository.findById(index));
+    public ResponseEntity<Servico> getServicoPorIndex(@PathVariable int index){
+        Optional<Servico> servicoOptional = servicoRepository.findById(index);
+        if (servicoOptional.isPresent())
+            return ResponseEntity.status(200).body(servicoOptional.get());
         return ResponseEntity.status(404).build();
     }
 
-    //    adiciona serviço
+//    adiciona serviço
     @PostMapping
-    public ResponseEntity postAddServico(@RequestBody @Valid PrestadorServicoRequest req){
+    public ResponseEntity<Void> postAddServico(@RequestBody @Valid PrestadorServicoRequest req){
         Optional<Prestador> prestadorOptional = repository.findById(req.getIdPrestador());
         if (prestadorOptional.isPresent()){
             Prestador prestador = prestadorOptional.get();
@@ -59,7 +60,7 @@ public class ServicoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity putAtualizaServico(@RequestBody @Valid ServicoRequest servicoRequest,
+    public ResponseEntity<Void> putAtualizaServico(@RequestBody @Valid ServicoRequest servicoRequest,
                                              @PathVariable int id) {
         Optional<Servico> servicoEncontrado = servicoRepository.findById(id);
         if (servicoEncontrado.isPresent()) {
@@ -74,7 +75,7 @@ public class ServicoController {
     }
 
     @PostMapping("/ativo/{id}")
-    public ResponseEntity postAtivoTrue(
+    public ResponseEntity<Void> postAtivoTrue(
             @PathVariable Integer id){
         Optional<Servico> servicoOptional = servicoRepository.findById(id);
         if (servicoOptional.isPresent()){
@@ -87,7 +88,7 @@ public class ServicoController {
     }
 
     @DeleteMapping("/ativo/{id}")
-    public ResponseEntity deleteAtivoTrue(
+    public ResponseEntity<Void> deleteAtivoTrue(
             @PathVariable Integer id){
         Optional<Servico> servicoOptional = servicoRepository.findById(id);
         if (servicoOptional.isPresent()){
@@ -100,7 +101,7 @@ public class ServicoController {
     }
 
     @PatchMapping("/duracao/{id}/{duracao}") //
-    public ResponseEntity patchDuracao(@PathVariable Integer id,
+    public ResponseEntity<Void> patchDuracao(@PathVariable Integer id,
                                        @PathVariable Double duracao){
         Optional<Servico> servicoOptional = servicoRepository.findById(id);
         if (servicoOptional.isPresent()){
