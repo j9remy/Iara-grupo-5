@@ -24,7 +24,7 @@ public class HabilidadeController {
     private PrestadorRepository prestadorRepository;
 
     @GetMapping
-    public ResponseEntity getHabilidades(){
+    public ResponseEntity<List<Habilidade>> getHabilidades(){
         List<Habilidade> habilidades = repository.findAll();
         if (!habilidades.isEmpty()){
             return ResponseEntity.status(200).body(habilidades);
@@ -34,7 +34,7 @@ public class HabilidadeController {
 
     // retorna habilidade pelo index
     @GetMapping("/{id}")
-    public ResponseEntity getHabilidadePorIndex(@PathVariable int id){
+    public ResponseEntity<Habilidade> getHabilidadePorIndex(@PathVariable int id){
         Optional<Habilidade> habilidadeOptional = repository.findById(id);
         if (habilidadeOptional.isPresent()){
             Habilidade habilidade = habilidadeOptional.get();
@@ -44,7 +44,7 @@ public class HabilidadeController {
     }
 
     @PostMapping
-    public ResponseEntity postAddHabilidade(@RequestBody Habilidade habilidade){
+    public ResponseEntity<Void> postAddHabilidade(@RequestBody Habilidade habilidade){
         if (!repository.existsByDescricao(habilidade.getDescricao()) &&
                 !repository.existsByHabilidade(habilidade.getHabilidade())){
             repository.save(habilidade);
@@ -55,7 +55,7 @@ public class HabilidadeController {
 
     // adiciona habilidade
     @PostMapping("/prestador")
-    public ResponseEntity postAddHabilidade(@RequestBody @Valid PrestadorHabilidadeRequest req){
+    public ResponseEntity<Void> postAddHabilidade(@RequestBody @Valid PrestadorHabilidadeRequest req){
         Optional<Prestador> prestadorOptional = prestadorRepository.findById(req.getUserId());
         if (prestadorOptional.isPresent()){
             Prestador prestador = prestadorOptional.get();

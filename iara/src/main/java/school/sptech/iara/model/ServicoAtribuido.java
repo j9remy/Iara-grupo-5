@@ -1,8 +1,12 @@
 package school.sptech.iara.model;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -11,33 +15,46 @@ public class ServicoAtribuido implements Avaliavel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     @ManyToOne
     private Cliente cliente;
-
     private LocalDateTime dataHoraInicio;
     private LocalDateTime dataHoraFim;
     private String observacoes;
     private String status;
     private boolean finalizado;
     private Double avaliacao;
-
     @ManyToOne
     private Servico servico;
-
-    @OneToOne
-    private Chat chat;
-
-    @ManyToOne
-    private ServicoAtribuido servicoAtribuido;
+//    @OneToOne
+//    private Chat chat;
 
 //    Constructor
-    public ServicoAtribuido(Servico servico, LocalDateTime horaInicio) {
+    public ServicoAtribuido(Servico servico,
+                            LocalDateTime horaInicio,
+                            Cliente cliente
+                            ) {
+        this.cliente = cliente;
         this.dataHoraInicio = horaInicio;
-        finalizado = false;
-        avaliacao = -1.0;
-        this.servico = servico;
 //        dataHoraFim = dataHoraInicio + servico.getDuracaoEstimada();
+        this.status = "Agendado";
+        this.finalizado = false;
+        this.avaliacao = -1.0;
+        this.servico = servico;
+//        this.chat = chat;
+    }
+    public ServicoAtribuido(Servico servico,
+                            LocalDateTime horaInicio,
+                            Cliente cliente,
+                            String observacoes) {
+        this.cliente = cliente;
+        this.dataHoraInicio = horaInicio;
+//        dataHoraFim = dataHoraInicio + servico.getDuracaoEstimada();
+        this.observacoes = observacoes;
+        this.status = "Agendado";
+        this.finalizado = false;
+        this.avaliacao = -1.0;
+        this.servico = servico;
+//        this.chat = chat;
     }
     public ServicoAtribuido(){}
 

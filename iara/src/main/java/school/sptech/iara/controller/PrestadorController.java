@@ -41,7 +41,7 @@ public class PrestadorController {
 
     // retorna todos registros de prestadores
     @GetMapping
-    public ResponseEntity getListaPrestadores(){
+    public ResponseEntity<List<Prestador>> getListaPrestadores(){
         List<Prestador> prestadores = repository.findAll();
         if (!prestadores.isEmpty()){
             return ResponseEntity.status(200).body(prestadores);
@@ -51,7 +51,7 @@ public class PrestadorController {
 
     // retorna usuário pelo index
     @GetMapping("/{id}")
-    public ResponseEntity getPrestadorPorId(@PathVariable Integer id){
+    public ResponseEntity<Prestador> getPrestadorPorId(@PathVariable Integer id){
         Optional<Prestador> prestadorOptional = repository.findById(id);
         if (prestadorOptional.isPresent()){
             Prestador prestador = prestadorOptional.get();
@@ -62,7 +62,7 @@ public class PrestadorController {
 
     //cadastro de prestador
     @PostMapping
-    public ResponseEntity postCadastrarPrestador(@RequestBody Prestador prestador){
+    public ResponseEntity<Void> postCadastrarPrestador(@RequestBody Prestador prestador){
         List<Prestador> prestadoresInvalidos = repository.validarCadastro(
                 prestador.getEmail(), prestador.getCpf(), prestador.getTelefone()
         );
@@ -76,8 +76,7 @@ public class PrestadorController {
 
     //Autenticar usuário
     @PostMapping("/autenticacao")
-    public ResponseEntity postAutenticarPrestador(@RequestBody @Valid UsuarioEmailSenhaRequest req){
-
+    public ResponseEntity<Void> postAutenticarPrestador(@RequestBody @Valid UsuarioEmailSenhaRequest req){
         Optional<Prestador> prestadorOptional = repository.findByEmailAndSenha(req.getEmail(), req.getSenha());
         if (prestadorOptional.isPresent()){
             Prestador prestador = prestadorOptional.get();
@@ -90,7 +89,7 @@ public class PrestadorController {
 
     //    desautenticar usuário
     @DeleteMapping("/autenticacao")
-    public ResponseEntity deleteLogoffPrestador(@RequestBody @Valid UsuarioEmailSenhaRequest req){
+    public ResponseEntity<Void> deleteLogoffPrestador(@RequestBody @Valid UsuarioEmailSenhaRequest req){
         Optional<Prestador> prestadorOptional = repository.findByEmailAndSenha(req.getEmail(), req.getSenha());
         if (prestadorOptional.isPresent()){
             Prestador prestador = prestadorOptional.get();
@@ -102,7 +101,7 @@ public class PrestadorController {
     }
 
     @PutMapping
-    public ResponseEntity putPrestador(@RequestBody @Valid PrestadorUpdateRequest req){
+    public ResponseEntity<Void> putPrestador(@RequestBody @Valid PrestadorUpdateRequest req){
         Optional<Prestador> prestadorOptional = repository.findById(req.getId());
         if(prestadorOptional.isPresent()){
             Prestador prestador = prestadorOptional.get();
@@ -130,7 +129,7 @@ public class PrestadorController {
     }
 
     @PostMapping("/endereco/{idPrestador}")
-    public ResponseEntity postEnderecoCliente(@PathVariable Integer idPrestador,
+    public ResponseEntity<Void> postEnderecoCliente(@PathVariable Integer idPrestador,
                                               @RequestBody EnderecoSimplesRequest enderecoRequest){
         List<Endereco> enderecos = enderecoRepository.enderecoValido(enderecoRequest.getCep(),
                 enderecoRequest.getComplemento(),
@@ -166,7 +165,7 @@ public class PrestadorController {
     }
 
     @GetMapping("/registro/{nomeArq}")
-    public ResponseEntity postRegistro(@PathVariable String nomeArq) {
+    public ResponseEntity<Void> postRegistro(@PathVariable String nomeArq) {
         List<Prestador> lista = repository.findAll();
         GravaArquivo gravaArq = new GravaArquivo();
         int contaRegCorpo = 0;
@@ -182,14 +181,14 @@ public class PrestadorController {
         String corpo;
         for (Prestador p : lista) {
             corpo = "02";
-            corpo += String.format("%-5.5s", p.getNome());
-            corpo += String.format("%-5.5s", p.getSobrenome());
-            corpo += String.format("%-5.5s", p.getCpf());
-            corpo += String.format("%-5.5s", p.getDataNasc());
-            corpo += String.format("%-5.5s", p.getSexo());
-            corpo += String.format("%-5.5s", p.getEmail());
-            corpo += String.format("%-5.5s", p.getTelefone());
-            corpo += String.format("%-5.5s", p.getResumo());
+            corpo += String.format("%-30.30s", p.getNome());
+            corpo += String.format("%-50.50s", p.getSobrenome());
+            corpo += String.format("%-11.11s", p.getCpf());
+            corpo += String.format("%-19.19s", p.getDataNasc());
+            corpo += String.format("%-1.1s", p.getSexo());
+            corpo += String.format("%-50.50s", p.getEmail());
+            corpo += String.format("%-15.15s", p.getTelefone());
+            corpo += String.format("%140.140s", p.getResumo());
             corpo += String.format("%-5.5s", p.getAtendeDomicilio());
             contaRegCorpo++;
             gravaArq.gravaRegistro(corpo, nomeArq);
@@ -204,13 +203,13 @@ public class PrestadorController {
     }
 
     @PostMapping("/registro/{nomeArq}")
-    public ResponseEntity getRegistro(String nomeArq) {
+    public ResponseEntity<Void> getRegistro(String nomeArq) {
         BufferedReader entrada = null;
         String registro, tipoRegistro;
         String nome, sobrenome, cpf, email, senha, telefone, resumo;
         Timestamp dataNasc;
-        Character sexo;
-        Boolean atendeDomicilio;
+        char sexo;
+        boolean atendeDomicilio;
         int contaRegCorpoLido = 0;
         int qtdRegCorpoGravado;
 
@@ -233,58 +232,57 @@ public class PrestadorController {
                 // 01234567
                 // 00NOTA20221
                 tipoRegistro = registro.substring(0,2);
-                if (tipoRegistro.equals("00")) {
-                    System.out.println("É um registro de header");
-                    System.out.println("Tipo de arquivo: " + registro.substring(2,6));
-                    System.out.println("Ano e semestre: " + registro.substring(6,11));
-                    System.out.println("Data e hora da gravação: " + registro.substring(11,30));
-                    System.out.println("Versão do documento: " + registro.substring(30,32));
-                }
-                else if (tipoRegistro.equals("01")) {
-                    System.out.println("É um registro de trailer");
-                    qtdRegCorpoGravado = Integer.parseInt(registro.substring(2,12));
-                    if (contaRegCorpoLido == qtdRegCorpoGravado) {
-                        System.out.println("Quantidade de registros lidos é compatível " +
-                                "com a quantidade de registros gravados");
-                    }
-                    else {
-                        System.out.println("Quantidade de registros lidos não é compatível " +
-                                "com a quantidade de registros gravados");
-                    }
-                }
-                else if (tipoRegistro.equals("00002")) {
-                    System.out.println("É um registro de corpo");
-                    nome = registro.substring(6,35).trim();
-                    sobrenome = registro.substring(36,85).trim();
-                    cpf = registro.substring(86,96).trim();
-                    dataNasc = Timestamp.valueOf(registro.substring(97,115).trim());
-                    sexo = registro.charAt(116);
-                    email = registro.substring(117,166).trim();
-                    senha = registro.substring(167,177).trim();
-                    telefone = registro.substring(178,191).trim();
-                    resumo = registro.substring(192,391).trim();
-                    atendeDomicilio = Boolean.valueOf(registro.substring(392,393).trim());
-                    contaRegCorpoLido++;
+                switch (tipoRegistro) {
+                    case "00":
+                        System.out.println("Tipo de arquivo: " + registro.substring(2, 6));
+                        System.out.println("Ano e semestre: " + registro.substring(6, 11));
+                        System.out.println("Data e hora da gravação: " + registro.substring(11, 30));
+                        System.out.println("Versão do documento: " + registro.substring(30, 32));
+                        break;
+                    case "01":
+                        System.out.println("É um registro de trailer");
+                        qtdRegCorpoGravado = Integer.parseInt(registro.substring(2, 12));
+                        if (contaRegCorpoLido == qtdRegCorpoGravado) {
+                            System.out.println("Quantidade de registros lidos é compatível " +
+                                    "com a quantidade de registros gravados");
+                        } else {
+                            System.out.println("Quantidade de registros lidos não é compatível " +
+                                    "com a quantidade de registros gravados");
+                        }
+                        break;
+                    case "00002":
+                        nome = registro.substring(6, 35).trim();
+                        sobrenome = registro.substring(36, 85).trim();
+                        cpf = registro.substring(86, 96).trim();
+                        dataNasc = Timestamp.valueOf(registro.substring(97, 115).trim());
+                        sexo = registro.charAt(116);
+                        email = registro.substring(117, 166).trim();
+                        senha = registro.substring(167, 177).trim();
+                        telefone = registro.substring(178, 191).trim();
+                        resumo = registro.substring(192, 391).trim();
+                        atendeDomicilio = Boolean.parseBoolean(registro.substring(392, 393).trim());
+                        contaRegCorpoLido++;
 
-                    Prestador p = new Prestador(nome,
-                            sobrenome,
-                            cpf,
-                            dataNasc,
-                            email,
-                            senha,
-                            sexo,
-                            telefone,
-                            resumo,
-                            atendeDomicilio);
+                        Prestador p = new Prestador(nome,
+                                sobrenome,
+                                cpf,
+                                dataNasc,
+                                email,
+                                senha,
+                                sexo,
+                                telefone,
+                                resumo,
+                                atendeDomicilio);
 
-                    // No projeto de PI, poderia fazer:
-                    // repository.save(a);
+                        // No projeto de PI, poderia fazer:
+                        // repository.save(a);
 
-                    // No nosso caso, vamos adicionar o objeto a na listaLida:
-                    repository.save(p);
-                }
-                else {
-                    System.out.println("Tipo de registro inválido!");
+                        // No nosso caso, vamos adicionar o objeto a na listaLida:
+                        repository.save(p);
+                        break;
+                    default:
+                        System.out.println("Tipo de registro inválido!");
+                        break;
                 }
 
                 // Lê o próximo registro
@@ -307,7 +305,7 @@ public class PrestadorController {
     }
 
     @GetMapping("/relatorio")
-    public ResponseEntity getRelatorio() {
+    public ResponseEntity<String> getRelatorio() {
         String relatorio = "";
         List<Prestador> lista = repository.findAll();
         for (Prestador prestador : lista) {
