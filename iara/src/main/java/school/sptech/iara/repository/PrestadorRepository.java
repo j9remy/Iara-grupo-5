@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 import school.sptech.iara.model.Cliente;
 import school.sptech.iara.model.Prestador;
+import school.sptech.iara.model.Servico;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,5 +30,6 @@ public interface PrestadorRepository extends JpaRepository<Prestador, Integer> {
     byte[] getFoto(Integer idPrestador);
 
     Boolean existsByTelefone(String telefone);
+    Prestador findByServicosContains(Servico servico);
 
 }

@@ -95,6 +95,36 @@ public class ServicoAtribuido implements Avaliavel{
     public void setAvaliacao(Double avaliacao) {
         this.avaliacao = avaliacao;
     }
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public Cliente getCliente() {
+        return cliente;
+    }
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+    public LocalDateTime getDataHoraInicio() {
+        return dataHoraInicio;
+    }
+    public void setDataHoraInicio(LocalDateTime dataHoraInicio) {
+        this.dataHoraInicio = dataHoraInicio;
+    }
+    public LocalDateTime getDataHoraFim() {
+        return dataHoraFim;
+    }
+    public void setDataHoraFim(LocalDateTime dataHoraFim) {
+        this.dataHoraFim = dataHoraFim;
+    }
+    public Servico getServico() {
+        return servico;
+    }
+    public void setServico(Servico servico) {
+        this.servico = servico;
+    }
 
     //    Methods
     // Simplesmente retorna o valor do atributo avaliacao

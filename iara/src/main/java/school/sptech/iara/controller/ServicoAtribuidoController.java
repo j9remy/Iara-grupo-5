@@ -1,5 +1,6 @@
 package school.sptech.iara.controller;
 
+import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -50,7 +51,7 @@ public class ServicoAtribuidoController {
 
     @PostMapping("/{idUser}")
     public ResponseEntity<Void> postServicoAttrServico(@PathVariable Integer idUser,
-                                                @RequestBody ServicoAtribuidoRequest req) throws ParseException {
+                                                @RequestBody ServicoAtribuidoRequest req){
         Optional<Servico> servicoOptional = servicoRepository.findById(req.getIdServico());
         Optional<Cliente> clienteOptional = clienteRepository.findById(idUser);
         if (servicoOptional.isPresent() && clienteOptional.isPresent()){
@@ -67,7 +68,8 @@ public class ServicoAtribuidoController {
                 servicoAtribuido = new ServicoAtribuido(
                         servico,
                         LocalDateTime.parse(req.getDataInicio(), formatter),
-                        cliente);
+                        cliente,
+                        req.getObservacoes());
             }
             Chat chat = new Chat(servicoAtribuido);
             servicoAtribuidoRepository.save(servicoAtribuido);
@@ -78,7 +80,7 @@ public class ServicoAtribuidoController {
         return ResponseEntity.status(400).build();
     }
 
-    @PatchMapping("/finalizado/{idServicoAttr}")
+    @PatchMapping("/finalizar/{idServicoAttr}")
     public ResponseEntity<Void> patchFinalizado(@PathVariable Integer idServicoAttr){
         Optional<ServicoAtribuido> servicoAtribuidoOptional = servicoAtribuidoRepository.findById(idServicoAttr);
         if (servicoAtribuidoOptional.isPresent()){
@@ -86,12 +88,41 @@ public class ServicoAtribuidoController {
             if (!servicoAtribuido.isFinalizado()){
                 servicoAtribuido.setFinalizado(true);
                 servicoAtribuido.setHoraFim(LocalDateTime.now());
+                servicoAtribuido.setStatus("Finalizado");
+                Chat chat = chatRepository.findByServicoAtribuido_Id(idServicoAttr);
+                chat.setFinalizado(true);
                 servicoAtribuidoRepository.save(servicoAtribuido);
+                chatRepository.save(chat);
                 return ResponseEntity.status(200).build();
             }
             return ResponseEntity.status(400).build();
         }
         return ResponseEntity.status(404).build();
     }
+
+    @PatchMapping("/finalizar/{idServicoAttr}/{avaliacao}")
+    public ResponseEntity<Void> patchFinalizadoComAvaliacao(@PathVariable Integer idServicoAttr,
+                                                            @PathVariable Double avaliacao){
+        if (avaliacao < 0 || avaliacao >5)
+            return ResponseEntity.status(400).build();
+        Optional<ServicoAtribuido> servicoAtribuidoOptional = servicoAtribuidoRepository.findById(idServicoAttr);
+        if (servicoAtribuidoOptional.isPresent()){
+            ServicoAtribuido servicoAtribuido = servicoAtribuidoOptional.get();
+            if (!servicoAtribuido.isFinalizado()){
+                servicoAtribuido.setFinalizado(true);
+                servicoAtribuido.setHoraFim(LocalDateTime.now());
+                servicoAtribuido.setStatus("Finalizado");
+                servicoAtribuido.setAvaliacao(avaliacao);
+                Chat chat = chatRepository.findByServicoAtribuido_Id(idServicoAttr);
+                chat.setFinalizado(true);
+                servicoAtribuidoRepository.save(servicoAtribuido);
+                chatRepository.save(chat);
+                return ResponseEntity.status(200).build();
+            }
+            return ResponseEntity.status(400).build();
+        }
+        return ResponseEntity.status(404).build();
+    }
+
 
 }
