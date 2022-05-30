@@ -12,7 +12,7 @@ public class Agenda {
 
     @OneToOne
     Prestador prestador;
-    
+
     public Agenda(Prestador prestador) {
         this.prestador = prestador;
     }

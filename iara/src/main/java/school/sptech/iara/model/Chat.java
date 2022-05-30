@@ -3,7 +3,6 @@ package school.sptech.iara.model;
 import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name="Chat",  uniqueConstraints={
@@ -20,12 +19,15 @@ public class Chat {
 
     private Boolean finalizado;
 
+    public Chat() {
+    }
+
     //Constructor
     public Chat(ServicoAtribuido servicoAtribuido) {
         this.servicoAtribuido = servicoAtribuido;
         finalizado = false;
     }
-    public Chat(){}
+
 
     // Getter and Setter
     public Boolean getFinalizado() {

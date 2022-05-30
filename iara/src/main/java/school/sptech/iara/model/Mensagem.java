@@ -30,7 +30,12 @@ public class Mensagem {
     @ManyToOne
     private Chat chat;
 
+<<<<<<< HEAD
     private Boolean enviadoPeloPrestador;
+=======
+    public Mensagem() {
+    }
+>>>>>>> ca3b2adbb0d10a492609de20468085b2bb3c4abd
 
     //constructor
     public Mensagem(Prestador prestador, Cliente cliente,String mensagem, Chat chat, Boolean enviadoPeloPrestador) {
