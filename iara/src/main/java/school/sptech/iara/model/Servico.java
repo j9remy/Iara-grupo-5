@@ -79,7 +79,9 @@ public class Servico {
     public void setDuracaoEstimada(Double duracaoEstimada) {
         this.duracaoEstimada = duracaoEstimada;
     }
-
+    public int getId() {
+        return id;
+    }
     //    Methods
     //Retorna a quantidade de serviços atribuidos a este serviço
 //    public int getQtdServicosAtribuidos(){

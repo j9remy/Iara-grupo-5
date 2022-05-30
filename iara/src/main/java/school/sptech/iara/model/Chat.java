@@ -1,16 +1,21 @@
 package school.sptech.iara.model;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name="Chat",  uniqueConstraints={
+        @UniqueConstraint(columnNames={"id"})
+})
 public class Chat {
     //Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne
+    @ManyToOne
     private ServicoAtribuido servicoAtribuido;
 
     private Boolean finalizado;
@@ -31,6 +36,21 @@ public class Chat {
         this.finalizado = finalizado;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public ServicoAtribuido getServicoAtribuido() {
+        return servicoAtribuido;
+    }
+
+    public void setServicoAtribuido(ServicoAtribuido servicoAtribuido) {
+        this.servicoAtribuido = servicoAtribuido;
+    }
 
     //Methods
     public void finalizar(){
