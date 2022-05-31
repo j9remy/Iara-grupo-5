@@ -26,6 +26,8 @@ public class PrestadorTest {
         String telefone = String.valueOf(faker.phoneNumber());
         String resumo = faker.lorem().paragraph(4);
         Boolean atendeDomicilio = faker.random().nextBoolean();
+        Boolean atendeEstabelecimento = faker.random().nextBoolean();
+        Double distancia = faker.random().nextDouble();
 
         long offset = Timestamp.valueOf("2012-01-01 00:00:00").getTime();
         long end = Timestamp.valueOf("2013-01-01 00:00:00").getTime();
@@ -33,7 +35,7 @@ public class PrestadorTest {
         Timestamp dataNasc = new Timestamp(offset + (long)(Math.random() * diff));
 
         Prestador user = new Prestador(nome, sobrenome, cpf, dataNasc, email, senha, sexo, telefone,resumo,
-            atendeDomicilio);
+            atendeDomicilio,atendeEstabelecimento, distancia);
 
         String [] credenciais = new String[] {email,senha};
 
@@ -59,6 +61,8 @@ public class PrestadorTest {
         String telefone = String.valueOf(faker.phoneNumber());
         String resumo = faker.lorem().paragraph(4);
         Boolean atendeDomicilio = faker.random().nextBoolean();
+        Boolean atendeEstabelecimento = faker.random().nextBoolean();
+        Double distancia = faker.random().nextDouble();
 
         long offset = Timestamp.valueOf("2012-01-01 00:00:00").getTime();
         long end = Timestamp.valueOf("2013-01-01 00:00:00").getTime();
@@ -66,7 +70,7 @@ public class PrestadorTest {
         Timestamp dataNasc = new Timestamp(offset + (long)(Math.random() * diff));
 
         Prestador user = new Prestador(nome, sobrenome, cpf, dataNasc, email, senha, sexo, telefone,resumo,
-            atendeDomicilio);
+            atendeDomicilio,atendeEstabelecimento,distancia);
 
         String [] credenciais = new String[] {faker.internet().emailAddress(),faker.lorem().word()};
 

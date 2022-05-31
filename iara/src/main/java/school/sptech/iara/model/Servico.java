@@ -1,5 +1,6 @@
 package school.sptech.iara.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;

@@ -17,6 +17,11 @@ public class Prestador extends Usuario{
     @NotNull
     private Boolean atendeDomicilio;
 
+    @NotNull
+    private Boolean atendeEstabelecimento;
+
+    private Double distancia;
+
     @OneToMany
     private List<Habilidade> habilidades;
 
@@ -32,10 +37,14 @@ public class Prestador extends Usuario{
                      String email, String senha,
                      char genero, String telefone,
                      String resumo,
-                     Boolean atendeDomicilio) {
+                     Boolean atendeDomicilio,
+                     Boolean atendeEstabelecimento,
+                     Double distancia) {
         super(nome, sobrenome, cpf, dataNasc, email, senha, genero, telefone);
         this.resumo = resumo;
         this.atendeDomicilio = atendeDomicilio;
+        this.atendeEstabelecimento = atendeEstabelecimento;
+        this.distancia = distancia;
         habilidades = new ArrayList<>();
         servicos = new ArrayList<>();
     }
@@ -44,9 +53,13 @@ public class Prestador extends Usuario{
                      String cpf, Timestamp dataNasc,
                      String email, String senha, char genero,
                      String telefone,
-                     Boolean atendeDomicilio) {
+                     Boolean atendeDomicilio,
+                     Boolean atendeEstabelecimento,
+                     Double distancia) {
         super(nome, sobrenome, cpf, dataNasc, email, senha, genero, telefone);
         this.atendeDomicilio = atendeDomicilio;
+        this.atendeEstabelecimento = atendeEstabelecimento;
+        this.distancia = distancia;
         habilidades = new ArrayList<>();
 //        servicos = new ArrayList<>();
     }
@@ -64,9 +77,20 @@ public class Prestador extends Usuario{
     public void setAtendeDomicilio(Boolean atendeDomicilio) {
         this.atendeDomicilio = atendeDomicilio;
     }
-
     public List<Habilidade> getHabilidades() {
         return habilidades;
+    }
+    public Boolean getAtendeEstabelecimento() {
+        return atendeEstabelecimento;
+    }
+    public void setAtendeEstabelecimento(Boolean atendeEstabelecimento) {
+        this.atendeEstabelecimento = atendeEstabelecimento;
+    }
+    public Double getDistancia() {
+        return distancia;
+    }
+    public void setDistancia(Double distancia) {
+        this.distancia = distancia;
     }
 
     //    Methods

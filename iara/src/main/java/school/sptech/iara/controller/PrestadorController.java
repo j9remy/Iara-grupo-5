@@ -167,7 +167,7 @@ public class PrestadorController {
     }
 
     @GetMapping("/registro/{nomeArq}")
-    public ResponseEntity<Void> postRegistro(@PathVariable String nomeArq) {
+    public ResponseEntity<Void> getRegistro(@PathVariable String nomeArq) {
         List<Prestador> lista = repository.findAll();
         GravaArquivo gravaArq = new GravaArquivo();
         int contaRegCorpo = 0;
@@ -192,6 +192,8 @@ public class PrestadorController {
             corpo += String.format("%-15.15s", p.getTelefone());
             corpo += String.format("%140.140s", p.getResumo());
             corpo += String.format("%-5.5s", p.getAtendeDomicilio());
+            corpo += String.format("%-5.5s", p.getAtendeEstabelecimento());
+            corpo += String.format("%4.2f", p.getDistancia());
             contaRegCorpo++;
             gravaArq.gravaRegistro(corpo, nomeArq);
         }
@@ -205,13 +207,14 @@ public class PrestadorController {
     }
 
     @PostMapping("/registro/{nomeArq}")
-    public ResponseEntity<Void> getRegistro(String nomeArq) {
+    public ResponseEntity<Void> postRegistro(String nomeArq) {
         BufferedReader entrada = null;
         String registro, tipoRegistro;
         String nome, sobrenome, cpf, email, senha, telefone, resumo;
         Timestamp dataNasc;
+        Double distancia;
         char sexo;
-        boolean atendeDomicilio;
+        boolean atendeDomicilio, atendeEstabelecimento;
         int contaRegCorpoLido = 0;
         int qtdRegCorpoGravado;
 
@@ -263,6 +266,8 @@ public class PrestadorController {
                         telefone = registro.substring(178, 191).trim();
                         resumo = registro.substring(192, 391).trim();
                         atendeDomicilio = Boolean.parseBoolean(registro.substring(392, 393).trim());
+                        atendeEstabelecimento = Boolean.parseBoolean(registro.substring(394, 395).trim());
+                        distancia = Double.parseDouble(registro.substring(396, 400).trim());
                         contaRegCorpoLido++;
 
                         Prestador p = new Prestador(nome,
@@ -274,7 +279,10 @@ public class PrestadorController {
                                 sexo,
                                 telefone,
                                 resumo,
-                                atendeDomicilio);
+                                atendeDomicilio,
+                                atendeEstabelecimento,
+                                distancia
+                                );
 
                         // No projeto de PI, poderia fazer:
                         // repository.save(a);
@@ -320,6 +328,8 @@ public class PrestadorController {
                     ";" + prestador.getTelefone() +
                     ";" + prestador.getResumo() +
                     ";" + prestador.getAtendeDomicilio() +
+                    ";" + prestador.getAtendeEstabelecimento() +
+                    ";" + prestador.getDistancia() +
                     "\r\n";
         }
         return ResponseEntity

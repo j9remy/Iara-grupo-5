@@ -31,6 +31,9 @@ public class PrestadorUpdateRequest {
     @NotNull
     private Boolean atendeDomicilio;
     private String resumo;
+    @NotNull
+    private Boolean atendeEstabelecimento;
+    private Double distancia;
 
 
     public Integer getId() {
@@ -86,5 +89,17 @@ public class PrestadorUpdateRequest {
     }
     public void setResumo(String resumo) {
         this.resumo = resumo;
+    }
+    public Boolean getAtendeEstabelecimento() {
+        return atendeEstabelecimento;
+    }
+    public void setAtendeEstabelecimento(Boolean atendeEstabelecimento) {
+        this.atendeEstabelecimento = atendeEstabelecimento;
+    }
+    public Double getDistancia() {
+        return distancia;
+    }
+    public void setDistancia(Double distancia) {
+        this.distancia = distancia;
     }
 }
