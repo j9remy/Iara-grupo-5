@@ -19,7 +19,7 @@ function EscolhaCadastro() {
                         </a>
                     </div>
                     <div class="txt-white dflex acenter jcenter login">
-                        Já possui cadastro? <a class="txt-white transform" href="login.html"><u><b>Entre aqui</b></u></a>
+                        Já possui cadastro? <Link class="txt-white transform" to="/login"><u><b>Entre aqui</b></u></Link>
                     </div>
                 </div>
             </div>
