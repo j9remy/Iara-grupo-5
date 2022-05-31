@@ -11,7 +11,7 @@ function EscolhaCadastro() {
                         <img class="logo transform" src={logo} />
                     </a>
                     <div class="buttons">
-                        <Link to="/CadastroCliente" class="button big bg-white txt-black bg-hover-dark-red txt-hover-white">
+                        <Link to="/cadastro-cliente" class="button big bg-white txt-black bg-hover-dark-red txt-hover-white">
                             Cadastrar-se como cliente
                         </Link>
                         <a href="" class="button big bg-white txt-black bg-hover-dark-red txt-hover-white">

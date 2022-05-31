@@ -3,12 +3,10 @@ package school.sptech.iara.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import school.sptech.iara.model.Agenda;
 import school.sptech.iara.model.Endereco;
 import school.sptech.iara.model.Prestador;
-import school.sptech.iara.repository.EnderecoRepository;
-import school.sptech.iara.repository.HabilidadeRepository;
-import school.sptech.iara.repository.PrestadorRepository;
-import school.sptech.iara.repository.ServicoRepository;
+import school.sptech.iara.repository.*;
 import school.sptech.iara.request.EnderecoSimplesRequest;
 import school.sptech.iara.request.PrestadorUpdateRequest;
 import school.sptech.iara.request.UsuarioEmailSenhaRequest;
@@ -35,6 +33,8 @@ public class PrestadorController {
     private HabilidadeRepository habilidadeRepository;
     @Autowired
     private ServicoRepository servicoRepository;
+    @Autowired
+    private AgendaRepository agendaRepository;
     @Autowired
     private EnderecoRepository enderecoRepository;
 
@@ -69,6 +69,8 @@ public class PrestadorController {
 
         if (prestadoresInvalidos.isEmpty()){
             repository.save(prestador);
+            Agenda agenda = new Agenda(prestador);
+            agendaRepository.save(agenda);
             return ResponseEntity.status(201).build();
         }
         return ResponseEntity.status(400).build();

@@ -6,8 +6,8 @@ function Rotas(){
     return(
         <BrowserRouter>
             <Routes>
-                <Route path="/escolhaCadastro" element={<EscolhaCadastro/>}/>
-                <Route path="/cadastroCliente" element={<CadastroCliente/>}/>
+                <Route path="/escolha-cadastro" element={<EscolhaCadastro/>}/>
+                <Route path="/cadastro-cliente" element={<CadastroCliente/>}/>
             </Routes>
         </BrowserRouter>
 

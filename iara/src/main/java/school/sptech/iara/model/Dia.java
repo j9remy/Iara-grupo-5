@@ -6,6 +6,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 public class Dia {
@@ -22,31 +23,34 @@ public class Dia {
     @Size(max = 20)
     private String nomeDia;
     @NotNull
-    private LocalDate horarioInicial;
+    private LocalTime horarioInicial;
     @NotNull
-    private LocalDate horarioFinal;
-    private LocalDate inicioIntervalo;
-    private Double duracaoIntervalo;
+    private LocalTime horarioFinal;
+    private LocalTime inicioIntervalo;
+    private LocalTime finalIntervalo;
 
     @ManyToOne
     private Semana semana;
 
-    public Dia(Integer codigoDia, LocalDate horarioInicial, LocalDate horarioFinal) {
+    public Dia(Integer codigoDia, LocalTime horarioInicial, LocalTime horarioFinal, Semana semana) {
         this.codigoDia = codigoDia;
         this.horarioInicial = horarioInicial;
         this.horarioFinal = horarioFinal;
+        this.semana = semana;
         atribuicaoDia(codigoDia);
     }
 
     public Dia() {
     }
 
-    public Dia(Integer codigoDia, LocalDate horarioInicial, LocalDate horarioFinal, LocalDate inicioIntervalo, Double duracaoIntervalo) {
+    public Dia(Integer codigoDia, LocalTime horarioInicial, LocalTime horarioFinal,
+               LocalTime inicioIntervalo, LocalTime finalIntervalo, Semana semana) {
         this.codigoDia = codigoDia;
         this.horarioInicial = horarioInicial;
         this.horarioFinal = horarioFinal;
         this.inicioIntervalo = inicioIntervalo;
-        this.duracaoIntervalo = duracaoIntervalo;
+        this.finalIntervalo = finalIntervalo;
+        this.semana = semana;
         atribuicaoDia(codigoDia);
     }
 
@@ -111,35 +115,47 @@ public class Dia {
         this.nomeDia = nomeDia;
     }
 
-    public LocalDate getHorarioInicial() {
+    public Integer getId() {
+        return id;
+    }
+
+    public LocalTime getHorarioInicial() {
         return horarioInicial;
     }
 
-    public void setHorarioInicial(LocalDate horarioInicial) {
+    public void setHorarioInicial(LocalTime horarioInicial) {
         this.horarioInicial = horarioInicial;
     }
 
-    public LocalDate getHorarioFinal() {
+    public LocalTime getHorarioFinal() {
         return horarioFinal;
     }
 
-    public void setHorarioFinal(LocalDate horarioFinal) {
+    public void setHorarioFinal(LocalTime horarioFinal) {
         this.horarioFinal = horarioFinal;
     }
 
-    public LocalDate getInicioIntervalo() {
+    public LocalTime getInicioIntervalo() {
         return inicioIntervalo;
     }
 
-    public void setInicioIntervalo(LocalDate inicioIntervalo) {
+    public void setInicioIntervalo(LocalTime inicioIntervalo) {
         this.inicioIntervalo = inicioIntervalo;
     }
 
-    public Double getDuracaoIntervalo() {
-        return duracaoIntervalo;
+    public LocalTime getFinalIntervalo() {
+        return finalIntervalo;
     }
 
-    public void setDuracaoIntervalo(Double duracaoIntervalo) {
-        this.duracaoIntervalo = duracaoIntervalo;
+    public void setFinalIntervalo(LocalTime finalIntervalo) {
+        this.finalIntervalo = finalIntervalo;
+    }
+
+    public Semana getSemana() {
+        return semana;
+    }
+
+    public void setSemana(Semana semana) {
+        this.semana = semana;
     }
 }

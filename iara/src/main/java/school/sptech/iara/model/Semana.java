@@ -2,8 +2,7 @@ package school.sptech.iara.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
 @Entity
 public class Semana {
@@ -17,9 +16,10 @@ public class Semana {
     @ManyToOne
     private Agenda agenda;
 
-    public Semana(LocalDate diaInicial, LocalDate diaFinal) {
+    public Semana(LocalDate diaInicial, LocalDate diaFinal, Agenda agenda) {
         this.diaInicial = diaInicial;
         this.diaFinal = diaFinal;
+        this.agenda = agenda;
     }
 
     public Semana() {
