@@ -382,7 +382,8 @@ h2 {
  }
  
  .input:focus ~ label, input:valid ~ label, .input:disabled ~ label {
-  transform: translateY(-29.5%) scale(0.8) translateX(-9px);
+  transform: translateY(-15%) translateX(1px);
+  font-size: 13.5px;
   background-color: rgb(171 2 41);
   padding: 0 0.1em;
   color: #fff;
