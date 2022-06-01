@@ -277,7 +277,7 @@ svg {
 
 .contato .conteudo{
   width: 100%;
-  max-width: 369px;
+  max-width: 381px;
   font-size: 58px;
   display: flex;
     align-content: center;
@@ -294,29 +294,38 @@ svg {
   display: block;
   width: fit-content;
   box-shadow: 0px 4px 4px #de0235;
-  margin-bottom: 18px;
+  margin-bottom: 45px;
+  border:solid 2px #fff;
   /*
   display: inline-block;
   */
 }
 
 .button.fale-conosco:hover{
-  transform: scale(1.02);
+  background-color: #AB0229;
   box-shadow: 0px 4px 14px 5px #de0235;
+  transition: all .4s;
+  cursor: pointer;
+  box-shadow: 0px 4px 14px 5px #de0235;
+  border:solid 2px #fff;
+  color: #fff;
 }
 
 i.fa-solid.fa-envelope-open-text {
     margin-right: 10px;
 }
 
-.input.mensagem{
+.input, .mensagem{
   resize: none;
   border: 2px solid transparent;
   border-radius: 10px;
   font-size: 17px;
   transition: all .4s;
-  width: 100%;
+  width: 99%;
   padding: 17px;
+  transition: border 150ms cubic-bezier(0.4,0,0.2,1);
+  border-radius: 10px;
+  border: 2px solid transparent;
 }
 
 #form-contato {
@@ -328,24 +337,29 @@ i.fa-solid.fa-envelope-open-text {
 
 .button.enviar-mensagem{
   background-color: #FFF;
-  font-size: 17px;
-  font-weight: bold;
-  border-radius: 10px;
-  padding: 0 23px;
-  color: #000;
-  box-shadow: 0px 4px 4px #de0235;
-  border: 1px solid transparent;
-  margin-left: 17px;
-  transition: all .4s;
-  margin: 0;
-  height: 45px;
+    font-size: 17px;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 0 21px;
+    color: #000;
+    box-shadow: 0px 4px 4px #de0235;
+    border: 2px solid transparent;
+    margin-left: 17px;
+    transition: all .4s;
+    margin: 0;
+    margin-top: 2px;
+    height: 45px;
+    margin-right: 2px;
 }
 
 .button.enviar-mensagem:hover{
-  transform: scale(1.05);
+  background-color: #AB0229;
   box-shadow: 0px 4px 14px 5px #de0235;
   transition: all .4s;
   cursor: pointer;
+  box-shadow: 0px 4px 14px 5px #de0235;
+  border:solid 2px #fff;
+  color: #fff;
 }
 
 .icones {
@@ -390,10 +404,6 @@ i.fa-solid.fa-envelope-open-text {
   background: #AB0229;
 }
 
-.input.email:focus, .input.email.focus, .input.mensagem:focus{
-      outline: none !important;
-      box-shadow: 0px 4px 14px 5px #de0235;
-}
 
 
 .balao{
@@ -436,58 +446,62 @@ i.fa-solid.fa-envelope-open-text {
 
 
 
-.user-input-wrp {
-	position: relative;
-	width: calc(100% - 130px);
-  display: flex;
-}
-.user-input-wrp.total {
-	width: 100%;
-}
-.user-input-wrp .input{
-	outline: none;
-	border:none;
-	border-radius: 9px;
-  padding: 4px 12px;
-  width: 100%;
+.input-group {
+  position: relative;
+  margin-top: -22px;
+ }
+ 
+ .input {
+  background: #fff;
+  font-size: 17px;
   color: #fff;
+  transition: border 150ms cubic-bezier(0.4,0,0.2,1);
+  border-radius: 10px;
   border: 2px solid transparent;
+  height: 45px;
+  margin-top: 5px;
+  box-shadow: 0px 5px 4px 0px #de0235;
+  padding: 0 10px;
+  width: 100%;
   transition: all .4s;
-}
-.user-input-wrp input.input {
-	height: 45px;
-}
-.user-input-wrp .floating-label {
-	position: absolute;
-	pointer-events: none;
-	top: 12px;
-	left: 12px;
-	transition: 0.2s ease all;
-	font-size: 17px;
-}
-.user-input-wrp .input:focus ~ .floating-label, .user-input-wrp .input.focus ~ .floating-label,
-.user-input-wrp .input:not(:focus):valid ~ .floating-label, .user-input-wrp .input:not(.focus):valid ~ .floating-label {
-	top: 19px;
-	left: 8px;
-	font-size: 13px;
-	opacity: 1;
-	font-weight: bold;
-	color: #1e0d14;
-}
-
-.user-input-wrp .input:focus, .user-input-wrp .input.focus, .input.mensagem:focus {
-  border: 2px solid #fff;
-  background-color: #ab0229;
-	box-shadow: 0px 4px 14px 5px #de0235;
-}
-
-.user-input-wrp .input:focus ~ .floating-label, .user-input-wrp .input.focus ~ .floating-label,
-.user-input-wrp .input:not(:focus):valid ~ .floating-label, .user-input-wrp .input:not(.focus):valid ~ .floating-label {
-  top: -7px;
+ }
+ 
+ .user-label {
+  position: absolute;
+  left: 15px;
+  color: #000;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: 150ms cubic-bezier(0.4,0,0.2,1);
+  font-size: 17px;
+ }
+ 
+ .input:focus, input:valid, .input:disabled, .mensagem:focus, .mensagem:valid {
+  outline: none;
+  background-color: rgb(171, 2, 41);
+  box-shadow: rgb(222, 2, 53) 0px 4px 14px 5px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: rgb(255, 255, 255);
+ }
+ 
+ .input:focus ~ label, input:valid ~ label, .input:disabled ~ label,
+ .mensagem:focus ~ label, .mensagem:valid ~ label {
+  background-color: rgb(171 2 41);
+  padding: 0 0.1em;
   color: #fff;
-  background: #af0229;
-}
+  letter-spacing: 0.5px;
+  font-weight: bold;
+ } 
 
-#form-contato > div:first-child {
-  margin-bottom: 20px;
-}
+ .email {
+  transform: translateY(38px);
+ }
+
+ .input-email:focus ~ label, .input-email:valid ~ label {
+  transform: translateY(79.5%) scale(0.8) translateX(-9px)!important;
+ }
+
+ .mensagem:focus ~ label, .mensagem:valid ~ label {
+  transform: translateY(-47.5%) scale(0.8) translateX(-9px);
+ }
