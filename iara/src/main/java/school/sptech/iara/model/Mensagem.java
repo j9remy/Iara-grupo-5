@@ -30,13 +30,10 @@ public class Mensagem {
     @ManyToOne
     private Chat chat;
 
-<<<<<<< HEAD
-    private Boolean enviadoPeloPrestador;
-=======
-
     private Boolean enviadoPeloPrestador;
 
->>>>>>> c65021b (Testes unitarios)
+
+
 
     //constructor
     public Mensagem(Prestador prestador, Cliente cliente,String mensagem, Chat chat, Boolean enviadoPeloPrestador) {
