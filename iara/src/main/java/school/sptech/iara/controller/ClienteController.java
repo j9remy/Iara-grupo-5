@@ -1,5 +1,7 @@
 package school.sptech.iara.controller;
 
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -178,13 +180,20 @@ public class ClienteController {
     }
 
     @PatchMapping(value = "/foto/{idCliente}", consumes = "image/jpeg")
+//    @ApiResponses({
+//        @ApiResponse(responseCode = "204", description = "vazio"),
+//
+//    })
     public ResponseEntity<Void> patchFoto(@PathVariable Integer idCliente,
                                     @RequestBody byte[] novaFoto) {
-        if (!repository.existsById(idCliente)) {
-            return ResponseEntity.status(404).build();
+        Optional<Cliente> clienteOptional = repository.findById(idCliente);
+        if (clienteOptional.isPresent()) {
+            Cliente cliente = clienteOptional.get();
+            cliente.setFoto(novaFoto);
+            repository.save(cliente);
+            return ResponseEntity.status(200).build();
         }
-        repository.atualizarFoto(idCliente, novaFoto);
-        return ResponseEntity.status(200).build();
+            return ResponseEntity.status(404).build();
     }
 
     @GetMapping("/registro/{nomeArq}")

@@ -1,5 +1,6 @@
 package school.sptech.iara.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.br.CPF;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,8 +19,8 @@ public abstract class Usuario implements Avaliavel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @Size(max = 50_000_000)
+    @JsonIgnore
+    @Column(length = 50_000_000)
     private byte[] foto;
 
     @NotNull

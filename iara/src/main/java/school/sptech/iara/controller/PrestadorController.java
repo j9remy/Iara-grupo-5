@@ -1,5 +1,7 @@
 package school.sptech.iara.controller;
 
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +43,10 @@ public class PrestadorController {
 
     // retorna todos registros de prestadores
     @GetMapping
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK, retorna uma lista de prestadores"),
+            @ApiResponse(responseCode = "204", description = "A lista de prestadores está vazia")
+    })
     public ResponseEntity<List<Prestador>> getListaPrestadores(){
         List<Prestador> prestadores = repository.findAll();
         if (!prestadores.isEmpty()){
@@ -51,6 +57,10 @@ public class PrestadorController {
 
     // retorna usuário pelo index
     @GetMapping("/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Retorna prestador com o id procurado"),
+            @ApiResponse(responseCode = "404", description = "Prestador não encontrado")
+    })
     public ResponseEntity<Prestador> getPrestadorPorId(@PathVariable Integer id){
         Optional<Prestador> prestadorOptional = repository.findById(id);
         if (prestadorOptional.isPresent()){
@@ -62,6 +72,10 @@ public class PrestadorController {
 
     //cadastro de prestador
     @PostMapping
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Prestador cadastrado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Prestador já existe ou possui dados inválidos")
+    })
     public ResponseEntity<Void> postCadastrarPrestador(@RequestBody Prestador prestador){
         List<Prestador> prestadoresInvalidos = repository.validarCadastro(
                 prestador.getEmail(), prestador.getCpf(), prestador.getTelefone()
@@ -78,6 +92,10 @@ public class PrestadorController {
 
     //Autenticar usuário
     @PostMapping("/autenticacao")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Prestador autenticado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Prestador não encontrado")
+    })
     public ResponseEntity<Void> postAutenticarPrestador(@RequestBody @Valid UsuarioEmailSenhaRequest req){
         Optional<Prestador> prestadorOptional = repository.findByEmailAndSenha(req.getEmail(), req.getSenha());
         if (prestadorOptional.isPresent()){
@@ -91,6 +109,10 @@ public class PrestadorController {
 
     //    desautenticar usuário
     @DeleteMapping("/autenticacao")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Prestador desautenticado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Prestador não encontrado")
+    })
     public ResponseEntity<Void> deleteLogoffPrestador(@RequestBody @Valid UsuarioEmailSenhaRequest req){
         Optional<Prestador> prestadorOptional = repository.findByEmailAndSenha(req.getEmail(), req.getSenha());
         if (prestadorOptional.isPresent()){
@@ -103,6 +125,12 @@ public class PrestadorController {
     }
 
     @PutMapping
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Prestador atualizado com sucesso"),
+            @ApiResponse(responseCode = "206", description = "Prestador atualizado com sucesso, com a exceção do " +
+                    "campo telefone, pois esse número já está cadastrado"),
+            @ApiResponse(responseCode = "404", description = "Prestador não encontrado")
+    })
     public ResponseEntity<Void> putPrestador(@RequestBody @Valid PrestadorUpdateRequest req){
         Optional<Prestador> prestadorOptional = repository.findById(req.getId());
         if(prestadorOptional.isPresent()){
@@ -131,6 +159,10 @@ public class PrestadorController {
     }
 
     @PostMapping("/endereco/{idPrestador}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Endereço cadastrado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Endereço já existe")
+    })
     public ResponseEntity<Void> postEnderecoCliente(@PathVariable Integer idPrestador,
                                               @RequestBody EnderecoSimplesRequest enderecoRequest){
         List<Endereco> enderecos = enderecoRepository.enderecoValido(enderecoRequest.getCep(),
@@ -148,6 +180,10 @@ public class PrestadorController {
     }
 
     @GetMapping(value = "/foto/{idPrestador}", produces = "image/jpeg")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "404", description = "Foto inválida"),
+            @ApiResponse(responseCode = "200", description = "Retorna a foto do usuário solicitado")
+    })
     public ResponseEntity<byte[]> getFoto(@PathVariable Integer idPrestador) {
         byte[] foto = repository.getFoto(idPrestador);
         if (foto == null) {
@@ -157,6 +193,10 @@ public class PrestadorController {
     }
 
     @PatchMapping(value = "/foto/{idPrestador}", consumes = "image/jpeg")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "404", description = "Prestador não encontrado"),
+            @ApiResponse(responseCode = "200", description = "Foto atualizada com sucesso")
+    })
     public ResponseEntity patchFoto(@PathVariable Integer idPrestador,
                                     @RequestBody byte[] novaFoto) {
         if (!repository.existsById(idPrestador)) {

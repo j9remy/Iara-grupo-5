@@ -15,13 +15,13 @@ import java.util.Optional;
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
     Optional<Cliente> findByEmailAndSenha(String email, String senha);
 
-    @Query("SELECT c FROM Cliente c WHERE email = ?1 OR cpf = ?2 OR telefone = ?3")
+    @Query("SELECT c FROM Cliente c WHERE c.email = ?1 OR c.cpf = ?2 OR c.telefone = ?3")
     List<Cliente> validarCadastro(String email, String cpf, String telefone);
 
-    @Query("UPDATE Cliente a SET a.foto = ?2 WHERE a.id = ?1")
+    /*@Query("UPDATE Cliente a SET a.foto = ?2 WHERE a.id = ?1")
     @Modifying
     @Transactional
-    void atualizarFoto(Integer idCliente, byte[] novaFoto);
+    void atualizarFoto(Integer idCliente, byte[] novaFoto);*/
 
     @Query("SELECT a.foto FROM Cliente a WHERE a.id = ?1")
     byte[] getFoto(Integer idCliente);
