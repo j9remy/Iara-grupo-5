@@ -23,76 +23,76 @@
             </a>
             <h2>Dados Pessoais</h2>
             <div class="card bg-dark-red dflex jbetween fwrap">
-                <div class="user-input-wrp width-4">
-                    <input type="text" class="input" id="input-nome" onkeyup="verificaConteudo(this)" required/>
-                    <span class="floating-label">Nome</span>
+                <div class="user-input-wrp width-4 input-group">
+                    <input type="text" class="input" id="input-nome" required/>
+                    <label class="user-label">Nome</label>
                 </div>
-                <div class="user-input-wrp width-4">
-                    <input type="text" class="input" id="input-sobrenome" onkeyup="verificaConteudo(this)" required/>
-                    <span class="floating-label">Sobrenome</span>
+                <div class="user-input-wrp width-4 input-group">
+                    <input type="text" class="input" id="input-sobrenome" required/>
+                    <label class="user-label">Sobrenome</label>
                 </div>
-                <div class="user-input-wrp width-4">
-                    <input type="text" class="input" id="input-genero" onkeyup="verificaConteudo(this)" required/>
-                    <span class="floating-label">Gênero</span>
+                <div class="user-input-wrp width-4 input-group">
+                    <input type="text" class="input" id="input-genero" required/>
+                    <label class="user-label">Gênero</label>
                 </div>
-                <div class="user-input-wrp width-4">
-                    <input type="text" class="input" id="input-nascimento" onkeyup="verificaConteudo(this)" onkeypress="$(this).mask('00/00/0000')" required/>
-                    <span class="floating-label">Data de Nascimento</span>
+                <div class="user-input-wrp width-4 input-group">
+                    <input type="text" class="input" id="input-nascimento" onkeypress="$(this).mask('00/00/0000')" required/>
+                    <label class="user-label">Data de Nascimento</label>
                 </div>
-                <div class="user-input-wrp width-4">
-                    <input type="text" class="input" id="input-cpf" onkeyup="verificaConteudo(this)" onkeypress="$(this).mask('000.000.000-00')" required/>
-                    <span class="floating-label">CPF</span>
+                <div class="user-input-wrp width-4 input-group">
+                    <input type="text" class="input" id="input-cpf" onkeypress="$(this).mask('000.000.000-00')" required/>
+                    <label class="user-label">CPF</label>
                 </div>
-                <div class="user-input-wrp width-4">
-                    <input type="text" class="input" id="input-telefone" onkeyup="verificaConteudo(this)" onkeypress="$(this).mask('(00) 00000-0000')" required/>
-                    <span class="floating-label">Telefone</span>
+                <div class="user-input-wrp width-4 input-group">
+                    <input type="text" class="input" id="input-telefone" onkeypress="$(this).mask('(00) 00000-0000')" required/>
+                    <label class="user-label">Telefone</label>
                 </div>
             </div>
             <h2>Endereço</h2>
             <div class="card bg-dark-red dflex jbetween fwrap">
-                <div class="user-input-wrp width-4">
-                    <input type="text" class="input" id="input-cep" onkeyup="verificaConteudo(this)" onkeypress="$(this).mask('00000-000')" onblur="pesquisacep(this.value);" required/>
-                    <span class="floating-label">CEP</span>
+                <div class="user-input-wrp width-4 input-group">
+                    <input type="text" class="input" id="input-cep" onkeypress="$(this).mask('00000-000')" onblur="pesquisacep(this.value);" required/>
+                    <label class="user-label">CEP</label>
                 </div>
                 <div class="width-8"></div>
-                <div class="user-input-wrp width-5">
-                    <input type="text" class="input" id="input-logradouro" onkeyup="verificaConteudo(this)" required/>
-                    <span class="floating-label">Logradouro</span>
+                <div class="user-input-wrp width-5 input-group">
+                    <input type="text" class="input" id="input-logradouro" required/>
+                    <label class="user-label">Logradouro</label>
                 </div>
-                <div class="user-input-wrp width-2">
-                    <input type="text" class="input" id="input-numero" onkeyup="verificaConteudo(this)" required/>
-                    <span class="floating-label">Número</span>
+                <div class="user-input-wrp width-2 input-group">
+                    <input type="text" class="input" id="input-numero" required/>
+                    <label class="user-label">Número</label>
                 </div>
-                <div class="user-input-wrp width-5">
-                    <input type="text" class="input" id="input-complemento" onkeyup="verificaConteudo(this)" required/>
-                    <span class="floating-label">Complemento</span>
+                <div class="user-input-wrp width-5 input-group">
+                    <input type="text" class="input" id="input-complemento" required/>
+                    <label class="user-label">Complemento</label>
                 </div>
-                <div class="user-input-wrp width-5">
-                    <input type="text" class="input" id="input-bairro" onkeyup="verificaConteudo(this)" required/>
-                    <span class="floating-label">Bairro</span>
+                <div class="user-input-wrp width-5 input-group">
+                    <input type="text" class="input" id="input-bairro" required/>
+                    <label class="user-label">Bairro</label>
                 </div>
-                <div class="user-input-wrp width-5">
-                    <input type="text" class="input" id="input-cidade" onkeyup="verificaConteudo(this)" required/>
-                    <span class="floating-label">Cidade</span>
+                <div class="user-input-wrp width-5 input-group">
+                    <input type="text" class="input" id="input-cidade" required/>
+                    <label class="user-label">Cidade</label>
                 </div>
-                <div class="user-input-wrp width-2">
-                    <input type="text" class="input" id="input-uf" onkeyup="verificaConteudo(this)" maxlength="2" oninput="this.value = this.value.toUpperCase()" required/>
-                    <span class="floating-label">UF</span>
+                <div class="user-input-wrp width-2 input-group">
+                    <input type="text" class="input" id="input-uf" maxlength="2" oninput="this.value = this.value.toUpperCase()" required/>
+                    <label class="user-label">UF</label>
                 </div>
             </div>
             <h2>Autenticação</h2>
             <div class="card bg-dark-red dflex jbetween fwrap">
-                <div class="user-input-wrp width-4">
-                    <input type="email" class="input" id="input-email" onkeyup="verificaConteudo(this)" required/>
-                    <span class="floating-label">E-mail</span>
+                <div class="user-input-wrp width-4 input-group">
+                    <input type="text" class="input" id="input-email" required/>
+                    <label class="user-label">E-mail</label>
                 </div>
-                <div class="user-input-wrp width-4">
-                    <input type="password" class="input" id="input-senha" onkeyup="verificaConteudo(this)" required/>
-                    <span class="floating-label">Senha</span>
+                <div class="user-input-wrp width-4 input-group">
+                    <input type="password" class="input" id="input-senha" required/>
+                    <label class="user-label">Senha</label>
                 </div>
-                <div class="user-input-wrp width-4">
-                    <input type="password" class="input" id="input-confirmar-senha" onkeyup="verificaConteudo(this)" required/>
-                    <span class="floating-label">Confirmar Senha</span>
+                <div class="user-input-wrp width-4 input-group">
+                    <input type="password" class="input" id="input-confirmar-senha" required/>
+                    <label class="user-label">Confirmar Senha</label>
                 </div>
             </div>
             <button type="submit" class="button bg-dark-red txt-white bg-hover-white txt-hover-dark-red align-right shadow-smooth">CADASTRAR</button>
@@ -119,19 +119,19 @@
         if (!("erro" in conteudo)) {
             if(conteudo.logradouro != ""){
                 logradouro.value=(conteudo.logradouro);
-                logradouro.disabled = true;
+                //logradouro.disabled = true;
             }
             if(conteudo.bairro != ""){
                 bairro.value=(conteudo.bairro);
-                bairro.disabled = true;    
+                //bairro.disabled = true;    
             }     
             if(conteudo.localidade != ""){   
                 cidade.value=(conteudo.localidade);       
-                cidade.disabled = true;  
+                //cidade.disabled = true;  
             }
             if(conteudo.uf != ""){    
                 uf.value=(conteudo.uf);
-                uf.disabled = true;  
+                //uf.disabled = true;  
             }
             //div_mens_cep.style.display='none'
         }
