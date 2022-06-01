@@ -391,4 +391,7 @@ h2 {
   font-weight: bold;
  }
 
+ .input:disabled {
+  filter: opacity(0.7);
+ }
 
