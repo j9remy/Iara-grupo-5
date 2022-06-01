@@ -27,6 +27,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/prestador")
+@CrossOrigin
 public class PrestadorController {
 
     @Autowired

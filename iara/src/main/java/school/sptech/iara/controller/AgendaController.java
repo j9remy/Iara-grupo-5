@@ -19,6 +19,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/agenda")
+@CrossOrigin
 public class AgendaController {
 
     @Autowired

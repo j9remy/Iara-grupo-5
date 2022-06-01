@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/chat")
+@CrossOrigin
 public class ChatController {
 
     @Autowired

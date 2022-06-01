@@ -32,6 +32,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/servico-atribuido")
+@CrossOrigin
 public class ServicoAtribuidoController {
 
     @Autowired

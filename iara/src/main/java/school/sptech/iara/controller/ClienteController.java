@@ -28,6 +28,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/cliente")
+@CrossOrigin
 public class ClienteController {
 
     @Autowired
