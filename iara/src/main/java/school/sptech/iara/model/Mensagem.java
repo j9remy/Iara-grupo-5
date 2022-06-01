@@ -32,6 +32,9 @@ public class Mensagem {
 
     private Boolean enviadoPeloPrestador;
 
+
+
+
     //constructor
     public Mensagem(Prestador prestador, Cliente cliente,String mensagem, Chat chat, Boolean enviadoPeloPrestador) {
         this.prestador = prestador;
@@ -42,6 +45,8 @@ public class Mensagem {
         dataHora = LocalDateTime.now();
         visualizado = false;
     }
+
+    //constructor
     public Mensagem(){}
 
     // Getter and Setter

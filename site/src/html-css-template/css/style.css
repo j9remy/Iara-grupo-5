@@ -386,3 +386,7 @@ h2 {
   transform-origin: bottom left;
  }
 
+ .cta:hover {
+  transform: scale(1.03);
+ }
+
