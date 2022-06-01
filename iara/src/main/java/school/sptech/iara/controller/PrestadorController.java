@@ -182,7 +182,7 @@ public class PrestadorController {
     @GetMapping(value = "/foto/{idPrestador}", produces = "image/jpeg")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "404", description = "Foto inválida"),
-            @ApiResponse(responseCode = "200", description = "Retorna a foto do usuário solicitado")
+            @ApiResponse(responseCode = "200", description = "Retorna a foto do prestador solicitado")
     })
     public ResponseEntity<byte[]> getFoto(@PathVariable Integer idPrestador) {
         byte[] foto = repository.getFoto(idPrestador);
@@ -207,6 +207,9 @@ public class PrestadorController {
     }
 
     @GetMapping("/registro/{nomeArq}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Arquivo gerado com sucesso")
+    })
     public ResponseEntity<Void> getRegistro(@PathVariable String nomeArq) {
         List<Prestador> lista = repository.findAll();
         GravaArquivo gravaArq = new GravaArquivo();
@@ -247,6 +250,10 @@ public class PrestadorController {
     }
 
     @PostMapping("/registro/{nomeArq}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Prestadores cadastrados com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Arquivo não encontrado")
+    })
     public ResponseEntity<Void> postRegistro(String nomeArq) {
         BufferedReader entrada = null;
         String registro, tipoRegistro;
@@ -355,6 +362,7 @@ public class PrestadorController {
     }
 
     @GetMapping("/relatorio")
+    @ApiResponse(responseCode = "200", description = "Arquivo gerado com sucesso")
     public ResponseEntity<String> getRelatorio() {
         String relatorio = "";
         List<Prestador> lista = repository.findAll();

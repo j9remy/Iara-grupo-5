@@ -1,6 +1,8 @@
 package school.sptech.iara.controller;
 
 import feign.FeignException;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +44,10 @@ public class ServicoAtribuidoController {
     private ChatRepository chatRepository;
 
     @GetMapping("/{idServico}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Retorna uma lista de serviços atribuídos"),
+            @ApiResponse(responseCode = "204", description = "Retorna uma lista vazia")
+    })
     public ResponseEntity<List<ServicoAtribuido>> getServicosAtribuidosPorServico(){
         List<ServicoAtribuido> servicosAtribuidos = servicoAtribuidoRepository.findAll();
         if (servicosAtribuidos.isEmpty())
@@ -50,6 +56,10 @@ public class ServicoAtribuidoController {
     }
 
     @PostMapping("/{idUser}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Serviço atribuído cadastrado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Serviço e/ou cliente não encontrados")
+    })
     public ResponseEntity<Void> postServicoAttrServico(@PathVariable Integer idUser,
                                                 @RequestBody ServicoAtribuidoRequest req){
         Optional<Servico> servicoOptional = servicoRepository.findById(req.getIdServico());
@@ -81,6 +91,11 @@ public class ServicoAtribuidoController {
     }
 
     @PatchMapping("/finalizar/{idServicoAttr}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Serviço atribuído finalizado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Serviço atribuído já está finalizado"),
+            @ApiResponse(responseCode = "404", description = "Serviço atribuído não encontrado")
+    })
     public ResponseEntity<Void> patchFinalizado(@PathVariable Integer idServicoAttr){
         Optional<ServicoAtribuido> servicoAtribuidoOptional = servicoAtribuidoRepository.findById(idServicoAttr);
         if (servicoAtribuidoOptional.isPresent()){
@@ -101,6 +116,13 @@ public class ServicoAtribuidoController {
     }
 
     @PatchMapping("/finalizar/{idServicoAttr}/{avaliacao}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Serviço atribuído finalizado com sucesso e nota atribuída" +
+                    " com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Serviço atribuído já está finalizado ou a nota inserida" +
+                    " é inválida"),
+            @ApiResponse(responseCode = "404", description = "Serviço atribuído não encontrado")
+    })
     public ResponseEntity<Void> patchFinalizadoComAvaliacao(@PathVariable Integer idServicoAttr,
                                                             @PathVariable Double avaliacao){
         if (avaliacao < 0 || avaliacao >5)

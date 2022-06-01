@@ -39,6 +39,10 @@ public class ClienteController {
 
     // retorna todos registros de usuários
     @GetMapping
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK, retorna uma lista de prestadores"),
+            @ApiResponse(responseCode = "204", description = "A lista de prestadores está vazia")
+    })
     public ResponseEntity<List<Cliente>> getCliente(){
         List<Cliente> clientes = repository.findAll();
         if (!clientes.isEmpty()){
@@ -49,6 +53,10 @@ public class ClienteController {
 
     // retorna usuário pelo index
     @GetMapping("/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Retorna cliente com o id procurado"),
+            @ApiResponse(responseCode = "404", description = "Cliente não encontrado")
+    })
     public ResponseEntity<Cliente> getClientePorId(@PathVariable int id){
         Optional<Cliente> clienteOptional = repository.findById(id);
         if (clienteOptional.isPresent()) {
@@ -60,6 +68,10 @@ public class ClienteController {
 
     //cadastro de clientes, com possibilidade de cadastrar vários de uma só vez
     @PostMapping
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Cliente(s) cadastrado(s) com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Cliente já existe ou possui dados inválidos")
+    })
     public ResponseEntity<Void> postCadastroClientes(@RequestBody Cliente cliente){
         List<Cliente> clienteOptional = repository.validarCadastro(
                 cliente.getEmail(), cliente.getCpf(), cliente.getTelefone()
@@ -72,6 +84,11 @@ public class ClienteController {
     }
 
     @GetMapping("/avaliacao/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Retorna a média de avaliações do" +
+                    " cliente desejado"),
+            @ApiResponse(responseCode = "404", description = "Cliente não encontrado")
+    })
     public ResponseEntity<UsuarioAvaliacaoResponse> getAvaliacao(@PathVariable Integer id){
         Optional<Cliente> clienteOptional = repository.findById(id);
         if (clienteOptional.isPresent()){
@@ -84,6 +101,12 @@ public class ClienteController {
 
     //Adicionar avaliação a lista de avaliações
     @PostMapping("/avaliacao")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Avalição adicionada com sucesso"),
+            @ApiResponse(responseCode = "204", description = "Cliente não encontrado"),
+            @ApiResponse(responseCode = "400", description = "Valor de avaliação inválido. Informe " +
+                    "um número de 0 a 5."),
+    })
     public ResponseEntity<Void> postCadastroAvaliacao(@RequestBody ClienteIdAvaliacaoRequest req){
         if (req.getAvaliacao() < 0 || req.getAvaliacao() >5){
             return ResponseEntity.status(400).build();
@@ -103,6 +126,10 @@ public class ClienteController {
 
     //Autenticar usuário
     @PostMapping("/autenticacao")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Cliente autenticado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Cliente não encontrado")
+    })
     public ResponseEntity<Void> postAutenticarUsuario(@RequestBody @Valid UsuarioEmailSenhaRequest req){
 
         Optional<Cliente> clienteOptional = repository.findByEmailAndSenha(req.getEmail(), req.getSenha());
@@ -118,6 +145,10 @@ public class ClienteController {
 
 //    desautenticar usuário
     @DeleteMapping("/autenticacao")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Cliente desautenticado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Cliente não encontrado")
+    })
     public ResponseEntity<Void> deleteLogOffUsuario(@RequestBody @Valid UsuarioEmailSenhaRequest req){
         Optional<Cliente> clienteOptional = repository.findByEmailAndSenha(req.getEmail(), req.getSenha());
         if (clienteOptional.isPresent()){
@@ -130,6 +161,12 @@ public class ClienteController {
     }
 
     @PutMapping
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Cliente atualizado com sucesso"),
+            @ApiResponse(responseCode = "206", description = "Cliente atualizado com sucesso, com a exceção do " +
+                    "campo telefone, pois esse número já está cadastrado"),
+            @ApiResponse(responseCode = "404", description = "Cliente não encontrado")
+    })
     public ResponseEntity<Void> putCliente(@RequestBody @Valid ClienteUpdateRequest req){
         Optional<Cliente> clienteOptional = repository.findById(req.getId());
         if (clienteOptional.isPresent()){
@@ -154,7 +191,10 @@ public class ClienteController {
     }
 
     @PostMapping("/endereco/{idCliente}")
-    public ResponseEntity<Void> postEnderecoCliente(@PathVariable Integer idCliente,
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Endereço cadastrado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Endereço já existe")
+    })    public ResponseEntity<Void> postEnderecoCliente(@PathVariable Integer idCliente,
                                               @RequestBody EnderecoSimplesRequest enderecoRequest){
         List<Endereco> enderecos = enderecoRepository.enderecoValido(enderecoRequest.getCep(),
                 enderecoRequest.getComplemento(),
@@ -171,6 +211,10 @@ public class ClienteController {
     }
 
     @GetMapping(value = "/foto/{idCliente}", produces = "image/jpeg")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "404", description = "Foto inválida"),
+            @ApiResponse(responseCode = "200", description = "Retorna a foto do cliente solicitado")
+    })
     public ResponseEntity<byte[]> getFoto(@PathVariable Integer idCliente) {
         byte[] foto = repository.getFoto(idCliente);
         if (foto == null) {
@@ -180,10 +224,10 @@ public class ClienteController {
     }
 
     @PatchMapping(value = "/foto/{idCliente}", consumes = "image/jpeg")
-//    @ApiResponses({
-//        @ApiResponse(responseCode = "204", description = "vazio"),
-//
-//    })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "404", description = "Cliente não encontrado"),
+            @ApiResponse(responseCode = "200", description = "Foto atualizada com sucesso")
+    })
     public ResponseEntity<Void> patchFoto(@PathVariable Integer idCliente,
                                     @RequestBody byte[] novaFoto) {
         Optional<Cliente> clienteOptional = repository.findById(idCliente);
@@ -197,6 +241,9 @@ public class ClienteController {
     }
 
     @GetMapping("/registro/{nomeArq}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Arquivo gerado com sucesso")
+    })
     public ResponseEntity<Void> postRegistro(@PathVariable String nomeArq) {
         List<Cliente> lista = repository.findAll();
         GravaArquivo gravaArq = new GravaArquivo();
@@ -233,6 +280,10 @@ public class ClienteController {
     }
 
     @PostMapping("/registro/{nomeArq}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Clientes cadastrados com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Arquivo não encontrado")
+    })
     public ResponseEntity<Void> getRegistro(String nomeArq) {
         BufferedReader entrada = null;
         String registro, tipoRegistro;
@@ -332,6 +383,7 @@ public class ClienteController {
     }
 
     @GetMapping("/relatorio")
+    @ApiResponse(responseCode = "200", description = "Arquivo gerado com sucesso")
     public ResponseEntity<String> getRelatorio() {
         String relatorio = "";
 

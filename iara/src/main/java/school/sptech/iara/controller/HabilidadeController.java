@@ -1,5 +1,7 @@
 package school.sptech.iara.controller;
 
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +26,10 @@ public class HabilidadeController {
     private PrestadorRepository prestadorRepository;
 
     @GetMapping
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Retorna uma lista de habilidades"),
+            @ApiResponse(responseCode = "204", description = "Retorna uma lista vazia")
+    })
     public ResponseEntity<List<Habilidade>> getHabilidades(){
         List<Habilidade> habilidades = repository.findAll();
         if (!habilidades.isEmpty()){
@@ -34,6 +40,10 @@ public class HabilidadeController {
 
     // retorna habilidade pelo index
     @GetMapping("/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Retorna a habilidade solicitada"),
+            @ApiResponse(responseCode = "404", description = "Habilidade não encontrada")
+    })
     public ResponseEntity<Habilidade> getHabilidadePorIndex(@PathVariable int id){
         Optional<Habilidade> habilidadeOptional = repository.findById(id);
         if (habilidadeOptional.isPresent()){
@@ -44,6 +54,10 @@ public class HabilidadeController {
     }
 
     @PostMapping
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Habilidade criada com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Habilidade já existe")
+    })
     public ResponseEntity<Void> postAddHabilidade(@RequestBody Habilidade habilidade){
         if (!repository.existsByDescricao(habilidade.getDescricao()) &&
                 !repository.existsByHabilidade(habilidade.getHabilidade())){
@@ -55,6 +69,12 @@ public class HabilidadeController {
 
     // adiciona habilidade
     @PostMapping("/prestador")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Habilidade adicionada ao prestador solicitado" +
+                    " com sucesso"),
+            @ApiResponse(responseCode = "400", description = "O prestador já possui esta habilidade cadastrada"),
+            @ApiResponse(responseCode = "404", description = "Prestador não encontrado")
+    })
     public ResponseEntity<Void> postAddHabilidade(@RequestBody @Valid PrestadorHabilidadeRequest req){
         Optional<Prestador> prestadorOptional = prestadorRepository.findById(req.getUserId());
         if (prestadorOptional.isPresent()){

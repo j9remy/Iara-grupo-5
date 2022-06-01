@@ -1,5 +1,7 @@
 package school.sptech.iara.controller;
 
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +25,10 @@ public class EnderecoController {
     private ViacepClient viacepClient;
 
     @GetMapping
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Retorna uma lista de endereços"),
+            @ApiResponse(responseCode = "204", description = "Retorna uma lista vazia")
+    })
     public ResponseEntity<List<Endereco>> getEnderecos(){
         List<Endereco> enderecos = enderecoRepository.findAll();
         if (enderecos.isEmpty())
@@ -31,6 +37,10 @@ public class EnderecoController {
     }
 
     @GetMapping("/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Retorna o endereço solicitado"),
+            @ApiResponse(responseCode = "404", description = "Endereço não encontrado")
+    })
     public ResponseEntity<Endereco> getEndereco(@PathVariable Integer id){
         Optional<Endereco> enderecoOptional = enderecoRepository.findById(id);
         if (enderecoOptional.isPresent())
@@ -40,6 +50,10 @@ public class EnderecoController {
 
 
     @PostMapping
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Endereço criado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Endereço já existe")
+    })
     public ResponseEntity<Void> postEnderecoReq(@RequestBody EnderecoSimplesRequest enderecoRequest){
         List<Endereco> enderecos = enderecoRepository.enderecoValido(enderecoRequest.getCep(),
                 enderecoRequest.getComplemento(),

@@ -1,5 +1,7 @@
 package school.sptech.iara.controller;
 
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +29,12 @@ public class ChatController {
     private PrestadorRepository prestadorRepository;
 
     @GetMapping("/servicoAtribuido/{idServico}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Retorna uma lista com todas mensagens enviadas no " +
+                    "serviço escolhido"),
+            @ApiResponse(responseCode = "204", description = "Retorna uma lista vazia"),
+            @ApiResponse(responseCode = "400", description = "Serviço não encontrado")
+    })
     public ResponseEntity<List<Mensagem>> getMensagens(@PathVariable Integer idServico){
         Boolean servicoExiste = servicoAtribuidoRepository.existsById(idServico);
         if (servicoExiste){
@@ -40,6 +48,10 @@ public class ChatController {
     }
 
     @PostMapping("/mensagem")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Mensagem criada com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Chat não encontrado")
+    })
     public ResponseEntity<Void> postMensagem(@RequestBody MensagemRequest req){
         Optional<Chat> chatOptional = chatRepository.findById(req.getIdChat());
         if (chatOptional.isPresent()){

@@ -1,5 +1,7 @@
 package school.sptech.iara.controller;
 
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +31,11 @@ public class AgendaController {
     private SemanaRepository semanaRepository;
 
     @PostMapping("/semana")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Semana cadastrada com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Semana não pôde ser cadastrado, pois o prestador " +
+                    "não foi encontrado ou a semana já existe")
+    })
     public ResponseEntity<Void> postSemana(@RequestBody SemanaRequest request) {
         Optional<Agenda> agendaOptional = agendaRepository.findByPrestador_Id(request.getIdPrestador());
         if (agendaOptional.isPresent()){
@@ -54,6 +61,11 @@ public class AgendaController {
     }
 
     @PutMapping("/dia")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Horário(s) atualizado(s) com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Horários não puderam ser atualizados, pois o prestador" +
+                    "a semana e/ou o dia não foram encontrados")
+    })
     public ResponseEntity<Void> putDia(@RequestBody DiaRequest request){
         Optional<Agenda> agendaOptional = agendaRepository.findByPrestador_Id(request.getIdPrestador());
         if (agendaOptional.isPresent()) {

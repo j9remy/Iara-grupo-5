@@ -26,6 +26,10 @@ public class ServicoController {
     private PrestadorRepository repository;
 
     @GetMapping
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Retorna a lista de serviços"),
+            @ApiResponse(responseCode = "204", description = "A lista não foi encontrada")
+    })
     public ResponseEntity<List<Servico>> getListaServicos(){
         if (servicoRepository.findAll().isEmpty())
             return ResponseEntity.status(204).build();
@@ -33,6 +37,10 @@ public class ServicoController {
     }
 
     @GetMapping("/{index}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Retorna a lista do serviço desejado"),
+            @ApiResponse(responseCode = "404", description = "O serviço desejado não foi encontrado")
+    })
     public ResponseEntity<Servico> getServicoPorIndex(@PathVariable int index){
         Optional<Servico> servicoOptional = servicoRepository.findById(index);
         if (servicoOptional.isPresent())
@@ -42,11 +50,16 @@ public class ServicoController {
 
 //    adiciona serviço
     @PostMapping
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Serviço adicionado com sucesso ao prestador desejado"),
+            @ApiResponse(responseCode = "400", description = "O serviço já existe"),
+            @ApiResponse(responseCode = "404", description = "O prestador desejado não foi encontrado"),
+    })
     public ResponseEntity<Void> postAddServico(@RequestBody @Valid PrestadorServicoRequest req){
         Optional<Prestador> prestadorOptional = repository.findById(req.getIdPrestador());
-        if (prestadorOptional.isPresent()){
+        if (prestadorOptional.isPresent()) {
             Prestador prestador = prestadorOptional.get();
-            if (!prestador.servicoExiste(req.getServico())){
+            if (!prestador.servicoExiste(req.getServico())) {
                 Servico servico = new Servico(req.getServico().getValor(),
                         req.getServico().getDescricao(),
                         req.getServico().getTipo(),
@@ -62,6 +75,10 @@ public class ServicoController {
     }
 
     @PutMapping("/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Serviço atualizado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "O serviço desejado não foi encontrado")
+    })
     public ResponseEntity<Void> putAtualizaServico(@RequestBody @Valid ServicoRequest servicoRequest,
                                              @PathVariable int id) {
         Optional<Servico> servicoEncontrado = servicoRepository.findById(id);
@@ -77,6 +94,10 @@ public class ServicoController {
     }
 
     @PostMapping("/ativo/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "O serviço desejado foi ativado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "O serviço ativo desejado não foi encontrado")
+    })
     public ResponseEntity<Void> postAtivoTrue(
             @PathVariable Integer id){
         Optional<Servico> servicoOptional = servicoRepository.findById(id);
@@ -90,6 +111,10 @@ public class ServicoController {
     }
 
     @DeleteMapping("/ativo/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "O serviço desejado desativado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "O serviço ativo desejado não foi encontrado")
+    })
     public ResponseEntity<Void> deleteAtivoTrue(
             @PathVariable Integer id){
         Optional<Servico> servicoOptional = servicoRepository.findById(id);
@@ -103,6 +128,11 @@ public class ServicoController {
     }
 
     @PatchMapping("/duracao/{id}/{duracao}") //
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "O serviço desejado desativado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "A duração desejada é igual a cadastradaa atualmente"),
+            @ApiResponse(responseCode = "404", description = "O serviço desejado não foi encontrado")
+    })
     public ResponseEntity<Void> patchDuracao(@PathVariable Integer id,
                                        @PathVariable Double duracao){
         Optional<Servico> servicoOptional = servicoRepository.findById(id);
