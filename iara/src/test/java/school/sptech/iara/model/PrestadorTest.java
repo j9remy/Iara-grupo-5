@@ -111,7 +111,8 @@ public class PrestadorTest {
             new Faker().lorem().word(),dataNasc,
             new Faker().internet().emailAddress(),new Faker().internet().password(),
             new Faker().lorem().character(), new Faker().phoneNumber().phoneNumber(),
-            new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean()
+            new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean(),
+            new Faker().random().nextBoolean(), new Faker().random().nextDouble()
         );
         Servico servico = new Servico(1,new Faker().lorem().word(),new Faker().lorem().word(),new Faker().random().nextDouble() );
 
@@ -138,7 +139,8 @@ public class PrestadorTest {
             new Faker().lorem().word(),dataNasc,
             new Faker().internet().emailAddress(),new Faker().internet().password(),
             new Faker().lorem().character(), new Faker().phoneNumber().phoneNumber(),
-            new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean()
+            new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean(),
+            new Faker().random().nextBoolean(), new Faker().random().nextDouble()
         );
 
         Servico servico = new Servico(1,new Faker().lorem().word(),new Faker().lorem().word(),new Faker().random().nextDouble() );
@@ -200,7 +202,8 @@ public class PrestadorTest {
             new Faker().lorem().word(),dataNasc,
             new Faker().internet().emailAddress(),new Faker().internet().password(),
             new Faker().lorem().character(), new Faker().phoneNumber().phoneNumber(),
-            new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean()
+            new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean(),
+            new Faker().random().nextBoolean(), new Faker().random().nextDouble()
         );
 
         Habilidade [] habilidades = new Habilidade[]{
@@ -236,7 +239,8 @@ public class PrestadorTest {
             new Faker().lorem().word(),dataNasc,
             new Faker().internet().emailAddress(),new Faker().internet().password(),
             new Faker().lorem().character(), new Faker().phoneNumber().phoneNumber(),
-            new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean()
+            new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean(),
+            new Faker().random().nextBoolean(), new Faker().random().nextDouble()
         );
 
         Habilidade [] habilidades = new Habilidade[]{
@@ -283,7 +287,8 @@ public class PrestadorTest {
             new Faker().lorem().word(),dataNasc,
             new Faker().internet().emailAddress(),new Faker().internet().password(),
             new Faker().lorem().character(), new Faker().phoneNumber().phoneNumber(),
-            new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean()
+            new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean(),
+            new Faker().random().nextBoolean(), new Faker().random().nextDouble()
         );
 
         Servico [] servicos = new Servico[]{
@@ -319,7 +324,8 @@ public class PrestadorTest {
             new Faker().lorem().word(),dataNasc,
             new Faker().internet().emailAddress(),new Faker().internet().password(),
             new Faker().lorem().character(), new Faker().phoneNumber().phoneNumber(),
-            new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean()
+            new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean(),
+            new Faker().random().nextBoolean(), new Faker().random().nextDouble()
         );
 
         Habilidade [] habilidades = new Habilidade[]{
