@@ -115,16 +115,16 @@
                 <form id="form-contato">
                     
                 
-                    <div class="user-input-wrp total">
-                        <textarea style="resize: none" onkeyup="verificaConteudo(this)" required maxlength="300" wrap="soft" rows="7" cols="37" size="37" class="input" type="text" id="input_mensagem" name="input_mensagem"></textarea>
-                        <span class="floating-label">Escreva sua mensagem</span>
+                    <div class="user-input-wrp total input-group">
+                        <textarea style="resize: none" required maxlength="300" wrap="soft" rows="7" cols="37" size="37" class="mensagem" type="text" id="input_mensagem" name="input_mensagem"></textarea>
+                        <label class="user-label">Escreva sua mensagem</label>
                     </div>
                 
                 
                 
-                    <div class="user-input-wrp">
-                        <input type="email" class="input" id="input-email" name="input-name" onkeyup="verificaConteudo(this)" required/>
-                        <span class="floating-label">E-mail</span>
+                    <div class="input-group">
+                        <input required="" id="input-email" type="text" autocomplete="off" class="input input-email">
+                        <label class="user-label email">E-mail</label>
                     </div>
                     <!--<input required placeholder="Email" id="input-email" name="input-email" type="email" class="input email"> -->
                     <button class="button enviar-mensagem" id="btn-mensagem" name="btn-mensagem" type="submit">
