@@ -3,16 +3,29 @@ package school.sptech.iara.model;
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.sql.Timestamp;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UsuarioTest {
+class ClienteTest {
 
+
+
+    @Test
+    @DisplayName("Um Cliente deve ser um tipo de Usuario ou seja deve herdar de Usuario")
+    void prestadorDeveSerUmTipoDerivadoDeUsuarioTest(){
+
+        //Arrange
+        Cliente cliente;
+
+        //Act
+        cliente = new Cliente();
+
+        //Assert
+        assertInstanceOf(Usuario.class,cliente);
+
+    }
 
     @Test
     @DisplayName("Quando as credenciais informadas pelo cliente derem match com os dados correspondetes deve existir usuario")
@@ -172,4 +185,8 @@ class UsuarioTest {
         assertFalse(user.isAutenticado());
         //assertEquals("Cliente não autenticado",logedOf);
     }
+
+
+
+
 }
