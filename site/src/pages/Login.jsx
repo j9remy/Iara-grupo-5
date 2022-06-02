@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import logo from '../html-css-template/img/logo-red.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
 
 
 
@@ -15,13 +15,13 @@ function Login() {
                         <img class="logo transform" src={logo} />
                     </a>
                     <form id="login" class="campos dflex fdcolumn txt-medium">
-                        <div class="user-input-wrp">
-                            <input type="email" class="input" id="input-email" onkeyup="verificaConteudo" required />
-                            <span class="floating-label">E-mail</span>
+                        <div class="input-group">
+                            <input required="" id="input-email" type="text" autocomplete="off" class="input" />
+                            <label class="user-label">E-mail</label>
                         </div>
-                        <div class="user-input-wrp">
-                            <input type="password" class="input" id="input-senha" onkeyup="verificaConteudo" required />
-                            <span class="floating-label">Senha</span>
+                        <div class="input-group">
+                            <input required="" id="input-senha" type="password" autocomplete="off" class="input" />
+                            <label class="user-label">Senha</label>
                         </div>
 
                         <button class="button bg-white txt-black bg-hover-dark-red txt-hover-white" type="submit">ENTRAR</button>

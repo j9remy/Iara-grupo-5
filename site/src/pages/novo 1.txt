@@ -1,0 +1,11 @@
+    constructor(){
+        super();
+        this.state = {
+            nome: ""
+        };
+        this.onChange = (evento) => {
+            this.state({nome: evento.target.value})
+            console.log(evento.target.value);
+        };
+    }
+
