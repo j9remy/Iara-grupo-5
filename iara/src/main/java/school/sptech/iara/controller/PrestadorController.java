@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import school.sptech.iara.model.Agenda;
 import school.sptech.iara.model.Endereco;
+import school.sptech.iara.model.Portifolio;
 import school.sptech.iara.model.Prestador;
 import school.sptech.iara.repository.*;
 import school.sptech.iara.request.EnderecoSimplesRequest;
@@ -14,6 +15,7 @@ import school.sptech.iara.request.PrestadorUpdateRequest;
 import school.sptech.iara.request.UsuarioEmailSenhaRequest;
 import school.sptech.iara.util.GravaArquivo;
 
+import javax.sound.sampled.Port;
 import javax.validation.Valid;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -40,6 +42,8 @@ public class PrestadorController {
     private AgendaRepository agendaRepository;
     @Autowired
     private EnderecoRepository enderecoRepository;
+    @Autowired
+    private PortifolioRepository portifolioRepository;
 
 
     // retorna todos registros de prestadores
@@ -86,6 +90,7 @@ public class PrestadorController {
             repository.save(prestador);
             Agenda agenda = new Agenda(prestador);
             agendaRepository.save(agenda);
+            portifolioRepository.save(new Portifolio(prestador));
             return ResponseEntity.status(201).build();
         }
         return ResponseEntity.status(400).build();

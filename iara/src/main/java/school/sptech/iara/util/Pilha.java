@@ -1,17 +1,19 @@
 package school.sptech.iara.util;
 
-public class Pilha {
+public class Pilha <T> {
 
-    private int[] pilha;
+    // Atributos
+    private T[] pilha;
     private int topo;
 
-    // Constructor
+    // Construtor
     public Pilha(int capacidade) {
-        pilha = new int[capacidade];
+        pilha = (T[]) new Object[capacidade];
         topo = -1;
     }
 
-    // Methods
+    // Métodos
+
     public Boolean isEmpty() {
         return topo == -1;
     }
@@ -20,25 +22,25 @@ public class Pilha {
         return topo == pilha.length - 1;
     }
 
-    public void push(int info) {
+    public void push(T obj) {
         if (isFull()) {
             System.out.println("Pilha cheia!");
         }
         else {
-            pilha[++topo] = info;
+            pilha[++topo] = obj;
         }
     }
 
-    public int pop() {
+    public T pop() {
         if (isEmpty()) {
-            return -1;
+            return null;
         }
         return pilha[topo--];
     }
 
-    public int peek() {
+    public T peek() {
         if (isEmpty()) {
-            return -1;
+            return null;
         }
         return pilha[topo];
     }
@@ -53,4 +55,9 @@ public class Pilha {
             }
         }
     }
+
+    public Integer size(){
+        return topo;
+    }
+
 }

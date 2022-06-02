@@ -1,9 +1,12 @@
 package school.sptech.iara.model;
 
 import org.hibernate.validator.constraints.URL;
+import school.sptech.iara.util.Pilha;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Stack;
 
 @Entity
 public class Portifolio {
@@ -11,26 +14,38 @@ public class Portifolio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @URL
-    private String url;
+    @OneToMany
+    private List<Foto> fotos;
 
-    private LocalDate dataPostagem;
 
     @ManyToOne
-    private Servico servico;
+    private Prestador prestador;
 
     // Constructor
-    public Portifolio(String url) {
-        this.url = url;
-        this.dataPostagem = LocalDate.now();
+    public Portifolio(Prestador prestador) {
+        this.prestador = prestador;
     }
+    public Portifolio(){}
 
     // Getter and Setter
-    public String getUrl() {
-        return url;
+
+    public List<Foto> getFotos() {
+        return fotos;
+    }
+    public void setFotos(List<Foto> fotos) {
+        this.fotos = fotos;
+    }
+    public Prestador getPrestador() {
+        return prestador;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setPrestador(Prestador prestador) {
+        this.prestador = prestador;
+    }
+
+    // Método
+
+    public void adicionarFoto(Foto foto){
+        fotos.add(foto);
     }
 }
