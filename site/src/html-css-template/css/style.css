@@ -395,3 +395,16 @@ h2 {
   filter: opacity(0.7);
  }
 
+.subtitulo {
+  letter-spacing: 16px;
+  font-size: 12px;
+  position: absolute;
+  bottom: 14px;
+  left: 2px;
+  color: #000;
+  font-weight: 500;
+ }
+
+ .prelative {
+   position: relative;
+ }
