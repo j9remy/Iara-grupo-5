@@ -13,21 +13,21 @@ public class AvaliacaoCliente {
     @ManyToOne
     private Cliente cliente;
 
-    private Integer avaliacao;
+    private Double avaliacao;
     private LocalDateTime dataHora;
 
     public AvaliacaoCliente(){}
-    public AvaliacaoCliente(Integer avaliacao, Cliente cliente) {
+    public AvaliacaoCliente(Double avaliacao, Cliente cliente) {
         this.avaliacao = avaliacao;
         dataHora = LocalDateTime.now();
         this.cliente = cliente;
     }
 
-    public Integer getAvaliacao() {
+    public Double getAvaliacao() {
         return avaliacao;
     }
 
-    public void setAvaliacao(Integer avaliacao) {
+    public void setAvaliacao(Double avaliacao) {
         this.avaliacao = avaliacao;
     }
 }

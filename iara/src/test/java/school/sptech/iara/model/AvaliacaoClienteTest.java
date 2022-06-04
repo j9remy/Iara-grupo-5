@@ -27,7 +27,7 @@ class AvaliacaoClienteTest {
         Timestamp dataNasc = new Timestamp(offset + (long)(Math.random() * diff));
 
         Cliente user = new Cliente(nome, sobrenome, cpf, dataNasc, email, senha, sexo, telefone);
-        AvaliacaoCliente avaliacao = new AvaliacaoCliente(6, user);
+        AvaliacaoCliente avaliacao = new AvaliacaoCliente(6d, user);
 
         assertEquals(avaliacao, avaliacao);
     }
@@ -37,7 +37,7 @@ class AvaliacaoClienteTest {
     void setAvaliacaoNovaAvaliacaoComSucesso() {
         AvaliacaoCliente avaliacao = new AvaliacaoCliente();
 
-        avaliacao.setAvaliacao(6);
+        avaliacao.setAvaliacao(6d);
 
         assertEquals(6, avaliacao.getAvaliacao());
     }

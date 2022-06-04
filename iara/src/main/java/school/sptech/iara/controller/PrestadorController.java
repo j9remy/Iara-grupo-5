@@ -202,16 +202,7 @@ public class PrestadorController {
             if (!servicos.isEmpty()){
                 List<ServicoAtribuidoResponse> servicoAtribuidoResponses = new ArrayList<>();
                 for (ServicoAtribuido serv: servicos){
-                    ServicoAtribuidoResponse servico = new ServicoAtribuidoResponse(serv.getId(),
-                            serv.getCliente().getId(),
-                            serv.getServico().getId(),
-                            serv.getDataHoraInicio(),
-                            serv.getDataHoraFim(),
-                            serv.getObservacoes(),
-                            serv.getStatus(),
-                            serv.isFinalizado(),
-                            serv.getAvaliacao());
-                    servicoAtribuidoResponses.add(servico);
+                    servicoAtribuidoResponses.add(serv.formatarResposta());
                 }
                 return ResponseEntity.status(200).body(servicoAtribuidoResponses);
             }

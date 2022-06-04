@@ -1,5 +1,7 @@
 package school.sptech.iara.model;
 
+import school.sptech.iara.response.ServicoAtribuidoResponse;
+
 import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -131,6 +133,20 @@ public class ServicoAtribuido implements Avaliavel{
             setFinalizado(true);
             dataHoraFim = LocalDateTime.now();
         }
+    }
+
+    public ServicoAtribuidoResponse formatarResposta(){
+        ServicoAtribuidoResponse servico = new ServicoAtribuidoResponse(
+                getId(),
+                getCliente().getId(),
+                getServico().getId(),
+                getDataHoraInicio(),
+                getDataHoraFim(),
+                getObservacoes(),
+                getStatus(),
+                isFinalizado(),
+                getAvaliacao());
+        return servico;
     }
 
 //    toString

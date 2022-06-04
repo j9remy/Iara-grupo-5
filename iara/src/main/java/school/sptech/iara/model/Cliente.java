@@ -10,8 +10,8 @@ import java.util.List;
 @Entity
 public class Cliente extends Usuario {
 //    Attributes
-    @OneToMany(cascade= CascadeType.PERSIST)
-    private List<AvaliacaoCliente> avaliacoes;
+//    @OneToMany(cascade= CascadeType.PERSIST)
+//    private List<AvaliacaoCliente> avaliacoes;
 //    Constructor
     public Cliente(){
         super();
@@ -22,23 +22,24 @@ public class Cliente extends Usuario {
                    String email, String senha,
                    char sexo, String telefone) {
         super(nome, sobrenome, cpf, dataNasc, email, senha, sexo, telefone);
-        avaliacoes = new ArrayList<>();
+//        avaliacoes = new ArrayList<>();
     }
 
 //    Methods
 //    Adiciona na lista de avaliações
-    public void addAvaliacao(AvaliacaoCliente avaliacao) {
-        avaliacoes.add(avaliacao);
-    }
+//    public void addAvaliacao(AvaliacaoCliente avaliacao) {
+//        avaliacoes.add(avaliacao);
+//    }
 
     @Override
 //   Retourna a média de todas avaliações na lista
     public double calcAvaliacao(){
-        Double somaAvaliacoes = 0d;
-        for (AvaliacaoCliente avaliacao : avaliacoes) {
-            somaAvaliacoes += avaliacao.getAvaliacao();
-        }
-        return somaAvaliacoes/avaliacoes.size();
+//        Double somaAvaliacoes = 0d;
+//        for (AvaliacaoCliente avaliacao : avaliacoes) {
+//            somaAvaliacoes += avaliacao.getAvaliacao();
+//        }
+//        return somaAvaliacoes/avaliacoes.size();
+        return 0d;
     }
 
     }

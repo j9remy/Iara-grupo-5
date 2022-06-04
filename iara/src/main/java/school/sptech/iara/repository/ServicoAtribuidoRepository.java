@@ -8,6 +8,7 @@ import school.sptech.iara.model.ServicoAtribuido;
 import java.util.List;
 
 public interface ServicoAtribuidoRepository extends JpaRepository<ServicoAtribuido,Integer> {
-    List<ServicoAtribuido> findAllByFinalizadoAndServico_AtivoAndServico_PrestadorOrderByDataHoraInicio(Boolean fin, Boolean ativ, Prestador prestador);
+    List<ServicoAtribuido> findAllByFinalizadoAndServico_AtivoAndServico_PrestadorOrderByDataHoraInicio
+            (Boolean fin, Boolean ativ, Prestador prestador);
 
 }

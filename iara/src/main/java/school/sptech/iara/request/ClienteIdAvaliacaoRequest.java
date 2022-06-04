@@ -12,12 +12,12 @@ public class ClienteIdAvaliacaoRequest {
     @NotNull
     @Min(0)
     @Max(5)
-    private Integer avaliacao;
+    private Double avaliacao;
 
     public Integer getId() {
         return id;
     }
-    public Integer getAvaliacao() {
+    public Double getAvaliacao() {
         return avaliacao;
     }
 }

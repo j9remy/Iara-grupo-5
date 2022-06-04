@@ -15,6 +15,7 @@ import school.sptech.iara.repository.ClienteRepository;
 import school.sptech.iara.repository.ServicoAtribuidoRepository;
 import school.sptech.iara.repository.ServicoRepository;
 import school.sptech.iara.request.ServicoAtribuidoRequest;
+import school.sptech.iara.response.ServicoAtribuidoResponse;
 
 import javax.swing.text.html.Option;
 import java.sql.Timestamp;
@@ -26,6 +27,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -49,11 +51,15 @@ public class ServicoAtribuidoController {
             @ApiResponse(responseCode = "200", description = "Retorna uma lista de serviços atribuídos"),
             @ApiResponse(responseCode = "204", description = "Retorna uma lista vazia")
     })
-    public ResponseEntity<List<ServicoAtribuido>> getServicosAtribuidosPorServico(){
+    public ResponseEntity<List<ServicoAtribuidoResponse>> getServicosAtribuidosPorServico(){
         List<ServicoAtribuido> servicosAtribuidos = servicoAtribuidoRepository.findAll();
         if (servicosAtribuidos.isEmpty())
             return ResponseEntity.status(204).build();
-        return ResponseEntity.status(200).body(servicosAtribuidos);
+        List<ServicoAtribuidoResponse> servicoAtribuidoResponses = new ArrayList<>();
+        for (ServicoAtribuido serv: servicosAtribuidos) {
+            servicoAtribuidoResponses.add(serv.formatarResposta());
+        }
+        return ResponseEntity.status(200).body(servicoAtribuidoResponses);
     }
 
     @PostMapping("/{idUser}")

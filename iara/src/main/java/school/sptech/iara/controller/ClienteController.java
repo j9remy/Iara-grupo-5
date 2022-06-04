@@ -94,7 +94,7 @@ public class ClienteController {
         Optional<Cliente> clienteOptional = repository.findById(id);
         if (clienteOptional.isPresent()){
             Cliente cliente = clienteOptional.get();
-            UsuarioAvaliacaoResponse respAval = new UsuarioAvaliacaoResponse(cliente, cliente.calcAvaliacao());
+            UsuarioAvaliacaoResponse respAval = new UsuarioAvaliacaoResponse(cliente.getId(), cliente.calcAvaliacao());
             return ResponseEntity.status(200).body(respAval);
         }
         return ResponseEntity.status(404).build();
@@ -117,7 +117,7 @@ public class ClienteController {
             Cliente cliente = clienteOptional.get();
             AvaliacaoCliente avaliacaoCliente = new AvaliacaoCliente(req.getAvaliacao(),cliente);
             avaliacaoRepository.save(avaliacaoCliente);
-            cliente.addAvaliacao(avaliacaoCliente);
+            //cliente.addAvaliacao(avaliacaoCliente);
             repository.save(cliente);
             return ResponseEntity.status(201).build();
         }else {
