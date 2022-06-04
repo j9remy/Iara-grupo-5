@@ -223,7 +223,6 @@ public class PrestadorTest {
             assertTrue(prestador.getHabilidades().contains(hab));
     }
 
-
     @Test
     @DisplayName("Quando habilidade adicionada deve haver uma habilidade correspondente na lista de habilidade do prestador")
     void quandoHabilidadeAdicionadaNaListaDeHabilidadeDeveExistirHabilidadeNaListaDeHabilidadesDoPrestador(){

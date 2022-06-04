@@ -1,6 +1,5 @@
 package school.sptech.iara.controller;
 
-import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,10 +9,8 @@ import school.sptech.iara.model.Prestador;
 import school.sptech.iara.repository.FotoRepository;
 import school.sptech.iara.repository.PortifolioRepository;
 import school.sptech.iara.repository.PrestadorRepository;
-import school.sptech.iara.request.FotoRequest;
 
 import java.time.LocalDate;
-import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -32,7 +29,6 @@ public class PortifolioController {
                                          @RequestBody byte[] foto){
         Optional<Prestador> prestadorOptional = prestadorRepository.findById(idPrestador);
         if (prestadorOptional.isPresent()){
-
 
             Foto fotoNova = new Foto(foto, LocalDate.now());
 

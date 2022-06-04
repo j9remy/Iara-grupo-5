@@ -38,7 +38,7 @@ class HabilidadeTest {
 
 
     @Test
-    @DisplayName("setar nova habilidade com sucesso")
+    @DisplayName("setar nova descrição com sucesso")
     void setDescricao() {
         Habilidade habilidade = new Habilidade();
 

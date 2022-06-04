@@ -1,12 +1,7 @@
 package school.sptech.iara.model;
 
-import org.hibernate.validator.constraints.URL;
-import school.sptech.iara.util.Pilha;
-
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Stack;
 
 @Entity
 public class Portifolio {
@@ -16,7 +11,6 @@ public class Portifolio {
 
     @OneToMany
     private List<Foto> fotos;
-
 
     @ManyToOne
     private Prestador prestador;
@@ -28,7 +22,6 @@ public class Portifolio {
     public Portifolio(){}
 
     // Getter and Setter
-
     public List<Foto> getFotos() {
         return fotos;
     }
@@ -38,7 +31,6 @@ public class Portifolio {
     public Prestador getPrestador() {
         return prestador;
     }
-
     public void setPrestador(Prestador prestador) {
         this.prestador = prestador;
     }
