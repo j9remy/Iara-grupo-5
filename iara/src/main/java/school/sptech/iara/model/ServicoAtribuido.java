@@ -59,23 +59,11 @@ public class ServicoAtribuido implements Avaliavel{
     public ServicoAtribuido(){}
 
 //    Getter and Setter
-    public LocalDateTime getHoraInicio() {
-        return dataHoraInicio;
-    }
-    public void setHoraInicio(LocalDateTime horaInicio) {
-        this.dataHoraInicio = horaInicio;
-    }
     public boolean isFinalizado() {
         return finalizado;
     }
     public void setFinalizado(boolean finalizado) {
         this.finalizado = finalizado;
-    }
-    public LocalDateTime getHoraFim() {
-        return dataHoraFim;
-    }
-    public void setHoraFim(LocalDateTime dataHoraFim) {
-        this.dataHoraFim = dataHoraFim;
     }
     public String getObservacoes() {
         return observacoes;
@@ -97,9 +85,6 @@ public class ServicoAtribuido implements Avaliavel{
     }
     public int getId() {
         return id;
-    }
-    public void setId(int id) {
-        this.id = id;
     }
     public Cliente getCliente() {
         return cliente;

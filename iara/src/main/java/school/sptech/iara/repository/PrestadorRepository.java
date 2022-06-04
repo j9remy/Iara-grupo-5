@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import school.sptech.iara.model.Cliente;
 import school.sptech.iara.model.Prestador;
 import school.sptech.iara.model.Servico;
+import school.sptech.iara.model.ServicoAtribuido;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +17,7 @@ public interface PrestadorRepository extends JpaRepository<Prestador, Integer> {
 
     Prestador getByEmailAndSenha(String email, String senha);
 
-    @Query("SELECT c FROM Prestador c WHERE email = ?1 OR cpf = ?2 OR telefone = ?3")
+    @Query("SELECT c FROM Prestador c WHERE c.email = ?1 OR c.cpf = ?2 OR c.telefone = ?3")
     List<Prestador> validarCadastro(String email, String cpf, String telefone);
 
     Optional<Prestador> findByEmailAndSenha(String email, String senha);

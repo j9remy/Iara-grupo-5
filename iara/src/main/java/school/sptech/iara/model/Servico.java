@@ -29,11 +29,20 @@ public class Servico {
 //    @OneToMany
 //    private List<ServicoAtribuido> servicoAtribuidos;
 
-//    @ManyToOne
-//    private Prestador prestador;
+    @ManyToOne
+    private Prestador prestador;
 
 //    Constructor
     public Servico(){}
+    public Servico(double valor, String descricao, String tipo, Double duracaoEstimada, Prestador prestador) {
+        this.valor = valor;
+        this.descricao = descricao;
+        this.tipo = tipo;
+        ativo = true;
+        this.prestador = prestador;
+        this.duracaoEstimada = duracaoEstimada;
+//        servicoAtribuidos = new ArrayList<>();
+    }
     public Servico(double valor, String descricao, String tipo, Double duracaoEstimada) {
         this.valor = valor;
         this.descricao = descricao;

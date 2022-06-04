@@ -103,7 +103,7 @@ public class ServicoAtribuidoController {
             ServicoAtribuido servicoAtribuido = servicoAtribuidoOptional.get();
             if (!servicoAtribuido.isFinalizado()){
                 servicoAtribuido.setFinalizado(true);
-                servicoAtribuido.setHoraFim(LocalDateTime.now());
+                servicoAtribuido.setDataHoraFim(LocalDateTime.now());
                 servicoAtribuido.setStatus("Finalizado");
                 Chat chat = chatRepository.findByServicoAtribuido_Id(idServicoAttr);
                 chat.setFinalizado(true);
@@ -133,7 +133,7 @@ public class ServicoAtribuidoController {
             ServicoAtribuido servicoAtribuido = servicoAtribuidoOptional.get();
             if (!servicoAtribuido.isFinalizado()){
                 servicoAtribuido.setFinalizado(true);
-                servicoAtribuido.setHoraFim(LocalDateTime.now());
+                servicoAtribuido.setDataHoraFim(LocalDateTime.now());
                 servicoAtribuido.setStatus("Finalizado");
                 servicoAtribuido.setAvaliacao(avaliacao);
                 Chat chat = chatRepository.findByServicoAtribuido_Id(idServicoAttr);

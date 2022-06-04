@@ -64,7 +64,8 @@ public class ServicoController {
                 Servico servico = new Servico(req.getServico().getValor(),
                         req.getServico().getDescricao(),
                         req.getServico().getTipo(),
-                        req.getServico().getDuracaoEstimada());
+                        req.getServico().getDuracaoEstimada(),
+                        prestador);
                 prestador.addServico(servico);
                 servicoRepository.save(servico);
                 repository.save(prestador);

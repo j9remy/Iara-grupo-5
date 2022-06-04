@@ -5,14 +5,12 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import school.sptech.iara.model.Agenda;
-import school.sptech.iara.model.Endereco;
-import school.sptech.iara.model.Portifolio;
-import school.sptech.iara.model.Prestador;
+import school.sptech.iara.model.*;
 import school.sptech.iara.repository.*;
 import school.sptech.iara.request.EnderecoSimplesRequest;
 import school.sptech.iara.request.PrestadorUpdateRequest;
 import school.sptech.iara.request.UsuarioEmailSenhaRequest;
+import school.sptech.iara.response.ServicoAtribuidoResponse;
 import school.sptech.iara.util.GravaArquivo;
 
 import javax.sound.sampled.Port;
@@ -39,11 +37,15 @@ public class PrestadorController {
     @Autowired
     private ServicoRepository servicoRepository;
     @Autowired
+    private ServicoAtribuidoRepository servicoAtribuidoRepository;
+    @Autowired
     private AgendaRepository agendaRepository;
     @Autowired
     private EnderecoRepository enderecoRepository;
     @Autowired
     private PortifolioRepository portifolioRepository;
+    @Autowired
+    private ServicoController servicoController;
 
 
     // retorna todos registros de prestadores
@@ -183,6 +185,39 @@ public class PrestadorController {
             return ResponseEntity.status(200).build();
         }
         return ResponseEntity.status(400).build();
+    }
+
+    @GetMapping("/agenda/{idPrestador}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Busca realizada com sucesso"),
+            @ApiResponse(responseCode = "204", description = "Busca realizada com sucesso, porém não há serviços não atendidos"),
+            @ApiResponse(responseCode = "404", description = "Prestador não encontrado")
+    })
+    public ResponseEntity<List<ServicoAtribuidoResponse>> getAgenda(@PathVariable Integer idPrestador){
+        Optional<Prestador> prestadorOptional = repository.findById(idPrestador);
+        if (prestadorOptional.isPresent()){
+            Prestador prestador = prestadorOptional.get();
+            List<ServicoAtribuido> servicos = servicoAtribuidoRepository.
+                    findAllByFinalizadoAndServico_AtivoAndServico_PrestadorOrderByDataHoraInicio(false,true,prestador);
+            if (!servicos.isEmpty()){
+                List<ServicoAtribuidoResponse> servicoAtribuidoResponses = new ArrayList<>();
+                for (ServicoAtribuido serv: servicos){
+                    ServicoAtribuidoResponse servico = new ServicoAtribuidoResponse(serv.getId(),
+                            serv.getCliente().getId(),
+                            serv.getServico().getId(),
+                            serv.getDataHoraInicio(),
+                            serv.getDataHoraFim(),
+                            serv.getObservacoes(),
+                            serv.getStatus(),
+                            serv.isFinalizado(),
+                            serv.getAvaliacao());
+                    servicoAtribuidoResponses.add(servico);
+                }
+                return ResponseEntity.status(200).body(servicoAtribuidoResponses);
+            }
+            return ResponseEntity.status(204).build();
+        }
+        return ResponseEntity.status(404).build();
     }
 
     @GetMapping(value = "/foto/{idPrestador}", produces = "image/jpeg")
