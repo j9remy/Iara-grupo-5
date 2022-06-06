@@ -7,10 +7,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import school.sptech.iara.model.Prestador;
 import school.sptech.iara.model.Servico;
+import school.sptech.iara.model.ServicoAtribuido;
 import school.sptech.iara.repository.PrestadorRepository;
+import school.sptech.iara.repository.ServicoAtribuidoRepository;
 import school.sptech.iara.repository.ServicoRepository;
 import school.sptech.iara.request.PrestadorServicoRequest;
 import school.sptech.iara.request.ServicoRequest;
+import school.sptech.iara.response.ServicoAvaliacaoResponse;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -23,6 +26,8 @@ public class ServicoController {
 
     @Autowired
     private ServicoRepository servicoRepository;
+    @Autowired
+    private ServicoAtribuidoRepository servicoAtribuidoRepository;
     @Autowired
     private PrestadorRepository repository;
 
@@ -48,6 +53,36 @@ public class ServicoController {
             return ResponseEntity.status(200).body(servicoOptional.get());
         return ResponseEntity.status(404).build();
     }
+
+    @GetMapping("/avaliacao/{idServico}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Retorna a média de avaliações de todos os serviços atribuidos deste serviço"),
+            @ApiResponse(responseCode = "204", description = "Este serviço não tem avaliações"),
+            @ApiResponse(responseCode = "400", description = "Serviço inexistente")
+    })
+    public ResponseEntity<ServicoAvaliacaoResponse> getAvaliacao(@PathVariable Integer idServico){
+        Optional<Servico> servicoOptional = servicoRepository.findById(idServico);
+        if (servicoOptional.isPresent()){
+            Servico servico = servicoOptional.get();
+            List<ServicoAtribuido> servicoAtribuidos = servicoAtribuidoRepository.findAllByServicoAndStatus(servico, "Finalizado");
+            Double soma = 0d;
+            Double media = 0d;
+            Integer contagem = 0;
+            for (ServicoAtribuido serv: servicoAtribuidos) {
+                if(serv.getAvaliacao() >= 0 && serv.getAvaliacao() <= 5){
+                    soma += serv.getAvaliacao();
+                    contagem++;
+                }
+            }
+            if (!servicoAtribuidos.isEmpty()){
+                media = soma / contagem;
+                return ResponseEntity.status(200).body(new ServicoAvaliacaoResponse(servico.getId(), media));
+            }
+            return ResponseEntity.status(204).build();
+        }
+        return ResponseEntity.status(400).build();
+    }
+
 
 //    adiciona serviço
     @PostMapping

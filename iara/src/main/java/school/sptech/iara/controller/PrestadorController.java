@@ -224,6 +224,8 @@ public class PrestadorController {
         return ResponseEntity.status(200).body(foto);
     }
 
+
+
     @PatchMapping(value = "/foto/{idPrestador}", consumes = "image/jpeg")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "404", description = "Prestador não encontrado"),

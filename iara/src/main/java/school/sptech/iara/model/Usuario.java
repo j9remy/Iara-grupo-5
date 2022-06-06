@@ -144,12 +144,9 @@ public abstract class Usuario implements Avaliavel{
     }
     //    Methods
 
-    public boolean usuarioExiste(String email, String senha){
-        if (email.equalsIgnoreCase(getEmail()) &&
-                senha.equals(this.senha)){
-            return true;
-        }
-        return false;
+    private boolean usuarioExiste(String email, String senha){
+        return email.equalsIgnoreCase(getEmail()) &&
+                senha.equals(this.senha);
     }
 
     public String autenticar(String email, String senha){

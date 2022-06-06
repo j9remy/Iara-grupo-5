@@ -10,8 +10,8 @@ import java.util.List;
 @Entity
 public class Cliente extends Usuario {
 //    Attributes
-//    @OneToMany(cascade= CascadeType.PERSIST)
-//    private List<AvaliacaoCliente> avaliacoes;
+    @OneToMany(cascade= CascadeType.PERSIST)
+    private List<AvaliacaoCliente> avaliacoes;
 //    Constructor
     public Cliente(){
         super();
@@ -27,9 +27,9 @@ public class Cliente extends Usuario {
 
 //    Methods
 //    Adiciona na lista de avaliações
-//    public void addAvaliacao(AvaliacaoCliente avaliacao) {
-//        avaliacoes.add(avaliacao);
-//    }
+    public void addAvaliacao(AvaliacaoCliente avaliacao) {
+        avaliacoes.add(avaliacao);
+    }
 
     @Override
 //   Retourna a média de todas avaliações na lista
@@ -42,4 +42,4 @@ public class Cliente extends Usuario {
         return 0d;
     }
 
-    }
+}

@@ -94,7 +94,17 @@ public class ClienteController {
         Optional<Cliente> clienteOptional = repository.findById(id);
         if (clienteOptional.isPresent()){
             Cliente cliente = clienteOptional.get();
-            UsuarioAvaliacaoResponse respAval = new UsuarioAvaliacaoResponse(cliente.getId(), cliente.calcAvaliacao());
+            List<AvaliacaoCliente> avaliacoes = avaliacaoRepository.findAllByCliente(cliente);
+            Double soma = 0d;
+            Integer contagem = 0;
+            for(int i = 0; i < avaliacoes.size(); i++){
+                if (avaliacoes.get(i).getAvaliacao() > -1 && avaliacoes.get(i).getAvaliacao() <= 5){
+                    soma += avaliacoes.get(i).getAvaliacao();
+                    contagem++;
+                }
+            }
+            Double media = soma / contagem;
+            UsuarioAvaliacaoResponse respAval = new UsuarioAvaliacaoResponse(cliente.getId(), media);
             return ResponseEntity.status(200).body(respAval);
         }
         return ResponseEntity.status(404).build();
