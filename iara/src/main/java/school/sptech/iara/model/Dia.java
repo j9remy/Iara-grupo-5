@@ -54,7 +54,7 @@ public class Dia {
         atribuicaoDia(codigoDia);
     }
 
-    public void atribuicaoDia(Integer codigoDia){
+    private void atribuicaoDia(Integer codigoDia){
         switch (codigoDia){
             case 1:
                 nomeDia = "Domingo";

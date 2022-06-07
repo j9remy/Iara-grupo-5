@@ -143,15 +143,15 @@ public class Prestador extends Usuario{
     }
 
     //retorna todos serviços ativos
-    public List<Servico> getServicosAtivos(){
-        List<Servico> servicosAtivos = new ArrayList<>();
-        for (Servico serv: servicos) {
-            if (serv.isAtivo()){
-                servicosAtivos.add(serv);
-            }
-        }
-        return servicosAtivos;
-    }
+//    public List<Servico> getServicosAtivos(){
+//        List<Servico> servicosAtivos = new ArrayList<>();
+//        for (Servico serv: servicos) {
+//            if (serv.isAtivo()){
+//                servicosAtivos.add(serv);
+//            }
+//        }
+//        return servicosAtivos;
+//    }
 
 //    toString
     @Override

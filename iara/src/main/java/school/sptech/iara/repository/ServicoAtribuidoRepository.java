@@ -13,5 +13,6 @@ public interface ServicoAtribuidoRepository extends JpaRepository<ServicoAtribui
             (Boolean fin, Boolean ativ, Prestador prestador);
 
     List<ServicoAtribuido> findAllByServicoAndStatus(Servico servico, String status);
+    List<ServicoAtribuido> findAllByServico_PrestadorAndStatus(Prestador prestador, String status);
 
 }

@@ -10,6 +10,7 @@ import school.sptech.iara.repository.*;
 import school.sptech.iara.request.EnderecoSimplesRequest;
 import school.sptech.iara.request.PrestadorUpdateRequest;
 import school.sptech.iara.request.UsuarioEmailSenhaRequest;
+import school.sptech.iara.response.PrestadorAvaliacaoResponse;
 import school.sptech.iara.response.ServicoAtribuidoResponse;
 import school.sptech.iara.util.GravaArquivo;
 
@@ -23,6 +24,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -224,7 +226,31 @@ public class PrestadorController {
         return ResponseEntity.status(200).body(foto);
     }
 
-
+    @GetMapping("/avaliacao/{idPrestador}")
+    public ResponseEntity<PrestadorAvaliacaoResponse> getAvaliacao(@PathVariable Integer idPrestador){
+        Optional<Prestador> prestadorOptional = repository.findById(idPrestador);
+        if (prestadorOptional.isPresent()){
+            Prestador prestador = prestadorOptional.get();
+            List<ServicoAtribuido> servicoAtribuidos = servicoAtribuidoRepository.
+                    findAllByServico_PrestadorAndStatus(prestador, "Finalizado");
+            if (!servicoAtribuidos.isEmpty()){
+                Double soma = 0d;
+                Integer contagem = 0;
+                for (ServicoAtribuido serv: servicoAtribuidos){
+                    if (serv.getAvaliacao() >= 0 && serv.getAvaliacao() <= 5){
+                        soma += serv.getAvaliacao();
+                        contagem++;
+                    }
+                }
+                Double media = soma / contagem;
+                if(media >= 0 && media <= 5){
+                    return ResponseEntity.status(200).body(new PrestadorAvaliacaoResponse(prestador.getId(), media));
+                }
+            }
+            return ResponseEntity.status(204).build();
+        }
+        return ResponseEntity.status(400).build();
+    }
 
     @PatchMapping(value = "/foto/{idPrestador}", consumes = "image/jpeg")
     @ApiResponses(value = {

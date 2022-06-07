@@ -46,7 +46,7 @@ public class ServicoAtribuidoController {
     @Autowired
     private ChatRepository chatRepository;
 
-    @GetMapping("/{idServico}")
+    @GetMapping
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Retorna uma lista de serviços atribuídos"),
             @ApiResponse(responseCode = "204", description = "Retorna uma lista vazia")
