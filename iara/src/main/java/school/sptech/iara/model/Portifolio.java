@@ -9,8 +9,8 @@ public class Portifolio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany
-    private List<Foto> fotos;
+//    @OneToMany
+//    private List<Foto> fotos;
 
     @ManyToOne
     private Prestador prestador;
@@ -22,12 +22,12 @@ public class Portifolio {
     public Portifolio(){}
 
     // Getter and Setter
-    public List<Foto> getFotos() {
-        return fotos;
-    }
-    public void setFotos(List<Foto> fotos) {
-        this.fotos = fotos;
-    }
+//    public List<Foto> getFotos() {
+//        return fotos;
+//    }
+//    public void setFotos(List<Foto> fotos) {
+//        this.fotos = fotos;
+//    }
     public Prestador getPrestador() {
         return prestador;
     }
@@ -37,7 +37,7 @@ public class Portifolio {
 
     // Método
 
-    public void adicionarFoto(Foto foto){
-        fotos.add(foto);
-    }
+//    public void adicionarFoto(Foto foto){
+//        fotos.add(foto);
+//    }
 }

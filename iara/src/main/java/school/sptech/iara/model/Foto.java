@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Entity
 public class Foto {
@@ -16,9 +17,13 @@ public class Foto {
     @NotNull
     private LocalDate data;
 
-    public Foto(byte[] foto, LocalDate data) {
+    @ManyToOne
+    private Portifolio portifolio;
+
+    public Foto(byte[] foto, Portifolio portifolio) {
         this.foto = foto;
-        this.data = data;
+        this.portifolio = portifolio;
+        this.data = LocalDate.now();
     }
     public Foto(){}
 
