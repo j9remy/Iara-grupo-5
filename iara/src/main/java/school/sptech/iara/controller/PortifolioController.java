@@ -1,5 +1,7 @@
 package school.sptech.iara.controller;
 
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +26,11 @@ public class PortifolioController {
     @Autowired
     private FotoRepository fotoRepository;
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Retorna uma única instância de foto"),
+            @ApiResponse(responseCode = "404", description = "Foto não encontrada"),
+            @ApiResponse(responseCode = "400", description = "Prestador ou Portifolio não encontrado")
+    })
     @GetMapping("/{idPrestador}/{idFoto}")
     public ResponseEntity<Foto> getPortifolio(@PathVariable Integer idPrestador,
                                                 @PathVariable Integer idFoto){
@@ -44,6 +51,11 @@ public class PortifolioController {
         return ResponseEntity.status(400).build();
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Foi retornada uma lista de instâncias de foto"),
+            @ApiResponse(responseCode = "204", description = "A busca foi feita, mas não houve retorno de fotos"),
+            @ApiResponse(responseCode = "400", description = "Prestador ou portifólio não encontrado")
+    })
     @GetMapping("/{idPrestador}")
     public ResponseEntity<List<Foto>> getPortifolio(@PathVariable Integer idPrestador){
         Optional<Prestador> prestadorOptional = prestadorRepository.findById(idPrestador);
@@ -62,6 +74,10 @@ public class PortifolioController {
         return ResponseEntity.status(400).build();
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Foto cadastrada no portifolio com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Prestador ou portifólio não encontrado")
+    })
     @PostMapping(value = "/{idPrestador}", consumes = "image/jpeg")
     public ResponseEntity<Void> postFoto(@PathVariable Integer idPrestador,
                                          @RequestBody byte[] foto){
@@ -79,6 +95,11 @@ public class PortifolioController {
         return ResponseEntity.status(400).build();
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "202", description = "Remoção da imagem feita com sucesso"),
+            @ApiResponse(responseCode = "204", description = "Foto na qual houve a tentativa de exclusão não existe"),
+            @ApiResponse(responseCode = "400", description = "Prestador ou portifólio não encontrado")
+    })
     @DeleteMapping("/{idPrestador}/{idFoto}")
     public ResponseEntity<Void> deleteFoto(@PathVariable Integer idPrestador,
                                            @PathVariable Integer idFoto){
