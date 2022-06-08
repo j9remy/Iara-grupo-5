@@ -9,19 +9,20 @@ import withReactContent from "sweetalert2-react-content";
 import api from "../api";
 
 
-function ReiniciarValores(){
-    return { email: "", senha: ""}
+
+function ReiniciarValores() {
+    return { email: "", senha: "" }
 }
 
 function Login() {
-    
+
     const [values, setValues] = useState(ReiniciarValores);
     const navigate = useNavigate();
     const swal = withReactContent(Swal);
 
-    function verificarValues(evento){
-        const {value, name} = evento.target;
-        setValues({...values, [name]: value, })
+    function verificarValues(evento) {
+        const { value, name } = evento.target;
+        setValues({ ...values, [name]: value, })
     }
 
     function autenticarLogin(evento) {
@@ -34,7 +35,7 @@ function Login() {
             }
         ).then((res) => {
             localStorage.setItem("clinte", JSON.stringify(res.data))
-            navigate("/home")
+            navigate("/")
         })
             .catch(error => {
                 if (error.request.status === 401) {
@@ -59,32 +60,32 @@ function Login() {
         <>
             <div class="page dflex acenter jcenter">
                 <div class="card bg-dark-red txt-left">
-                    <a href="institucional.html">
+                    <Link to={'/'}>
                         <img class="logo transform" src={logo} />
-                    </a>
+                    </Link>
                     <form id="login" class="campos dflex fdcolumn txt-medium" onSubmit={autenticarLogin}>
                         <div class="input-group">
-                            <input 
-                            required 
-                            id="input-email"
-                            name="email" 
-                            type="text" 
-                            value={values.email}
-                            onChange={verificarValues}
-                            autocomplete="off" 
-                            class="input" 
+                            <input
+                                required
+                                id="input-email"
+                                name="email"
+                                type="text"
+                                value={values.email}
+                                onChange={verificarValues}
+                                autocomplete="off"
+                                class="input"
                             />
                             <label class="user-label">E-mail</label>
                         </div>
                         <div class="input-group">
-                            <input required 
-                            id="input-senha" 
-                            name="senha"
-                            type="password"
-                            value={values.senha}
-                            onChange={verificarValues} 
-                            autocomplete="off" 
-                            class="input" />
+                            <input required
+                                id="input-senha"
+                                name="senha"
+                                type="password"
+                                value={values.senha}
+                                onChange={verificarValues}
+                                autocomplete="off"
+                                class="input" />
                             <label class="user-label">Senha</label>
                         </div>
 

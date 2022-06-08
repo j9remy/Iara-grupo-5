@@ -2,6 +2,7 @@ import logo from '../html-css-template/img/logo-branco.png';
 import api from "../api";
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 function CadastroInformacoesPessoais() {
 
@@ -64,14 +65,14 @@ function CadastroInformacoesPessoais() {
 
     console.log(id)
 
-    function SubmeterFormEndereco(evento){
+    function SubmeterFormEndereco(evento) {
 
         let jsonEndereco = {
             cep: cep,
             numero: numero,
             complemento: complemento
         }
-        
+
         if (senha !== senhaVerificacao) {
             alert("As senhas devem ser iguais!");
         } else {
@@ -83,15 +84,15 @@ function CadastroInformacoesPessoais() {
         }
     }
 
-    
+
     console.log(id)
     return (
         <>
             <div class="page dflex acenter jcenter txt-medium">
                 <form id="cadastro-cliente" class="container" onSubmit={SubmeterFormCliente}>
-                    <a href="institucional.html" class="logo transform">
-                        <img alt="Logo" src={logo} />
-                    </a>
+                    <Link to={'/'}>
+                        <img class="logo transform" src={logo} />
+                    </Link>
                     <h2>Dados Pessoais</h2>
                     <div class="card bg-dark-red dflex jbetween fwrap">
                         <div class="user-input-wrp width-4 input-group">
@@ -159,79 +160,79 @@ function CadastroInformacoesPessoais() {
                             <label class="user-label">Telefone</label>
                         </div>
                     </div>
-                        <h2>Endereço</h2>
-                        <div class="card bg-dark-red dflex jbetween fwrap" onSubmit={SubmeterFormEndereco}>
-                            <div class="user-input-wrp width-4 input-group">
-                                <input
-                                    type="text"
-                                    class="input"
-                                    id="input-cep"
-                                    onChange={evento => setCep(evento.target.value)}
-                                    required
-                                />
-                                <label class="user-label">CEP</label>
-                            </div>
-                            <div class="width-8"></div>
-                            <div class="user-input-wrp width-5 input-group">
-                                <input
-                                    type="text"
-                                    class="input"
-                                    id="input-logradouro"
-                                    required
-                                />
-                                <label class="user-label">Logradouro</label>
-                            </div>
-                            <div class="user-input-wrp width-2 input-group">
-                                <input
-                                    type="text"
-                                    class="input"
-                                    id="input-numero"
-                                    required
-                                    onChange={evento => setNumero(evento.target.value)}    
-                                />
-                                <label class="user-label">Número</label>
-                            </div>
-                            <div class="user-input-wrp width-5 input-group">
-                                <input
-                                    type="text"
-                                    class="input"
-                                    id="input-complemento"
-                                    onChange={evento => setComplemento(evento.target.value) | setComplemento(null)} 
-                                />
-                                <label class="user-label">Complemento</label>
-                            </div>
-                            <div class="user-input-wrp width-5 input-group">
-                                <input
-                                    type="text"
-                                    class="input"
-                                    id="input-bairro"
-                                    required                                   
-                                />
-                                <label class="user-label">Bairro</label>
-                            </div>
-                            <div class="user-input-wrp width-5 input-group">
-                                <input
-                                    type="text"
-                                    class="input"
-                                    id="input-cidade"
-                                    required
-                                />
-                                <label class="user-label">Cidade</label>
-                            </div>
-                            <div class="user-input-wrp width-2 input-group">
-                                <input
-                                    type="text"
-                                    class="input"
-                                    id="input-uf"
-                                    maxlength="2"
-                                    required
-                                    value={null}
-                                    oninput="this.value = this.value.toUpperCase()"
-                                />
-                                <label class="user-label">UF</label>
-                            </div>
+                    <h2>Endereço</h2>
+                    <div class="card bg-dark-red dflex jbetween fwrap" onSubmit={SubmeterFormEndereco}>
+                        <div class="user-input-wrp width-4 input-group">
+                            <input
+                                type="text"
+                                class="input"
+                                id="input-cep"
+                                onChange={evento => setCep(evento.target.value)}
+                                required
+                            />
+                            <label class="user-label">CEP</label>
                         </div>
-                    
+                        <div class="width-8"></div>
+                        <div class="user-input-wrp width-5 input-group">
+                            <input
+                                type="text"
+                                class="input"
+                                id="input-logradouro"
+                                required
+                            />
+                            <label class="user-label">Logradouro</label>
+                        </div>
+                        <div class="user-input-wrp width-2 input-group">
+                            <input
+                                type="text"
+                                class="input"
+                                id="input-numero"
+                                required
+                                onChange={evento => setNumero(evento.target.value)}
+                            />
+                            <label class="user-label">Número</label>
+                        </div>
+                        <div class="user-input-wrp width-5 input-group">
+                            <input
+                                type="text"
+                                class="input"
+                                id="input-complemento"
+                                onChange={evento => setComplemento(evento.target.value) | setComplemento(null)}
+                            />
+                            <label class="user-label">Complemento</label>
+                        </div>
+                        <div class="user-input-wrp width-5 input-group">
+                            <input
+                                type="text"
+                                class="input"
+                                id="input-bairro"
+                                required
+                            />
+                            <label class="user-label">Bairro</label>
+                        </div>
+                        <div class="user-input-wrp width-5 input-group">
+                            <input
+                                type="text"
+                                class="input"
+                                id="input-cidade"
+                                required
+                            />
+                            <label class="user-label">Cidade</label>
+                        </div>
+                        <div class="user-input-wrp width-2 input-group">
+                            <input
+                                type="text"
+                                class="input"
+                                id="input-uf"
+                                maxlength="2"
+                                required
+                                value={null}
+                                oninput="this.value = this.value.toUpperCase()"
+                            />
+                            <label class="user-label">UF</label>
+                        </div>
+                    </div>
+
                     <h2>Autenticação</h2>
                     <div class="card bg-dark-red dflex jbetween fwrap">
                         <div class="user-input-wrp width-4 input-group">

@@ -1,12 +1,12 @@
 import './html-css-template/css/style.css';
-import Home from './pages/Home';
+import Rotas from './routes';
 
 
 function App() {
 
     return (
         <>
-            <Home />
+            <Rotas />
         </>
     );
 }

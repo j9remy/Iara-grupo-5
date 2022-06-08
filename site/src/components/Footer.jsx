@@ -1,10 +1,17 @@
+import { Link } from 'react-router-dom';
+import logo from '../html-css-template/img/logo-red.png';
+    import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+    import { faFacebookF, faInstagram, faLinkedinIn, faTwitter, faYoutube, faYoutubeSquare } from '@fortawesome/free-brands-svg-icons';
+
 function Footer() {
     return (
         <footer class="footer-logged">
             <div class="container dflex jbetween">
-                <a href="home.html" class="logo transform">
-                    <img alt="Logo" src="../img/logo.png" />
-                </a>
+                <Link to={'/'}>
+                    <a  class="logo transform">
+                        <img alt="Logo" src="../img/logo.png" />
+                    </a>
+                </Link>
                 <div>
                     <h4>INSTITUCIONAL</h4>
                     <a href="institucional.html#como-funciona">Como Funciona</a>
@@ -31,11 +38,11 @@ function Footer() {
                     <span>Acompanhe as nossas<br />
                         redes sociais</span>
                     <div class="dflex acenter">
-                        <a href="" class="button circle txt-dark-red bg-white dflex acenter jcenter"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="" class="button circle txt-dark-red bg-white dflex acenter jcenter"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="" class="button circle txt-dark-red bg-white dflex acenter jcenter"><i class="fa-brands fa-twitter"></i></a>
-                        <a href="" class="button circle txt-dark-red bg-white dflex acenter jcenter"><i class="fa-brands fa-linkedin-in"></i></a>
-                        <a href="" class="button circle txt-dark-red bg-white dflex acenter jcenter"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="" class="button circle txt-dark-red bg-white dflex acenter jcenter"><FontAwesomeIcon icon={faFacebookF} /></a>
+                        <a href="" class="button circle txt-dark-red bg-white dflex acenter jcenter"><FontAwesomeIcon icon={faInstagram} /></a>
+                        <a href="" class="button circle txt-dark-red bg-white dflex acenter jcenter"><FontAwesomeIcon icon={faTwitter} /></a>
+                        <a href="" class="button circle txt-dark-red bg-white dflex acenter jcenter"><FontAwesomeIcon icon={faLinkedinIn} /></a>
+                        <a href="" class="button circle txt-dark-red bg-white dflex acenter jcenter"><FontAwesomeIcon icon={faYoutubeSquare} /></a>
                     </div>
                 </div>
             </div>

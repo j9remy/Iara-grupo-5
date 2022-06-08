@@ -13,7 +13,7 @@ function Rotas(){
                 <Route path="/cadastroCliente" element={<CadastroCliente/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/sucessoCadastro" element={<SucessoCadastro/>}/>
-                <Route path="/home" element={<Home/>}/>
+                <Route path="/" element={<Home/>}/>
             </Routes>
         </BrowserRouter>
 
