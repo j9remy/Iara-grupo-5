@@ -1,0 +1,36 @@
+CLIENTE08-06-2022 20:07:1501
+02Luciana                       Rita                                              841254174071984-02-22         Fluciana@gmail.com                                 (84) 98185-4215
+02Ricardo                       Pedro                                             541166443821990-06-09         Mricardo@outlook.com                               (96) 92775-2377
+02Victória                      Eloá                                              093167905221969-01-12         Fvictoria@gmail.com                                (41) 92879-1509
+02Caio                          Assunção                                          563121856991964-03-17         Massuncaocaio@gmail.com                            (63) 93975-9441
+02Thomas                        Ramos                                             456631139242000-08-14         Mthomas@yahoo.com.br                               (61) 98984-1622
+02Julio                         Nunes                                             392944885861991-09-11         Mjulionunes@gmail.com                              (81) 99385-8178
+02Isadora                       Maitê Souza                                       448982853501985-10-19         Fmaite_isa@uol.com.br                              (27) 98610-1588
+010000000007
+CLIENTE08-06-2022 20:10:4901
+02Luciana                       Rita                                              841254174071984-02-22         Fluciana@gmail.com                                 (84) 98185-4215
+02Ricardo                       Pedro                                             541166443821990-06-09         Mricardo@outlook.com                               (96) 92775-2377
+02Victória                      Eloá                                              093167905221969-01-12         Fvictoria@gmail.com                                (41) 92879-1509
+02Caio                          Assunção                                          563121856991964-03-17         Massuncaocaio@gmail.com                            (63) 93975-9441
+02Thomas                        Ramos                                             456631139242000-08-14         Mthomas@yahoo.com.br                               (61) 98984-1622
+02Julio                         Nunes                                             392944885861991-09-11         Mjulionunes@gmail.com                              (81) 99385-8178
+02Isadora                       Maitê Souza                                       448982853501985-10-19         Fmaite_isa@uol.com.br                              (27) 98610-1588
+010000000007
+CLIENTE08-06-2022 20:12:2301
+02Luciana                       Rita                                              841254174071984-02-22         Fluciana@gmail.com                                 (84) 98185-4215
+02Ricardo                       Pedro                                             541166443821990-06-09         Mricardo@outlook.com                               (96) 92775-2377
+02Victória                      Eloá                                              093167905221969-01-12         Fvictoria@gmail.com                                (41) 92879-1509
+02Caio                          Assunção                                          563121856991964-03-17         Massuncaocaio@gmail.com                            (63) 93975-9441
+02Thomas                        Ramos                                             456631139242000-08-14         Mthomas@yahoo.com.br                               (61) 98984-1622
+02Julio                         Nunes                                             392944885861991-09-11         Mjulionunes@gmail.com                              (81) 99385-8178
+02Isadora                       Maitê Souza                                       448982853501985-10-19         Fmaite_isa@uol.com.br                              (27) 98610-1588
+010000000007
+CLIENTE08-06-2022 20:13:0401
+02Luciana                       Rita                                              841254174071984-02-22         Fluciana@gmail.com                                 (84) 98185-4215
+02Ricardo                       Pedro                                             541166443821990-06-09         Mricardo@outlook.com                               (96) 92775-2377
+02Victória                      Eloá                                              093167905221969-01-12         Fvictoria@gmail.com                                (41) 92879-1509
+02Caio                          Assunção                                          563121856991964-03-17         Massuncaocaio@gmail.com                            (63) 93975-9441
+02Thomas                        Ramos                                             456631139242000-08-14         Mthomas@yahoo.com.br                               (61) 98984-1622
+02Julio                         Nunes                                             392944885861991-09-11         Mjulionunes@gmail.com                              (81) 99385-8178
+02Isadora                       Maitê Souza                                       448982853501985-10-19         Fmaite_isa@uol.com.br                              (27) 98610-1588
+010000000007

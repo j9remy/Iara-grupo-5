@@ -20,6 +20,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -261,12 +262,12 @@ public class ClienteController {
         int contaRegCorpo = 0;
 
         // Monta o registro de header
-        String header = "CLIENTE";
+        String header = "00CLIENTE";
         header += LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
         header += "01";
 
         // Grava o registro de header
-        gravaArq.gravaRegistro(header, nomeArq);
+        gravaArq.gravaRegistro(header, nomeArq + ".txt");
 
         String corpo;
         for (Cliente c : lista) {
@@ -279,13 +280,13 @@ public class ClienteController {
             corpo += String.format("%-50.50s", c.getEmail());
             corpo += String.format("%-15.15s", c.getTelefone());
             contaRegCorpo++;
-            gravaArq.gravaRegistro(corpo, nomeArq);
+            gravaArq.gravaRegistro(corpo, nomeArq + ".txt");
         }
 
         // Monta e grava o registro de trailer
         String trailer = "01";
         trailer += String.format("%010d", contaRegCorpo);
-        gravaArq.gravaRegistro(trailer, nomeArq);
+        gravaArq.gravaRegistro(trailer, nomeArq + ".txt");
 
         return ResponseEntity.status(201).build();
     }
@@ -299,7 +300,7 @@ public class ClienteController {
         BufferedReader entrada = null;
         String registro, tipoRegistro;
         String nome, sobrenome, cpf, email, senha, telefone;
-        Timestamp dataNasc;
+        LocalDate dataNasc;
         char sexo;
         int contaRegCorpoLido = 0;
         int qtdRegCorpoGravado;
@@ -308,7 +309,7 @@ public class ClienteController {
 
         // try-catch para abrir o arquivo
         try {
-            entrada = new BufferedReader(new FileReader(nomeArq));
+            entrada = new BufferedReader(new FileReader(nomeArq + ".txt"));
         } catch (IOException erro) {
             System.out.println("Erro ao abrir o arquivo: " + erro);
             return ResponseEntity.status(400).build();
@@ -326,10 +327,9 @@ public class ClienteController {
                 switch (tipoRegistro) {
                     case "00":
                         System.out.println("É um registro de header");
-                        System.out.println("Tipo de arquivo: " + registro.substring(2, 6));
-                        System.out.println("Ano e semestre: " + registro.substring(6, 11));
-                        System.out.println("Data e hora da gravação: " + registro.substring(11, 30));
-                        System.out.println("Versão do documento: " + registro.substring(30, 32));
+                        System.out.println("Tipo de arquivo: " + registro.substring(2, 9));
+                        System.out.println("Data e hora da gravação: " + registro.substring(9, 28));
+                        System.out.println("Versão do documento: " + registro.substring(28, 30));
                         break;
                     case "01":
                         System.out.println("É um registro de trailer");
@@ -342,16 +342,17 @@ public class ClienteController {
                                     "com a quantidade de registros gravados");
                         }
                         break;
-                    case "00002":
+                    case "02":
                         System.out.println("É um registro de corpo");
-                        nome = registro.substring(6, 35).trim();
-                        sobrenome = registro.substring(36, 85).trim();
-                        cpf = registro.substring(86, 96).trim();
-                        dataNasc = Timestamp.valueOf(registro.substring(97, 115).trim());
-                        sexo = registro.charAt(116);
-                        email = registro.substring(117, 166).trim();
-                        senha = registro.substring(167, 177).trim();
-                        telefone = registro.substring(178, 191).trim();
+                        nome = registro.substring(2, 32).trim();
+                        sobrenome = registro.substring(32, 82).trim();
+                        cpf = registro.substring(82, 93).trim();
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                        dataNasc = LocalDate.parse(registro.substring(93, 103), formatter);
+                        sexo = registro.charAt(112);
+                        email = registro.substring(113, 163).trim();
+                        telefone = registro.substring(163, 178).trim();
+                        senha = "abcde";
                         contaRegCorpoLido++;
 
                         Cliente c = new Cliente(nome,
@@ -368,6 +369,7 @@ public class ClienteController {
 
                         // No nosso caso, vamos adicionar o objeto a na listaLida:
                         repository.save(c);
+                        listaLida.add(c);
                         break;
                     default:
                         System.out.println("Tipo de registro inválido!");

@@ -33,7 +33,7 @@ public class Prestador extends Usuario{
         super();
     }
     public Prestador(String nome, String sobrenome,
-                     String cpf, Timestamp dataNasc,
+                     String cpf, LocalDate dataNasc,
                      String email, String senha,
                      char genero, String telefone,
                      String resumo,
@@ -50,7 +50,7 @@ public class Prestador extends Usuario{
     }
 
     public Prestador(String nome, String sobrenome,
-                     String cpf, Timestamp dataNasc,
+                     String cpf, LocalDate dataNasc,
                      String email, String senha, char genero,
                      String telefone,
                      Boolean atendeDomicilio,

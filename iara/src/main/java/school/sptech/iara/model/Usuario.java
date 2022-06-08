@@ -10,6 +10,7 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,12 +33,12 @@ public abstract class Usuario implements Avaliavel{
     private String sobrenome;
 
     @NotNull
-    @CPF
+//    @CPF
     private String cpf;
 
     @NotNull
     @Past
-    private Timestamp dataNasc;
+    private LocalDate dataNasc;
 
     @NotNull
     @Email
@@ -62,7 +63,7 @@ public abstract class Usuario implements Avaliavel{
 
 //    Constructor
     public Usuario(String nome, String sobrenome,
-                   String cpf, Timestamp dataNasc,
+                   String cpf, LocalDate dataNasc,
                    String email, String senha,
                    char genero, String telefone) {
         this.nome = nome;
@@ -106,10 +107,10 @@ public abstract class Usuario implements Avaliavel{
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-    public Timestamp getDataNasc() {
+    public LocalDate getDataNasc() {
         return dataNasc;
     }
-    public void setDataNasc(Timestamp dataNasc) {
+    public void setDataNasc(LocalDate dataNasc) {
         this.dataNasc = dataNasc;
     }
     public String getEmail() {

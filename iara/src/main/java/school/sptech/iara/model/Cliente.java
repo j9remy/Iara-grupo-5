@@ -4,6 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class Cliente extends Usuario {
     }
 
     public Cliente(String nome, String sobrenome,
-                   String cpf, Timestamp dataNasc,
+                   String cpf, LocalDate dataNasc,
                    String email, String senha,
                    char sexo, String telefone) {
         super(nome, sobrenome, cpf, dataNasc, email, senha, sexo, telefone);

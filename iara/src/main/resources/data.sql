@@ -13,7 +13,7 @@ INSERT INTO Cliente (Autenticado, Nome, Sobrenome, Cpf, Data_nasc, Email, Senha,
 INSERT INTO Prestador (Autenticado, Nome, Sobrenome, Cpf, Data_nasc, Email, Senha, Genero,  Telefone, Resumo, Atende_Domicilio, Atende_Estabelecimento, Distancia) VALUES
     (true, 'Claudia','Rita','98895457056','1964-01-20','claudia@hotmail.com','12345','F','(17) 96728-6724', 'Cabelereira dedicada e com longa experiência na área estética', true,false, 0.0),
     (false, 'Paulo','Henrique','63513178000','1960-04-08','pauloh@outlook.com','12345','M','(21) 99365-1619', 'Barbeiro e cabeleireiro com diversos prêmios nacionais, 15 anos no ramo', true,false, 0.0),
-    (false, 'Leticia','Maia','81587717030','1967-02-14','leticia@gmail.com','12345','F','(89) 98719-6305', 'Designer de Sobrancelhas nova no mundo estético procurando clientes', true,true, 2.5),
+    (false, 'Leticia','Maia','26301579038','1967-02-14','leticia@gmail.com','12345','F','(89) 98719-6305', 'Designer de Sobrancelhas nova no mundo estético procurando clientes', true,true, 2.5),
     (true, 'Victor','Assunção','81408412004','1974-04-16','victorassuncao@gmail.com','12345','M','(93) 99518-6231', 'Especialista em limpeza de pele e cuidados com o rosto', false,true, 4.5),
     (true, 'Kelvin','Ramos','10419961011','2001-03-13','kelvin@gmail.com.br','12345','M','(68) 96942-6542', 'Massagista premiado mundialmente, técnicas tailandesas e experiência na área',false, true,8.0),
     (false, 'Bruno','Aluísio','65638818073','1994-04-17','alubruno@bing.com','12345','M','(87) 98169-4246', 'Cabeleireiro feminino, experiência com cortes curtos e cachos', false, true, 3.1),

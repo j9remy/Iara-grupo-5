@@ -20,6 +20,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -276,12 +277,12 @@ public class PrestadorController {
         int contaRegCorpo = 0;
 
         // Monta o registro de header
-        String header = "PRESTADOR";
+        String header = "00PRESTADOR";
         header += LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
         header += "01";
 
         // Grava o registro de header
-        gravaArq.gravaRegistro(header, nomeArq);
+        gravaArq.gravaRegistro(header, nomeArq + ".txt");
 
         String corpo;
         for (Prestador p : lista) {
@@ -293,18 +294,18 @@ public class PrestadorController {
             corpo += String.format("%-1.1s", p.getSexo());
             corpo += String.format("%-50.50s", p.getEmail());
             corpo += String.format("%-15.15s", p.getTelefone());
-            corpo += String.format("%140.140s", p.getResumo());
+            corpo += String.format("%-140.140s", p.getResumo());
             corpo += String.format("%-5.5s", p.getAtendeDomicilio());
             corpo += String.format("%-5.5s", p.getAtendeEstabelecimento());
             corpo += String.format("%4.2f", p.getDistancia());
             contaRegCorpo++;
-            gravaArq.gravaRegistro(corpo, nomeArq);
+            gravaArq.gravaRegistro(corpo, nomeArq + ".txt");
         }
 
         // Monta e grava o registro de trailer
         String trailer = "01";
         trailer += String.format("%010d", contaRegCorpo);
-        gravaArq.gravaRegistro(trailer, nomeArq);
+        gravaArq.gravaRegistro(trailer, nomeArq + ".txt");
 
         return ResponseEntity.status(201).build();
     }
@@ -318,7 +319,7 @@ public class PrestadorController {
         BufferedReader entrada = null;
         String registro, tipoRegistro;
         String nome, sobrenome, cpf, email, senha, telefone, resumo;
-        Timestamp dataNasc;
+        LocalDate dataNasc;
         Double distancia;
         char sexo;
         boolean atendeDomicilio, atendeEstabelecimento;
@@ -329,7 +330,7 @@ public class PrestadorController {
 
         // try-catch para abrir o arquivo
         try {
-            entrada = new BufferedReader(new FileReader(nomeArq));
+            entrada = new BufferedReader(new FileReader(nomeArq + ".txt"));
         } catch (IOException erro) {
             System.out.println("Erro ao abrir o arquivo: " + erro);
             return ResponseEntity.status(400).build();
@@ -346,8 +347,7 @@ public class PrestadorController {
                 tipoRegistro = registro.substring(0,2);
                 switch (tipoRegistro) {
                     case "00":
-                        System.out.println("Tipo de arquivo: " + registro.substring(2, 6));
-                        System.out.println("Ano e semestre: " + registro.substring(6, 11));
+                        System.out.println("Tipo de arquivo: " + registro.substring(2, 11));
                         System.out.println("Data e hora da gravação: " + registro.substring(11, 30));
                         System.out.println("Versão do documento: " + registro.substring(30, 32));
                         break;
@@ -362,19 +362,20 @@ public class PrestadorController {
                                     "com a quantidade de registros gravados");
                         }
                         break;
-                    case "00002":
-                        nome = registro.substring(6, 35).trim();
-                        sobrenome = registro.substring(36, 85).trim();
-                        cpf = registro.substring(86, 96).trim();
-                        dataNasc = Timestamp.valueOf(registro.substring(97, 115).trim());
-                        sexo = registro.charAt(116);
-                        email = registro.substring(117, 166).trim();
-                        senha = registro.substring(167, 177).trim();
-                        telefone = registro.substring(178, 191).trim();
-                        resumo = registro.substring(192, 391).trim();
-                        atendeDomicilio = Boolean.parseBoolean(registro.substring(392, 393).trim());
-                        atendeEstabelecimento = Boolean.parseBoolean(registro.substring(394, 395).trim());
-                        distancia = Double.parseDouble(registro.substring(396, 400).trim());
+                    case "02":
+                        nome = registro.substring(2, 32).trim();
+                        sobrenome = registro.substring(32, 82).trim();
+                        cpf = registro.substring(82, 93).trim();
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                        dataNasc = LocalDate.parse(registro.substring(93, 103), formatter);
+                        sexo = registro.charAt(112);
+                        email = registro.substring(113, 163).trim();
+                        telefone = registro.substring(163, 178).trim();
+                        senha = "abcde";
+                        resumo = registro.substring(178, 318).trim();
+                        atendeDomicilio = Boolean.parseBoolean(registro.substring(318, 322).trim());
+                        atendeEstabelecimento = Boolean.parseBoolean(registro.substring(322, 328).trim());
+                        distancia = Double.parseDouble(registro.substring(328, 332).replace(',','.'));
                         contaRegCorpoLido++;
 
                         Prestador p = new Prestador(nome,
@@ -396,6 +397,7 @@ public class PrestadorController {
 
                         // No nosso caso, vamos adicionar o objeto a na listaLida:
                         repository.save(p);
+                        listaLida.add(p);
                         break;
                     default:
                         System.out.println("Tipo de registro inválido!");

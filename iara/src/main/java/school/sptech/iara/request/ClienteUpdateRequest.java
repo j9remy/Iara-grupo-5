@@ -6,6 +6,7 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 public class ClienteUpdateRequest {
     @NotNull
@@ -18,7 +19,7 @@ public class ClienteUpdateRequest {
     private String sobrenome;
     @NotNull
     @Past
-    private Timestamp dataNasc;
+    private LocalDate dataNasc;
     @NotNull
     @Size(min = 5, max = 20)
     private String senha;
@@ -46,10 +47,10 @@ public class ClienteUpdateRequest {
     public void setSobrenome(String sobrenome) {
         this.sobrenome = sobrenome;
     }
-    public Timestamp getDataNasc() {
+    public LocalDate getDataNasc() {
         return dataNasc;
     }
-    public void setDataNasc(Timestamp dataNasc) {
+    public void setDataNasc(LocalDate dataNasc) {
         this.dataNasc = dataNasc;
     }
     public String getSenha() {
