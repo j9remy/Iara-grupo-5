@@ -2,10 +2,58 @@ import { Link } from 'react-router-dom';
 import logo from '../html-css-template/img/logo-red.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import api from "../api";
 
 
+function ReiniciarValores(){
+    return { email: "", senha: ""}
+}
 
 function Login() {
+    
+    const [values, setValues] = useState(ReiniciarValores);
+    const navigate = useNavigate();
+    const swal = withReactContent(Swal);
+
+    function verificarValues(evento){
+        const {value, name} = evento.target;
+        setValues({...values, [name]: value, })
+    }
+
+    function autenticarLogin(evento) {
+        evento.preventDefault();
+        api.post("cliente/autenticacao", values,
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        ).then((res) => {
+            localStorage.setItem("clinte", JSON.stringify(res.data))
+            navigate("/home")
+        })
+            .catch(error => {
+                if (error.request.status === 401) {
+                    console.log("success")
+                    swal.fire({
+                        icon: "error",
+                        title: <h1>Ops... Dados inválidos</h1>,
+                        text: "Por favor, tente novamente!"
+                    });
+                } else {
+                    console.error("err")
+                    swal.fire({
+                        icon: "error",
+                        title: <h1>Ops! Algo deu errado da nossa parte</h1>,
+                        text: "Por favor, tente novamente!"
+                    });
+                }
+            });
+    }
 
     return (
         <>
@@ -14,13 +62,29 @@ function Login() {
                     <a href="institucional.html">
                         <img class="logo transform" src={logo} />
                     </a>
-                    <form id="login" class="campos dflex fdcolumn txt-medium">
+                    <form id="login" class="campos dflex fdcolumn txt-medium" onSubmit={autenticarLogin}>
                         <div class="input-group">
-                            <input required="" id="input-email" type="text" autocomplete="off" class="input" />
+                            <input 
+                            required 
+                            id="input-email"
+                            name="email" 
+                            type="text" 
+                            value={values.email}
+                            onChange={verificarValues}
+                            autocomplete="off" 
+                            class="input" 
+                            />
                             <label class="user-label">E-mail</label>
                         </div>
                         <div class="input-group">
-                            <input required="" id="input-senha" type="password" autocomplete="off" class="input" />
+                            <input required 
+                            id="input-senha" 
+                            name="senha"
+                            type="password"
+                            value={values.senha}
+                            onChange={verificarValues} 
+                            autocomplete="off" 
+                            class="input" />
                             <label class="user-label">Senha</label>
                         </div>
 
