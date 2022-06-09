@@ -55,7 +55,6 @@ function CadastroInformacoesPessoais() {
                     'Content-Type': 'application/json'
                 }
             }).then(() => {
-                alert("Restaurante cadastrado com sucesso!");
                 navigate("/sucessoCadastro")
             });
         }
