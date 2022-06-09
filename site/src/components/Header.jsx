@@ -1,5 +1,6 @@
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function Header() {
@@ -19,10 +20,8 @@ function Header() {
                     <a href=" " class="txt-dark-red txt-medium margin-right-fifty transform">INSTITUCIONAL</a>
                     <a href=" " class="txt-dark-red txt-medium transform">AMIGOS DA IARA</a>
                 </div>
-                
-                <span class="button red"><Link to={'/EscolhaCadastro'}>CADASTRE-SE</Link></span>
-                    
-                <Link to={'/Login'} class="button white">LOGIN</Link>
+                <Link to={'/cadastrocliente'}><button class="button bg-red txt-white bg-hover-white txt-hover-dark-red" >CADASTRE-SE</button></Link>
+                <Link to={'/login'}><button class="button bg-white txt-black bg-hover-dark-red txt-hover-white" >LOGIN</button></Link>
             </div>
         </header>
     )

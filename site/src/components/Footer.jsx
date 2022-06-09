@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom';
 import logo from '../html-css-template/img/logo-red.png';
-    import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-    import { faFacebookF, faInstagram, faLinkedinIn, faTwitter, faYoutube, faYoutubeSquare } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFacebookF, faInstagram, faLinkedinIn, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
 
 function Footer() {
     return (
         <footer class="footer-logged">
             <div class="container dflex jbetween">
-                <Link to={'/'}>
-                    <a  class="logo transform">
+                <div>
+                    <a class="logo transform">
                         <img alt="Logo" src="../img/logo.png" />
                     </a>
-                </Link>
+                </div>
                 <div>
                     <h4>INSTITUCIONAL</h4>
                     <a href="institucional.html#como-funciona">Como Funciona</a>
@@ -42,7 +42,7 @@ function Footer() {
                         <a href="" class="button circle txt-dark-red bg-white dflex acenter jcenter"><FontAwesomeIcon icon={faInstagram} /></a>
                         <a href="" class="button circle txt-dark-red bg-white dflex acenter jcenter"><FontAwesomeIcon icon={faTwitter} /></a>
                         <a href="" class="button circle txt-dark-red bg-white dflex acenter jcenter"><FontAwesomeIcon icon={faLinkedinIn} /></a>
-                        <a href="" class="button circle txt-dark-red bg-white dflex acenter jcenter"><FontAwesomeIcon icon={faYoutubeSquare} /></a>
+                        <a href="" class="button circle txt-dark-red bg-white dflex acenter jcenter"><FontAwesomeIcon icon={faYoutube} /></a>
                     </div>
                 </div>
             </div>

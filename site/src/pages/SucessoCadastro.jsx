@@ -5,10 +5,9 @@ function SucessoCadastro() {
     return (
         <div class="page dflex acenter jcenter fdcolumn">
             <div class="card bg-dark-red txt-left">
-                <a href="institucional.html">
+                <Link to={'/'}>
                     <img class="logo transform logo-menor" src={logo} />
-                </a>
-
+                </Link>
                 <div class="dflex acenter jcenter txt-medium txt-white txt-bigger margin-top-thirty">
                     Cadastro realizado com sucesso!
                 </div>

@@ -1,7 +1,7 @@
 import CarrocelCategorias from "../components/CarrocelCategorias";
 import CarrocelProfissionais from "../components/CarrocelProfissionais";
 import Footer from "../components/Footer";
-import Header from "../components/Header";
+import HeaderLogado from "../components/HearderLogado";
 
 
 function Home() {
@@ -9,7 +9,7 @@ function Home() {
         <>
             <main class="margin-top-thirty">
                 <div class="container">
-                    <Header />
+                    <HeaderLogado />
                     <CarrocelCategorias />
                     <CarrocelProfissionais />
                     <Footer/>

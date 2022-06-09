@@ -35,7 +35,7 @@ function Login() {
             }
         ).then((res) => {
             localStorage.setItem("clinte", JSON.stringify(res.data))
-            navigate("/")
+            navigate("/home")
         })
             .catch(error => {
                 if (error.request.status === 401) {
