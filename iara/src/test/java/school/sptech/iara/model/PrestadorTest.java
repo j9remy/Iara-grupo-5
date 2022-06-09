@@ -1,12 +1,17 @@
 package school.sptech.iara.model;
 
 import com.github.javafaker.Faker;
+import com.sun.istack.NotNull;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
+import java.lang.reflect.Field;
 import java.sql.Timestamp;
+
+import javax.persistence.OneToMany;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -177,7 +182,8 @@ public class PrestadorTest {
         Prestador prestador = new Prestador();
 
         //Act
-        var thrown = Assertions.assertThrows(ArithmeticException.class, () -> {
+        var thrown = Assertions.assertThrows(ArithmeticException.class, 
+        () -> {
             prestador.calcAvaliacao();
         });
 
@@ -364,5 +370,25 @@ public class PrestadorTest {
             assertFalse(prestador.servicoExiste(servico));
     }
 
+    @Test
+    @DisplayName("Os campos devem estar com as anotacoes do spring corretas")
+    void camposComAnotacoesDoSpringDevemEstarCorretos() throws NoSuchFieldException, SecurityException{
+        
+        Class<Prestador> classe =  Prestador.class;
+
+        Field [] campo = new Field[]{
+            classe.getDeclaredField("atendeDomicilio"),
+            classe.getDeclaredField("atendeEstabelecimento"),
+            classe.getDeclaredField("habilidades"),
+            classe.getDeclaredField("servicos")
+        };
+
+        assertTrue(campo[0].isAnnotationPresent(NotNull.class));
+        assertTrue(campo[1].isAnnotationPresent(NotNull.class));
+        assertTrue(campo[2].isAnnotationPresent(OneToMany.class));
+        assertTrue(campo[3].isAnnotationPresent(OneToMany.class));
+        
+
+    }
 
 }
