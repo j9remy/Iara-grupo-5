@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.ResponseEntity;
+
+import school.sptech.iara.model.Endereco;
 import school.sptech.iara.model.Prestador;
 import school.sptech.iara.repository.*;
+import school.sptech.iara.request.EnderecoSimplesRequest;
 import school.sptech.iara.request.PrestadorUpdateRequest;
 import school.sptech.iara.request.UsuarioEmailSenhaRequest;
 
@@ -411,47 +414,90 @@ public class PrestadorControllerTest {
     }
 
 
-    // @Test
-    // @DisplayName("postEnderecoCliente deve Retornar status 200 e um body vazio")
-    // public void postEnderecoClienteDeveRetornarStatus200NoBodyNada(){
+    @Test
+    @DisplayName("postEnderecoCliente deve Retornar status 200 e um body vazio")
+    public void postEnderecoClienteDeveRetornarStatus200NoBodyNada(){
 
-    //     //Arrange
-    //     Prestador prestadorMock = mock(Prestador.class);
-    //     Optional<Prestador> optional;
-    //     UsuarioEmailSenhaRequest req = mock(UsuarioEmailSenhaRequest.class);
+        //Arrange
+        Prestador prestadorMock = new Prestador(
+            new Faker().name().firstName(), new Faker().name().lastName(),
+            new Faker().lorem().word(),LocalDate.now(),new Faker().internet().emailAddress(),
+            new Faker().internet().password(),
+            new Faker().lorem().character(), new Faker().phoneNumber().phoneNumber(),
+            new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean(),
+            new Faker().random().nextBoolean(), new Faker().random().nextDouble()
+        );
 
-    //     optional = Optional.empty();
-    //     when(prestadorRepo.findByEmailAndSenha(anyString(),anyString())).thenReturn(optional);
+        Optional<Prestador> optional = Optional.of(prestadorMock);
+        
+        EnderecoSimplesRequest req = new EnderecoSimplesRequest();
 
-    //     // Act
-    //     ResponseEntity<Void> resposta = prestadorController.postEnderecoCliente(req);
+        Endereco endereco = new Endereco(
+            new Faker().lorem().word(),
+            new Faker().lorem().word(),
+            new Faker().lorem().word(),
+            new Faker().lorem().word(),
+            new Faker().lorem().word(),
+            new Faker().lorem().word(),
+            new Faker().lorem().word()
+        );
 
-    //     // Assert
-    //     assertFalse(optional.isPresent());
-    //     assertEquals(404, resposta.getStatusCodeValue());
-    //     assertNull(resposta.getBody());
+        
+        req.setCep(new Faker().lorem().word());
+        req.setComplemento(new Faker().lorem().word());
+        req.setNumero(new Faker().random().nextInt(1, 5000).toString());
 
-    // }
+        
+        when(enderecoRepository.enderecoValido(anyString(),anyString(),anyString())).thenReturn(List.of(endereco));
+        when(prestadorRepo.findById(anyInt())).thenReturn(optional);
+
+        // Act
+        ResponseEntity<Void> resposta = prestadorController.postEnderecoCliente(1,req);
+
+        // Assert
+        assertTrue(optional.isPresent());
+        assertEquals(200, resposta.getStatusCodeValue());
+        assertNull(resposta.getBody());
+
+    }
 
 
     @Test
-    @DisplayName("postEnderecoCliente deve Retornar status 404 e um body vazio")
-    public void postEnderecoClienteDeveRetornarStatus404NoBodyNada(){
+    @DisplayName("postEnderecoCliente deve Retornar status 400 e um body vazio")
+    public void postEnderecoClienteDeveRetornarStatus400NoBodyNada(){
 
         //Arrange
-        Prestador prestadorMock = mock(Prestador.class);
-        Optional<Prestador> optional;
-        UsuarioEmailSenhaRequest req = mock(UsuarioEmailSenhaRequest.class);
+        
 
-        optional = Optional.empty();
-        when(prestadorRepo.findByEmailAndSenha(anyString(),anyString())).thenReturn(optional);
+        Optional<Prestador> optional = Optional.empty();
+        
+        EnderecoSimplesRequest req = new EnderecoSimplesRequest();
+
+        Endereco endereco = new Endereco(
+            new Faker().lorem().word(),
+            new Faker().lorem().word(),
+            new Faker().lorem().word(),
+            new Faker().lorem().word(),
+            new Faker().lorem().word(),
+            new Faker().lorem().word(),
+            new Faker().lorem().word()
+        );
+
+        
+        req.setCep(new Faker().lorem().word());
+        req.setComplemento(new Faker().lorem().word());
+        req.setNumero(new Faker().random().nextInt(1, 5000).toString());
+
+        
+        when(enderecoRepository.enderecoValido(anyString(),anyString(),anyString())).thenReturn(List.of(endereco));
+        when(prestadorRepo.findById(anyInt())).thenReturn(optional);
 
         // Act
-        ResponseEntity<Void> resposta = prestadorController.postAutenticarPrestador(req);
+        ResponseEntity<Void> resposta = prestadorController.postEnderecoCliente(1,req);
 
         // Assert
         assertFalse(optional.isPresent());
-        assertEquals(404, resposta.getStatusCodeValue());
+        assertEquals(400, resposta.getStatusCodeValue());
         assertNull(resposta.getBody());
 
     }
