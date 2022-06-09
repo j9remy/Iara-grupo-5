@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,12 +22,8 @@ class AvaliacaoClienteTest {
         String senha = faker.lorem().word();
         char sexo = faker.lorem().character();
         String telefone = String.valueOf(faker.phoneNumber());
-        long offset = Timestamp.valueOf("2012-01-01 00:00:00").getTime();
-        long end = Timestamp.valueOf("2013-01-01 00:00:00").getTime();
-        long diff = end - offset + 1;
-        Timestamp dataNasc = new Timestamp(offset + (long)(Math.random() * diff));
-
-        Cliente user = new Cliente(nome, sobrenome, cpf, dataNasc, email, senha, sexo, telefone);
+        
+        Cliente user = new Cliente(nome, sobrenome, cpf, LocalDate.now(), email, senha, sexo, telefone);
         AvaliacaoCliente avaliacao = new AvaliacaoCliente(6d, user);
 
         assertEquals(avaliacao, avaliacao);

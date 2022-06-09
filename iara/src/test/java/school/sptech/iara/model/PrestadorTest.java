@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
 import java.lang.reflect.Field;
-import java.sql.Timestamp;
+
 import java.time.LocalDate;
 
 import javax.persistence.OneToMany;
@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PrestadorTest {
-    
+
     @Test
     @DisplayName("Um Prestador deve ser um tipo de Usuario ou seja deve herdar de Usuario")
     void prestadorDeveSerUmTipoDerivadoDeUsuarioTest(){
@@ -198,8 +198,8 @@ public class PrestadorTest {
         //Arrange
         Prestador prestador = new Prestador(
             new Faker().name().firstName(), new Faker().name().lastName(),
-            new Faker().lorem().word(),new Faker().internet().emailAddress(),
-            new Faker().internet().password(), LocalDate.now(),
+            new Faker().lorem().word(),LocalDate.now(),
+            new Faker().internet().password(), new Faker().internet().emailAddress(),
             new Faker().lorem().character(), new Faker().phoneNumber().phoneNumber(),
             new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean(),
             new Faker().random().nextBoolean(), new Faker().random().nextDouble()
@@ -230,8 +230,8 @@ public class PrestadorTest {
         //Arrange
         Prestador prestador = new Prestador(
             new Faker().name().firstName(), new Faker().name().lastName(),
-            new Faker().lorem().word(),new Faker().internet().emailAddress(),
-            new Faker().internet().password(), LocalDate.now(),
+            new Faker().lorem().word(),LocalDate.now(),
+            new Faker().internet().password(), new Faker().internet().emailAddress(),
             new Faker().lorem().character(), new Faker().phoneNumber().phoneNumber(),
             new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean(),
             new Faker().random().nextBoolean(), new Faker().random().nextDouble()

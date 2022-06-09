@@ -10,9 +10,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.ResponseEntity;
 import school.sptech.iara.model.Prestador;
 import school.sptech.iara.repository.*;
+import school.sptech.iara.request.PrestadorUpdateRequest;
 import school.sptech.iara.request.UsuarioEmailSenhaRequest;
 
-import java.sql.Timestamp;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -164,7 +165,15 @@ public class PrestadorControllerTest {
     public void postCadastrarPrestadorDeveRetornarStatus400NoBodyNada(){
 
         //Arrange
-        Prestador prestadorMock = mock(Prestador.class);
+        Prestador prestadorMock = new Prestador(
+            new Faker().name().firstName(), new Faker().name().lastName(),
+            new Faker().lorem().word(),LocalDate.now(),new Faker().internet().emailAddress(),
+            new Faker().internet().password(),
+            new Faker().lorem().character(), new Faker().phoneNumber().phoneNumber(),
+            new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean(),
+            new Faker().random().nextBoolean(), new Faker().random().nextDouble()
+        );
+
         Prestador prestadorMock2 = mock(Prestador.class);
         Prestador prestadorMock3 = mock(Prestador.class);
 
@@ -188,14 +197,17 @@ public class PrestadorControllerTest {
         //Arrange
         Prestador prestadorMock = new Prestador(
             new Faker().name().firstName(), new Faker().name().lastName(),
-            new Faker().lorem().word(),new Faker().internet().emailAddress(),
-            new Faker().internet().password(), LocalDate.now(),
+            new Faker().lorem().word(),LocalDate.now(),new Faker().internet().emailAddress(),
+            new Faker().internet().password(),
             new Faker().lorem().character(), new Faker().phoneNumber().phoneNumber(),
             new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean(),
             new Faker().random().nextBoolean(), new Faker().random().nextDouble()
         );
         var optional = Optional.of(prestadorMock);
-        UsuarioEmailSenhaRequest req = mock(UsuarioEmailSenhaRequest.class);
+
+        UsuarioEmailSenhaRequest req = new UsuarioEmailSenhaRequest();
+        req.setEmail(prestadorMock.getEmail());
+        req.setSenha(new Faker().internet().password());
 
         when(prestadorRepo.findByEmailAndSenha(anyString(),anyString())).thenReturn(optional);
 
@@ -232,5 +244,216 @@ public class PrestadorControllerTest {
     }
 
 
+    @Test
+    @DisplayName("deleteLogoffPrestador deve Retornar status 200 e um body vazio")
+    public void deleteLogoffPrestadorDeveRetornarStatus200NoBodyNada(){
+        
+        //Arrange
+        Prestador prestadorMock = new Prestador(
+            new Faker().name().firstName(), new Faker().name().lastName(),
+            new Faker().lorem().word(),LocalDate.now(),new Faker().internet().emailAddress(),
+            new Faker().internet().password(),
+            new Faker().lorem().character(), new Faker().phoneNumber().phoneNumber(),
+            new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean(),
+            new Faker().random().nextBoolean(), new Faker().random().nextDouble()
+        );
+
+        var optional = Optional.of(prestadorMock);
+
+        UsuarioEmailSenhaRequest req = new UsuarioEmailSenhaRequest();
+        req.setEmail(prestadorMock.getEmail());
+        req.setSenha(new Faker().internet().password());
+
+        when(prestadorRepo.findByEmailAndSenha(anyString(),anyString())).thenReturn(optional);
+
+        // Act
+        ResponseEntity<Void> resposta = prestadorController.deleteLogoffPrestador(req);
+
+        // Assert
+        assertTrue(optional.isPresent());
+        assertEquals(200, resposta.getStatusCodeValue());
+        assertNull(resposta.getBody());
+
+    }
+
+    @Test
+    @DisplayName("deleteLogoffPrestador deve Retornar status 404 e um body vazio")
+    public void deleteLogoffPrestadorDeveRetornarStatus404NoBodyNada(){
+
+        //Arrange
+        Prestador prestadorMock = mock(Prestador.class);
+        Optional<Prestador> optional;
+        UsuarioEmailSenhaRequest req = new UsuarioEmailSenhaRequest();
+        req.setEmail(prestadorMock.getEmail());
+        req.setSenha(new Faker().internet().password());
+
+        optional = Optional.empty();
+        when(prestadorRepo.findByEmailAndSenha(anyString(),anyString())).thenReturn(optional);
+
+        // Act
+        ResponseEntity<Void> resposta = prestadorController.deleteLogoffPrestador(req);
+
+        // Assert
+        assertFalse(optional.isPresent());
+        assertEquals(404, resposta.getStatusCodeValue());
+        assertNull(resposta.getBody());
+
+    }
+
+
+    @Test
+    @DisplayName("putPrestador deve Retornar status 201 e um body vazio")
+    public void putPrestadorDeveRetornarStatus201NoBodyNada(){
+        
+        //Arrange
+        Prestador prestadorMock = new Prestador(
+            new Faker().name().firstName(), new Faker().name().lastName(),
+            new Faker().lorem().word(),LocalDate.now(),new Faker().internet().emailAddress(),
+            new Faker().internet().password(),
+            new Faker().lorem().character(), new Faker().phoneNumber().phoneNumber(),
+            new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean(),
+            new Faker().random().nextBoolean(), new Faker().random().nextDouble()
+        );
+
+        var optional = Optional.of(prestadorMock);
+
+        PrestadorUpdateRequest req = new PrestadorUpdateRequest();
+        req.setId(1);
+        req.setTelefone(prestadorMock.getTelefone()+"1");
+        req.setResumo(prestadorMock.getResumo());
+
+        when(prestadorRepo.findById(anyInt())).thenReturn(optional);
+
+        when(prestadorRepo.existsByTelefone(anyString())).thenReturn(false);
+
+        // Act
+        ResponseEntity<Void> resposta = prestadorController.putPrestador(req);
+
+        // Assert
+        assertTrue(optional.isPresent());
+        assertEquals(201, resposta.getStatusCodeValue());
+        assertNull(resposta.getBody());
+
+    }
+
+
+    @Test
+    @DisplayName("putPrestador deve Retornar status 206 e um body vazio")
+    public void putPrestadorDeveRetornarStatus206NoBodyNada(){
+        
+        //Arrange
+        Prestador prestadorMock = new Prestador(
+            new Faker().name().firstName(), new Faker().name().lastName(),
+            new Faker().lorem().word(),LocalDate.now(),new Faker().internet().emailAddress(),
+            new Faker().internet().password(),
+            new Faker().lorem().character(), new Faker().phoneNumber().phoneNumber(),
+            new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean(),
+            new Faker().random().nextBoolean(), new Faker().random().nextDouble()
+        );
+
+        var optional = Optional.of(prestadorMock);
+
+        PrestadorUpdateRequest req = new PrestadorUpdateRequest();
+        req.setId(1);
+        req.setTelefone(prestadorMock.getTelefone());
+        req.setResumo(prestadorMock.getResumo());
+
+        when(prestadorRepo.findById(anyInt())).thenReturn(optional);
+
+        when(prestadorRepo.existsByTelefone(anyString())).thenReturn(true);
+
+        // Act
+        ResponseEntity<Void> resposta = prestadorController.putPrestador(req);
+
+        // Assert
+        assertTrue(optional.isPresent());
+        assertEquals(206, resposta.getStatusCodeValue());
+        assertNull(resposta.getBody());
+
+    }
+
+    @Test
+    @DisplayName("putPrestador deve Retornar status 404 e um body vazio")
+    public void putPrestadorDeveRetornarStatus404NoBodyNada(){
+        
+        //Arrange
+        Prestador prestadorMock = new Prestador(
+            new Faker().name().firstName(), new Faker().name().lastName(),
+            new Faker().lorem().word(),LocalDate.now(),new Faker().internet().emailAddress(),
+            new Faker().internet().password(),
+            new Faker().lorem().character(), new Faker().phoneNumber().phoneNumber(),
+            new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean(),
+            new Faker().random().nextBoolean(), new Faker().random().nextDouble()
+        );
+
+        Optional<Prestador> optional;
+        
+        optional = Optional.empty();
+
+        PrestadorUpdateRequest req = new PrestadorUpdateRequest();
+
+        req.setId(1);
+        req.setTelefone(prestadorMock.getTelefone());
+        req.setResumo(prestadorMock.getResumo());
+
+        when(prestadorRepo.findById(anyInt())).thenReturn(optional);
+
+        when(prestadorRepo.existsByTelefone(anyString())).thenReturn(true);
+
+        // Act
+        ResponseEntity<Void> resposta = prestadorController.putPrestador(req);
+
+        // Assert
+        assertFalse(optional.isPresent());
+        assertEquals(404, resposta.getStatusCodeValue());
+        assertNull(resposta.getBody());
+
+    }
+
+
+    // @Test
+    // @DisplayName("postEnderecoCliente deve Retornar status 200 e um body vazio")
+    // public void postEnderecoClienteDeveRetornarStatus200NoBodyNada(){
+
+    //     //Arrange
+    //     Prestador prestadorMock = mock(Prestador.class);
+    //     Optional<Prestador> optional;
+    //     UsuarioEmailSenhaRequest req = mock(UsuarioEmailSenhaRequest.class);
+
+    //     optional = Optional.empty();
+    //     when(prestadorRepo.findByEmailAndSenha(anyString(),anyString())).thenReturn(optional);
+
+    //     // Act
+    //     ResponseEntity<Void> resposta = prestadorController.postEnderecoCliente(req);
+
+    //     // Assert
+    //     assertFalse(optional.isPresent());
+    //     assertEquals(404, resposta.getStatusCodeValue());
+    //     assertNull(resposta.getBody());
+
+    // }
+
+
+    @Test
+    @DisplayName("postEnderecoCliente deve Retornar status 404 e um body vazio")
+    public void postEnderecoClienteDeveRetornarStatus404NoBodyNada(){
+
+        //Arrange
+        Prestador prestadorMock = mock(Prestador.class);
+        Optional<Prestador> optional;
+        UsuarioEmailSenhaRequest req = mock(UsuarioEmailSenhaRequest.class);
+
+        optional = Optional.empty();
+        when(prestadorRepo.findByEmailAndSenha(anyString(),anyString())).thenReturn(optional);
+
+        // Act
+        ResponseEntity<Void> resposta = prestadorController.postAutenticarPrestador(req);
+
+        // Assert
+        assertFalse(optional.isPresent());
+        assertEquals(404, resposta.getStatusCodeValue());
+        assertNull(resposta.getBody());
+
+    }
 
 }
