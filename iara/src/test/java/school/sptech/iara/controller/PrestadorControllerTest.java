@@ -13,6 +13,7 @@ import school.sptech.iara.repository.*;
 import school.sptech.iara.request.UsuarioEmailSenhaRequest;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -134,15 +135,10 @@ public class PrestadorControllerTest {
     public void postCadastrarPrestadorDeveRetornarStatus201NoBodyNada(){
 
         //Arrange
-        long offset = Timestamp.valueOf("2012-01-01 00:00:00").getTime();
-        long end = Timestamp.valueOf("2013-01-01 00:00:00").getTime();
-        long diff = end - offset + 1;
-        Timestamp dataNasc = new Timestamp(offset + (long)(Math.random() * diff));
-
         Prestador prestadorMock = new Prestador(
             new Faker().name().firstName(), new Faker().name().lastName(),
-            new Faker().lorem().word(),dataNasc,
-            new Faker().internet().emailAddress(),new Faker().internet().password(),
+            new Faker().lorem().word(),LocalDate.now(),new Faker().internet().emailAddress(),
+            new Faker().internet().password(),
             new Faker().lorem().character(), new Faker().phoneNumber().phoneNumber(),
             new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean(),
             new Faker().random().nextBoolean(), new Faker().random().nextDouble()
@@ -189,17 +185,11 @@ public class PrestadorControllerTest {
     @Test
     @DisplayName("postAutenticarPrestador deve Retornar status 200 e um body vazio")
     public void postAutenticarPrestadorDeveRetornarStatus200NoBodyNada(){
-
         //Arrange
-        long offset = Timestamp.valueOf("2012-01-01 00:00:00").getTime();
-        long end = Timestamp.valueOf("2013-01-01 00:00:00").getTime();
-        long diff = end - offset + 1;
-        Timestamp dataNasc = new Timestamp(offset + (long)(Math.random() * diff));
-
         Prestador prestadorMock = new Prestador(
             new Faker().name().firstName(), new Faker().name().lastName(),
-            new Faker().lorem().word(),dataNasc,
-            new Faker().internet().emailAddress(),new Faker().internet().password(),
+            new Faker().lorem().word(),new Faker().internet().emailAddress(),
+            new Faker().internet().password(), LocalDate.now(),
             new Faker().lorem().character(), new Faker().phoneNumber().phoneNumber(),
             new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean(),
             new Faker().random().nextBoolean(), new Faker().random().nextDouble()
@@ -225,10 +215,10 @@ public class PrestadorControllerTest {
 
         //Arrange
         Prestador prestadorMock = mock(Prestador.class);
-        Optional<Prestador> optional = null;
+        Optional<Prestador> optional;
         UsuarioEmailSenhaRequest req = mock(UsuarioEmailSenhaRequest.class);
 
-        optional = Optional.ofNullable(null);
+        optional = Optional.empty();
         when(prestadorRepo.findByEmailAndSenha(anyString(),anyString())).thenReturn(optional);
 
         // Act

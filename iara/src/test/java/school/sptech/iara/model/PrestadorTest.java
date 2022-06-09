@@ -10,84 +10,14 @@ import org.junit.jupiter.api.function.Executable;
 
 import java.lang.reflect.Field;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 import javax.persistence.OneToMany;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PrestadorTest {
-
-    @Test
-    @DisplayName("Quando as credenciais informadas pelo prestador derem match com os dados correspondetes deve existir usuario")
-    void usuarioPrestadorExisteTest() {
-
-        //Arrange
-//        Faker faker = new Faker();
-//        String nome = faker.name().firstName() ;
-//        String sobrenome = faker.name().lastName();
-//        String cpf = faker.random().toString();
-//        String email = faker.internet().emailAddress();
-//        String senha = faker.lorem().word();
-//        char sexo = faker.lorem().character();
-//        String telefone = String.valueOf(faker.phoneNumber());
-//        String resumo = faker.lorem().paragraph(4);
-//        Boolean atendeDomicilio = faker.random().nextBoolean();
-//        Boolean atendeEstabelecimento = faker.random().nextBoolean();
-//        Double distancia = faker.random().nextDouble();
-//
-//        long offset = Timestamp.valueOf("2012-01-01 00:00:00").getTime();
-//        long end = Timestamp.valueOf("2013-01-01 00:00:00").getTime();
-//        long diff = end - offset + 1;
-//        Timestamp dataNasc = new Timestamp(offset + (long)(Math.random() * diff));
-//
-//        Prestador user = new Prestador(nome, sobrenome, cpf, dataNasc, email, senha, sexo, telefone,resumo,
-//            atendeDomicilio,atendeEstabelecimento, distancia);
-//
-//        String [] credenciais = new String[] {email,senha};
-//
-//        //Act
-//        var existe = user.usuarioExiste(credenciais[0],credenciais[1]);
-//
-//        //Assert
-//        assertTrue(existe);
-    }
-
-    @Test
-    @DisplayName("Quando as credenciais informadas pelo prestador NÃO derem match com os dados correspondetes NÃO deve existir usuario")
-    void usuarioPrestadorNaoExisteTest() {
-//
-//        //Arrange
-//        Faker faker = new Faker();
-//        String nome = faker.name().firstName() ;
-//        String sobrenome = faker.name().lastName();
-//        String cpf = faker.random().toString();
-//        String email = faker.internet().emailAddress();
-//        String senha = faker.lorem().word();
-//        char sexo = faker.lorem().character();
-//        String telefone = String.valueOf(faker.phoneNumber());
-//        String resumo = faker.lorem().paragraph(4);
-//        Boolean atendeDomicilio = faker.random().nextBoolean();
-//        Boolean atendeEstabelecimento = faker.random().nextBoolean();
-//        Double distancia = faker.random().nextDouble();
-//
-//        long offset = Timestamp.valueOf("2012-01-01 00:00:00").getTime();
-//        long end = Timestamp.valueOf("2013-01-01 00:00:00").getTime();
-//        long diff = end - offset + 1;
-//        Timestamp dataNasc = new Timestamp(offset + (long)(Math.random() * diff));
-//
-//        Prestador user = new Prestador(nome, sobrenome, cpf, dataNasc, email, senha, sexo, telefone,resumo,
-//            atendeDomicilio,atendeEstabelecimento,distancia);
-//
-//        String [] credenciais = new String[] {faker.internet().emailAddress(),faker.lorem().word()};
-//
-//        //Act
-//        var existe = user.usuarioExiste(credenciais[0],credenciais[1]);
-//
-//        //Assert
-//        assertFalse(existe);
-    }
-
-
+    
     @Test
     @DisplayName("Um Prestador deve ser um tipo de Usuario ou seja deve herdar de Usuario")
     void prestadorDeveSerUmTipoDerivadoDeUsuarioTest(){
@@ -106,14 +36,10 @@ public class PrestadorTest {
     @DisplayName("CalcAvaliacao deve ser NAN caso não tenha avaliacoes")
     void calcAvaliacaoDeveSerNaN(){
         //Arrange
-        long offset = Timestamp.valueOf("2012-01-01 00:00:00").getTime();
-        long end = Timestamp.valueOf("2013-01-01 00:00:00").getTime();
-        long diff = end - offset + 1;
-        Timestamp dataNasc = new Timestamp(offset + (long)(Math.random() * diff));
 
         Prestador prestador = new Prestador(
             new Faker().name().firstName(), new Faker().name().lastName(),
-            new Faker().lorem().word(),dataNasc,
+            new Faker().lorem().word(),LocalDate.now(),
             new Faker().internet().emailAddress(),new Faker().internet().password(),
             new Faker().lorem().character(), new Faker().phoneNumber().phoneNumber(),
             new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean(),
@@ -134,14 +60,10 @@ public class PrestadorTest {
     @DisplayName("CalcAvaliacao deve ser soma das Avaliacoes divididas pela quantidade de avaliacoes")
     void calcAvaliacaoDeveSomarAvaliacoesEDividirEsseValorPelaQuantidadeDeAvaliacoes(){
         //Arrange
-        long offset = Timestamp.valueOf("2012-01-01 00:00:00").getTime();
-        long end = Timestamp.valueOf("2013-01-01 00:00:00").getTime();
-        long diff = end - offset + 1;
-        Timestamp dataNasc = new Timestamp(offset + (long)(Math.random() * diff));
 
         Prestador prestador = new Prestador(
             new Faker().name().firstName(), new Faker().name().lastName(),
-            new Faker().lorem().word(),dataNasc,
+            new Faker().lorem().word(),LocalDate.now(),
             new Faker().internet().emailAddress(),new Faker().internet().password(),
             new Faker().lorem().character(), new Faker().phoneNumber().phoneNumber(),
             new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean(),
@@ -182,7 +104,7 @@ public class PrestadorTest {
         Prestador prestador = new Prestador();
 
         //Act
-        var thrown = Assertions.assertThrows(ArithmeticException.class, 
+        var thrown = Assertions.assertThrows(ArithmeticException.class,
         () -> {
             prestador.calcAvaliacao();
         });
@@ -198,14 +120,11 @@ public class PrestadorTest {
     void addHabilidadeDeveAdicionarHabilidadeNaListaDeHabilidadesDoPrestador(){
 
         //Arrange
-        long offset = Timestamp.valueOf("2012-01-01 00:00:00").getTime();
-        long end = Timestamp.valueOf("2013-01-01 00:00:00").getTime();
-        long diff = end - offset + 1;
-        Timestamp dataNasc = new Timestamp(offset + (long)(Math.random() * diff));
+
 
         Prestador prestador = new Prestador(
             new Faker().name().firstName(), new Faker().name().lastName(),
-            new Faker().lorem().word(),dataNasc,
+            new Faker().lorem().word(),LocalDate.now(),
             new Faker().internet().emailAddress(),new Faker().internet().password(),
             new Faker().lorem().character(), new Faker().phoneNumber().phoneNumber(),
             new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean(),
@@ -234,15 +153,10 @@ public class PrestadorTest {
     void quandoHabilidadeAdicionadaNaListaDeHabilidadeDeveExistirHabilidadeNaListaDeHabilidadesDoPrestador(){
 
         //Arrange
-        long offset = Timestamp.valueOf("2012-01-01 00:00:00").getTime();
-        long end = Timestamp.valueOf("2013-01-01 00:00:00").getTime();
-        long diff = end - offset + 1;
-        Timestamp dataNasc = new Timestamp(offset + (long)(Math.random() * diff));
-
         Prestador prestador = new Prestador(
             new Faker().name().firstName(), new Faker().name().lastName(),
-            new Faker().lorem().word(),dataNasc,
-            new Faker().internet().emailAddress(),new Faker().internet().password(),
+            new Faker().lorem().word(),LocalDate.now(),new Faker().internet().emailAddress(),
+            new Faker().internet().password(),
             new Faker().lorem().character(), new Faker().phoneNumber().phoneNumber(),
             new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean(),
             new Faker().random().nextBoolean(), new Faker().random().nextDouble()
@@ -282,15 +196,10 @@ public class PrestadorTest {
     void addServicoDeveAdicionarServicoNaListaDeServicosDoPrestador(){
 
         //Arrange
-        long offset = Timestamp.valueOf("2012-01-01 00:00:00").getTime();
-        long end = Timestamp.valueOf("2013-01-01 00:00:00").getTime();
-        long diff = end - offset + 1;
-        Timestamp dataNasc = new Timestamp(offset + (long)(Math.random() * diff));
-
         Prestador prestador = new Prestador(
             new Faker().name().firstName(), new Faker().name().lastName(),
-            new Faker().lorem().word(),dataNasc,
-            new Faker().internet().emailAddress(),new Faker().internet().password(),
+            new Faker().lorem().word(),new Faker().internet().emailAddress(),
+            new Faker().internet().password(), LocalDate.now(),
             new Faker().lorem().character(), new Faker().phoneNumber().phoneNumber(),
             new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean(),
             new Faker().random().nextBoolean(), new Faker().random().nextDouble()
@@ -319,15 +228,10 @@ public class PrestadorTest {
     void quandoServicoAdicionadoNaListaDeServicosDeveExistirServicoCorrespondenteNaListaDeServicosDoPrestador(){
 
         //Arrange
-        long offset = Timestamp.valueOf("2012-01-01 00:00:00").getTime();
-        long end = Timestamp.valueOf("2013-01-01 00:00:00").getTime();
-        long diff = end - offset + 1;
-        Timestamp dataNasc = new Timestamp(offset + (long)(Math.random() * diff));
-
         Prestador prestador = new Prestador(
             new Faker().name().firstName(), new Faker().name().lastName(),
-            new Faker().lorem().word(),dataNasc,
-            new Faker().internet().emailAddress(),new Faker().internet().password(),
+            new Faker().lorem().word(),new Faker().internet().emailAddress(),
+            new Faker().internet().password(), LocalDate.now(),
             new Faker().lorem().character(), new Faker().phoneNumber().phoneNumber(),
             new Faker().shakespeare().kingRichardIIIQuote(), new Faker().random().nextBoolean(),
             new Faker().random().nextBoolean(), new Faker().random().nextDouble()
@@ -373,7 +277,7 @@ public class PrestadorTest {
     @Test
     @DisplayName("Os campos devem estar com as anotacoes do spring corretas")
     void camposComAnotacoesDoSpringDevemEstarCorretos() throws NoSuchFieldException, SecurityException{
-        
+
         Class<Prestador> classe =  Prestador.class;
 
         Field [] campo = new Field[]{
@@ -387,7 +291,7 @@ public class PrestadorTest {
         assertTrue(campo[1].isAnnotationPresent(NotNull.class));
         assertTrue(campo[2].isAnnotationPresent(OneToMany.class));
         assertTrue(campo[3].isAnnotationPresent(OneToMany.class));
-        
+
 
     }
 
