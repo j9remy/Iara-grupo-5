@@ -6,14 +6,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import school.sptech.iara.model.Chat;
-import school.sptech.iara.model.Cliente;
-import school.sptech.iara.model.Servico;
-import school.sptech.iara.model.ServicoAtribuido;
-import school.sptech.iara.repository.ChatRepository;
-import school.sptech.iara.repository.ClienteRepository;
-import school.sptech.iara.repository.ServicoAtribuidoRepository;
-import school.sptech.iara.repository.ServicoRepository;
+import school.sptech.iara.model.*;
+import school.sptech.iara.repository.*;
 import school.sptech.iara.request.ServicoAtribuidoRequest;
 import school.sptech.iara.response.ServicoAtribuidoResponse;
 
@@ -45,6 +39,10 @@ public class ServicoAtribuidoController {
     private ClienteRepository clienteRepository;
     @Autowired
     private ChatRepository chatRepository;
+    @Autowired
+    private AgendamentoRepository agendamentoRepository;
+    @Autowired
+    private AgendaRepository agendaRepository;
 
     @GetMapping
     @ApiResponses(value = {
@@ -65,7 +63,7 @@ public class ServicoAtribuidoController {
     @PostMapping("/{idUser}")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Serviço atribuído cadastrado com sucesso"),
-            @ApiResponse(responseCode = "400", description = "Serviço e/ou cliente não encontrados")
+            @ApiResponse(responseCode = "400", description = "Serviço e/ou cliente e/ou prestador não encontrados")
     })
     public ResponseEntity<Void> postServicoAttrServico(@PathVariable Integer idUser,
                                                 @RequestBody ServicoAtribuidoRequest req){
@@ -74,25 +72,45 @@ public class ServicoAtribuidoController {
         if (servicoOptional.isPresent() && clienteOptional.isPresent()){
             Servico servico = servicoOptional.get();
             Cliente cliente = clienteOptional.get();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             ServicoAtribuido servicoAtribuido;
-            if (req.getObservacoes().isBlank()){
-                servicoAtribuido = new ServicoAtribuido(
-                        servico,
-                        LocalDateTime.parse(req.getDataInicio(), formatter),
-                        cliente);
-            }else{
-                servicoAtribuido = new ServicoAtribuido(
-                        servico,
-                        LocalDateTime.parse(req.getDataInicio(), formatter),
-                        cliente,
-                        req.getObservacoes());
-            }
-            Chat chat = new Chat(servicoAtribuido);
-            servicoAtribuidoRepository.save(servicoAtribuido);
-            chatRepository.save(chat);
+            Prestador prestador = servico.getPrestador();
+            Optional<Agenda> agendaOptional = agendaRepository.findByPrestador_Id(prestador.getId());
+            if (agendaOptional.isPresent()){
+                Agenda agenda = agendaOptional.get();
+                Agendamento agendamento = new Agendamento(servico.getTipo() +" - "+ servico.getDescricao(),req.getObservacoes(), req.getDataInicio().toLocalDate(),
+                        req.getDataInicio().toLocalTime(), req.getDataInicio().toLocalTime().plusHours(servico.getDuracaoEstimada().getHour())
+                        .plusMinutes(servico.getDuracaoEstimada().getMinute()), agenda);
 
-            return ResponseEntity.status(201).build();
+                if (agendamento.getHoraFim().isBefore(agendamento.getHoraInicio())){
+                    return ResponseEntity.status(400).build();
+                }
+                List<Agendamento> agendamentos = agendamentoRepository.findAllByAgendaAndData(agenda,req.getDataInicio().toLocalDate());
+                for (Agendamento ag:agendamentos) {
+                    if (agendamento.getHoraInicio().isAfter(ag.getHoraInicio()) && agendamento.getHoraInicio().isBefore(ag.getHoraFim()) ||
+                        agendamento.getHoraFim().isAfter(ag.getHoraInicio()) && agendamento.getHoraFim().isBefore(ag.getHoraFim()) ||
+                        agendamento.getHoraInicio().equals(ag.getHoraInicio()) && agendamento.getHoraFim().equals(ag.getHoraFim())
+                        ){
+                        return ResponseEntity.status(400).build();
+                    }
+                }
+                agendamentoRepository.save(agendamento);
+
+                if (req.getObservacoes().isBlank()) {
+                    servicoAtribuido = new ServicoAtribuido(
+                            servico,
+                            cliente);
+                } else {
+                    servicoAtribuido = new ServicoAtribuido(
+                            servico,
+                            cliente,
+                            req.getObservacoes());
+                }
+                Chat chat = new Chat(servicoAtribuido);
+                servicoAtribuidoRepository.save(servicoAtribuido);
+                chatRepository.save(chat);
+                return ResponseEntity.status(201).build();
+            }
+
         }
         return ResponseEntity.status(400).build();
     }

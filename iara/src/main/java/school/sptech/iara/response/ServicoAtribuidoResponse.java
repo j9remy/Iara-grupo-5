@@ -9,7 +9,6 @@ public class ServicoAtribuidoResponse {
     private Integer id;
     private Integer clienteId;
     private Integer servicoId;
-    private LocalDateTime dataHoraInicio;
     private LocalDateTime dataHoraFim;
     private String observacoes;
     private String status;
@@ -17,14 +16,13 @@ public class ServicoAtribuidoResponse {
     private Double avaliacao;
 
     public ServicoAtribuidoResponse(Integer id, Integer clienteId,
-                                    Integer servicoId, LocalDateTime dataHoraInicio,
+                                    Integer servicoId,
                                     LocalDateTime dataHoraFim, String observacoes,
                                     String status, Boolean finalizado,
                                     Double avaliacao) {
         this.id = id;
         this.clienteId = clienteId;
         this.servicoId = servicoId;
-        this.dataHoraInicio = dataHoraInicio;
         this.dataHoraFim = dataHoraFim;
         this.observacoes = observacoes;
         this.status = status;
@@ -40,9 +38,6 @@ public class ServicoAtribuidoResponse {
     }
     public Integer getServicoId() {
         return servicoId;
-    }
-    public LocalDateTime getDataHoraInicio() {
-        return dataHoraInicio;
     }
     public LocalDateTime getDataHoraFim() {
         return dataHoraFim;

@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -24,7 +25,7 @@ public class Servico {
     private String tipo;
     private boolean ativo;
     @NotNull
-    private Double duracaoEstimada;
+    private LocalTime duracaoEstimada;
 
 //    @OneToMany
 //    private List<ServicoAtribuido> servicoAtribuidos;
@@ -34,7 +35,7 @@ public class Servico {
 
 //    Constructor
     public Servico(){}
-    public Servico(double valor, String descricao, String tipo, Double duracaoEstimada, Prestador prestador) {
+    public Servico(double valor, String descricao, String tipo, LocalTime duracaoEstimada, Prestador prestador) {
         this.valor = valor;
         this.descricao = descricao;
         this.tipo = tipo;
@@ -43,7 +44,7 @@ public class Servico {
         this.duracaoEstimada = duracaoEstimada;
 //        servicoAtribuidos = new ArrayList<>();
     }
-    public Servico(double valor, String descricao, String tipo, Double duracaoEstimada) {
+    public Servico(double valor, String descricao, String tipo, LocalTime duracaoEstimada) {
         this.valor = valor;
         this.descricao = descricao;
         this.tipo = tipo;
@@ -80,18 +81,20 @@ public class Servico {
     public void setAtivo() {
         setAtivo(!isAtivo());
     }
-//    public List<ServicoAtribuido> getServicoAtribuidos() {
-//        return servicoAtribuidos;
-//    }
-    public Double getDuracaoEstimada() {
+    public Prestador getPrestador() {
+        return prestador;
+    }
+    public LocalTime getDuracaoEstimada() {
         return duracaoEstimada;
     }
-    public void setDuracaoEstimada(Double duracaoEstimada) {
+    public void setDuracaoEstimada(LocalTime duracaoEstimada) {
         this.duracaoEstimada = duracaoEstimada;
     }
     public int getId() {
         return id;
     }
+
+
     //    Methods
     //Retorna a quantidade de serviços atribuidos a este serviço
 //    public int getQtdServicosAtribuidos(){

@@ -1,31 +1,48 @@
 package school.sptech.iara.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
-public class Dia {
+public class Agendamento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private String titulo;
+    private String descricao;
     private LocalDate data;
     private LocalTime horaInicio;
     private LocalTime horaFim;
+    @ManyToOne
+    private Agenda agenda;
 
-    public Dia(LocalDate data, LocalTime horaInicio, LocalTime horaFim) {
+    public Agendamento(String titulo, String descricao, LocalDate data, LocalTime horaInicio, LocalTime horaFim, Agenda agenda) {
+        this.titulo = titulo;
+        this.descricao = descricao;
         this.data = data;
         this.horaInicio = horaInicio;
         this.horaFim = horaFim;
+        this.agenda = agenda;
+    }
+    public Agendamento() {
     }
 
     public Integer getId() {
         return id;
+    }
+    public String getTitulo() {
+        return titulo;
+    }
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+    public String getDescricao() {
+        return descricao;
+    }
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
     public LocalDate getData() {
         return data;
@@ -44,5 +61,8 @@ public class Dia {
     }
     public void setHoraFim(LocalTime horaFim) {
         this.horaFim = horaFim;
+    }
+    public Agenda getAgenda() {
+        return agenda;
     }
 }

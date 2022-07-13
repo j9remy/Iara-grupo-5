@@ -1,8 +1,5 @@
 package school.sptech.iara.request;
 
-import school.sptech.iara.model.Semana;
-
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;

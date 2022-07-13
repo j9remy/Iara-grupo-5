@@ -19,7 +19,6 @@ public class ServicoAtribuido implements Avaliavel{
     private int id;
     @ManyToOne
     private Cliente cliente;
-    private LocalDateTime dataHoraInicio;
     private LocalDateTime dataHoraFim;
     private String observacoes;
     private String status;
@@ -32,12 +31,8 @@ public class ServicoAtribuido implements Avaliavel{
 
 //    Constructor
     public ServicoAtribuido(Servico servico,
-                            LocalDateTime horaInicio,
-                            Cliente cliente
-                            ) {
+                            Cliente cliente) {
         this.cliente = cliente;
-        this.dataHoraInicio = horaInicio;
-//        dataHoraFim = dataHoraInicio + servico.getDuracaoEstimada();
         this.status = "Agendado";
         this.finalizado = false;
         this.avaliacao = -1.0;
@@ -45,12 +40,9 @@ public class ServicoAtribuido implements Avaliavel{
 //        this.chat = chat;
     }
     public ServicoAtribuido(Servico servico,
-                            LocalDateTime horaInicio,
                             Cliente cliente,
                             String observacoes) {
         this.cliente = cliente;
-        this.dataHoraInicio = horaInicio;
-//        dataHoraFim = dataHoraInicio + servico.getDuracaoEstimada();
         this.observacoes = observacoes;
         this.status = "Agendado";
         this.finalizado = false;
@@ -94,12 +86,6 @@ public class ServicoAtribuido implements Avaliavel{
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    public LocalDateTime getDataHoraInicio() {
-        return dataHoraInicio;
-    }
-    public void setDataHoraInicio(LocalDateTime dataHoraInicio) {
-        this.dataHoraInicio = dataHoraInicio;
-    }
     public LocalDateTime getDataHoraFim() {
         return dataHoraFim;
     }
@@ -140,7 +126,6 @@ public class ServicoAtribuido implements Avaliavel{
                 getId(),
                 getCliente().getId(),
                 getServico().getId(),
-                getDataHoraInicio(),
                 getDataHoraFim(),
                 getObservacoes(),
                 getStatus(),
@@ -153,7 +138,6 @@ public class ServicoAtribuido implements Avaliavel{
     @Override
     public String toString() {
         return "ServicoAtribuido{" +
-                ", horaInicio=" + dataHoraInicio +
                 ", horaFim=" + dataHoraFim +
                 ", finalizado=" + finalizado +
                 ", avaliacao=" + avaliacao +
