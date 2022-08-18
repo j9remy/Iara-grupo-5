@@ -86,6 +86,7 @@ function CadastroInformacoesPessoais() {
                 <form id="cadastro-cliente" class="container" onSubmit={SubmeterFormCliente}>
                     <Link to={'/'}>
                         <img class="logo transform" src={logo} />
+                        <span class="subtitulo">CADASTRO</span>
                     </Link>
                     <h2>Dados Pessoais</h2>
                     <div class="card bg-dark-red dflex jbetween fwrap">
