@@ -81,10 +81,15 @@ public class ServicoAtribuidoController {
                         req.getDataInicio().toLocalTime(), req.getDataInicio().toLocalTime().plusHours(servico.getDuracaoEstimada().getHour())
                         .plusMinutes(servico.getDuracaoEstimada().getMinute()), agenda);
 
-                if (agendamento.getHoraFim().isBefore(agendamento.getHoraInicio())){
+                if (agendamento.getHoraFim().isBefore(agendamento.getHoraInicio()) ||
+                    agendamento.getData().isBefore(LocalDate.now()) ||
+                    agendamento.getData().equals(LocalDate.now()) && agendamento.getHoraInicio().isBefore(LocalTime.now())){
+
                     return ResponseEntity.status(400).build();
                 }
                 List<Agendamento> agendamentos = agendamentoRepository.findAllByAgendaAndData(agenda,req.getDataInicio().toLocalDate());
+                if (agendamentos.isEmpty())
+                    return ResponseEntity.status(400).build();
                 for (Agendamento ag:agendamentos) {
                     if (agendamento.getHoraInicio().isAfter(ag.getHoraInicio()) && agendamento.getHoraInicio().isBefore(ag.getHoraFim()) ||
                         agendamento.getHoraFim().isAfter(ag.getHoraInicio()) && agendamento.getHoraFim().isBefore(ag.getHoraFim()) ||
@@ -93,7 +98,7 @@ public class ServicoAtribuidoController {
                         return ResponseEntity.status(400).build();
                     }
                 }
-                agendamentoRepository.save(agendamento);
+
 
                 if (req.getObservacoes().isBlank()) {
                     servicoAtribuido = new ServicoAtribuido(
@@ -108,6 +113,8 @@ public class ServicoAtribuidoController {
                 Chat chat = new Chat(servicoAtribuido);
                 servicoAtribuidoRepository.save(servicoAtribuido);
                 chatRepository.save(chat);
+                agendamento.setServicoAtribuido(servicoAtribuido);
+                agendamentoRepository.save(agendamento);
                 return ResponseEntity.status(201).build();
             }
 

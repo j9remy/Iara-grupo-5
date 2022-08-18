@@ -1,6 +1,10 @@
 package school.sptech.iara.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.jetbrains.annotations.NotNull;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -12,13 +16,21 @@ public class Agendamento {
     private Integer id;
     private String titulo;
     private String descricao;
+    @NotNull
     private LocalDate data;
+    @NotNull
     private LocalTime horaInicio;
+    @NotNull
     private LocalTime horaFim;
     @ManyToOne
+    @JsonIgnore
+    @NotNull
     private Agenda agenda;
+    @ManyToOne
+    private ServicoAtribuido servicoAtribuido;
 
-    public Agendamento(String titulo, String descricao, LocalDate data, LocalTime horaInicio, LocalTime horaFim, Agenda agenda) {
+    public Agendamento(String titulo, String descricao, @NotNull LocalDate data,
+                       @NotNull LocalTime horaInicio, @NotNull LocalTime horaFim, @NotNull Agenda agenda) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.data = data;
@@ -26,6 +38,16 @@ public class Agendamento {
         this.horaFim = horaFim;
         this.agenda = agenda;
     }
+
+    public Agendamento(String titulo, @NotNull LocalDate data, @NotNull LocalTime horaInicio,
+                       @NotNull LocalTime horaFim, @NotNull Agenda agenda) {
+        this.titulo = titulo;
+        this.data = data;
+        this.horaInicio = horaInicio;
+        this.horaFim = horaFim;
+        this.agenda = agenda;
+    }
+
     public Agendamento() {
     }
 
@@ -64,5 +86,11 @@ public class Agendamento {
     }
     public Agenda getAgenda() {
         return agenda;
+    }
+    public ServicoAtribuido getServicoAtribuido() {
+        return servicoAtribuido;
+    }
+    public void setServicoAtribuido(ServicoAtribuido servicoAtribuido) {
+        this.servicoAtribuido = servicoAtribuido;
     }
 }

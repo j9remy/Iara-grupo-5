@@ -2,7 +2,7 @@ package school.sptech.iara.request;
 
 import java.time.LocalDate;
 
-public class AgendamentoRequest {
+public class AgendamentoDataRequest {
     private Integer idPrestador;
     private LocalDate data;
 
@@ -11,5 +11,11 @@ public class AgendamentoRequest {
     }
     public LocalDate getData() {
         return data;
+    }
+    public void setIdPrestador(Integer idPrestador) {
+        this.idPrestador = idPrestador;
+    }
+    public void setData(LocalDate data) {
+        this.data = data;
     }
 }
