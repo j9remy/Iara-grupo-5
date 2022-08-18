@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro | Iara</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon_io/favicon-16x16.png">
+    <script src="https://kit.fontawesome.com/26f7448628.js" crossorigin="anonymous"></script>   
+    <script src="../script.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+</head>
+<body>
+    <div class="page dflex acenter jcenter txt-medium">
+        <form id="cadastro-cliente" class="container">
+            <a href="institucional.html" class="logo transform prelative">
+                <img alt="Logo" src="../img/logo-branco.png">
+                <span class="subtitulo">CADASTRO</span>
+            </a>
+            <h2>Dados Pessoais</h2>
+            <div class="card bg-off-white dflex jbetween fwrap">
+                <div class="user-input-wrp width-4 input-group">
+                    <input type="text" class="input" id="input-nome" autocomplete="off" required/>
+                    <label class="user-label">Nome</label>
+                </div>
+                <div class="user-input-wrp width-4 input-group">
+                    <input type="text" class="input" id="input-sobrenome" autocomplete="off" required/>
+                    <label class="user-label">Sobrenome</label>
+                </div>
+                <div class="user-input-wrp width-4 input-group">
+                    <input type="text" class="input" id="input-genero" required/>
+                    <label class="user-label">Gênero</label>
+                </div>
+                <div class="user-input-wrp width-4 input-group">
+                    <input type="text" class="input" id="input-nascimento" onkeypress="$(this).mask('00/00/0000')" required/>
+                    <label class="user-label">Data de Nascimento</label>
+                </div>
+                <div class="user-input-wrp width-4 input-group">
+                    <input type="text" class="input" id="input-cpf" onkeypress="$(this).mask('000.000.000-00')" required/>
+                    <label class="user-label">CPF</label>
+                </div>
+                <div class="user-input-wrp width-4 input-group">
+                    <input type="text" class="input" id="input-telefone" autocomplete="off" onkeypress="$(this).mask('(00) 00000-0000')" required/>
+                    <label class="user-label">Telefone</label>
+                </div>
+            </div>
+            
+            <h2>Autenticação</h2>
+            <div class="card bg-off-white dflex jbetween fwrap">
+                <div class="user-input-wrp width-4 input-group">
+                    <input type="email" class="input" autocomplete="off" id="input-email" required/>
+                    <label class="user-label">E-mail</label>
+                </div>
+                <div class="user-input-wrp width-4 input-group">
+                    <input type="password" class="input" id="input-senha" required/>
+                    <label class="user-label">Senha</label>
+                </div>
+                <div class="user-input-wrp width-4 input-group">
+                    <input type="password" class="input" id="input-confirmar-senha" required/>
+                    <label class="user-label">Confirmar Senha</label>
+                </div>
+            </div>
+            <button type="submit" class="button bg-dark-red txt-white bg-hover-white txt-hover-dark-red align-right shadow-smooth">PRÓXIMO</button>
+        </form>
+    </div>
+</body>
+</html>
