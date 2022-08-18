@@ -84,12 +84,12 @@ function CadastroInformacoesPessoais() {
         <>
             <div class="page dflex acenter jcenter txt-medium">
                 <form id="cadastro-cliente" class="container" onSubmit={SubmeterFormCliente}>
-                    <Link to={'/'}>
-                        <img class="logo transform" src={logo} />
+                    <a to={'/'} class="logo transform prelative">
+                        <img src={logo} />
                         <span class="subtitulo">CADASTRO</span>
-                    </Link>
+                    </a>
                     <h2>Dados Pessoais</h2>
-                    <div class="card bg-dark-red dflex jbetween fwrap">
+                    <div class="card bg-off-white dflex jbetween fwrap">
                         <div class="user-input-wrp width-4 input-group">
                             <input
                                 type="text"
@@ -157,7 +157,7 @@ function CadastroInformacoesPessoais() {
                         </div>
                     </div>
                     <h2>Endereço</h2>
-                    <div class="card bg-dark-red dflex jbetween fwrap" onSubmit={SubmeterFormEndereco}>
+                    <div class="card bg-off-white dflex jbetween fwrap" onSubmit={SubmeterFormEndereco}>
                         <div class="user-input-wrp width-4 input-group">
                             <input
                                 type="text"
@@ -226,7 +226,7 @@ function CadastroInformacoesPessoais() {
                     </div>
 
                     <h2>Autenticação</h2>
-                    <div class="card bg-dark-red dflex jbetween fwrap">
+                    <div class="card bg-off-white dflex jbetween fwrap">
                         <div class="user-input-wrp width-4 input-group">
                             <input
                                 type="text"
