@@ -123,6 +123,12 @@ img {
   background-color: #AB0229;
 }
 
+
+.bg-off-white,
+.bg-off-white-red:hover {
+  background-color: #f3f3f3;
+}
+
 .bg-red {
   background-color: #de0235;
 }
@@ -351,7 +357,6 @@ h2 {
 
 
 
-
 .input-group {
   position: relative;
 }
@@ -384,6 +389,18 @@ h2 {
 .input:valid,
 .input:disabled {
   outline: none;
+  background-color: #f3f3f3;
+  box-shadow: #de0235 0px 0px 3px 0px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: rgb(255, 255, 255);
+  color: #000;
+}
+
+.input-login:focus,
+.input-login:valid,
+.input-login:disabled {
+  outline: none;
   background-color: rgb(171, 2, 41);
   box-shadow: rgb(222, 2, 53) 0px 4px 14px 5px;
   border-width: 2px;
@@ -396,12 +413,25 @@ h2 {
 .input:disabled~label {
   transform: translateY(-15%) translateX(1px);
   font-size: 13.5px;
+  background-color: #f3f3f3;
+  padding: 0 0.1em;
+  color: #ab0229;
+  letter-spacing: 0.5px;
+  font-weight: bold;
+}
+
+.input-login:focus~label,
+.input-login:valid~label,
+.input-login:disabled~label {
+  transform: translateY(-15%) translateX(1px);
+  font-size: 13.5px;
   background-color: rgb(171 2 41);
   padding: 0 0.1em;
   color: #fff;
   letter-spacing: 0.5px;
   font-weight: bold;
 }
+
 
 .input:disabled {
   filter: opacity(0.7);
