@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro | Iara</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon_io/favicon-16x16.png">
+    <script src="https://kit.fontawesome.com/26f7448628.js" crossorigin="anonymous"></script>   
+    <script src="../script.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+</head>
+<body>
+    <div class="page dflex acenter jcenter txt-medium">
+        <form id="cadastro-cliente" class="container">
+            <a href="institucional.html" class="logo transform prelative">
+                <img alt="Logo" src="../img/logo-branco.png">
+                <span class="subtitulo">CADASTRO</span>
+            </a>
+            <h2>Cadastro Profissional</h2>
+            <div class="card bg-off-white dflex jbetween fwrap">
+                <div class="dflex fwrap astart jaround">
+                    <div class="width-50-margin-20">
+                        <h3>Cadastrar Serviços</h3>
+                        <div class="dflex fwrap jbetween">
+                            <select class="input width-50-margin-10 margin-bottom-15">
+                                <option value="" disabled selected>Escolha a Categoria</option>
+                            </select>
+                            <select class="input width-50-margin-10 margin-bottom-15">
+                                <option value="" disabled selected>Escolha a Especialidade</option>
+                            </select>
+                            <input type="number" min="1" step="any" placeholder="Preço (R$)" class="input width-50-margin-10" id="input-preco"/>
+                            <input type="text" placeholder="Duração" class="input width-50-margin-10" id="input-duracao" onkeypress="$(this).mask('00:00')"/>
+                        </div>
+                        <button type="submit" class="button button-cadastro-profissional txt-white bg-hover-white txt-hover-dark-red">CADASTRAR</button>
+                    </div>
+                    <div class="width-50-margin-20">
+                        <h3>Serviços Cadastrados</h3>
+                    </div>
+                </div>
+                <div class="separador"></div>
+
+            </div>
+            
+            <button type="submit" class="button bg-dark-red txt-white bg-hover-white txt-hover-dark-red align-right shadow-smooth">CADASTRAR</button>
+        </form>
+    </div>
+</body>
+</html>
