@@ -67,6 +67,10 @@ textarea {
   justify-content: space-between;
 }
 
+.jaround{
+  justify-content: space-around;
+}
+
 .fwrap {
   flex-wrap: wrap;
 }
@@ -77,6 +81,10 @@ textarea {
 
 .fdcolumn {
   flex-direction: column;
+}
+
+.astart{
+  align-items: flex-start;
 }
 
 a,
@@ -679,3 +687,44 @@ h2 {
   padding: 50px 0 20px;
 }
 
+.width-50-porc{
+  width: 50%;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.width-50-margin-10{
+  width: calc(50% - 10px);
+}
+
+.width-50-margin-20{
+  width: calc(50% - 20px);
+}
+
+.margin-bottom-15{
+  margin-bottom: 15px;
+}
+
+.button-cadastro-profissional {
+  margin: 35px 0 0 auto;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 6px 12px;
+  box-shadow: #de0235 0px 1px 3px 0px;
+  background-color: #de0235;
+}
+
+.button-cadastro-profissional:hover{
+  box-shadow: 0px 2px 4px 0px #de0235;
+}
+
+.separador {
+  height: 3px;
+  background-color: rgb(227 70 107 / 69%);
+  width: 100%;
+  border-radius: 10px;
+  margin: 30px 0;
+}
