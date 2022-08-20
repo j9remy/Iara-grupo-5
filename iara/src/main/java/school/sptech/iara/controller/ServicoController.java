@@ -13,8 +13,8 @@ import school.sptech.iara.repository.ServicoAtribuidoRepository;
 import school.sptech.iara.repository.ServicoRepository;
 import school.sptech.iara.request.PrestadorServicoRequest;
 import school.sptech.iara.request.ServicoRequest;
-import school.sptech.iara.response.ServicoAvaliacaoResponse;
-import school.sptech.iara.response.ServicoResponse;
+import school.sptech.iara.repository.response.ServicoAvaliacaoResponse;
+import school.sptech.iara.repository.response.ServicoResponse;
 
 import javax.validation.Valid;
 import java.time.LocalTime;

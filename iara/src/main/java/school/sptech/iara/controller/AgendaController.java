@@ -4,17 +4,17 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import school.sptech.iara.model.Agenda;
-import school.sptech.iara.model.Agendamento;
-import school.sptech.iara.model.ServicoAtribuido;
-import school.sptech.iara.repository.AgendaRepository;
-import school.sptech.iara.repository.AgendamentoRepository;
-import school.sptech.iara.repository.ServicoAtribuidoRepository;
+import school.sptech.iara.model.*;
+import school.sptech.iara.repository.*;
+import school.sptech.iara.repository.response.HorariosResponse;
 import school.sptech.iara.request.*;
+import school.sptech.iara.repository.response.HorariosDisponiveisResponse;
 
+import javax.validation.Valid;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -31,6 +31,10 @@ public class AgendaController {
     private AgendamentoRepository agendamentoRepository;
     @Autowired
     private ServicoAtribuidoRepository servicoAtribuidoRepository;
+    @Autowired
+    private ServicoRepository servicoRepository;
+    @Autowired
+    private PrestadorRepository prestadorRepository;
 
     @GetMapping("/{idPrestador}")
     @ApiResponses(value = {
@@ -71,8 +75,46 @@ public class AgendaController {
         return ResponseEntity.status(404).build();
     }
 
+
+    @GetMapping("/disponiveis")
+    public ResponseEntity<HorariosDisponiveisResponse> getHorariosDisponiveis(@RequestBody @Valid HorariosDisponiveisRequest req){
+        if (req.getData().isAfter(LocalDate.now())){
+            Optional<Servico> servicoOptional = servicoRepository.findById(req.getservicoId());
+            Optional<Prestador> prestadorOptional = prestadorRepository.findById(req.getIdPrestador());
+            System.out.println();
+            if (prestadorOptional.isPresent() && servicoOptional.isPresent()){
+                Prestador prestador = prestadorOptional.get();
+                Servico servico = servicoOptional.get();
+                Optional<Agenda> agendaOptional = agendaRepository.findByPrestador_Id(prestador.getId());
+                if (servico.getPrestador().equals(prestador) && agendaOptional.isPresent()){
+                    Agenda agenda = agendaOptional.get();
+                    List<Agendamento> agendamentos = agendamentoRepository.findAllByAgendaAndDataOrderByHoraInicio
+                                                                            (agenda, req.getData());
+                    List<HorariosResponse> horariosResponses = new ArrayList<>();
+                    for (int i = 0; i < agendamentos.size(); i++) {
+                        if (i + 1 < agendamentos.size() &&
+                                !agendamentos.get(i).getHoraFim().equals(agendamentos.get(i + 1).getHoraInicio())){
+                            LocalTime tempo = servico.getDuracaoEstimada();
+                            if (agendamentos.get(i).getHoraFim().plusHours(tempo.getHour())
+                                    .plusMinutes(tempo.getMinute()).isBefore(agendamentos.get(i + 1).getHoraInicio())){
+                                HorariosResponse hrResp = new HorariosResponse(agendamentos.get(i).getHoraFim(),
+                                        agendamentos.get(i + 1).getHoraInicio().minusHours(tempo.getHour())
+                                        .minusMinutes(tempo.getMinute()));
+                                horariosResponses.add(hrResp);
+                            }
+                        }
+                    }
+                    HorariosDisponiveisResponse hr = new HorariosDisponiveisResponse(req.getData(), horariosResponses);
+                    return ResponseEntity.status(200).body(hr);
+                }
+            }
+            return ResponseEntity.status(404).build();
+        }
+        return ResponseEntity.status(400).build();
+    }
+
+
     @PostMapping
-    @GetMapping
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Agendamento criado com sucesso"),
             @ApiResponse(responseCode = "400", description = "Agendamento já cadastrado ou prestador inválido")
@@ -268,6 +310,8 @@ public class AgendaController {
         }
         return ResponseEntity.status(400).build();
     }
+
+
 
 
 }

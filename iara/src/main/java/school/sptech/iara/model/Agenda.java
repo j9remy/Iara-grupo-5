@@ -16,7 +16,6 @@ public class Agenda {
     public Agenda(Prestador prestador) {
         this.prestador = prestador;
     }
-
     public Agenda() {
     }
 

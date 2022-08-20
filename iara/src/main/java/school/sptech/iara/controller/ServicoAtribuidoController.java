@@ -1,6 +1,5 @@
 package school.sptech.iara.controller;
 
-import feign.FeignException;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,20 +8,12 @@ import org.springframework.web.bind.annotation.*;
 import school.sptech.iara.model.*;
 import school.sptech.iara.repository.*;
 import school.sptech.iara.request.ServicoAtribuidoRequest;
-import school.sptech.iara.response.ServicoAtribuidoResponse;
+import school.sptech.iara.repository.response.ServicoAtribuidoResponse;
 
-import javax.swing.text.html.Option;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 

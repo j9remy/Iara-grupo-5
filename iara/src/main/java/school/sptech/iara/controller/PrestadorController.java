@@ -10,22 +10,18 @@ import school.sptech.iara.repository.*;
 import school.sptech.iara.request.EnderecoSimplesRequest;
 import school.sptech.iara.request.PrestadorUpdateRequest;
 import school.sptech.iara.request.UsuarioEmailSenhaRequest;
-import school.sptech.iara.response.PrestadorAvaliacaoResponse;
-import school.sptech.iara.response.ServicoAtribuidoResponse;
+import school.sptech.iara.repository.response.PrestadorAvaliacaoResponse;
 import school.sptech.iara.util.GravaArquivo;
 
-import javax.sound.sampled.Port;
 import javax.validation.Valid;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @RestController
