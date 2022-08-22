@@ -7,11 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import school.sptech.iara.model.Endereco;
 import school.sptech.iara.repository.EnderecoRepository;
-import school.sptech.iara.request.EnderecoRequest;
 import school.sptech.iara.request.EnderecoSimplesRequest;
 import school.sptech.iara.rest.viacep.ViacepClient;
 import school.sptech.iara.rest.viacep.ViacepResponse;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -78,5 +78,37 @@ public class EnderecoController {
         return ResponseEntity.status(400).build();
     }
 
+    @PutMapping("/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Endereço atualizado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "O endereço desejado não foi encontrado")
+    })
+    public ResponseEntity<Endereco> putEndereco(@RequestBody @Valid EnderecoSimplesRequest req,
+                                                @PathVariable int id) {
+        Optional<Endereco> enderecoEncontrado = enderecoRepository.findById(id);
+        if (enderecoEncontrado.isPresent()) {
+            Endereco endereco = enderecoEncontrado.get();
+            endereco.setCep(req.getCep());
+            endereco.setNumero(req.getNumero());
+            endereco.setComplemento(req.getComplemento());
+            return ResponseEntity.status(200).build();
+        }
+        return ResponseEntity.status(404).build();
+    }
+
+    @DeleteMapping("/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Endereço excluído com sucesso"),
+            @ApiResponse(responseCode = "404", description = "O endereço desejado não foi encontrado")
+    })
+    public ResponseEntity<Endereco> deleteEndereco(@PathVariable Integer id) {
+        Optional<Endereco> enderecoOptional = enderecoRepository.findById(id);
+        if (enderecoOptional.isPresent()) {
+            Endereco endereco = enderecoOptional.get();
+            enderecoRepository.delete(endereco);
+            return ResponseEntity.status(200).build();
+        }
+        return ResponseEntity.status(404).build();
+    }
 
 }
