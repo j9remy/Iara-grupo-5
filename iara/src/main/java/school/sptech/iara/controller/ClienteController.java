@@ -12,14 +12,13 @@ import school.sptech.iara.repository.AvaliacaoRepository;
 import school.sptech.iara.repository.ClienteRepository;
 import school.sptech.iara.repository.EnderecoRepository;
 import school.sptech.iara.request.*;
-import school.sptech.iara.response.UsuarioAvaliacaoResponse;
+import school.sptech.iara.repository.response.UsuarioAvaliacaoResponse;
 import school.sptech.iara.util.GravaArquivo;
 
 import javax.validation.Valid;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

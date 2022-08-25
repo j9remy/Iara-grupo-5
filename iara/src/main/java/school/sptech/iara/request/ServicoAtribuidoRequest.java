@@ -8,7 +8,7 @@ public class ServicoAtribuidoRequest {
     @NotNull
     private Integer idServico;
     @NotNull
-    private String dataInicio;
+    private LocalDateTime dataInicio;
     private String observacoes;
 
     public Integer getIdServico() {
@@ -17,10 +17,10 @@ public class ServicoAtribuidoRequest {
     public void setIdServico(Integer idServico) {
         this.idServico = idServico;
     }
-    public String getDataInicio() {
+    public LocalDateTime getDataInicio() {
         return dataInicio;
     }
-    public void setDataInicio(String dataInicio) {
+    public void setDataInicio(LocalDateTime dataInicio) {
         this.dataInicio = dataInicio;
     }
     public String getObservacoes() {

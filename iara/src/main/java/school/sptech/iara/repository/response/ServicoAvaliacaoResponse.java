@@ -1,4 +1,4 @@
-package school.sptech.iara.response;
+package school.sptech.iara.repository.response;
 
 public class ServicoAvaliacaoResponse {
     private Integer servicoId;

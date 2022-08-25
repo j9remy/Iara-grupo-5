@@ -10,22 +10,18 @@ import school.sptech.iara.repository.*;
 import school.sptech.iara.request.EnderecoSimplesRequest;
 import school.sptech.iara.request.PrestadorUpdateRequest;
 import school.sptech.iara.request.UsuarioEmailSenhaRequest;
-import school.sptech.iara.response.PrestadorAvaliacaoResponse;
-import school.sptech.iara.response.ServicoAtribuidoResponse;
+import school.sptech.iara.repository.response.PrestadorAvaliacaoResponse;
 import school.sptech.iara.util.GravaArquivo;
 
-import javax.sound.sampled.Port;
 import javax.validation.Valid;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -190,29 +186,29 @@ public class PrestadorController {
         return ResponseEntity.status(400).build();
     }
 
-    @GetMapping("/agenda/{idPrestador}")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Busca realizada com sucesso"),
-            @ApiResponse(responseCode = "204", description = "Busca realizada com sucesso, porém não há serviços não atendidos"),
-            @ApiResponse(responseCode = "404", description = "Prestador não encontrado")
-    })
-    public ResponseEntity<List<ServicoAtribuidoResponse>> getAgenda(@PathVariable Integer idPrestador){
-        Optional<Prestador> prestadorOptional = repository.findById(idPrestador);
-        if (prestadorOptional.isPresent()){
-            Prestador prestador = prestadorOptional.get();
-            List<ServicoAtribuido> servicos = servicoAtribuidoRepository.
-                    findAllByFinalizadoAndServico_AtivoAndServico_PrestadorOrderByDataHoraInicio(false,true,prestador);
-            if (!servicos.isEmpty()){
-                List<ServicoAtribuidoResponse> servicoAtribuidoResponses = new ArrayList<>();
-                for (ServicoAtribuido serv: servicos){
-                    servicoAtribuidoResponses.add(serv.formatarResposta());
-                }
-                return ResponseEntity.status(200).body(servicoAtribuidoResponses);
-            }
-            return ResponseEntity.status(204).build();
-        }
-        return ResponseEntity.status(404).build();
-    }
+//    @GetMapping("/agenda/{idPrestador}")
+//    @ApiResponses(value = {
+//            @ApiResponse(responseCode = "200", description = "Busca realizada com sucesso"),
+//            @ApiResponse(responseCode = "204", description = "Busca realizada com sucesso, porém não há serviços não atendidos"),
+//            @ApiResponse(responseCode = "404", description = "Prestador não encontrado")
+//    })
+//    public ResponseEntity<List<ServicoAtribuidoResponse>> getAgenda(@PathVariable Integer idPrestador){
+//        Optional<Prestador> prestadorOptional = repository.findById(idPrestador);
+//        if (prestadorOptional.isPresent()){
+//            Prestador prestador = prestadorOptional.get();
+//            List<ServicoAtribuido> servicos = servicoAtribuidoRepository.
+//                    findAllByFinalizadoAndServico_AtivoAndServico_PrestadorOrderByDataHoraInicio(false,true,prestador);
+//            if (!servicos.isEmpty()){
+//                List<ServicoAtribuidoResponse> servicoAtribuidoResponses = new ArrayList<>();
+//                for (ServicoAtribuido serv: servicos){
+//                    servicoAtribuidoResponses.add(serv.formatarResposta());
+//                }
+//                return ResponseEntity.status(200).body(servicoAtribuidoResponses);
+//            }
+//            return ResponseEntity.status(204).build();
+//        }
+//        return ResponseEntity.status(404).build();
+//    }
 
     @GetMapping(value = "/foto/{idPrestador}", produces = "image/jpeg")
     @ApiResponses(value = {

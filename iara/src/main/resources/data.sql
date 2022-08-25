@@ -84,21 +84,21 @@ INSERT INTO Habilidade (Habilidade, Descricao) VALUES
 
 -- Servicos
 INSERT INTO Servico (Ativo, Descricao, Duracao_Estimada, Tipo, Valor, Prestador_Id) VALUES
-    (true,'Corte Masculino',60,'Corte',40.00,7),
-    (false,'Pedicure sem Esmaltação',100,'Podologia',50.00,6),
-    (true,'Luzes',150,'Corte Feminino',150,7),
-    (true,'Spa dos Pés',45,'Pedicure',50,6),
-    (true,'Esmaltação',85,'Manicure',20,6),
-    (true,'Esmaltação Artistica',150,'Manicure',200,6),
-    (true,'Aparação na barba',30,'Barba',35,7);
+    (true,'Corte Masculino','01:00','Corte',40.00,7),
+    (false,'Pedicure sem Esmaltação','1:20','Podologia',50.00,6),
+    (true,'Luzes','1:30','Corte Feminino',150,7),
+    (true,'Spa dos Pés','00:45','Pedicure',50,6),
+    (true,'Esmaltação','1:00','Manicure',20,6),
+    (true,'Esmaltação Artistica','1:45','Manicure',200,6),
+    (true,'Aparação na barba','00:30','Barba',35,7);
 
 -- Serviços atribuidos
-INSERT INTO Servico_Atribuido (Cliente_Id, Servico_Id, Avaliacao, Data_Hora_Inicio, Data_Hora_Fim, Status, Observacoes, Finalizado) VALUES
-    (1,7,-1.0,'2022-06-10 13:00',null,'Agendado',null,false),
-    (1,6,-1.0,'2022-06-09 12:00','2022-06-09 14:37','Finalizado','Devo me atrasar alguns minutos',true),
-    (2,5,-1.0,'2022-06-10 11:30',null,'Agendado','Desejo minhas unhas da cor vermelha',false),
-    (3,4,-1.0,'2022-06-10 10:30',null,'Agendado',null,false),
-    (4,3,-1.0,'2022-06-11 19:30',null,'Agendado',null,false),
-    (5,2,-1.0,'2022-06-12 15:00',null,'Agendado',null,false),
-    (6,1,-1.0,'2022-06-10 14:00',null,'Agendado',null,false);
+INSERT INTO Servico_Atribuido (Cliente_Id, Servico_Id, Avaliacao, Data_Hora_Fim, Status, Observacoes, Finalizado) VALUES
+    (1,7,-1.0,null,'Agendado',null,false),
+    (1,6,-1.0,'2022-06-09T14:37','Finalizado','Devo me atrasar alguns minutos',true),
+    (2,5,-1.0,null,'Agendado','Desejo minhas unhas da cor vermelha',false),
+    (3,4,-1.0,null,'Agendado',null,false),
+    (4,3,-1.0,null,'Agendado',null,false),
+    (5,2,-1.0,null,'Agendado',null,false),
+    (6,1,-1.0,null,'Agendado',null,false);
 

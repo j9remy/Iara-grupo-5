@@ -13,9 +13,12 @@ import school.sptech.iara.repository.ServicoAtribuidoRepository;
 import school.sptech.iara.repository.ServicoRepository;
 import school.sptech.iara.request.PrestadorServicoRequest;
 import school.sptech.iara.request.ServicoRequest;
-import school.sptech.iara.response.ServicoAvaliacaoResponse;
+import school.sptech.iara.repository.response.ServicoAvaliacaoResponse;
+import school.sptech.iara.repository.response.ServicoResponse;
 
 import javax.validation.Valid;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,10 +39,19 @@ public class ServicoController {
             @ApiResponse(responseCode = "200", description = "Retorna a lista de serviços"),
             @ApiResponse(responseCode = "204", description = "A lista não foi encontrada")
     })
-    public ResponseEntity<List<Servico>> getListaServicos(){
-        if (servicoRepository.findAll().isEmpty())
-            return ResponseEntity.status(204).build();
-        return ResponseEntity.status(200).body(servicoRepository.findAll());
+    public ResponseEntity<List<ServicoResponse>> getListaServicos(){
+        if (!servicoRepository.findAll().isEmpty()){
+            List<ServicoResponse> resp = new ArrayList<>();
+            List<Servico> servicos = servicoRepository.findAll();
+            for (Servico servico : servicos){
+                ServicoResponse servicoResponse = new ServicoResponse(servico.getId(),
+                        servico.getValor(), servico.getDescricao(),servico.getTipo(),servico.getDuracaoEstimada(),
+                        servico.getPrestador().getId(),servico.getAvaliacao(),servico.getQtdServicosAvaliados());
+                resp.add(servicoResponse);
+            }
+            return ResponseEntity.status(200).body(resp);
+        }
+        return ResponseEntity.status(204).build();
     }
 
     @GetMapping("/{index}")
@@ -47,10 +59,15 @@ public class ServicoController {
             @ApiResponse(responseCode = "200", description = "Retorna a lista do serviço desejado"),
             @ApiResponse(responseCode = "404", description = "O serviço desejado não foi encontrado")
     })
-    public ResponseEntity<Servico> getServicoPorIndex(@PathVariable int index){
+    public ResponseEntity<ServicoResponse> getServicoPorIndex(@PathVariable int index){
         Optional<Servico> servicoOptional = servicoRepository.findById(index);
-        if (servicoOptional.isPresent())
-            return ResponseEntity.status(200).body(servicoOptional.get());
+        if (servicoOptional.isPresent()) {
+            Servico servico = servicoOptional.get();
+            ServicoResponse servicoResponse = new ServicoResponse(servico.getId(),
+                    servico.getValor(), servico.getDescricao(),servico.getTipo(),servico.getDuracaoEstimada(),
+                    servico.getPrestador().getId(),servico.getAvaliacao(),servico.getQtdServicosAvaliados());
+            return ResponseEntity.status(200).body(servicoResponse);
+        }
         return ResponseEntity.status(404).build();
     }
 
@@ -164,14 +181,14 @@ public class ServicoController {
         return ResponseEntity.status(404).build();
     }
 
-    @PatchMapping("/duracao/{id}/{duracao}") //
+    @PatchMapping("/duracao/{id}/{duracao}")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "O serviço desejado desativado com sucesso"),
             @ApiResponse(responseCode = "400", description = "A duração desejada é igual a cadastradaa atualmente"),
             @ApiResponse(responseCode = "404", description = "O serviço desejado não foi encontrado")
     })
     public ResponseEntity<Void> patchDuracao(@PathVariable Integer id,
-                                       @PathVariable Double duracao){
+                                       @PathVariable LocalTime duracao){
         Optional<Servico> servicoOptional = servicoRepository.findById(id);
         if (servicoOptional.isPresent()){
             Servico servico = servicoOptional.get();

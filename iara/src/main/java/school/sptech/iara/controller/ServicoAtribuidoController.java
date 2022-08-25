@@ -1,34 +1,19 @@
 package school.sptech.iara.controller;
 
-import feign.FeignException;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import school.sptech.iara.model.Chat;
-import school.sptech.iara.model.Cliente;
-import school.sptech.iara.model.Servico;
-import school.sptech.iara.model.ServicoAtribuido;
-import school.sptech.iara.repository.ChatRepository;
-import school.sptech.iara.repository.ClienteRepository;
-import school.sptech.iara.repository.ServicoAtribuidoRepository;
-import school.sptech.iara.repository.ServicoRepository;
+import school.sptech.iara.model.*;
+import school.sptech.iara.repository.*;
 import school.sptech.iara.request.ServicoAtribuidoRequest;
-import school.sptech.iara.response.ServicoAtribuidoResponse;
+import school.sptech.iara.repository.response.ServicoAtribuidoResponse;
 
-import javax.swing.text.html.Option;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,6 +30,10 @@ public class ServicoAtribuidoController {
     private ClienteRepository clienteRepository;
     @Autowired
     private ChatRepository chatRepository;
+    @Autowired
+    private AgendamentoRepository agendamentoRepository;
+    @Autowired
+    private AgendaRepository agendaRepository;
 
     @GetMapping
     @ApiResponses(value = {
@@ -65,7 +54,7 @@ public class ServicoAtribuidoController {
     @PostMapping("/{idUser}")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Serviço atribuído cadastrado com sucesso"),
-            @ApiResponse(responseCode = "400", description = "Serviço e/ou cliente não encontrados")
+            @ApiResponse(responseCode = "400", description = "Serviço e/ou cliente e/ou prestador não encontrados")
     })
     public ResponseEntity<Void> postServicoAttrServico(@PathVariable Integer idUser,
                                                 @RequestBody ServicoAtribuidoRequest req){
@@ -74,25 +63,52 @@ public class ServicoAtribuidoController {
         if (servicoOptional.isPresent() && clienteOptional.isPresent()){
             Servico servico = servicoOptional.get();
             Cliente cliente = clienteOptional.get();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             ServicoAtribuido servicoAtribuido;
-            if (req.getObservacoes().isBlank()){
-                servicoAtribuido = new ServicoAtribuido(
-                        servico,
-                        LocalDateTime.parse(req.getDataInicio(), formatter),
-                        cliente);
-            }else{
-                servicoAtribuido = new ServicoAtribuido(
-                        servico,
-                        LocalDateTime.parse(req.getDataInicio(), formatter),
-                        cliente,
-                        req.getObservacoes());
-            }
-            Chat chat = new Chat(servicoAtribuido);
-            servicoAtribuidoRepository.save(servicoAtribuido);
-            chatRepository.save(chat);
+            Prestador prestador = servico.getPrestador();
+            Optional<Agenda> agendaOptional = agendaRepository.findByPrestador_Id(prestador.getId());
+            if (agendaOptional.isPresent()){
+                Agenda agenda = agendaOptional.get();
+                Agendamento agendamento = new Agendamento(servico.getTipo() +" - "+ servico.getDescricao(),req.getObservacoes(), req.getDataInicio().toLocalDate(),
+                        req.getDataInicio().toLocalTime(), req.getDataInicio().toLocalTime().plusHours(servico.getDuracaoEstimada().getHour())
+                        .plusMinutes(servico.getDuracaoEstimada().getMinute()), agenda);
 
-            return ResponseEntity.status(201).build();
+                if (agendamento.getHoraFim().isBefore(agendamento.getHoraInicio()) ||
+                    agendamento.getData().isBefore(LocalDate.now()) ||
+                    agendamento.getData().equals(LocalDate.now()) && agendamento.getHoraInicio().isBefore(LocalTime.now())){
+
+                    return ResponseEntity.status(400).build();
+                }
+                List<Agendamento> agendamentos = agendamentoRepository.findAllByAgendaAndData(agenda,req.getDataInicio().toLocalDate());
+                if (agendamentos.isEmpty())
+                    return ResponseEntity.status(400).build();
+                for (Agendamento ag:agendamentos) {
+                    if (agendamento.getHoraInicio().isAfter(ag.getHoraInicio()) && agendamento.getHoraInicio().isBefore(ag.getHoraFim()) ||
+                        agendamento.getHoraFim().isAfter(ag.getHoraInicio()) && agendamento.getHoraFim().isBefore(ag.getHoraFim()) ||
+                        agendamento.getHoraInicio().equals(ag.getHoraInicio()) && agendamento.getHoraFim().equals(ag.getHoraFim())
+                        ){
+                        return ResponseEntity.status(400).build();
+                    }
+                }
+
+
+                if (req.getObservacoes().isBlank()) {
+                    servicoAtribuido = new ServicoAtribuido(
+                            servico,
+                            cliente);
+                } else {
+                    servicoAtribuido = new ServicoAtribuido(
+                            servico,
+                            cliente,
+                            req.getObservacoes());
+                }
+                Chat chat = new Chat(servicoAtribuido);
+                servicoAtribuidoRepository.save(servicoAtribuido);
+                chatRepository.save(chat);
+                agendamento.setServicoAtribuido(servicoAtribuido);
+                agendamentoRepository.save(agendamento);
+                return ResponseEntity.status(201).build();
+            }
+
         }
         return ResponseEntity.status(400).build();
     }
