@@ -1,8 +1,12 @@
 package school.sptech.iara.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
-
+@Data
+@NoArgsConstructor
 @Entity
 public class AvaliacaoCliente {
 
@@ -16,18 +20,10 @@ public class AvaliacaoCliente {
     private Double avaliacao;
     private LocalDateTime dataHora;
 
-    public AvaliacaoCliente(){}
     public AvaliacaoCliente(Double avaliacao, Cliente cliente) {
         this.avaliacao = avaliacao;
         dataHora = LocalDateTime.now();
         this.cliente = cliente;
     }
 
-    public Double getAvaliacao() {
-        return avaliacao;
-    }
-
-    public void setAvaliacao(Double avaliacao) {
-        this.avaliacao = avaliacao;
-    }
 }

@@ -1,15 +1,15 @@
 package school.sptech.iara.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
+@Data
+@NoArgsConstructor
 @Entity
 public class Servico {
 //    Attributes
@@ -34,7 +34,6 @@ public class Servico {
     private Prestador prestador;
 
 //    Constructor
-    public Servico(){}
     public Servico(double valor, String descricao, String tipo, LocalTime duracaoEstimada, Prestador prestador) {
         this.valor = valor;
         this.descricao = descricao;
@@ -53,53 +52,6 @@ public class Servico {
 //        servicoAtribuidos = new ArrayList<>();
     }
 
-//    Getter and Setter
-    public double getValor() {
-        return valor;
-    }
-    public void setValor(double valor) {
-        this.valor = valor;
-    }
-    public String getDescricao() {
-        return descricao;
-    }
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-    public String getTipo() {
-        return tipo;
-    }
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-    public boolean isAtivo() {
-        return ativo;
-    }
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
-    }
-    public void setAtivo() {
-        setAtivo(!isAtivo());
-    }
-    public Prestador getPrestador() {
-        return prestador;
-    }
-    public LocalTime getDuracaoEstimada() {
-        return duracaoEstimada;
-    }
-    public void setDuracaoEstimada(LocalTime duracaoEstimada) {
-        this.duracaoEstimada = duracaoEstimada;
-    }
-    public int getId() {
-        return id;
-    }
-
-
-    //    Methods
-    //Retorna a quantidade de serviços atribuidos a este serviço
-//    public int getQtdServicosAtribuidos(){
-//        return servicoAtribuidos.size();
-//    }
 
     // Retorna a quantidade de serviços avaliados
     public int getQtdServicosAvaliados(){
@@ -129,10 +81,6 @@ public class Servico {
         return 0d;
     }
 
-    //retorna a lista de todos os servicos atribuidos serviço
-//    public List<ServicoAtribuido> listarServicosAtribuidos(){
-//        return servicoAtribuidos;
-//    }
 
     //Se servicoAtribuido não existir na lista, adiciona
     public void addServicoAtribuido(ServicoAtribuido servicoAtribuido){
@@ -174,17 +122,5 @@ public class Servico {
         setTipo(tipo);
     }
 
-//    toString
-    @Override
-    public String toString() {
-        return "Servico{" +
-                "valor=" + valor +
-                ", descricao='" + descricao + '\'' +
-                ", tipo='" + tipo + '\'' +
-                ", ativo=" + ativo +
-//                ", servicoAtribuidos=" + servicoAtribuidos +
-                ", duracaoEstimada=" + duracaoEstimada +
-                '}';
-    }
 }
 

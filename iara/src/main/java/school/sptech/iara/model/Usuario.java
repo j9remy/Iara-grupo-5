@@ -1,6 +1,8 @@
 package school.sptech.iara.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,6 +16,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
+@NoArgsConstructor
 @MappedSuperclass
 public abstract class Usuario implements Avaliavel{
 //    Attributes
@@ -77,72 +81,7 @@ public abstract class Usuario implements Avaliavel{
         this.autenticado = false;
         enderecos = new ArrayList<>();
     }
-    public Usuario() {
 
-    }
-
-//    Getter and Setter
-
-    public Integer getId() {
-        return id;
-    }
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    public String getNome() {
-        return nome;
-    }
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-    public String getSobrenome() {
-        return sobrenome;
-    }
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
-    }
-    public String getCpf() {
-        return cpf;
-    }
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-    public LocalDate getDataNasc() {
-        return dataNasc;
-    }
-    public void setDataNasc(LocalDate dataNasc) {
-        this.dataNasc = dataNasc;
-    }
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-    public char getSexo() {
-        return genero;
-    }
-    public void setSexo(char sexo) {
-        this.genero = sexo;
-    }
-    public String getTelefone() {
-        return telefone;
-    }
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-    public boolean isAutenticado() {
-        return autenticado;
-    }
-    public byte[] getFoto() {
-        return foto;
-    }
-    public void setFoto(byte[] foto) {
-        this.foto = foto;
-    }
     //    Methods
 
     private boolean usuarioExiste(String email, String senha){
@@ -170,22 +109,6 @@ public abstract class Usuario implements Avaliavel{
 
     public void addEndereco(Endereco endereco){
         enderecos.add(endereco);
-    }
-
-    //toString
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "nome='" + nome + '\'' +
-                ", sobrenome='" + sobrenome + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", dataNasc=" + dataNasc +
-                ", email='" + email + '\'' +
-                ", senha='" + senha + '\'' +
-                ", sexo=" + genero +
-                ", telefone='" + telefone + '\'' +
-                ", autenticado=" + autenticado +
-                '}';
     }
 
 }

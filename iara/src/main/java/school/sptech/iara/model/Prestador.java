@@ -1,5 +1,7 @@
 package school.sptech.iara.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
@@ -9,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Data
+@NoArgsConstructor
 @Entity
 public class Prestador extends Usuario{
 //    Attributes
@@ -29,9 +33,6 @@ public class Prestador extends Usuario{
     private List<Servico> servicos;
 
 //    Constructor
-    public Prestador(){
-        super();
-    }
     public Prestador(String nome, String sobrenome,
                      String cpf, LocalDate dataNasc,
                      String email, String senha,
@@ -64,34 +65,6 @@ public class Prestador extends Usuario{
 //        servicos = new ArrayList<>();
     }
 
-    //    Getter and Setter
-    public String getResumo() {
-        return resumo;
-    }
-    public void setResumo(String resumo) {
-        this.resumo = resumo;
-    }
-    public Boolean getAtendeDomicilio() {
-        return atendeDomicilio;
-    }
-    public void setAtendeDomicilio(Boolean atendeDomicilio) {
-        this.atendeDomicilio = atendeDomicilio;
-    }
-    public List<Habilidade> getHabilidades() {
-        return habilidades;
-    }
-    public Boolean getAtendeEstabelecimento() {
-        return atendeEstabelecimento;
-    }
-    public void setAtendeEstabelecimento(Boolean atendeEstabelecimento) {
-        this.atendeEstabelecimento = atendeEstabelecimento;
-    }
-    public Double getDistancia() {
-        return distancia;
-    }
-    public void setDistancia(Double distancia) {
-        this.distancia = distancia;
-    }
 
     //    Methods
     @Override
@@ -151,25 +124,5 @@ public class Prestador extends Usuario{
             }
         }
         return servicosAtivos;
-    }
-
-//    toString
-    @Override
-    public String toString() {
-        return "Cliente{" +
-            "nome='" + getNome() + '\'' +
-            ", sobrenome='" + getSobrenome() + '\'' +
-            ", cpf='" + getCpf() + '\'' +
-            ", dataNasc=" + getDataNasc() +
-            ", email='" + getEmail() + '\'' +
-            ", sexo=" + getSexo() +
-            ", telefone='" + getTelefone() + '\'' +
-            ", autenticado=" + isAutenticado() +
-//                ", endereco=" + getEndereco() +
-            ", resumo=" + getResumo() +
-            ", habilidades=" + habilidades +
-//                ", serviços=" + servicos +
-            ", mediaAvaliacao=" + calcAvaliacao() +
-            '}';
     }
 }
