@@ -1,10 +1,14 @@
 package school.sptech.iara.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
+@Data
 @Entity
+@NoArgsConstructor
 public class Agenda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +20,6 @@ public class Agenda {
     public Agenda(Prestador prestador) {
         this.prestador = prestador;
     }
-    public Agenda() {
-    }
+
 
 }

@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import SucessoCadastro from "./pages/SucessoCadastro";
 import Home from "./pages/Home";
 import HomeCliente from "./pages/HomeCliente";
+import CadastroProfissional from "./pages/CadastroProfissional";
 
 function Rotas(){
     return(
@@ -12,6 +13,7 @@ function Rotas(){
             <Routes>
                 <Route path="/escolhaCadastro" element={<EscolhaCadastro/>}/>
                 <Route path="/cadastroCliente" element={<CadastroCliente/>}/>
+                <Route path="/cadastroProfissional" element={<CadastroProfissional/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/sucessoCadastro" element={<SucessoCadastro/>}/>
                 <Route path="/" element={<Home/>}/>

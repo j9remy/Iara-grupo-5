@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 
-function CadastroInformacoesPessoais() {
+function CadastroInformacoesPessoaisCliente() {
 
     const maskTelefone = (value) => {
         return value
@@ -63,10 +63,12 @@ function CadastroInformacoesPessoais() {
         <>
             <div class="page dflex acenter jcenter txt-medium">
                 <form id="cadastro-cliente" class="container" onSubmit={SubmeterFormCliente}>
-                    <a to={'/'} class="logo transform prelative">
-                        <img src={logo} />
+                    <Link to={'/escolhaCadastro'} >
+                    <div class="logo transform prelative">
+                        <img src={logo}/>
                         <span class="subtitulo">CADASTRO</span>
-                    </a>
+                    </div>
+                    </Link>
                     <h2>Dados Pessoais</h2>
                     <div class="card bg-off-white dflex jbetween fwrap">
                         <div class="user-input-wrp width-4 input-group">
@@ -172,4 +174,4 @@ function CadastroInformacoesPessoais() {
         </>
     )
 }
-export default CadastroInformacoesPessoais;
+export default CadastroInformacoesPessoaisCliente;

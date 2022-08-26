@@ -1,5 +1,7 @@
 package school.sptech.iara.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 import org.jetbrains.annotations.NotNull;
 
@@ -8,6 +10,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
+@Data
+@NoArgsConstructor
 @Entity
 public class Mensagem {
     @Id
@@ -32,9 +36,6 @@ public class Mensagem {
 
     private Boolean enviadoPeloPrestador;
 
-
-
-
     //constructor
     public Mensagem(Prestador prestador, Cliente cliente,String mensagem, Chat chat, Boolean enviadoPeloPrestador) {
         this.prestador = prestador;
@@ -44,72 +45,5 @@ public class Mensagem {
         this.enviadoPeloPrestador = enviadoPeloPrestador;
         dataHora = LocalDateTime.now();
         visualizado = false;
-    }
-
-    //constructor
-    public Mensagem(){}
-
-    // Getter and Setter
-    public Boolean getVisualizado() {
-        return visualizado;
-    }
-    public void setVisualizado(Boolean visualizado) {
-        this.visualizado = visualizado;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public Prestador getPrestador() {
-        return prestador;
-    }
-
-    public void setPrestador(Prestador prestador) {
-        this.prestador = prestador;
-    }
-
-    public String getMensagem() {
-        return mensagem;
-    }
-
-    public void setMensagem(String mensagem) {
-        this.mensagem = mensagem;
-    }
-
-    public LocalDateTime getDataHora() {
-        return dataHora;
-    }
-
-    public void setDataHora(LocalDateTime dataHora) {
-        this.dataHora = dataHora;
-    }
-
-    public Chat getChat() {
-        return chat;
-    }
-
-    public void setChat(Chat chat) {
-        this.chat = chat;
-    }
-
-    public Boolean getEnviadoPeloPrestador() {
-        return enviadoPeloPrestador;
-    }
-
-    public void setEnviadoPeloPrestador(Boolean enviadoPeloPrestador) {
-        this.enviadoPeloPrestador = enviadoPeloPrestador;
     }
 }

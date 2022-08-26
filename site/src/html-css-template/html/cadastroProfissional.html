@@ -130,33 +130,72 @@
                         <h3>Preferência de Atendimento</h3>
                         <div class="dflex fwrap">
                             <label class="label-checkbox wide">
-                                <input type="checkbox" name="Em Domicílio">
-                                <div class="checkmark"></div>
-                                <span>Em Domicílio</span>
-                            </label>
-                            <label class="label-checkbox wide">
-                                <input type="checkbox" name="Estabelecimento Próprio">
+                                <input type="checkbox" id="checkbox-estabelecimento" name="Estabelecimento Próprio">
                                 <div class="checkmark"></div>
                                 <span>Estabelecimento Próprio</span>
+                            </label>
+                            <label class="label-checkbox wide">
+                                <input type="checkbox" id="checkbox-domicilio" name="Em Domicílio">
+                                <div class="checkmark"></div>
+                                <span>Em Domicílio</span>
                             </label>
                         </div>
                     </div>                    
                     <div class="width-50-margin-20">
-                        <h3 class="margin-bottom-10">Raio de Atentimento em Domicílio (Km)</h3>
-                        
-                            <input class="width-100-porc" type="range" min="0" max="100">
-                        
+                        <h3 class="margin-bottom-10">Raio de Atentimento em Domicílio</h3>
+                            <div class="dflex jbetween">
+                                <div id="div-range" class="range-parent width-100-porc disabled">
+                                    <input type="range" disabled class="range not-allowed" id="range">
+                                    <output class="bubble not-allowed" id="bubble"></output>
+                                    <span class="pabsolute zero-km" >0 Km</span>
+                                    <span class="pabsolute cem-km" >100 Km</span>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>
             <div class="dflex acenter jbetween">
-                <button type="button" class="button bg-dark-red txt-white bg-hover-white txt-hover-dark-red shadow-smooth">
+                <a href="cadastroDados.html" class="button bg-dark-red txt-white bg-hover-white txt-hover-dark-red shadow-smooth">
                     <i class="fa-solid fa-arrow-left-long margin-right-5"></i>
                     VOLTAR
-                </button>
+                </a>
                 <button type="submit" class="button bg-dark-red txt-white bg-hover-white txt-hover-dark-red shadow-smooth">CADASTRAR</button>
             </div>
         </form>
     </div>
 </body>
 </html>
+
+<script>
+var range = document.getElementById('range');
+var bubble = document.getElementById('bubble');
+
+document.getElementById('checkbox-domicilio').onchange = function() {
+    range.disabled = !this.checked;
+    if (range.classList.contains('not-allowed')) {
+        range.classList.remove('not-allowed');
+        bubble.classList.remove('not-allowed');
+        document.getElementById('div-range').classList.remove('disabled');
+    } else {
+        range.classList.add('not-allowed');
+        bubble.classList.add('not-allowed');
+        document.getElementById('div-range').classList.add('disabled');
+    }
+};
+
+range.addEventListener("input", () => {
+  setBubble(range, bubble);
+});
+
+setBubble(range, bubble);
+
+function setBubble(range, bubble) {
+  const val = range.value;
+  const min = range.min ? range.min : 0;
+  const max = range.max ? range.max : 100;
+  const newVal = Number(((val - min) * 100) / (max - min));
+  bubble.innerHTML = val + " Km";
+
+  bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
+}
+</script>

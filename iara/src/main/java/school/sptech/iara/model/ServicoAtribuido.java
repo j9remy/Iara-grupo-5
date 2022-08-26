@@ -1,11 +1,15 @@
 package school.sptech.iara.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import school.sptech.iara.repository.response.ServicoAtribuidoResponse;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@Data
+@NoArgsConstructor
 @Entity
 public class ServicoAtribuido implements Avaliavel{
 //    Attributes
@@ -45,54 +49,6 @@ public class ServicoAtribuido implements Avaliavel{
         this.servico = servico;
 //        this.chat = chat;
     }
-    public ServicoAtribuido(){}
-
-//    Getter and Setter
-    public boolean isFinalizado() {
-        return finalizado;
-    }
-    public void setFinalizado(boolean finalizado) {
-        this.finalizado = finalizado;
-    }
-    public String getObservacoes() {
-        return observacoes;
-    }
-    public void setObservacoes(String observacoes) {
-        this.observacoes = observacoes;
-    }
-    public String getStatus() {
-        return status;
-    }
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    public Double getAvaliacao() {
-        return avaliacao;
-    }
-    public void setAvaliacao(Double avaliacao) {
-        this.avaliacao = avaliacao;
-    }
-    public int getId() {
-        return id;
-    }
-    public Cliente getCliente() {
-        return cliente;
-    }
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-    public LocalDateTime getDataHoraFim() {
-        return dataHoraFim;
-    }
-    public void setDataHoraFim(LocalDateTime dataHoraFim) {
-        this.dataHoraFim = dataHoraFim;
-    }
-    public Servico getServico() {
-        return servico;
-    }
-    public void setServico(Servico servico) {
-        this.servico = servico;
-    }
 
     //    Methods
     // Simplesmente retorna o valor do atributo avaliacao
@@ -127,15 +83,5 @@ public class ServicoAtribuido implements Avaliavel{
                 isFinalizado(),
                 getAvaliacao());
         return servico;
-    }
-
-//    toString
-    @Override
-    public String toString() {
-        return "ServicoAtribuido{" +
-                ", horaFim=" + dataHoraFim +
-                ", finalizado=" + finalizado +
-                ", avaliacao=" + avaliacao +
-                '}';
     }
 }

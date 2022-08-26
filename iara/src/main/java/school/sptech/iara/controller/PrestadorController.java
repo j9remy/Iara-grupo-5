@@ -146,7 +146,7 @@ public class PrestadorController {
             prestador.setSobrenome(req.getSobrenome());
             prestador.setDataNasc(req.getDataNasc());
             prestador.setSenha(req.getSenha());
-            prestador.setSexo(req.getGenero());
+            prestador.setGenero(req.getGenero());
             prestador.setAtendeDomicilio(req.getAtendeDomicilio());
             if(!req.getResumo().isEmpty()){
                 prestador.setResumo(req.getResumo());
@@ -287,7 +287,7 @@ public class PrestadorController {
             corpo += String.format("%-50.50s", p.getSobrenome());
             corpo += String.format("%-11.11s", p.getCpf());
             corpo += String.format("%-19.19s", p.getDataNasc());
-            corpo += String.format("%-1.1s", p.getSexo());
+            corpo += String.format("%-1.1s", p.getGenero());
             corpo += String.format("%-50.50s", p.getEmail());
             corpo += String.format("%-15.15s", p.getTelefone());
             corpo += String.format("%-140.140s", p.getResumo());
@@ -430,7 +430,7 @@ public class PrestadorController {
                     ";" + prestador.getCpf() +
                     "," + prestador.getDataNasc() +
                     ";" + prestador.getEmail() +
-                    ";" + prestador.getSexo() +
+                    ";" + prestador.getGenero() +
                     ";" + prestador.getTelefone() +
                     ";" + prestador.getResumo() +
                     ";" + prestador.getAtendeDomicilio() +

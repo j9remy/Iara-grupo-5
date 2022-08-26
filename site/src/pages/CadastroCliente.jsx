@@ -1,9 +1,9 @@
-import CadastroInformacoesPessoais from "../components/CadastroInformacoesPessoais";
+import CadastroInformacoesPessoaisCliente from "../components/CadastroInformacoesPessoaisCliente";
 
 function CadastroCliente() {
     return (
         <>
-            <CadastroInformacoesPessoais />
+            <CadastroInformacoesPessoaisCliente />
         </>
     )
 }

@@ -1,8 +1,12 @@
 package school.sptech.iara.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.List;
-
+@Data
+@NoArgsConstructor
 @Entity
 public class Portifolio {
     @Id
@@ -19,25 +23,5 @@ public class Portifolio {
     public Portifolio(Prestador prestador) {
         this.prestador = prestador;
     }
-    public Portifolio(){}
 
-    // Getter and Setter
-//    public List<Foto> getFotos() {
-//        return fotos;
-//    }
-//    public void setFotos(List<Foto> fotos) {
-//        this.fotos = fotos;
-//    }
-    public Prestador getPrestador() {
-        return prestador;
-    }
-    public void setPrestador(Prestador prestador) {
-        this.prestador = prestador;
-    }
-
-    // Método
-
-//    public void adicionarFoto(Foto foto){
-//        fotos.add(foto);
-//    }
 }

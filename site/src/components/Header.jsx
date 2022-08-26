@@ -19,7 +19,7 @@ function Header() {
                     <a href=" " class="txt-dark-red txt-medium margin-right-fifty transform">INSTITUCIONAL</a>
                     <a href=" " class="txt-dark-red txt-medium transform">AMIGOS DA IARA</a>
                 </div>
-                <Link to={'/cadastrocliente'}><button class="button bg-red txt-white bg-hover-white txt-hover-dark-red" >CADASTRE-SE</button></Link>
+                <Link to={'/escolhacadastro'}><button class="button bg-red txt-white bg-hover-white txt-hover-dark-red" >CADASTRE-SE</button></Link>
                 <Link to={'/login'}><button class="button bg-white txt-black bg-hover-dark-red txt-hover-white" >LOGIN</button></Link>
             </div>
         </header>

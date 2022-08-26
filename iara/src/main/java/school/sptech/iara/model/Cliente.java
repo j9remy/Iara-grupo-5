@@ -1,5 +1,8 @@
 package school.sptech.iara.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -8,15 +11,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
+@NoArgsConstructor
 @Entity
 public class Cliente extends Usuario {
 //    Attributes
     @OneToMany(cascade= CascadeType.PERSIST)
     private List<AvaliacaoCliente> avaliacoes;
 //    Constructor
-    public Cliente(){
-        super();
-    }
 
     public Cliente(String nome, String sobrenome,
                    String cpf, LocalDate dataNasc,

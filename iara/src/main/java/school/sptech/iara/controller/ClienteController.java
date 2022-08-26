@@ -186,7 +186,7 @@ public class ClienteController {
             cliente.setSobrenome(req.getSobrenome());
             cliente.setDataNasc(req.getDataNasc());
             cliente.setSenha(req.getSenha());
-            cliente.setSexo(req.getGenero());
+            cliente.setGenero(req.getGenero());
             Boolean telefoneExiste = repository.existsByTelefone(req.getTelefone());
             if(!req.getTelefone().equals(cliente.getTelefone())){
                 if (!telefoneExiste){
@@ -275,7 +275,7 @@ public class ClienteController {
             corpo += String.format("%-50.50s", c.getSobrenome());
             corpo += String.format("%-11.11s", c.getCpf());
             corpo += String.format("%-19.19s", c.getDataNasc());
-            corpo += String.format("%-1.1s", c.getSexo());
+            corpo += String.format("%-1.1s", c.getGenero());
             corpo += String.format("%-50.50s", c.getEmail());
             corpo += String.format("%-15.15s", c.getTelefone());
             contaRegCorpo++;
@@ -407,7 +407,7 @@ public class ClienteController {
                 ";" + cliente.getCpf() +
                 ";" + cliente.getDataNasc() +
                 ";" + cliente.getEmail() +
-                ";" + cliente.getSexo() +
+                ";" + cliente.getGenero() +
                 ";" + cliente.getTelefone() + "\r\n";
         }
 

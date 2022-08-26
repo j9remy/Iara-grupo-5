@@ -1,11 +1,15 @@
 package school.sptech.iara.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Optional;
 
+@Data
+@NoArgsConstructor
 @Entity
 public class Foto {
     @Id
@@ -25,21 +29,5 @@ public class Foto {
         this.portifolio = portifolio;
         this.data = LocalDate.now();
     }
-    public Foto(){}
 
-    public Integer getId() {
-        return id;
-    }
-    public byte[] getFoto() {
-        return foto;
-    }
-    public void setFoto(byte[] foto) {
-        this.foto = foto;
-    }
-    public LocalDate getData() {
-        return data;
-    }
-    public void setData(LocalDate data) {
-        this.data = data;
-    }
 }
