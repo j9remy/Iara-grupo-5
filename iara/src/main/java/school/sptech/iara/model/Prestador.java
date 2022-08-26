@@ -117,6 +117,11 @@ public class Prestador extends Usuario{
         habilidades.add(habilidade);
     }
 
+    //Remove habilidade
+    public void removeHabilidade(Habilidade habilidade) {
+        habilidades.remove(habilidade);
+    }
+
     public Boolean habilidadeExiste(Habilidade habilidade){
         for (int i = 0; i < habilidades.size(); i++) {
             if (habilidades.get(i).getHabilidade().equals(habilidade.getHabilidade()) &&

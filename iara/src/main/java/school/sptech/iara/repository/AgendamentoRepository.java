@@ -16,4 +16,5 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Intege
     List<Agendamento> findAllByDataBefore(LocalDate day);
     List<Agendamento> findAllByAgendaAndDataAfter(Agenda agenda, LocalDate day);
     Integer countAgendamentoByData(LocalDate data);
+    Agendamento findByServicoAtribuido_Id(Integer idServicoAttr);
 }

@@ -169,5 +169,30 @@ public class ServicoAtribuidoController {
         return ResponseEntity.status(404).build();
     }
 
+    @DeleteMapping("cancelar/{idServicoAttr}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Serviço atribuído cancelado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Serviço atribuído já está finalizado"),
+            @ApiResponse(responseCode = "404", description = "Serviço atribuído não encontrado")
+    })
+    public ResponseEntity<Void> deleteCancelado(@PathVariable Integer idServicoAttr) {
+        Optional<ServicoAtribuido> servicoAtribuidoOptional = servicoAtribuidoRepository.findById(idServicoAttr);
+        if (servicoAtribuidoOptional.isPresent()) {
+            ServicoAtribuido servicoAtribuido = servicoAtribuidoOptional.get();
+            if (!servicoAtribuido.isFinalizado()) {
+                servicoAtribuido.setFinalizado(true);
+                servicoAtribuido.setDataHoraFim(LocalDateTime.now());
+                servicoAtribuido.setStatus("Cancelado");
+                Chat chat = chatRepository.findByServicoAtribuido_Id(idServicoAttr);
+                chat.setFinalizado(true);
+                Agendamento agendamento = agendamentoRepository.findByServicoAtribuido_Id(idServicoAttr);
+                agendamentoRepository.deleteById(agendamento.getId());
+                chatRepository.save(chat);
+                return ResponseEntity.status(202).build();
+            }
+            return ResponseEntity.status(400).build();
+        }
+        return ResponseEntity.status(404).build();
+    }
 
 }
