@@ -3,7 +3,7 @@ import api from "../api";
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
-function CadastroEndereco() {
+function CadastroDoEndereco() {
 
     const [cep, setCep] = useState('');
     const [numero, setNumero] = useState('');
@@ -91,4 +91,4 @@ function CadastroEndereco() {
     )
 }
 
-export default CadastroEndereco;
+export default CadastroDoEndereco;

@@ -6,6 +6,8 @@ import SucessoCadastro from "./pages/SucessoCadastro";
 import Home from "./pages/Home";
 import HomeCliente from "./pages/HomeCliente";
 import CadastroProfissional from "./pages/CadastroProfissional";
+import CadastroEndereco from "./pages/CadastroEndereco";
+import CadastroHabilidades from "./pages/CadastroHabilidades";
 
 function Rotas(){
     return(
@@ -18,6 +20,8 @@ function Rotas(){
                 <Route path="/sucessoCadastro" element={<SucessoCadastro/>}/>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/home" element={<HomeCliente/>}/>
+                <Route path="/cadastroEndereco" element={<CadastroEndereco/>}/>
+                <Route path="/cadastroHabilidades" element={<CadastroHabilidades/>}/>
             </Routes>
         </BrowserRouter>
 
