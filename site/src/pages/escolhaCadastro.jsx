@@ -6,7 +6,7 @@ function EscolhaCadastro() {
         <>
             <div class="page dflex acenter jcenter">
                 <div class="card bg-dark-red txt-center">
-                    <Link to={'/home'}>
+                    <Link to={'/'}>
                         <img class="logo transform" src={logo} />
                     </Link>
                     <div class="buttons">

@@ -47,7 +47,7 @@ function CadastroInformacoesPessoaisProfissional() {
         if (senha !== senhaVerificacao) {
             alert("As senhas devem ser iguais!");
         } else {
-            api.post('/cliente', jsonCliente, {
+            api.post('/prestador', jsonCliente, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
