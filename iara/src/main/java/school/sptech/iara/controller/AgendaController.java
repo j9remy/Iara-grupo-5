@@ -6,9 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import school.sptech.iara.model.*;
 import school.sptech.iara.repository.*;
-import school.sptech.iara.repository.response.HorariosResponse;
+import school.sptech.iara.response.HorariosResponse;
 import school.sptech.iara.request.*;
-import school.sptech.iara.repository.response.HorariosDisponiveisResponse;
+import school.sptech.iara.response.HorariosDisponiveisResponse;
 
 import javax.validation.Valid;
 import java.time.DayOfWeek;
@@ -77,6 +77,11 @@ public class AgendaController {
 
 
     @GetMapping("/disponiveis")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Horários disponíveis retornados com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Parâmetros de digitação inválidos"),
+            @ApiResponse(responseCode = "404", description = "Prestador ou serviço não encontrados")
+    })
     public ResponseEntity<HorariosDisponiveisResponse> getHorariosDisponiveis(@RequestBody @Valid HorariosDisponiveisRequest req){
         if (req.getData().isAfter(LocalDate.now())){
             Optional<Servico> servicoOptional = servicoRepository.findById(req.getservicoId());

@@ -3,10 +3,7 @@ package school.sptech.iara.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -19,17 +16,16 @@ public class Habilidade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank
-    @Size(min = 2, max = 30)
-    private String habilidade;
+    @ManyToOne
+    private Categoria categoria;
 
     @NotBlank
     @Size(min = 2, max = 300)
     private String descricao;
 
 //    Constructor
-    public Habilidade(String habilidade, String descricao) {
-        this.habilidade = habilidade;
+    public Habilidade(Categoria categoria, String descricao) {
+        this.categoria = categoria;
         this.descricao = descricao;
     }
 

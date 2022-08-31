@@ -61,7 +61,7 @@ public class HabilidadeController {
     })
     public ResponseEntity<Void> postAddHabilidade(@RequestBody Habilidade habilidade){
         if (!repository.existsByDescricao(habilidade.getDescricao()) &&
-                !repository.existsByHabilidade(habilidade.getHabilidade())){
+                !repository.existsByCategoria(habilidade.getCategoria())){
             repository.save(habilidade);
             return ResponseEntity.status(201).build();
         }

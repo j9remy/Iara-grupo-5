@@ -1,4 +1,4 @@
-package school.sptech.iara.repository.response;
+package school.sptech.iara.response;
 
 import java.time.LocalDate;
 import java.util.List;

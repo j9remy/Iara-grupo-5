@@ -1,4 +1,4 @@
-package school.sptech.iara.repository.response;
+package school.sptech.iara.response;
 
 import org.jetbrains.annotations.NotNull;
 import school.sptech.iara.model.Usuario;

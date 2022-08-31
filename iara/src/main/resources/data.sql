@@ -68,19 +68,19 @@ INSERT INTO Avaliacao_Cliente (Avaliacao, Data_Hora, Cliente_Id) VALUES
     (4,'2022-03-10 20:34', 7),
     (3,'2022-03-10 20:34', 7);
 
--- Habilidade
-INSERT INTO Habilidade (Habilidade, Descricao) VALUES
-    ('Corte','Corte Masculino (incluso shampoo)'),
-    ('Barba', 'Barba completa'),
-    ('Depilação','Cera corporal'),
-    ('Depilação','Cera facial'),
-    ('Procedimento','Luzes'),
-    ('Procedimento','Botox capilar'),
-    ('Podologia','Pedicure sem Esmaltação'),
-    ('Podologia','Cauterização de Verruga'),
-    ('Manicure','Esmaltação'),
-    ('Manicure','Francesinha'),
-    ('Pedicure','Spa dos Pés');
+-- -- Habilidade
+-- INSERT INTO Habilidade (Habilidade, Descricao) VALUES
+--     ('Corte','Corte Masculino (incluso shampoo)'),
+--     ('Barba', 'Barba completa'),
+--     ('Depilação','Cera corporal'),
+--     ('Depilação','Cera facial'),
+--     ('Procedimento','Luzes'),
+--     ('Procedimento','Botox capilar'),
+--     ('Podologia','Pedicure sem Esmaltação'),
+--     ('Podologia','Cauterização de Verruga'),
+--     ('Manicure','Esmaltação'),
+--     ('Manicure','Francesinha'),
+--     ('Pedicure','Spa dos Pés');
 
 -- Servicos
 INSERT INTO Servico (Ativo, Descricao, Duracao_Estimada, Tipo, Valor, Prestador_Id) VALUES

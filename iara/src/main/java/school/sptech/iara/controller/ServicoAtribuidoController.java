@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import school.sptech.iara.model.*;
 import school.sptech.iara.repository.*;
 import school.sptech.iara.request.ServicoAtribuidoRequest;
-import school.sptech.iara.repository.response.ServicoAtribuidoResponse;
+import school.sptech.iara.response.ServicoAtribuidoResponse;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

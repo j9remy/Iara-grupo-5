@@ -2,7 +2,7 @@ package school.sptech.iara.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import school.sptech.iara.repository.response.ServicoAtribuidoResponse;
+import school.sptech.iara.response.ServicoAtribuidoResponse;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

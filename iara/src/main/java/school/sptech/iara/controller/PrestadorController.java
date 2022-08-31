@@ -10,7 +10,7 @@ import school.sptech.iara.repository.*;
 import school.sptech.iara.request.EnderecoSimplesRequest;
 import school.sptech.iara.request.PrestadorUpdateRequest;
 import school.sptech.iara.request.UsuarioEmailSenhaRequest;
-import school.sptech.iara.repository.response.PrestadorAvaliacaoResponse;
+import school.sptech.iara.response.PrestadorAvaliacaoResponse;
 import school.sptech.iara.util.GravaArquivo;
 
 import javax.validation.Valid;
