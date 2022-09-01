@@ -97,7 +97,7 @@ public class Prestador extends Usuario{
 
     public Boolean habilidadeExiste(Habilidade habilidade){
         for (int i = 0; i < habilidades.size(); i++) {
-            if (habilidades.get(i).getCategoria().equals(habilidade.getCategoria()) &&
+            if (habilidades.get(i).getCategoria().getCategoria().equals(habilidade.getCategoria().getCategoria()) &&
                     habilidades.get(i).getDescricao().equals(habilidade.getDescricao())){
                 return true;
             }

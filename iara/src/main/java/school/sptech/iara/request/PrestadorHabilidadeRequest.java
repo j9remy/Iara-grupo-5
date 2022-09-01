@@ -1,27 +1,17 @@
 package school.sptech.iara.request;
 
+import lombok.Data;
 import school.sptech.iara.model.Habilidade;
 
 import javax.validation.constraints.NotNull;
 
+@Data
 public class PrestadorHabilidadeRequest {
 
     @NotNull
-    private Integer userId;
-
+    private Integer idPrestador;
     @NotNull
-    private Habilidade habilidade;
-
-    public Integer getUserId() {
-        return userId;
-    }
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-    public Habilidade getHabilidade() {
-        return habilidade;
-    }
-    public void setHabilidade(Habilidade habilidade) {
-        this.habilidade = habilidade;
-    }
+    private String Categoria;
+    @NotNull
+    private String Descricao;
 }
