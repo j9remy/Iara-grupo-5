@@ -982,6 +982,7 @@ i.icon.star {
 .input-border-bottom-red {
   border: none;
   border-bottom: 1px solid #de0235;
+  background-color: #fdfbfb;
 }
 
 .table.red tr:first-child {
