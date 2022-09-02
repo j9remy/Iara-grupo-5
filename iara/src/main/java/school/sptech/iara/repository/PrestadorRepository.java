@@ -4,10 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
-import school.sptech.iara.model.Cliente;
-import school.sptech.iara.model.Prestador;
-import school.sptech.iara.model.Servico;
-import school.sptech.iara.model.ServicoAtribuido;
+import school.sptech.iara.model.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,4 +30,5 @@ public interface PrestadorRepository extends JpaRepository<Prestador, Integer> {
     Boolean existsByTelefone(String telefone);
     Prestador findByServicosContains(Servico servico);
 
+    List<Prestador> findAllByHabilidades_Categoria(Categoria categoria);
 }

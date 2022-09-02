@@ -1,13 +1,11 @@
 package school.sptech.iara.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -18,6 +16,8 @@ public class Categoria {
     private Integer id;
     @NotNull
     private String categoria;
+    @JsonIgnore
+    @Column(length = 50_000_000)
     private byte[] imagem;
 
     public Categoria(@NotNull String categoria, byte[] imagem) {

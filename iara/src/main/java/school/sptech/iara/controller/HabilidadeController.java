@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import school.sptech.iara.Service.HabilidadeService;
 import school.sptech.iara.model.Habilidade;
 import school.sptech.iara.model.Prestador;
 import school.sptech.iara.repository.HabilidadeRepository;
@@ -25,6 +26,9 @@ public class HabilidadeController {
 
     @Autowired
     private PrestadorRepository prestadorRepository;
+
+    @Autowired
+    private HabilidadeService habilidadeService;
 
     @GetMapping
     @ApiResponses(value = {
@@ -71,46 +75,34 @@ public class HabilidadeController {
     // adiciona habilidade
     @PostMapping("/prestador")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Habilidade adicionada ao prestador solicitado" +
-                    " com sucesso"),
+            @ApiResponse(responseCode = "201", description = "Habilidade adicionada ao prestador solicitado com sucesso"),
             @ApiResponse(responseCode = "400", description = "O prestador já possui esta habilidade cadastrada"),
             @ApiResponse(responseCode = "404", description = "Prestador não encontrado")
     })
     public ResponseEntity<Void> postAddHabilidade(@RequestBody @Valid PrestadorHabilidadeRequest req){
-        Optional<Prestador> prestadorOptional = prestadorRepository.findById(req.getUserId());
-        if (prestadorOptional.isPresent()){
-            Prestador prestador = prestadorOptional.get();
-            if (!prestador.habilidadeExiste(req.getHabilidade())){
-                repository.save(req.getHabilidade());
-                prestador.addHabilidade(req.getHabilidade());
-                prestadorRepository.save(prestador);
-                return ResponseEntity.status(201).build();
-            }
-            return ResponseEntity.status(400).build();
-        }
-        return ResponseEntity.status(404).build();
+        return ResponseEntity.status(habilidadeService.associarPrestador(req).getStatusCodeValue()).build();
     }
 
     // remove habilidade
-    @DeleteMapping("/prestador")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "202", description = "Habilidade removida do prestador solicitado" +
-                    " com sucesso."),
-            @ApiResponse(responseCode = "400", description = "O prestador não possui esta habilidade cadastrada."),
-            @ApiResponse(responseCode = "404", description = "Prestador não encontrado.")
-    })
-    public ResponseEntity<Void> deleteRemoveHabilidade(@RequestBody @Valid PrestadorHabilidadeRequest req) {
-        Optional<Prestador> prestadorOptional = prestadorRepository.findById(req.getUserId());
-        if (prestadorOptional.isPresent()) {
-            Prestador prestador = prestadorOptional.get();
-            if (prestador.habilidadeExiste(req.getHabilidade())) {
-                prestador.removeHabilidade(req.getHabilidade());
-                prestadorRepository.save(prestador);
-                return ResponseEntity.status(202).build();
-            }
-            return ResponseEntity.status(400).build();
-        }
-        return ResponseEntity.status(404).build();
-    }
+//    @DeleteMapping("/prestador")
+//    @ApiResponses(value = {
+//            @ApiResponse(responseCode = "202", description = "Habilidade removida do prestador solicitado" +
+//                    " com sucesso."),
+//            @ApiResponse(responseCode = "400", description = "O prestador não possui esta habilidade cadastrada."),
+//            @ApiResponse(responseCode = "404", description = "Prestador não encontrado.")
+//    })
+//    public ResponseEntity<Void> deleteRemoveHabilidade(@RequestBody @Valid PrestadorHabilidadeRequest req) {
+//        Optional<Prestador> prestadorOptional = prestadorRepository.findById(req.getIdPrestador());
+//        if (prestadorOptional.isPresent()) {
+//            Prestador prestador = prestadorOptional.get();
+//            if (prestador.habilidadeExiste(req.getHabilidade())) {
+//                prestador.removeHabilidade(req.getHabilidade());
+//                prestadorRepository.save(prestador);
+//                return ResponseEntity.status(202).build();
+//            }
+//            return ResponseEntity.status(400).build();
+//        }
+//        return ResponseEntity.status(404).build();
+//    }
 
 }

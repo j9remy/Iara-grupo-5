@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import school.sptech.iara.model.Endereco;
 import school.sptech.iara.repository.EnderecoRepository;
+import school.sptech.iara.request.EnderecoRequest;
 import school.sptech.iara.request.EnderecoSimplesRequest;
 import school.sptech.iara.rest.viacep.ViacepClient;
 import school.sptech.iara.rest.viacep.ViacepResponse;
@@ -83,14 +84,19 @@ public class EnderecoController {
             @ApiResponse(responseCode = "200", description = "Endereço atualizado com sucesso"),
             @ApiResponse(responseCode = "404", description = "O endereço desejado não foi encontrado")
     })
-    public ResponseEntity<Endereco> putEndereco(@RequestBody @Valid EnderecoSimplesRequest req,
-                                                @PathVariable int id) {
+    public ResponseEntity<Endereco> putEndereco(@RequestBody @Valid EnderecoRequest req,
+                                                @PathVariable Integer id) {
         Optional<Endereco> enderecoEncontrado = enderecoRepository.findById(id);
         if (enderecoEncontrado.isPresent()) {
             Endereco endereco = enderecoEncontrado.get();
+            endereco.setRua(req.getRua());
+            endereco.setCidade(req.getCidade());
+            endereco.setBairro(req.getBairro());
+            endereco.setUf(req.getUf());
             endereco.setCep(req.getCep());
             endereco.setNumero(req.getNumero());
             endereco.setComplemento(req.getComplemento());
+            enderecoRepository.save(endereco);
             return ResponseEntity.status(200).build();
         }
         return ResponseEntity.status(404).build();
