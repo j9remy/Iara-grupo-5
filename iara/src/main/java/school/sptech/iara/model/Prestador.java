@@ -2,6 +2,7 @@ package school.sptech.iara.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
@@ -26,7 +27,8 @@ public class Prestador extends Usuario{
 
     private Double distancia;
 
-    @OneToMany
+    @ManyToMany
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private List<Habilidade> habilidades;
 
     @OneToMany

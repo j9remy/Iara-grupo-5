@@ -84,25 +84,15 @@ public class HabilidadeController {
     }
 
     // remove habilidade
-//    @DeleteMapping("/prestador")
-//    @ApiResponses(value = {
-//            @ApiResponse(responseCode = "202", description = "Habilidade removida do prestador solicitado" +
-//                    " com sucesso."),
-//            @ApiResponse(responseCode = "400", description = "O prestador não possui esta habilidade cadastrada."),
-//            @ApiResponse(responseCode = "404", description = "Prestador não encontrado.")
-//    })
-//    public ResponseEntity<Void> deleteRemoveHabilidade(@RequestBody @Valid PrestadorHabilidadeRequest req) {
-//        Optional<Prestador> prestadorOptional = prestadorRepository.findById(req.getIdPrestador());
-//        if (prestadorOptional.isPresent()) {
-//            Prestador prestador = prestadorOptional.get();
-//            if (prestador.habilidadeExiste(req.getHabilidade())) {
-//                prestador.removeHabilidade(req.getHabilidade());
-//                prestadorRepository.save(prestador);
-//                return ResponseEntity.status(202).build();
-//            }
-//            return ResponseEntity.status(400).build();
-//        }
-//        return ResponseEntity.status(404).build();
-//    }
+    @DeleteMapping("/prestador")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "202", description = "Habilidade removida do prestador solicitado" +
+                    " com sucesso."),
+            @ApiResponse(responseCode = "400", description = "O prestador não possui esta habilidade cadastrada."),
+            @ApiResponse(responseCode = "404", description = "Prestador não encontrado.")
+    })
+    public ResponseEntity<Void> deleteRemoveHabilidade(@RequestBody @Valid PrestadorHabilidadeRequest req) {
+        return ResponseEntity.status(habilidadeService.desassociarPrestador(req).getStatusCodeValue()).build();
+    }
 
 }
