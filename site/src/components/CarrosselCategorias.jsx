@@ -22,7 +22,7 @@ function SamplePrevArrow(props) {
     );
 }
 
-function CarrocelCategorias(props) {
+function CarrosselCategorias(props) {
 
     const settings = {
         infinite: true,
@@ -95,4 +95,4 @@ function CarrocelCategorias(props) {
     );
 }
 
-export default CarrocelCategorias;
+export default CarrosselCategorias;

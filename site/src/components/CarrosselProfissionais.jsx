@@ -1,4 +1,4 @@
-function CarrocelProfissionais(props) {
+function CarrosselProfissionais(props) {
     return (
       <>
         <div class="item">
@@ -28,4 +28,4 @@ function CarrocelProfissionais(props) {
     );
   }
   
-  export default CarrocelProfissionais;
+  export default CarrosselProfissionais;

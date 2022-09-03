@@ -39,11 +39,11 @@ class ChatTest {
         assertEquals(false,chat.getFinalizado());
     }
 
-    @Test
-    void finalizar() {
-        Chat chat = new Chat();
-
-        chat.finalizar();
-        assertEquals(true, chat.getFinalizado());
-    }
+//    @Test
+//    void finalizar() {
+//        Chat chat = new Chat();
+//
+//        chat.finalizar();
+//        assertEquals(true, chat.getFinalizado());
+//    }
 }

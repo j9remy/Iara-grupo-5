@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import CarrocelCategorias from "../components/CarrocelCategorias";
-import CarrocelProfissionais from "../components/CarrocelProfissionais";
+import CarrosselCategorias from "../components/CarrosselCategorias";
+import CarrosselProfissionais from "../components/CarrosselProfissionais";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
@@ -27,7 +27,6 @@ function SamplePrevArrow(props) {
     />
   );
 }
-
 
 function Home() {
   const [profissionais, setProfissionais] = useState([]);
@@ -96,12 +95,12 @@ function Home() {
         <div class="container">
           <Header />
 
-          <CarrocelCategorias funcaoCategoria={selecionarCategoria} />
+          <CarrosselCategorias funcaoCategoria={selecionarCategoria} />
 
           <div id="profissionais" class="profissionais">
             <Slider {...settings}>
               {profissionais.map((profissional) => (
-                <CarrocelProfissionais
+                <CarrosselProfissionais
                   nome={profissional.nome}
                   habilidade={profissional.habilidade}
                   distancia={profissional.distancia}
