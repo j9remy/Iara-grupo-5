@@ -1026,8 +1026,8 @@ i.icon.star {
   background-color: #c80230;
   border-radius: 20px;
   padding: 9px;
-  bottom: 85px;
-  right: -55px;
+  top: 6px;
+  right: -16px;
   box-shadow: 0px 3px 5px 0px #de0235ab;
   cursor: pointer;
   font-size: 18px;
@@ -1065,12 +1065,4 @@ i.icon.star {
   padding: 6px 12px;
 }
 
-.slick-arrow.slick-next {
-   right: 0;
-  
-}
 
-
-.slick-arrow.slick-prev {
-  left: 0;
-}
