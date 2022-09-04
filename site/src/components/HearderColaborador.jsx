@@ -2,7 +2,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
-function HeaderLogado() {
+function HeaderColaborador() {
     return (
         <header class="header-logged">
             <div class="container dflex acenter jbetween">
@@ -17,7 +17,6 @@ function HeaderLogado() {
                 </form>
                 <div class="dflex acenter">
                     <a href=" " class="txt-dark-red txt-medium margin-right-fifty transform">INSTITUCIONAL</a>
-                    <a href=" " class="txt-dark-red txt-medium transform">AMIGOS DA IARA</a>
                 </div>
                 <div>
                     <button type="button" class="btn-no-style btn-profile dflex acenter jcenter">
@@ -28,4 +27,4 @@ function HeaderLogado() {
         </header>
     )
 }
-export default HeaderLogado;
+export default HeaderColaborador;

@@ -1,20 +1,20 @@
 import CarrosselCategorias from "../components/CarrosselCategorias";
 import CarrosselProfissionais from "../components/CarrosselProfissionais";
 import Footer from "../components/Footer";
-import HeaderLogado from "../components/HearderLogado";
-
+import HeaderCliente from "../components/HearderCliente";
 
 function Home() {
     return (
         <>
+        
+            <HeaderCliente />
             <main class="margin-top-thirty">
                 <div class="container">
-                    <HeaderLogado />
                     <CarrosselCategorias />
                     <CarrosselProfissionais />
-                    <Footer/>
                 </div>
             </main>
+            <Footer />
         </>
     )
 

@@ -1,26 +1,7 @@
 import Slider from "react-slick";
+import { GoChevronRight } from "react-icons/go";
+import { GoChevronLeft } from "react-icons/go";
 
-function SampleNextArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-        <div
-            className={className}
-            style={{ ...style, display: "block" }}
-            onClick={onClick}
-        />
-    );
-}
-
-function SamplePrevArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-        <div
-            className={className}
-            style={{ ...style, display: "block" }}
-            onClick={onClick}
-        />
-    );
-}
 
 function CarrosselCategorias(props) {
 
@@ -28,8 +9,8 @@ function CarrosselCategorias(props) {
         infinite: true,
         slidesToShow: 5,
         slidesToScroll: 1,
-        nextArrow: <SampleNextArrow />,
-        prevArrow: <SamplePrevArrow />
+        nextArrow: <GoChevronRight color="white"/>,
+        prevArrow: <GoChevronLeft color="white"/>
     };
     return (
         <div id="categorias" class="categorias card bg-red">

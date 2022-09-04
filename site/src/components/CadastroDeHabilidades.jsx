@@ -3,9 +3,40 @@ import React, { useState } from 'react';
 
 
 function CadastroDeHabilidades() {
-    
-    return (
 
+    var range = useState('range');
+    var bubble = useState('bubble');
+
+    useState('checkbox-domicilio').onchange = function () {
+        range.disabled = !this.checked;
+        if (range.classList.contains('not-allowed')) {
+            range.classList.remove('not-allowed');
+            bubble.classList.remove('not-allowed');
+            document.getElementById('div-range').classList.remove('disabled');
+        } else {
+            range.classList.add('not-allowed');
+            bubble.classList.add('not-allowed');
+            document.getElementById('div-range').classList.add('disabled');
+        }
+    };
+
+    range.addEventListener("input", () => {
+        setBubble(range, bubble);
+    });
+
+    setBubble(range, bubble);
+
+    function setBubble(range, bubble) {
+        const val = range.value;
+        const min = range.min ? range.min : 0;
+        const max = range.max ? range.max : 100;
+        const newVal = Number(((val - min) * 100) / (max - min));
+        bubble.innerHTML = val + " Km";
+
+        bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
+    }
+
+    return (
         <div class="page dflex acenter jcenter txt-medium">
             <form id="cadastro-cliente" class="container">
                 <div href="" class="logo transform prelative">

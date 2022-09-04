@@ -8,6 +8,7 @@ import HomeCliente from "./pages/HomeCliente";
 import CadastroProfissional from "./pages/CadastroProfissional";
 import CadastroEndereco from "./pages/CadastroEndereco";
 import CadastroHabilidades from "./pages/CadastroHabilidades";
+import PerfilProfissionalColaborador from "./pages/PerfilProfissionalColaborador";
 
 function Rotas(){
     return(
@@ -22,6 +23,7 @@ function Rotas(){
                 <Route path="/home" element={<HomeCliente/>}/>
                 <Route path="/cadastroEndereco" element={<CadastroEndereco/>}/>
                 <Route path="/cadastroHabilidades" element={<CadastroHabilidades/>}/>
+                <Route path="/perfilProfissionalColaborador" element={<PerfilProfissionalColaborador/>}/>
             </Routes>
         </BrowserRouter>
 
