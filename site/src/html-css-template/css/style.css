@@ -1065,4 +1065,13 @@ i.icon.star {
   padding: 6px 12px;
 }
 
+.slick-arrow.slick-next {
+   right: 0;
+
+}
+
+
+.slick-arrow.slick-prev {
+  left: 0;
+}
 
