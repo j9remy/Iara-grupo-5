@@ -70,7 +70,7 @@ function CadastroInformacoesPessoaisProfissional() {
                         </div>
                     </Link>
                     <h2>Dados Pessoais</h2>
-                    <div class="card bg-off-white dflex jbetween fwrap">
+                    <div class="dflex jbetween fwrap">
                         <div class="user-input-wrp width-4 input-group">
                             <input
                                 type="text"
@@ -139,7 +139,7 @@ function CadastroInformacoesPessoaisProfissional() {
                     </div>
 
                     <h2>Autenticação</h2>
-                    <div class="card bg-off-white dflex jbetween fwrap">
+                    <div class="dflex jbetween fwrap">
                         <div class="user-input-wrp width-4 input-group">
                             <input
                                 type="text"

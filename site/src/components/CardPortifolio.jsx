@@ -1,6 +1,6 @@
 import Slider from "react-slick";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight, faMugSaucer } from "@fortawesome/free-solid-svg-icons";
+import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { GoChevronRight } from "react-icons/go";
 import { GoChevronLeft } from "react-icons/go";
 import imagem1 from "../html-css-template/img/portfolio/1.png";
@@ -22,7 +22,10 @@ function CardPortifolio() {
     };
 
     return (
-        <div class="card margin-top-thirty">
+        <div class="card margin-top-thirty prelative">
+            <a class="btn-editar-perfil pabsolute bg-hover-white txt-hover-dark-red transform">
+                <FontAwesomeIcon icon={faPen} />
+            </a>
             <h3 class="txt-bigger txt-red txt-bold">Portfólio</h3>
             <div id="portfolio" class="padding-zero-twenty">
                 <Slider {...settings}>
@@ -36,7 +39,7 @@ function CardPortifolio() {
                         <img src={imagem3} alt="Imagem 3 do Portfólio" />
                     </div>
                     <div class="padding-zero-twenty">
-                        <img src="../html-css-template/img/2.png" alt="Imagem 4 do Portfólio" />
+                        <img src="../html-css-template/img/portfolio/2.png" alt="Imagem 4 do Portfólio" />
                     </div>
                 </Slider>
             </div>
