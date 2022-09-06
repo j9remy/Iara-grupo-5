@@ -21,19 +21,21 @@ function CadastroInformacoesPessoaisProfissional() {
     const [senha, setSenha] = useState('');
     const [senhaVerificacao, setSenhaVerificacao] = useState('');
     const [telefone, setTelefone] = useState('');
-    const [sexo, setSexo] = useState('');
+    const [genero, setGenero] = useState('F');
     const [id, setId] = useState([]);
+    const atendeDomicilio = false;
+    const atendeEstabelecimento = false;
+    const distancia = 0;
 
 
     const navigate = useNavigate();
-
+    
     function SubmeterFormProfissional(evento) {
 
         evento.preventDefault();
         api.get("/prestador").then((resposta) => {
             setId(resposta.data)
         })
-
         let jsonCliente = {
             nome: nome,
             sobrenome: sobrenome,
@@ -42,7 +44,10 @@ function CadastroInformacoesPessoaisProfissional() {
             email: email,
             senha: senha,
             telefone: telefone,
-            sexo: sexo
+            genero: genero,
+            atendeDomicilio: atendeDomicilio,
+            atendeEstabelecimento: atendeEstabelecimento,
+            distancia: distancia
         }
         if (senha !== senhaVerificacao) {
             alert("As senhas devem ser iguais!");
@@ -95,7 +100,8 @@ function CadastroInformacoesPessoaisProfissional() {
                                 type="text"
                                 class="input"
                                 id="input-genero"
-                                onChange={evento => setSexo(evento.target.value)}
+                                value={genero}
+                                onChange={evento => setGenero(evento.target.value)}
                             >
                                 <option value="F"> Feminino </option>
                                 <option value="M"> Masculino</option>

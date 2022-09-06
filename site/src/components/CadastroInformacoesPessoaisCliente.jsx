@@ -21,7 +21,7 @@ function CadastroInformacoesPessoaisCliente() {
     const [senha, setSenha] = useState('');
     const [senhaVerificacao, setSenhaVerificacao] = useState('');
     const [telefone, setTelefone] = useState('');
-    const [sexo, setSexo] = useState('');
+    const [genero, setGenero] = useState('F');
     const [id, setId] = useState([]);
     
 
@@ -42,7 +42,7 @@ function CadastroInformacoesPessoaisCliente() {
             email: email,
             senha: senha,
             telefone: telefone,
-            sexo: sexo
+            genero: genero
         }
         if (senha !== senhaVerificacao) {
             alert("As senhas devem ser iguais!");
@@ -95,7 +95,7 @@ function CadastroInformacoesPessoaisCliente() {
                                 type="text"
                                 class="input"
                                 id="input-genero"
-                                onChange={evento => setSexo(evento.target.value)}
+                                onChange={evento => setGenero(evento.target.value)}
                             >
                                 <option value="F"> Feminino </option>
                                 <option value="M"> Masculino</option>
