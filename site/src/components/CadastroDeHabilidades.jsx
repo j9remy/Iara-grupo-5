@@ -1,5 +1,6 @@
 import logo from '../html-css-template/img/logo-branco.png';
 import React, { useState } from 'react';
+import { GoTrashcan } from "react-icons/go";
 
 
 function CadastroDeHabilidades() {
@@ -37,17 +38,17 @@ function CadastroDeHabilidades() {
                                         <td></td>
                                         <td>
                                             <button type="button" class="trash">
-                                                <i class="fa-solid fa-trash-can"></i>
+                                                
                                             </button>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td></td>
-                                        <td>x</td>
+                                        <td></td>
                                         <td></td>
                                         <td>
                                             <button type="button" class="trash">
-                                                <i class="fa-solid fa-trash-can"></i>
+                                                
                                             </button>
                                         </td>
                                     </tr>
@@ -133,10 +134,7 @@ function CadastroDeHabilidades() {
                             <h3 class="margin-bottom-10">Raio de Atentimento em Domicílio</h3>
                             <div class="dflex jbetween">
                                 <div id="div-range" class="range-parent width-100-porc disabled">
-                                    <input type="range" disabled class="range not-allowed" id="range" />
-                                    <output class="bubble not-allowed" id="bubble"></output>
-                                    <span class="pabsolute zero-km" >0 Km</span>
-                                    <span class="pabsolute cem-km" >100 Km</span>
+                                    <input type="number" min="1" max="100" step="any" placeholder="Raio de 0 Km até 100 Km" class="input width-50-margin-10" id="range" />
                                 </div>
                             </div>
                         </div>
@@ -152,7 +150,7 @@ function CadastroDeHabilidades() {
             </form>
         </div>
 
-    )
+    );
 }
 
 export default CadastroDeHabilidades;
