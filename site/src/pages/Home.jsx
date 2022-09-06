@@ -3,6 +3,8 @@ import CarrosselCategorias from "../components/CarrosselCategorias";
 import CarrosselProfissionais from "../components/CarrosselProfissionais";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import api from "../api";
+
 
 import Slider from "react-slick";
 
@@ -43,7 +45,7 @@ function Home() {
   useEffect(() =>{
     console.log("Entrou no useEffect");
     async function buscarCategoria(){
-        const resposta = await api.get(`/${1}`);
+        const resposta = await api.get(`categoria/`);
         setProfissionais(resposta.data);
         console.log("OLHA O QUE VEIO DA API!!", resposta.data)
     }   
