@@ -1,9 +1,25 @@
 import logo from '../html-css-template/img/logo-branco.png';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import api from "../api";
 import { GoTrashcan } from "react-icons/go";
+import SelectCategoria from './SelectCategoria';
 
 
-function CadastroDeHabilidades() {
+function CadastroDeHabilidades(props) {
+
+    const [categoria, setCategoria] = useState([]);
+
+    useEffect(() => {
+        try {
+            api.get("categoria/").then((resposta) => {
+                console.log(resposta.data)
+                setCategoria(resposta.data)
+            })
+        } catch (erro) {
+            console.error(erro);
+        }
+
+    }, [])
     return (
         <div class="page dflex acenter jcenter txt-medium">
             <form id="cadastro-cliente" class="container">
@@ -19,11 +35,16 @@ function CadastroDeHabilidades() {
                             <div class="dflex fwrap jbetween">
                                 <select class="input width-50-margin-10 margin-bottom-15">
                                     <option value="" hidden="true" default="true">Escolha a Categoria</option>
+                                    <option value="">Corte Cabelo</option>
+                                    <option value="">Hidratação</option>
+                                    <option value="">Maquiagem</option>
+                                    <option value="">Manicure</option>
+                                    <option value="">Design de sobrancelhas</option>
+                                    <option value="">Massagem</option>
+                                    <option value="">Pedicure</option>
                                 </select>
-                                <select class="input width-50-margin-10 margin-bottom-15">
-                                    <option value="" hidden="true" default="true">Escolha a Especialidade</option>
-                                </select>
-                                <input type="number" min="1" step="any" placeholder="Preço (R$)" class="input width-50-margin-10" id="input-preco" />
+                                <input type="text" placeholder="Escolha a Especialidade" step="any" class="input width-50-margin-10 margin-bottom-15"  />
+                                <input type="number" min="1" step="any" placeholder="Preço (R$)" id="input-preco" class="input width-50-margin-10 margin-bottom-15" />
                                 <input type="text" placeholder="Duração" class="input width-50-margin-10" id="input-duracao-servico" onkeypress="$(this).mask('00:00')" />
                             </div>
                             <button type="submit" class="button button-cadastro-profissional txt-white bg-hover-white txt-hover-dark-red">CADASTRAR</button>
@@ -38,7 +59,7 @@ function CadastroDeHabilidades() {
                                         <td></td>
                                         <td>
                                             <button type="button" class="trash">
-                                                
+
                                             </button>
                                         </td>
                                     </tr>
@@ -48,7 +69,7 @@ function CadastroDeHabilidades() {
                                         <td></td>
                                         <td>
                                             <button type="button" class="trash">
-                                                
+
                                             </button>
                                         </td>
                                     </tr>
