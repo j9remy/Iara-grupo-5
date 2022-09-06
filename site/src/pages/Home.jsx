@@ -40,6 +40,16 @@ function Home() {
   };
 
 
+  useEffect(() =>{
+    console.log("Entrou no useEffect");
+    async function buscarCategoria(){
+        const resposta = await api.get(`/${1}`);
+        setProfissionais(resposta.data);
+        console.log("OLHA O QUE VEIO DA API!!", resposta.data)
+    }   
+    buscarCategoria();
+}, [])
+
   function selecionarCategoria(idCategoria) {
     //REQUISIÇÃO BACKEND
 
