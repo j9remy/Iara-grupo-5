@@ -4,8 +4,6 @@ import CarrosselProfissionais from "../components/CarrosselProfissionais";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import api from "../api";
-
-
 import Slider from "react-slick";
 
 function SampleNextArrow(props) {
@@ -59,32 +57,32 @@ function Home() {
 
       setProfissionais([
         {
-          nome: "Ana clara",
+          nome: "Claudia Rita",
+          distancia: "6,4 KM",
+          habilidade: "Cacheado",
+          avaliacao: "5",
+          foto: "../img/profissionais/img-prof-Claudia.jpg",
+        },
+        {
+          nome: "Paulo Henrique",
+          distancia: "7,4 KM",
+          habilidade: "Afro",
+          avaliacao: "4",
+          foto: "../img/profissionais/img-prof-Paulo.jpg",
+        },
+        {
+          nome: "Letícia Maia",
           distancia: "6,4 KM",
           habilidade: "Cacheado",
           avaliacao: "4",
-          foto: "../img/profissionais/img-prof-1.png",
+          foto: "../img/profissionais/img-prof-Leticia.jpg",
         },
         {
-          nome: "Diogo",
+          nome: "Victor Assunção",
           distancia: "7,4 KM",
-          habilidade: "Liso",
+          habilidade: "Luzes",
           avaliacao: "4",
-          foto: "../img/profissionais/img-prof-1.png",
-        },
-        {
-          nome: "Ana clara",
-          distancia: "6,4 KM",
-          habilidade: "Cacheado",
-          avaliacao: "4",
-          foto: "../img/profissionais/img-prof-1.png",
-        },
-        {
-          nome: "Diogo",
-          distancia: "7,4 KM",
-          habilidade: "Liso",
-          avaliacao: "4",
-          foto: "../img/profissionais/img-prof-1.png",
+          foto: "../img/profissionais/img-prof-Victor.jpg",
         }
       ]);
     } else {

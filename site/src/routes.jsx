@@ -9,6 +9,8 @@ import CadastroProfissional from "./pages/CadastroProfissional";
 import CadastroEndereco from "./pages/CadastroEndereco";
 import CadastroHabilidades from "./pages/CadastroHabilidades";
 import PerfilProfissionalColaborador from "./pages/PerfilProfissionalColaborador";
+import SelecionarCategoria from "./components/SelecionarCategoriaProfissionais";
+//import SelecionarCategoriaProfissional from "./components/SelecionarCategoriaProfissional";
 
 function Rotas(){
     return(
@@ -24,6 +26,7 @@ function Rotas(){
                 <Route path="/cadastroEndereco" element={<CadastroEndereco/>}/>
                 <Route path="/cadastroHabilidades" element={<CadastroHabilidades/>}/>
                 <Route path="/perfilProfissionalColaborador" element={<PerfilProfissionalColaborador/>}/>
+                <Route path="/selecionarcategoria" element={<SelecionarCategoria/>}/>
             </Routes>
         </BrowserRouter>
 
