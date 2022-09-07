@@ -39,65 +39,11 @@ function Home() {
     prevArrow: <SamplePrevArrow />,
   };
 
-
-  useEffect(() =>{
-    console.log("Entrou no useEffect");
-    async function buscarCategoria(){
-        const resposta = await api.get(`categoria/`);
-        setProfissionais(resposta.data);
-        console.log("OLHA O QUE VEIO DA API!!", resposta.data)
-    }   
-    buscarCategoria();
-}, [])
-
-  function selecionarCategoria(idCategoria) {
-    //REQUISIÇÃO BACKEND
-
-    if (idCategoria === 1) {
-
-      setProfissionais([
-        {
-          nome: "Claudia Rita",
-          distancia: "6,4 KM",
-          habilidade: "Cacheado",
-          avaliacao: "5",
-          foto: "../img/profissionais/img-prof-Claudia.jpg",
-        },
-        {
-          nome: "Paulo Henrique",
-          distancia: "7,4 KM",
-          habilidade: "Afro",
-          avaliacao: "4",
-          foto: "../img/profissionais/img-prof-Paulo.jpg",
-        },
-        {
-          nome: "Letícia Maia",
-          distancia: "6,4 KM",
-          habilidade: "Cacheado",
-          avaliacao: "4",
-          foto: "../img/profissionais/img-prof-Leticia.jpg",
-        },
-        {
-          nome: "Victor Assunção",
-          distancia: "7,4 KM",
-          habilidade: "Luzes",
-          avaliacao: "4",
-          foto: "../img/profissionais/img-prof-Victor.jpg",
-        }
-      ]);
-    } else {
-      setProfissionais([
-        {
-          nome: "Diogo",
-          distancia: "7,4 KM",
-          habilidade: "Liso",
-          avaliacao: "4",
-          foto: "../img/profissionais/img-prof-1.png",
-        },
-      ]);
-    }
-
-  }
+  async function selecionarCategoria(idCategoria) {
+    const resposta = await api.get(`categoria/prestador/${idCategoria}`);
+    setProfissionais(resposta.data);
+    console.log("OLHA O QUE VEIO DA API!!", resposta.data)
+}
 
   return (
     <>
@@ -110,8 +56,8 @@ function Home() {
               {profissionais.map((profissional) => (
                 <CarrosselProfissionais
                   nome={profissional.nome}
-                  habilidade={profissional.habilidade}
-                  distancia={profissional.distancia}
+                  habilidade={profissional.habilidades[0].descricao}
+                  distancia={profissional.distancia + " KM"}
                   avaliacao={profissional.avaliacao}
                   foto={profissional.foto}
                 />
