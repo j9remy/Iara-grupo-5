@@ -36,20 +36,25 @@ function Login() {
         ).then((res) => {
             localStorage.setItem("clinte", JSON.stringify(res.data))
             navigate("/home")
-        })
+        },
+            api.post("prestador/autenticacao", values,
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+            ).then((res) => {
+                localStorage.setItem("clinte", JSON.stringify(res.data))
+                navigate("/perfilProfissionalColaborador")
+            },
+            )
+        )
             .catch(error => {
                 if (error.request.status === 401) {
                     console.log("success")
                     swal.fire({
                         icon: "error",
                         title: <h1>Ops... Dados inválidos</h1>,
-                        text: "Por favor, tente novamente!"
-                    });
-                } else {
-                    console.error("err")
-                    swal.fire({
-                        icon: "error",
-                        title: <h1>Ops! Algo deu errado da nossa parte</h1>,
                         text: "Por favor, tente novamente!"
                     });
                 }
