@@ -24,6 +24,7 @@ function Rotas(){
                 <Route path="/cadastroEndereco" element={<CadastroEndereco/>}/>
                 <Route path="/cadastroHabilidades" element={<CadastroHabilidades/>}/>
                 <Route path="/perfilProfissionalColaborador" element={<PerfilProfissionalColaborador/>}/>
+                <Route path="/perfilProfissionalColaborador/:id" element={<PerfilProfissionalColaborador/>} />
             </Routes>
         </BrowserRouter>
 

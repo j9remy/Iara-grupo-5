@@ -2,17 +2,19 @@ import { Link } from 'react-router-dom';
 import logo from '../html-css-template/img/logo-red.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import api from "../api";
+import teste from './PerfilProfissionalColaborador';
 
 
 
 function ReiniciarValores() {
     return { email: "", senha: "" }
 }
+
 
 function Login() {
 
@@ -27,7 +29,7 @@ function Login() {
 
     function autenticarLogin(evento) {
         evento.preventDefault();
-        api.post("cliente/autenticacao", values,
+        api.post("/cliente/autenticacao", values,
             {
                 headers: {
                     'Content-Type': 'application/json'
@@ -35,16 +37,22 @@ function Login() {
             }
         ).then((res) => {
             localStorage.setItem("clinte", JSON.stringify(res.data))
+            localStorage.setItem("clienteId", JSON.stringify(res.data.id))
+
             navigate("/home")
         },
-            api.post("prestador/autenticacao", values,
+            api.post("/prestador/autenticacao", values,
                 {
                     headers: {
                         'Content-Type': 'application/json'
                     }
                 }
             ).then((res) => {
-                localStorage.setItem("clinte", JSON.stringify(res.data))
+                localStorage.setItem("iara_prestador", JSON.stringify(res.data))
+                localStorage.setItem("iara_prestador_id", JSON.stringify(res.data.id))
+                console.log(localStorage)
+                
+
                 navigate("/perfilProfissionalColaborador")
             },
             )
@@ -68,7 +76,7 @@ function Login() {
                     <Link to={'/'}>
                         <img class="logo transform" src={logo} />
                     </Link>
-                    <form id="login" class="campos dflex fdcolumn txt-medium" onSubmit={autenticarLogin}>
+                    <form id="login" class="campos dflex fdcolumn txt-medium" onSubmit={autenticarLogin} onClick={teste}>
                         <div class="input-group">
                             <input
                                 required

@@ -1,6 +1,6 @@
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 
 function HeaderCliente() {
     return (
@@ -17,6 +17,7 @@ function HeaderCliente() {
                 </form>
                 <div class="dflex acenter">
                     <a href=" " class="txt-dark-red txt-medium margin-right-fifty transform">INSTITUCIONAL</a>
+                    <Link to={'/'}><button class="button bg-white txt-black bg-hover-dark-red txt-hover-white" >Sair</button></Link>
                 </div>
                 <div>
                     <button type="button" class="btn-no-style btn-profile dflex acenter jcenter">

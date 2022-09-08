@@ -1,13 +1,17 @@
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 
 function CardInformacoesDoProfissional() {
 
     return (
         <div class="card prelative">
-            <a class="btn-editar-perfil pabsolute bg-hover-white txt-hover-dark-red transform">
-                <FontAwesomeIcon icon={faPen} />
-            </a>
+            <Link to={"/cadastroProfissional"}>
+                <a class="btn-editar-perfil pabsolute bg-hover-white txt-hover-dark-red transform">
+                    <FontAwesomeIcon icon={faPen} />
+                </a>
+            </Link>
+
             <div class="dflex acenter jbetween">
                 <div class="dflex acenter jbetween">
                     <img src="../img/foto-perfil.png" alt="Foto de perfil" class="margin-right-twenty" />

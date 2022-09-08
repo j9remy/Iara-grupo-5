@@ -4,9 +4,7 @@ import { GoChevronLeft } from "react-icons/go";
 
 
 function CarrosselCategorias(props) {
-
     const settings = {
-        infinite: true,
         slidesToShow: 5,
         slidesToScroll: 1,
         nextArrow: <GoChevronRight color="white"/>,
@@ -16,7 +14,7 @@ function CarrosselCategorias(props) {
         <div id="categorias" class="categorias card bg-red">
             <Slider {...settings}>
                 <div>
-                    <span class="item" onClick={() => props.funcaoCategoria(1)}>
+                    <span class="item" onClick={() => props.funcaoCategoria(1)} >
                         <a href="#">
                             <img src="../img/categorias/img-corte.png" alt="Corte de cabelo" />
                             <span>Corte de Cabelo</span>

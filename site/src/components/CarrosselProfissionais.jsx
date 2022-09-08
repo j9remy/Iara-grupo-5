@@ -1,9 +1,10 @@
+import foto from "../html-css-template/img/img-prof-default.png";
 function CarrosselProfissionais(props) {
     return (
       <>
         <div class="item">
           <div class="card bg-dark-red txt-white txt-center">
-            <img src={props.foto} />
+            <img src={foto} />
             <div class="nome">
               <b>{props.nome}</b>
               <br />

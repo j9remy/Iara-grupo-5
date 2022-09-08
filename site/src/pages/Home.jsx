@@ -5,51 +5,33 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import api from "../api";
 import Slider from "react-slick";
+import { GoChevronRight } from "react-icons/go";
+import { GoChevronLeft } from "react-icons/go";
+import CarrosselPropaganda from "../components/CarrosselPropaganda";
 
-function SampleNextArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{ ...style, display: "block" }}
-      onClick={onClick}
-    />
-  );
-}
-
-function SamplePrevArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{ ...style, display: "absolute", color: "#de0235" }}
-      onClick={onClick}
-    />
-  );
-}
 
 function Home() {
   const [profissionais, setProfissionais] = useState([]);
 
   const settings = {
-    infinite: false,
     slidesToShow: 5,
     slidesToScroll: 1,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
+    nextArrow: <GoChevronRight color="white" />,
+    prevArrow: <GoChevronLeft color="white" />
   };
 
   async function selecionarCategoria(idCategoria) {
     const resposta = await api.get(`categoria/prestador/${idCategoria}`);
     setProfissionais(resposta.data);
     console.log("OLHA O QUE VEIO DA API!!", resposta.data)
-}
+  }
 
   return (
     <>
       <Header />
       <main class="margin-top-thirty">
         <div class="container">
+          <CarrosselPropaganda />
           <CarrosselCategorias funcaoCategoria={selecionarCategoria} />
           <div id="profissionais" class="profissionais">
             <Slider {...settings}>
