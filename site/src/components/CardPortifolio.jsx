@@ -6,6 +6,7 @@ import { GoChevronLeft } from "react-icons/go";
 import imagem1 from "../html-css-template/img/portfolio/1.png";
 import imagem2 from "../html-css-template/img/portfolio/2.png";
 import imagem3 from "../html-css-template/img/portfolio/3.png";
+import imagem4 from "../html-css-template/img/portfolio/4.png";
 
 
 
@@ -39,7 +40,7 @@ function CardPortifolio() {
                         <img src={imagem3} alt="Imagem 3 do Portfólio" />
                     </div>
                     <div class="padding-zero-twenty">
-                        <img src="../html-css-template/img/portfolio/2.png" alt="Imagem 4 do Portfólio" />
+                        <img src={imagem4} alt="Imagem 4 do Portfólio" />
                     </div>
                 </Slider>
             </div>
