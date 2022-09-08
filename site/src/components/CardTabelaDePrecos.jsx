@@ -1,12 +1,15 @@
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 
 function CardTabelaDePrecos() {
     return (
         <div class="card half prelative">
-            <a class="btn-editar-perfil pabsolute bg-hover-white txt-hover-dark-red transform">
-                <FontAwesomeIcon icon={faPen} />
-            </a>
+            <Link to={"/cadastroHabilidades"}>
+                <a class="btn-editar-perfil pabsolute bg-hover-white txt-hover-dark-red transform">
+                    <FontAwesomeIcon icon={faPen} />
+                </a>
+            </Link>
             <h3 class="txt-bigger txt-center txt-red txt-bold">Tabela de Preços</h3>
             <div class="dflex acenter jbetween margin-top-ten">
                 <b>Corte</b>

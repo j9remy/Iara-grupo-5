@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import api from "../api";
 import { GoTrashcan } from "react-icons/go";
 import SelectCategoria from './SelectCategoria';
+import { Link } from 'react-router-dom';
 
 
 function CadastroDeHabilidades(props) {
@@ -43,7 +44,7 @@ function CadastroDeHabilidades(props) {
                                     <option value="">Massagem</option>
                                     <option value="">Pedicure</option>
                                 </select>
-                                <input type="text" placeholder="Escolha a Especialidade" step="any" class="input width-50-margin-10 margin-bottom-15"  />
+                                <input type="text" placeholder="Escolha a Especialidade" step="any" class="input width-50-margin-10 margin-bottom-15" />
                                 <input type="number" min="1" step="any" placeholder="Preço (R$)" id="input-preco" class="input width-50-margin-10 margin-bottom-15" />
                                 <input type="text" placeholder="Duração" class="input width-50-margin-10" id="input-duracao-servico" onkeypress="$(this).mask('00:00')" />
                             </div>
@@ -162,10 +163,12 @@ function CadastroDeHabilidades(props) {
                     </div>
                 </div>
                 <div class="dflex acenter jbetween">
-                    <a href="cadastroDados.html" class="button bg-dark-red txt-white bg-hover-white txt-hover-dark-red shadow-smooth">
-                        <i class="fa-solid fa-arrow-left-long margin-right-5"></i>
-                        VOLTAR
-                    </a>
+                    <Link to={"/perfilProfissionalColaborador"}>
+                        <a href="cadastroDados.html" class="button bg-dark-red txt-white bg-hover-white txt-hover-dark-red shadow-smooth">
+                            <i class="fa-solid fa-arrow-left-long margin-right-5"></i>
+                            VOLTAR
+                        </a>
+                    </Link>
                     <button type="submit" class="button bg-dark-red txt-white bg-hover-white txt-hover-dark-red shadow-smooth">CADASTRAR</button>
                 </div>
             </form>

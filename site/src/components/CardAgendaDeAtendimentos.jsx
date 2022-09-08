@@ -4,9 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 function CardAgendaDeAtendimentos() {
     return (
         <div class="card half prelative">
-            <a class="btn-editar-perfil pabsolute bg-hover-white txt-hover-dark-red transform">
-                <FontAwesomeIcon icon={faPen} />
-            </a>
             <h3 class="txt-bigger txt-center txt-red txt-bold">Agenda de Atendimentos</h3>
             <div class="table red atendimentos">
                 <table>
