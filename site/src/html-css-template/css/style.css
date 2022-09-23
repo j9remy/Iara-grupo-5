@@ -135,7 +135,7 @@ img {
 }
 
 .card.half {
-  width: calc(50% - 15px)
+  width: calc(50% - 15px);
 }
 
 .bg-dark-red,
@@ -267,8 +267,18 @@ img {
   display: block;
 }
 
+.transform-bold {
+  transition: all .4s;
+  display: block;
+}
+
 .transform:hover {
   transform: scale(1.1);
+}
+
+.transform-bold:hover{
+  font-weight: 500;
+  transform: scale(1.05);
 }
 
 .login a {
@@ -355,6 +365,10 @@ h2 {
 
 .margin-bottom-thirty {
   margin-bottom: 30px;
+}
+
+.dblock {
+  display: block;
 }
 
 /* From uiverse.io by @alexmaracinaru */
@@ -1014,7 +1028,7 @@ i.icon.star {
 }
 
 .table.atendimentos td span {
-  font-size: 13px !important;
+  font-size: 15px !important;
   margin-top: 10px !important;
   padding: 3px 5px;
 }
@@ -1065,6 +1079,37 @@ i.icon.star {
 
 .button.small {
   padding: 6px 12px;
+}
+
+.account-menu {
+  background-color: #fdfbfbf0;
+    padding: 13px;
+    text-align: right;
+    right: 4px;
+    border-radius: 9px;
+    z-index: 1;
+    top: 72px;
+    box-shadow: 0px 3px 9px 0px #de023573;
+    width: 131px;
+    transition: all .4s;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.itens {
+  opacity: 0;
+  visibility: hidden;
+  transition: all .4s;
+}
+
+.btn-profile:hover ~ .itens, .itens:hover {
+  opacity: 1;
+  visibility: visible;
+  transition: all .4s;
+}
+
+.link-profissional:hover a{
+  color: #AB0229;
 }
 
 
