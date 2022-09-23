@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil | Iara</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon_io/favicon-16x16.png">
+    <script src="https://kit.fontawesome.com/26f7448628.js" crossorigin="anonymous"></script> 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>  
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/> 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+</head>
+<body>
+    <header class="header-logged">
+        <div class="container dflex acenter jbetween">
+            <a href="home.html" class="logo transform">
+                <img alt="Logo" src="../img/logo.png">
+            </a>
+            <form>
+                <input type="text" placeholder="Buscar" class="input-search" required>
+                <button type="submit" class="btn-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </form>
+            <div class="dflex acenter">
+                <a href="institucional.html" class="txt-dark-red txt-medium margin-right-fifty transform">INSTITUCIONAL</a>
+            </div>
+            <div class="prelative">
+                <button type="button" class="btn-no-style btn-profile dflex acenter jcenter">
+                    <img src="../img/profissionais/img-prof-1.png" alt="Foto de perfil">
+                </button>
+                <div class="itens jflex pabsolute txt-dark-red account-menu">
+                    <a class="txt-dark-red transform-bold margin-bottom-10" href="">MINHA CONTA</a>
+                    <a class="txt-dark-red transform-bold margin-bottom-10" href="" >ANÁLISES</a>
+                    <a class="txt-dark-red transform-bold" href="" >SAIR</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="margin-top-thirty margin-bottom-thirty container">
+        <div class="card">
+            <div class="dflex acenter jbetween prelative">
+                <div class="dflex acenter jbetween">
+                    <img src="../img/foto-perfil.png" alt="Foto de perfil" class="margin-right-twenty">
+                    <div>
+                        <b>Ana Clara Pinheiros, 32 anos</b><br />Cabeleireira
+                    </div>
+                </div>
+                <div class="dflex acenter jbetween">
+                    <a href="#" class="button bg-red txt-white bg-hover-white txt-hover-dark-red margin-none margin-right-twenty">FAVORITAR</a>
+                    <div class="button bg-red txt-white bg-hover-white txt-hover-dark-red margin-none dflex acenter jbetween"><span>4</span>/5 <i class="icon star"></i></div>
+                </div>
+            </div>
+            <div class="margin-top-thirty dflex jbetween">
+                <div>
+                    <b>Telefone</b><br />
+                    <span>(11) 99724-0127</span><br /><br />
+                    <b>Gênero</b><br />
+                    <span>Feminino</span>                    
+                </div>
+                <div>
+                    <b>Endereço</b><br />
+                    <span>Rua Francisco de Oliveira, 144<br />
+                    Parque das Árvores, São Paulo<br />
+                    SP - 14404-068</span>                    
+                </div>
+                <div>
+                    <b>Preferências de atendimento</b>
+                    <ul>
+                        <li>Em Domicílio</li>
+                    </ul>
+                    <br />
+                    <b>Raio de atendimento</b>
+                    <ul>
+                        <li>35 Km</li>
+                    </ul>                    
+                </div>
+            </div>
+        </div>
+        <div class="dflex jbetween margin-top-thirty">
+            <div class="card half">
+                <h3 class="txt-bigger txt-center txt-red txt-bold">Tabela de Preços</h3>
+                <div class="dflex acenter jbetween margin-top-ten">
+                    <b>Corte</b>
+                    <input type="text" class="input-border-bottom-red txt-red" readonly value="(± 1 hora)" />                    
+                    <span class="button small bg-red txt-white margin-none pointer-none">R$ 60,00</span>
+                </div>
+                <div class="dflex acenter jbetween margin-top-ten">
+                    <b>Escova</b>
+                    <input type="text" class="input-border-bottom-red txt-red" readonly value="(± 1 hora)" />                    
+                    <span class="button small bg-red txt-white margin-none pointer-none">R$ 80,00</span>
+                </div>
+                <div class="dflex acenter jbetween margin-top-ten">
+                    <b>Permanente</b>
+                    <input type="text" class="input-border-bottom-red txt-red" readonly value="(± 1 hora)" />                    
+                    <span class="button small bg-red txt-white margin-none pointer-none">R$ 80,00</span>
+                </div>
+                <div class="dflex acenter jbetween margin-top-ten">
+                    <b>Tintura</b>
+                    <input type="text" class="input-border-bottom-red txt-red" readonly value="(± 1 hora)" />                    
+                    <span class="button small bg-red txt-white margin-none pointer-none">R$ 90,00</span>
+                </div>
+            </div>
+            <div class="card half">
+                <h3 class="txt-bigger txt-center txt-red txt-bold">Agendar Atendimentos</h3>
+                <form>
+                    <div>
+                        <h4 class="margin-bottom-10">Selecione o Serviço:</h4>
+                        <div class="dflex fwrap">
+                            <div class="prelative margin-right-twenty margin-bottom-10">
+                                <input required type="radio" id="selecione_servico_corte" name="selecione_servico" value="Corte" class="radio-button">
+                                <label for="selecione_servico_corte" class="button small bg-white txt-dark-red bg-hover-red box-shadow-none-hover txt-hover-white margin-none">Corte</label>
+                            </div>
+                            <div class="prelative margin-right-twenty margin-bottom-10">
+                                <input required type="radio" id="selecione_servico_escova" name="selecione_servico" value="Escova" class="radio-button">
+                                <label for="selecione_servico_escova" class="button small bg-white txt-dark-red bg-hover-red box-shadow-none-hover txt-hover-white margin-none">Escova</label>
+                            </div>
+                            <div class="prelative margin-right-twenty margin-bottom-10">
+                                <input required type="radio" id="selecione_servico_tintura" name="selecione_servico" value="Tintura" class="radio-button">
+                                <label for="selecione_servico_tintura" class="button small bg-white txt-dark-red bg-hover-red box-shadow-none-hover txt-hover-white margin-none">Tintura</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="margin-bottom-10">Selecione o Dia:</h4>
+                        <input required class="input max-content" type="date">
+                    </div>
+                    <div>
+                        <h4 class="margin-bottom-10">Selecione o Horário:</h4>
+                        <div class="dflex fwrap">
+                            <div class="prelative margin-right-twenty margin-bottom-10">
+                                <input required type="radio" id="selecione_horario_0900" name="selecione_horario" value="09:00" class="radio-button">
+                                <label for="selecione_horario_0900" class="button small bg-white txt-dark-red bg-hover-red box-shadow-none-hover txt-hover-white margin-none">09:00</label>
+                            </div>
+                            <div class="prelative margin-right-twenty margin-bottom-10">
+                                <input required type="radio" id="selecione_horario_1030" name="selecione_horario" value="10:30" class="radio-button">
+                                <label for="selecione_horario_1030" class="button small bg-white txt-dark-red bg-hover-red box-shadow-none-hover txt-hover-white margin-none">10:30</label>
+                            </div>
+                            <div class="prelative margin-right-twenty margin-bottom-10">
+                                <input required type="radio" id="selecione_horario_1300" name="selecione_horario" value="13:00" class="radio-button">
+                                <label for="selecione_horario_1300" class="button small bg-white txt-dark-red bg-hover-red box-shadow-none-hover txt-hover-white margin-none">13:00</label>
+                            </div>
+                            <div class="prelative margin-right-twenty margin-bottom-10">
+                                <input required type="radio" id="selecione_horario_1430" name="selecione_horario" value="14:30" class="radio-button">
+                                <label for="selecione_horario_1430" class="button small bg-white txt-dark-red bg-hover-red box-shadow-none-hover txt-hover-white margin-none">14:30</label>
+                            </div>
+                            <div class="prelative margin-right-twenty margin-bottom-10">
+                                <input required type="radio" id="selecione_horario_1600" name="selecione_horario" value="16:00" class="radio-button">
+                                <label for="selecione_horario_1600" class="button small bg-white txt-dark-red bg-hover-red box-shadow-none-hover txt-hover-white margin-none">16:00</label>
+                            </div>
+                            <div class="prelative margin-right-twenty margin-bottom-10">
+                                <input required type="radio" id="selecione_horario_1730" name="selecione_horario" value="17:30" class="radio-button">
+                                <label for="selecione_horario_1730" class="button small bg-white txt-dark-red bg-hover-red box-shadow-none-hover txt-hover-white margin-none">17:30</label>
+                            </div>
+                            <div class="prelative margin-right-twenty margin-bottom-10">
+                                <input disabled required type="radio" id="selecione_horario_1900" name="selecione_horario" value="19:00" class="radio-button">
+                                <label for="selecione_horario_1900" class="button small bg-white txt-dark-red bg-hover-red box-shadow-none-hover txt-hover-white margin-none">19:00</label>
+                            </div>
+                            <div class="prelative margin-right-twenty margin-bottom-10">
+                                <input disabled required type="radio" id="selecione_horario_2030" name="selecione_horario" value="20:30" class="radio-button">
+                                <label for="selecione_horario_2030" class="button small bg-white txt-dark-red bg-hover-red box-shadow-none-hover txt-hover-white margin-none">20:30</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="button bg-red txt-white bg-hover-white txt-hover-dark-red margin-auto margin-top-thirty" type="submit">AGENDAR</button>
+                </form>
+            </div>
+        </div>
+        <div class="card margin-top-thirty">
+            <h3 class="txt-bigger txt-red txt-bold">Portfólio</h3>
+            <div id="portfolio" class="padding-zero-twenty">
+                <div class="padding-zero-twenty">
+                    <img src="../img/portfolio/1.png" alt="Imagem 1 do Portfólio" />
+                </div>
+                <div class="padding-zero-twenty">
+                    <img src="../img/portfolio/2.png" alt="Imagem 2 do Portfólio" />
+                </div>
+                <div class="padding-zero-twenty">
+                    <img src="../img/portfolio/3.png" alt="Imagem 3 do Portfólio" />
+                </div>
+                <div class="padding-zero-twenty">
+                    <img src="../img/portfolio/2.png" alt="Imagem 4 do Portfólio" />
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer-logged">
+        <div class="container dflex jbetween">
+            <a href="home.html" class="logo transform">
+                <img alt="Logo" src="../img/logo.png">
+            </a>
+            <div>
+                <h4>INSTITUCIONAL</h4>
+                <a href="institucional.html#como-funciona">Como Funciona</a>
+                <a href="institucional.html#sobre-nos">Sobre nós</a>
+            </div>
+            <div>
+                <h4>MINHA CONTA</h4>
+                <a href="">Meu Perfil</a>
+                <a href="">Meus Pontos</a>
+            </div>
+            <div>
+                <h4>CONTATO</h4>
+                <a href="">
+                    Whatsapp<br />
+                    (11) 99111-1111
+                </a>
+                <a href="mailto:contato@iara.com">
+                    E-mail<br />
+                    contato@iara.com
+                </a>
+            </div>
+            <div>
+                <h4>SIGA-NOS</h4>
+                <span>Acompanhe as nossas<br />
+                    redes sociais</span>
+                <div class="dflex acenter">
+                    <a href="" class="button circle txt-dark-red bg-white dflex acenter jcenter"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="" class="button circle txt-dark-red bg-white dflex acenter jcenter"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="" class="button circle txt-dark-red bg-white dflex acenter jcenter"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="" class="button circle txt-dark-red bg-white dflex acenter jcenter"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="" class="button circle txt-dark-red bg-white dflex acenter jcenter"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="txt-center margin-top-thirty txt-regular">© <b>IARA</b> - Todos os direitos reservados</div>
+    </footer>
+</body>
+</html>
+<script>
+    $('#portfolio').slick({
+        infinite: true,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        prevArrow: '<button type="button" class="slick-prev"><i class="fa-solid fa-chevron-left txt-red"></i></button>',
+        nextArrow: '<button type="button" class="slick-next"><i class="fa-solid fa-chevron-right txt-red"></i></button>'
+    });
+</script>
