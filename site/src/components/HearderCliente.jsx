@@ -1,12 +1,13 @@
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import api from '../api';
 
 function HeaderCliente() {
     return (
         <header class="header-logged">
             <div class="container dflex acenter jbetween">
-                <a href=" " class="logo transform">
+                <a href="/homeCliente " class="logo transform">
                     <img alt="Logo" src="../img/logo.png" />
                 </a>
                 <form>
@@ -17,12 +18,18 @@ function HeaderCliente() {
                 </form>
                 <div class="dflex acenter">
                     <a href=" " class="txt-dark-red txt-medium margin-right-fifty transform">INSTITUCIONAL</a>
-                    <Link to={'/'}><button class="button bg-white txt-black bg-hover-dark-red txt-hover-white" >Sair</button></Link>
                 </div>
-                <div>
+                <div class="prelative">
                     <button type="button" class="btn-no-style btn-profile dflex acenter jcenter">
                         <img src="../img/perfil-padrao.png" alt="Foto de perfil" />
                     </button>
+                    <div class="itens jflex pabsolute txt-dark-red account-menu">
+                        <a class="txt-dark-red transform-bold margin-bottom-10" href="">MINHA CONTA</a>
+                        <a class="txt-dark-red transform-bold margin-bottom-10" href="" >FAVORITOS</a>
+                        <a class="txt-dark-red transform-bold" href="/">SAIR</a>
+                    </div>
+                </div>
+                <div>
                 </div>
             </div>
         </header>
