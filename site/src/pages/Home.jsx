@@ -40,7 +40,7 @@ function Home() {
                   nome={profissional.nome}
                   habilidade={profissional.habilidades[0].descricao}
                   distancia={profissional.distancia + " KM"}
-                  avaliacao={profissional.avaliacao}
+                  avaliacao={4}
                   foto={profissional.foto}
                 />
               ))}

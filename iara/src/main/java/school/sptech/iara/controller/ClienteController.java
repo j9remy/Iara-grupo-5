@@ -28,7 +28,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/cliente")
-@CrossOrigin
 public class ClienteController {
 
     @Autowired
@@ -65,6 +64,15 @@ public class ClienteController {
             return ResponseEntity.status(200).body(cliente);
         }
         return ResponseEntity.status(404).build();
+    }
+
+    @GetMapping("/dado/{email}/{senha}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK, retorna uma lista de prestadores"),
+            @ApiResponse(responseCode = "204", description = "A lista de clientes está vazia")
+    })
+    public ResponseEntity<Optional<Cliente>> getDadosClientePorEmail(@PathVariable String email, @PathVariable String senha){
+        return ResponseEntity.status(200).body(repository.findByEmailAndSenha(email, senha));
     }
 
     //cadastro de clientes, com possibilidade de cadastrar vários de uma só vez

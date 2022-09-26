@@ -29,33 +29,39 @@ function Login() {
 
     function autenticarLogin(evento) {
         evento.preventDefault();
-        api.post("/cliente/autenticacao", values,
+        api.get(`/cliente/dado/${values.email}/${values.senha}`, values,
             {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             }
         ).then((res) => {
-            localStorage.setItem("clinte", JSON.stringify(res.data))
-            localStorage.setItem("clienteId", JSON.stringify(res.data.id))
+            localStorage.dadosUsuario = res.data;
+            localStorage.idUsuario = res.data.id;
 
-            navigate("/home")
-        },
-            api.post("/prestador/autenticacao", values,
-                {
-                    headers: {
-                        'Content-Type': 'application/json'
+            console.log(res.data);
+            console.log(localStorage.idUsuario);
+
+            if (res.status != 200) {
+                api.post("/prestador/autenticacao", values,
+                    {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
                     }
-                }
-            ).then((res) => {
-                localStorage.setItem("iara_prestador", JSON.stringify(res.data))
-                localStorage.setItem("iara_prestador_id", JSON.stringify(res.data.id))
-                console.log(localStorage)
-                
+                ).then((res) => {
+                    localStorage.dadosUsuario = res.data;
+                    localStorage.idUsuario = res.data.id;
+                    console.log("Alooo:", localStorage.dadosUsuario)
+                    console.log("res", res.data)
 
-                navigate("/perfilProfissionalColaborador")
-            },
-            )
+
+                    navigate("/perfilProfissionalColaborador")
+                }
+                )
+            }
+            navigate("/home")
+        }
         )
             .catch(error => {
                 if (error.request.status === 401) {
@@ -76,7 +82,7 @@ function Login() {
                     <Link to={'/'}>
                         <img class="logo transform" src={logo} />
                     </Link>
-                    <form id="login" class="campos dflex fdcolumn txt-medium" onSubmit={autenticarLogin} onClick={teste}>
+                    <form id="login" class="campos dflex fdcolumn txt-medium" onSubmit={autenticarLogin}>
                         <div class="input-group">
                             <input
                                 required

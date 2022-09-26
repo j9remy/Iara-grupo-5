@@ -18,7 +18,7 @@ function PerfilProfissionalColaborador() {
     console.log(idPrestador)
 
     useEffect(() => {
-        const infoPrestador = JSON.parse(localStorage.getItem('iara_prestador'));
+        const infoPrestador = localStorage.dadosUsuario;
         if (infoPrestador) {
             setPrestador(infoPrestador);
         }
