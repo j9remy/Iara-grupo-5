@@ -66,7 +66,7 @@ public class ClienteController {
         return ResponseEntity.status(404).build();
     }
 
-    @GetMapping("/dado/{email}/{senha}")
+    @GetMapping("/logar/{email}/{senha}")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK, retorna uma lista de prestadores"),
             @ApiResponse(responseCode = "204", description = "A lista de clientes está vazia")

@@ -2,10 +2,16 @@ import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 
-function CardInformacoesDoProfissional() {
+function CardInformacoesDoProfissionalAdm() {
 
     return (
         <div class="card prelative">
+            <Link to={"/cadastroProfissional"}>
+                <a class="btn-editar-perfil pabsolute bg-hover-white txt-hover-dark-red transform">
+                    <FontAwesomeIcon icon={faPen} />
+                </a>
+            </Link>
+
             <div class="dflex acenter jbetween">
                 <div class="dflex acenter jbetween">
                     <img src="../img/foto-perfil.png" alt="Foto de perfil" class="margin-right-twenty" />
@@ -14,7 +20,7 @@ function CardInformacoesDoProfissional() {
                     </div>
                 </div>
                 <div class="dflex acenter jbetween">
-                    <a href="#" class="button bg-red txt-white bg-hover-white txt-hover-dark-red margin-none margin-right-twenty">FAVORITAR</a>
+                    <a href="#" class="button bg-red txt-white bg-hover-white txt-hover-dark-red margin-none margin-right-twenty">ANÁLISES</a>
                     <div class="button bg-red txt-white bg-hover-white txt-hover-dark-red margin-none dflex acenter jbetween"><span>4</span>/5 <i class="icon star"></i></div>
                 </div>
             </div>
@@ -47,4 +53,4 @@ function CardInformacoesDoProfissional() {
     );
 }
 
-export default CardInformacoesDoProfissional;
+export default CardInformacoesDoProfissionalAdm;

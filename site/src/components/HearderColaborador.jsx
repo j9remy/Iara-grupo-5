@@ -19,13 +19,16 @@ function HeaderColaborador() {
                 </form>
                 <div class="dflex acenter">
                     <a href=" " class="txt-dark-red txt-medium margin-right-fifty transform">INSTITUCIONAL</a>
-                <Link to={'/'}><button class="button bg-white txt-black bg-hover-dark-red txt-hover-white" >Sair</button></Link>
-
                 </div>
-                <div>
+                <div class="prelative">
                     <button type="button" class="btn-no-style btn-profile dflex acenter jcenter">
                         <img src="../img/perfil-padrao.png" alt="Foto de perfil" />
                     </button>
+                    <div class="itens jflex pabsolute txt-dark-red account-menu">
+                        <a class="txt-dark-red transform-bold margin-bottom-10" href="">MINHA CONTA</a>
+                        <a class="txt-dark-red transform-bold margin-bottom-10" href="" >ANÁLISES</a>
+                        <a class="txt-dark-red transform-bold" href="/">SAIR</a>
+                    </div>
                 </div>
             </div>
         </header>

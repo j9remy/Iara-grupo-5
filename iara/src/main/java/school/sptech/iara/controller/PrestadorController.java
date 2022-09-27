@@ -76,6 +76,15 @@ public class PrestadorController {
         return ResponseEntity.status(404).build();
     }
 
+    @GetMapping("/logar/{email}/{senha}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK, retorna uma lista de prestadores"),
+            @ApiResponse(responseCode = "204", description = "A lista de clientes está vazia")
+    })
+    public ResponseEntity<Optional<Prestador>> getDadosClientePorEmail(@PathVariable String email, @PathVariable String senha){
+        return ResponseEntity.status(200).body(repository.findByEmailAndSenha(email, senha));
+    }
+
     //cadastro de prestador
     @PostMapping
     @ApiResponses(value = {

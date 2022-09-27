@@ -1,4 +1,6 @@
 import Slider from "react-slick";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { GoChevronRight } from "react-icons/go";
 import { GoChevronLeft } from "react-icons/go";
 import imagem1 from "../html-css-template/img/portfolio/1.png";
@@ -7,7 +9,9 @@ import imagem3 from "../html-css-template/img/portfolio/3.png";
 import imagem4 from "../html-css-template/img/portfolio/4.png";
 
 
-function CardPortifolio() {
+
+function CardPortifolioAdm() {
+    
     const settings = {
         infinite: true,
         slidesToShow: 3,
@@ -15,10 +19,14 @@ function CardPortifolio() {
         arrows: true,
         dots: true,
         nextArrow: <GoChevronRight color="red" />,
-        prevArrow: <GoChevronLeft color="red" />
+        prevArrow: <GoChevronLeft  color="red"/>
     };
+
     return (
         <div class="card margin-top-thirty prelative">
+            <a class="btn-editar-perfil pabsolute bg-hover-white txt-hover-dark-red transform">
+                <FontAwesomeIcon icon={faPen} />
+            </a>
             <h3 class="txt-bigger txt-red txt-bold">Portfólio</h3>
             <div id="portfolio" class="padding-zero-twenty">
                 <Slider {...settings}>
@@ -40,4 +48,4 @@ function CardPortifolio() {
     );
 }
 
-export default CardPortifolio;
+export default CardPortifolioAdm;

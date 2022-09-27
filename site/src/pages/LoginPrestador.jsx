@@ -8,15 +8,11 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import api from "../api";
 
-
-
 function ReiniciarValores() {
     return { email: "", senha: "" }
 }
 
-
-function Login() {
-
+function LoginPrestador() {
     const [values, setValues] = useState(ReiniciarValores);
     const navigate = useNavigate();
     const swal = withReactContent(Swal);
@@ -25,24 +21,22 @@ function Login() {
         const { value, name } = evento.target;
         setValues({ ...values, [name]: value, })
     }
-
     function autenticarLogin(evento) {
         evento.preventDefault();
-        api.get(`/cliente/logar/${values.email}/${values.senha}`, values,
+        api.get(`/prestador/logar/${values.email}/${values.senha}`, values,
             {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             }
         ).then((res) => {
-            localStorage.dadosCliente = res.data;
-            localStorage.idCliente = res.data.id;
+            localStorage.dadosPrestador = res.data;
+            localStorage.idPrestador = res.data.id;
 
             console.log(res.data);
-            console.log(localStorage.idCliente);
-
-            navigate("/home")
-        }
+            console.log(localStorage.idPrestador);
+            navigate("/accountProfissional")
+        },
         )
             .catch(error => {
                 if (error.request.status === 401) {
@@ -108,6 +102,7 @@ function Login() {
             </div>
         </>
     );
+
 }
 
-export default Login;
+export default LoginPrestador;

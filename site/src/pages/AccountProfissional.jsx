@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import api from "../api";
 import CardAgendaDeAtendimentos from "../components/CardAgendaDeAtendimentos";
-import CardInformacoesDoProfissional from "../components/CardInformacoesDoProfissional";
-import CardPortifolio from "../components/CardPortifolio";
-import CardTabelaDePrecos from "../components/CardTabelaDePrecos";
+import CardInformacoesDoProfissionalAdm from "../components/CardInformacoesDoProfissionalAdm"
+import CardPortifolioAdm from "../components/CardPortifolioAdm";
+import CardTabelaDePrecosAdm from "../components/CardTabelaDePrecosAdm";
 import Footer from "../components/Footer";
 import HeaderColaborador from "../components/HearderColaborador";
 
 
-function PerfilProfissionalColaborador() {
+function AccountProfissional() {
 
 
     const [infoPrestador, setPrestador] = useState([])
@@ -34,12 +34,12 @@ function PerfilProfissionalColaborador() {
             <HeaderColaborador />
             <main class="margin-top-thirty">
                 <div class="container">
-                    <CardInformacoesDoProfissional />
+                    <CardInformacoesDoProfissionalAdm />
                     <div class="dflex jbetween margin-top-thirty">
-                        <CardTabelaDePrecos />
+                        <CardTabelaDePrecosAdm />
                         <CardAgendaDeAtendimentos />
                     </div>
-                    <CardPortifolio />
+                    <CardPortifolioAdm />
                 </div>
             </main>
             <Footer />
@@ -47,4 +47,4 @@ function PerfilProfissionalColaborador() {
     )
 
 }
-export default PerfilProfissionalColaborador;
+export default AccountProfissional;

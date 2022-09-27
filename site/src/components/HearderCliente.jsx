@@ -29,8 +29,6 @@ function HeaderCliente() {
                         <a class="txt-dark-red transform-bold" href="/">SAIR</a>
                     </div>
                 </div>
-                <div>
-                </div>
             </div>
         </header>
     )
