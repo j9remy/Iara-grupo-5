@@ -41,10 +41,10 @@
         </div>
     </header>
     <main class="margin-top-thirty margin-bottom-thirty container">
-        <h3 class="font-size-fifteen"><a href="accountProfissional.html" class="txt-black"><u>Perfil</u></a> / Análises</h3>
-        <div class="dflex jbetween margin-bottom-55">
+        <h3 class="font-size-fifteen margin-bottom-80"><a href="accountProfissional.html" class="txt-black"><u>Perfil</u></a> / Análises</h3>
+        <div class="dflex jbetween margin-bottom-80">
             <div class="width-70-porc">
-                <h3 class="txt-center font-size-sixteen margin-top-ten"><b>NÚMERO DE ATENDIMENTOS EM COMPARAÇÃO COM A SEMANA ANTERIOR</b></h3>
+                <h3 class="txt-center font-size-eighteen margin-top-ten"><b>NÚMERO DE ATENDIMENTOS EM COMPARAÇÃO COM A SEMANA ANTERIOR</b></h3>
                 <div id="chart_atendimentos_dia_semana" style="height: 350px;"></div>
             </div>
             <div class="width-30-margin-15 dflex fwrap">
@@ -74,7 +74,7 @@
                 </div>
             </div>
         </div>
-        <div class="dflex jbetween margin-bottom-55">
+        <div class="dflex jbetween margin-bottom-110">
             <div class="width-4-cards small-card dflex acenter jcenter fwrap">
                 <div class="dflex fwrap acenter jcenter txt-center">
                     <span class="txt-center margin-bottom-10">Dia com mais atendimentos</span>
@@ -119,8 +119,42 @@
                     <span class="txt-center font-size-fifteen">Atendimentos</span>
                 </div>
             </div>
+        </div>
+        <div class="dflex jbetween margin-bottom-80">
+            <div class="width-30-margin-15 dflex fwrap txt-center">
+                <div class="dark-red-card width-100-porc txt-white margin-bottom-thirty dflex fwrap jbetween acenter">
+                    <div class="width-100-porc">
+                        <span>Serviço com <b>mais</b> atendimentos</span>
+                    </div>
+                    <div class="width-50-porc">
+                        <b><span class="font-size-twenty">CORTE</span></b>
+                    </div>
+                    <div class="width-50-porc">
+                        <b><span class="font-size-thirty">27</span></b><br/>
+                        <span class="font-size-thirteen">ATENDIMENTOS</span>
+                    </div>
+                </div>
+                <div class="dark-red-card width-100-porc txt-white margin-bottom-thirty dflex fwrap jbetween acenter">
+                    <div class="width-100-porc">
+                        <span>Serviço com <b>menos</b> atendimentos</span>
+                    </div>
+                    <div class="width-50-porc">
+                        <b><span class="font-size-twenty">TINTURA</span></b>
+                    </div>
+                    <div class="width-50-porc">
+                        <b><span class="font-size-thirty">6</span></b><br/>
+                        <span class="font-size-thirteen">ATENDIMENTOS</span>
+                    </div>
+                </div>
+            </div>
+            <div class="width-60-porc">
+                <h3 class="txt-center font-size-eighteen margin-bottom-neg-5"><b>VISUALIZAÇÃO DE PROCURA DE SERVIÇOS</b></h3>
+                <div id="chart_procura_servicos" style="height: 400px;"></div>
+            </div>
 
         </div>
+
+
     </main>
     <footer class="footer-logged">
         <div class="container dflex jbetween">
@@ -167,6 +201,7 @@
 </html>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
+
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawVisualization);
 
@@ -206,5 +241,41 @@
 
         var chart = new google.visualization.ComboChart(document.getElementById('chart_atendimentos_dia_semana'));
         chart.draw(data, options);
+
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            var data = google.visualization.arrayToDataTable([
+            ['Serviço', 'Quantidade'],
+            ['Corte',     27],
+            ['Escova',      12],
+            ['Permanente',  10],
+            ['Tintura', 6]
+            ]);
+
+            var options = {
+            title: 'VISUALIZAÇÃO DE PROCURA DE SERVIÇOS',
+            titlePosition: 'none',
+            colors: ['#de0235', '#E3466B', '#ab0229' , '#6e031c'],
+            backgroundColor: 'transparent',
+            legend: { position: 'bottom', textStyle: {fontSize: 17}},
+            is3D: true,
+            chartArea: {
+            top: 40,
+            right: 40,
+            bottom: 50,
+            left: 50,
+            height: '1000px',
+            width: '100%'
+            }
+
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('chart_procura_servicos'));
+
+            chart.draw(data, options);
+      }
       }
     </script>
