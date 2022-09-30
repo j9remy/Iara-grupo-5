@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análises | Iara</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon_io/favicon-16x16.png">
+    <script src="https://kit.fontawesome.com/26f7448628.js" crossorigin="anonymous"></script> 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>  
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/> 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+</head>
+<body>
+    <header class="header-logged">
+        <div class="container dflex acenter jbetween">
+            <a href="home.html" class="logo transform">
+                <img alt="Logo" src="../img/logo.png">
+            </a>
+            <form>
+                <input type="text" placeholder="Buscar" class="input-search" required>
+                <button type="submit" class="btn-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </form>
+            <div class="dflex acenter">
+                <a href="institucional.html" class="txt-dark-red txt-medium margin-right-fifty transform">INSTITUCIONAL</a>
+            </div>
+            <div class="prelative">
+                <button type="button" class="btn-no-style btn-profile dflex acenter jcenter">
+                    <img src="../img/profissionais/img-prof-1.png" alt="Foto de perfil">
+                </button>
+                <div class="itens jflex pabsolute txt-dark-red account-menu">
+                    <a class="txt-dark-red transform-bold margin-bottom-10" href="">MINHA CONTA</a>
+                    <a class="txt-dark-red transform-bold margin-bottom-10" href="" >ANÁLISES</a>
+                    <a class="txt-dark-red transform-bold" href="" >SAIR</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="margin-top-thirty margin-bottom-thirty container">
+        <h3 class="font-size-fifteen"><a href="accountProfissional.html" class="txt-black"><u>Perfil</u></a> / Análises</h3>
+        <div class="dflex jbetween margin-bottom-55">
+            <div class="width-70-porc">
+                <h3 class="txt-center font-size-sixteen margin-top-ten"><b>NÚMERO DE ATENDIMENTOS EM COMPARAÇÃO COM A SEMANA ANTERIOR</b></h3>
+                <div id="chart_atendimentos_dia_semana" style="height: 350px;"></div>
+            </div>
+            <div class="width-30-margin-15 dflex fwrap">
+                <div class="dark-red-card width-100-porc txt-white margin-bottom-thirty dflex jbetween acenter">
+                    <div class="width-70-porc">
+                        <span class="font-size-sixteen">Total de atendimentos da última <b>semana</b></span>
+                    </div>
+                    <div class="width-30-porc dflex acenter jcenter">
+                        <b><span class="font-size-thirty">14</span></b>
+                    </div>
+                </div>
+                <div class="dark-red-card width-100-porc txt-white margin-bottom-thirty dflex jbetween acenter">
+                    <div class="width-70-porc">
+                        <span class="font-size-sixteen">Total de atendimentos do último <b>mês</b></span>
+                    </div>
+                    <div class="width-30-porc dflex acenter jcenter">
+                        <b><span class="font-size-thirty">43</span></b>
+                    </div>
+                </div>
+                <div class="dark-red-card width-100-porc txt-white dflex jbetween acenter margin-bottom-thirty">
+                    <div class="width-70-porc">
+                        <span class="font-size-sixteen">Total de atendimentos dos últimos <b>três meses</b></span>
+                    </div>
+                    <div class="width-30-porc dflex acenter jcenter">
+                        <b><span class="font-size-thirty">139</span></b>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dflex jbetween margin-bottom-55">
+            <div class="width-4-cards small-card dflex acenter jcenter fwrap">
+                <div class="dflex fwrap acenter jcenter txt-center">
+                    <span class="txt-center margin-bottom-10">Dia com mais atendimentos</span>
+                    <span class="txt-bigger txt-medium">Sábado</span>
+                </div>
+                <div class="small-separador"></div>
+                <div class="dflex fwrap acenter jcenter txt-center">
+                    <span class="font-size-twenty-five txt-medium width-100-porc">16</span></br>
+                    <span class="txt-center font-size-fifteen">Atendimentos</span>
+                </div>
+            </div>
+            <div class="width-4-cards small-card dflex acenter jcenter fwrap">
+                <div class="dflex fwrap acenter jcenter txt-center">
+                    <span class="txt-center margin-bottom-10">Dia com menos atendimentos</span>
+                    <span class="txt-bigger txt-medium">Segunda</span>
+                </div>
+                <div class="small-separador"></div>
+                <div class="dflex fwrap acenter jcenter txt-center">
+                    <span class="font-size-twenty-five txt-medium width-100-porc">1</span></br>
+                    <span class="txt-center font-size-fifteen">Atendimentos</span>
+                </div>
+            </div>
+            <div class="width-4-cards small-card dflex acenter jcenter fwrap">
+                <div class="dflex fwrap acenter jcenter txt-center">
+                    <span class="txt-center margin-bottom-10">Horário com mais atendimentos</span>
+                    <span class="txt-bigger txt-medium">18:00h</span>
+                </div>
+                <div class="small-separador"></div>
+                <div class="dflex fwrap acenter jcenter txt-center">
+                    <span class="font-size-twenty-five txt-medium width-100-porc">8</span></br>
+                    <span class="txt-center font-size-fifteen">Atendimentos</span>
+                </div>
+            </div>
+            <div class="width-4-cards small-card dflex acenter jcenter fwrap">
+                <div class="dflex fwrap acenter jcenter txt-center">
+                    <span class="txt-center margin-bottom-10">Dia com menos atendimentos</span>
+                    <span class="txt-bigger txt-medium">10:00h</span>
+                </div>
+                <div class="small-separador"></div>
+                <div class="dflex fwrap acenter jcenter txt-center">
+                    <span class="font-size-twenty-five txt-medium width-100-porc">2</span></br>
+                    <span class="txt-center font-size-fifteen">Atendimentos</span>
+                </div>
+            </div>
+
+        </div>
+    </main>
+    <footer class="footer-logged">
+        <div class="container dflex jbetween">
+            <a href="home.html" class="logo transform">
+                <img alt="Logo" src="../img/logo.png">
+            </a>
+            <div>
+                <h4>INSTITUCIONAL</h4>
+                <a href="institucional.html#como-funciona">Como Funciona</a>
+                <a href="institucional.html#sobre-nos">Sobre nós</a>
+            </div>
+            <div>
+                <h4>MINHA CONTA</h4>
+                <a href="">Meu Perfil</a>
+                <a href="">Meus Pontos</a>
+            </div>
+            <div>
+                <h4>CONTATO</h4>
+                <a href="">
+                    Whatsapp<br />
+                    (11) 99111-1111
+                </a>
+                <a href="mailto:contato@iara.com">
+                    E-mail<br />
+                    contato@iara.com
+                </a>
+            </div>
+            <div>
+                <h4>SIGA-NOS</h4>
+                <span>Acompanhe as nossas<br />
+                    redes sociais</span>
+                <div class="dflex acenter">
+                    <a href="" class="button circle txt-dark-red bg-white dflex acenter jcenter"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="" class="button circle txt-dark-red bg-white dflex acenter jcenter"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="" class="button circle txt-dark-red bg-white dflex acenter jcenter"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="" class="button circle txt-dark-red bg-white dflex acenter jcenter"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="" class="button circle txt-dark-red bg-white dflex acenter jcenter"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="txt-center margin-top-thirty txt-regular">© <b>IARA</b> - Todos os direitos reservados</div>
+    </footer>
+</body>
+</html>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawVisualization);
+
+      function drawVisualization() {
+        // Some raw data (not necessarily accurate)
+        var data = google.visualization.arrayToDataTable([
+          ['Dia da Semana', 'Semana Atual', 'Semana Anterior'],
+          ['Domingo',  7, 5],
+          ['Segunda',  1, 0],
+          ['Terça',  2, 1],
+          ['Quarta',  3, 4],
+          ['Quinta',  6, 8],
+          ['Sexta',  12, 10],
+          ['Sábado',  16, 19]
+        ]);
+
+        var options = {
+          title : 'Número de Atendimentos em comparação com a semana anterior',
+          titlePosition: 'none',
+          vAxis: {title: ''},
+          hAxis: {title: 'Dias da Semana'},
+          seriesType: 'bars',
+          series: {1: {type: 'line'}},
+          colors: ['#de0235', '#ab0229'],
+          lineWidth: 3,
+          legend: { position: 'bottom', alignment: 'start' },
+          backgroundColor: '#fbfbfb',
+          chartArea: {
+            top: 40,
+            right: 40,
+            bottom: 50,
+            left: 50,
+            height: '1000px',
+            width: '100%'
+          },
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('chart_atendimentos_dia_semana'));
+        chart.draw(data, options);
+      }
+    </script>
