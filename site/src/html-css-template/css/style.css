@@ -521,6 +521,16 @@ h2 {
   font-weight: bold;
 }
 
+.input-login-novo ~ label {
+  transform: translateY(-15%) translateX(1px);
+  font-size: 13.5px;
+  background-color: #ab0229;
+  padding: 0 0.1em;
+  color: #f3f3f3;
+  letter-spacing: 0.5px;
+  font-weight: bold;
+}
+
 .input-login:focus~label,
 .input-login:valid~label,
 .input-login:disabled~label {
@@ -660,7 +670,17 @@ h2 {
 }
 
 .categorias {
-  padding: 20px 55px;
+  padding: 24px 55px 20px 55px;
+  width: calc(100% - 58px);
+  margin: auto;
+}
+
+.banner {
+  padding: 0px 30px 0px 30px;
+  width: 100%;
+  margin: auto;
+  border-radius: 17px;
+  margin-bottom: 60px;
 }
 
 .slick-arrow {
@@ -672,10 +692,11 @@ h2 {
   border: none;
   cursor: pointer;
   font-size: 40px;
-  color: #fff;
+  color: white;
   z-index: 1;
   padding: 0;
 }
+
 
 
 .slick-arrow.slick-next {
@@ -1219,4 +1240,38 @@ i.icon.star {
   background-color: rgb(227 70 107 / 53%);
   width: 100%;
   margin: 15px 0;
+}
+
+.input-login-novo {
+  
+  transition: border 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  height: 34px;
+  margin-top: 5px;
+  padding: 0 10px;
+  width: 100%;
+  transition: all .4s;
+  outline: none;
+  background-color: rgb(171, 2, 41) !important;
+  box-shadow: rgb(222 2 53) 0px 4px 14px 5px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: rgb(255, 255, 255);
+  margin-bottom: 30px;
+  font-size: 17px;
+  color: #fff;
+}
+
+.input-login-novo:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px rgb(171, 2, 41) inset;
+}
+
+.input-login-novo:-webkit-autofill {
+  -webkit-text-fill-color: white !important;
+}
+
+.radius {
+  border-radius: 10px;
+  border: 5px solid rgb(222 2 53);
 }
