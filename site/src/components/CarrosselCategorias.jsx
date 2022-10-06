@@ -15,7 +15,7 @@ function CarrosselCategorias(props) {
             <Slider {...settings}>
                 <div>
                     <span class="item" onClick={() => props.funcaoCategoria(1)} >
-                        <a href="#">
+                        <a href="#categorias">
                             <img src="../img/categorias/img-corte.png" alt="Corte de cabelo" />
                             <span>Corte de Cabelo</span>
                         </a>
@@ -23,7 +23,7 @@ function CarrosselCategorias(props) {
                 </div>
                 <div>
                     <span class="item" onClick={() => props.funcaoCategoria(2)}>
-                        <a href="#">
+                        <a href="#categorias">
                             <img src="../img/categorias/img-hidratacao.png" alt="Hidratação" />
                             <span>Hidratação</span>
                         </a>
@@ -31,7 +31,7 @@ function CarrosselCategorias(props) {
                 </div>
                 <div>
                     <span class="item" onClick={() => props.funcaoCategoria(3)}>
-                        <a href="#">
+                        <a href="#categorias">
                             <img src="../img/categorias/img-maquiagem.png" alt="Maquiagem" />
                             <span>Maquiagem</span>
                         </a>
@@ -39,7 +39,7 @@ function CarrosselCategorias(props) {
                 </div>
                 <div>
                     <span class="item" onClick={() => props.funcaoCategoria(4)}>
-                        <a href="#">
+                        <a href="#categorias">
                             <img src="../img/categorias/img-manicure.png" alt="Manicure" />
                             <span>Manicure</span>
                         </a>
@@ -47,7 +47,7 @@ function CarrosselCategorias(props) {
                 </div>
                 <div>
                     <span class="item" onClick={() => props.funcaoCategoria(5)}>
-                        <a href="#">
+                        <a href="#categorias">
                             <img src="../img/categorias/img-designer-sobrancelhas.png" alt="Design de sobrancelhas" />
                             <span>Design de sobrancelhas</span>
                         </a>
@@ -55,7 +55,7 @@ function CarrosselCategorias(props) {
                 </div>
                 <div>
                     <span class="item" onClick={() => props.funcaoCategoria(6)}>
-                        <a href="#">
+                        <a href="#categorias">
                             <img src="../img/categorias/img-massagem.png" alt="Massagem" />
                             <span>Massagem</span>
                         </a>
@@ -63,7 +63,7 @@ function CarrosselCategorias(props) {
                 </div>
                 <div>
                     <span class="item" onClick={() => props.funcaoCategoria(7)}>
-                        <a href="#">
+                        <a href="#categorias">
                         <img src="../img/categorias/img-pedicure.png" alt="Pedicure" />
                             <span>Pedicure</span>
                         </a>
