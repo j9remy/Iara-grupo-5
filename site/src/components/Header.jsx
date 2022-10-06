@@ -18,8 +18,8 @@ function Header() {
                 <div class="dflex acenter">
                     <a href=" " class="txt-dark-red txt-medium margin-right-fifty transform">INSTITUCIONAL</a>
                 </div>
-                <Link to={'/escolhacadastro'}><button class="button bg-red txt-white bg-hover-white txt-hover-dark-red" >CADASTRE-SE</button></Link>
-                <Link to={'/escolhaLogin'}><button class="button bg-white txt-black bg-hover-dark-red txt-hover-white" >LOGIN</button></Link>
+                <Link to={'/escolhacadastro'}><button class="button bg-red txt-white bg-hover-white txt-hover-dark-red box-shadow-none-hover" >CADASTRE-SE</button></Link>
+                <Link to={'/escolhaLogin'}><button class="button bg-white txt-black bg-hover-dark-red txt-hover-white box-shadow-none-hover" >LOGIN</button></Link>
             </div>
         </header>
     )
